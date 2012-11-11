@@ -1,0 +1,5 @@
+locale
+*.orig
+*.bak
+*.rej
+
