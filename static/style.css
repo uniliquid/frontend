@@ -45,7 +45,7 @@ caption, th, td {
   font-weight: normal;
 }
 a:focus {
-  outline: 1px solid #f90;
+  outline: 1px solid #89408e;
 }
 /*************************************************************************
  * Some global definitions 
@@ -191,7 +191,7 @@ h2 {
 .topbar a:hover .logo_liquidfeedback,
 .topbar a:focus, 
 .topbar a:focus .logo_liquidfeedback {
-  color: #f90;
+  color: #89408e;
 }
 
 .navigation {
@@ -293,7 +293,7 @@ form.unit_selector {
 
 #member_menu ul li:hover a {
   background: #000;
-  color: #f90;
+  color: #89408e;
 }
 
 */
@@ -522,7 +522,7 @@ a.delegation_info:focus {
 
 .delegation_info .micro_avatar.highlighted {
   margin: 0;
-  border: 2px solid #f90;
+  border: 2px solid #89408e;
 }
 
 
@@ -587,8 +587,8 @@ a.delegation_info:focus {
 .ui_tabs_links a.selected {
   margin: 0;
   margin-right: 2px;
-  border: 2px solid #f90;
-  box-shadow: 0px 0px 3px 1px #f90;
+  border: 2px solid #89408e;
+  box-shadow: 0px 0px 3px 1px #89408e;
 }
 
 .ui_tabs_links a.selected {
@@ -1496,3 +1496,43 @@ div.notifications {
   margin: 0 auto;
   max-width: 1130px;
 }
+
+/* abstimmungs links usw.
+
+.content.actions {
+  margin: 20px 0px 10px -2px;
+  line-height: 300%;
+}
+*/
+
+.content.actions a {
+  padding: 2px 5px;
+  background: -webkit-linear-gradient(top, #cdf, #abe);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cdf), color-stop(100%,#abe));
+  background: -moz-linear-gradient(#cdf, #abe);
+  background: -ms-linear-gradient(#cdf, #abe);
+  background: -o-linear-gradient(#cdf, #abe);
+  background: linear-gradient(#cdf, #abe);
+  background-color: #abf;
+#  color: #f7f7f7;
+  white-space: nowrap;
+  border-radius: 4px;
+  font-size: 100%;
+#  font-weight: bold;
+  margin: 2px;
+  margin-right: 3px;
+}
+
+.content.actions a:hover,
+.content.actions a:focus,
+.content.actions a.selected {
+  margin: 0;
+  margin-right: 1px;
+  border: 2px solid #89408e;
+  box-shadow: 0px 0px 1px 1px #89408e;
+}
+
+.content.actions a.selected {
+  text-decoration: none;
+}
+

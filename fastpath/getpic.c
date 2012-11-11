@@ -12,7 +12,7 @@
 #endif
 
 #ifndef GETPIC_DEFAULT_AVATAR
-#define GETPIC_DEFAULT_AVATAR "/opt/liquid_feedback_testing/app/static/avatar.jpg"
+#define GETPIC_DEFAULT_AVATAR "/opt/liquid_feedback_frontend/static/avatar.jpg"
 #endif
 
 int main(int argc, const char * const *argv) {

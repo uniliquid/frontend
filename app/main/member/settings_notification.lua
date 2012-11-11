@@ -14,6 +14,8 @@ ui.form{
     }
   },
   content = function()
+    local notify_level_s = string.find(app.session.member.admin_comment or "", " 39 ") and true or false
+
     ui.tag{ tag = "p", content = _"I like to receive notifications by email about events in my areas and issues:" }
   
     ui.container{ content = function()
@@ -96,6 +98,27 @@ ui.form{
       ui.tag{
         tag = "label", attr = { ['for'] = "notify_level_voting" },
         content = _"Only for issues reaching the voting phase"
+      }
+    end }
+
+    slot.put("<br />")
+
+    ui.container{ content = function()
+      ui.tag{
+        tag = "input",
+        attr = {
+          id = "notify_level_s",
+          type = "checkbox", name = "notify_level_s", value = "39",
+          checked = notify_level_s and "checked" or nil
+        }
+      }
+      ui.tag{
+        tag = "label", attr = { ['for'] = "notify_level_s" },
+        content = function()
+          slot.put("Unabhängig davon möchte ich per E-Mail über ")
+          ui.tag{ tag = "b", content = "Satzungsänderungen" }
+          slot.put(" informiert werden.")
+        end
       }
     end }
 

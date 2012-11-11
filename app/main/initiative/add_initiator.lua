@@ -44,7 +44,13 @@ ui.form{
         name = _"Choose member"
       }
     }
-    local contact_members = app.session.member:get_reference_selector("saved_members"):add_order_by("name"):exec()
+local contact_members = Member:build_selector{
+--  is_contact_of_member_id = app.session.member_id,
+  voting_right_for_unit_id = voting_right_unit_id,
+  active = true,
+  order = "name"
+}:exec()
+--    local contact_members = app.session.member:get_reference_selector("saved_members"):add_order_by("name"):exec()
     for i, record in ipairs(contact_members) do
       records[#records+1] = record
     end

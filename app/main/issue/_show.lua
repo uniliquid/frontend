@@ -4,6 +4,7 @@ local for_member = param.get("for_member", "table")
 local for_listing = param.get("for_listing", atom.boolean)
 local for_initiative = param.get("for_initiative", "table")
 local for_initiative_id = for_initiative and for_initiative.id or nil
+local full = param.get("full", atom.boolean)
 
 local direct_voter
 if app.session.member_id then
@@ -276,7 +277,8 @@ ui.container{ attr = { class = class }, content = function()
         highlight_string = highlight_string,
         no_sort = true,
         limit = (for_listing or for_initiative) and 5 or nil,
-        for_member = for_member
+        for_member = for_member,
+        full = full
       }
     }
   end }

@@ -1,6 +1,7 @@
 local initiative = param.get("initiative", "table")
+local full = param.get("full", atom.boolean)
 
-local show_as_head = param.get("show_as_head", atom.boolean)
+local show_as_head = not full and param.get("show_as_head", atom.boolean)
 
 initiative:load_everything_for_member_id(app.session.member_id)
 
@@ -16,6 +17,7 @@ if app.session.member_id then
   issue:load_everything_for_member_id(app.session.member_id)
 end
 
+if not full then
 app.html_title.title = initiative.name
 app.html_title.subtitle = _("Initiative ##{id}", { id = initiative.id })
 
@@ -25,7 +27,8 @@ slot.select("head", function()
     params = { issue = issue, initiative = initiative }
   }
 end)
-  
+end
+
 local initiators_members_selector = initiative:get_reference_selector("initiating_members")
   :add_field("initiator.accepted", "accepted")
   :add_order_by("member.name")
@@ -37,7 +40,7 @@ end
 
 local initiators = initiators_members_selector:exec()
 
-
+if not full then
 local initiatives_selector = initiative.issue:get_reference_selector("initiatives")
 slot.select("head", function()
   execute.view{
@@ -52,6 +55,10 @@ slot.select("head", function()
 end)
 
 util.help("initiative.show")
+
+end
+if not full or (not initiative.issue.fully_frozen and not initiative.issue.closed and not initiative.revoked) or initiative.admitted then
+
 
 local class = "initiative_head"
 
@@ -414,7 +421,8 @@ ui.container{ attr = { class = class }, content = function()
     }
   end
 end }
-
+end
+if not full then
 if not show_as_head then
   execute.view{
     module = "suggestion",
@@ -528,4 +536,5 @@ if not show_as_head then
     }
 
   end
+end
 end

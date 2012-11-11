@@ -5,11 +5,15 @@ local secret = param.get("secret")
 if not secret then
 
   local member = Member:new_selector()
-    :add_where{ "login = ?", param.get("login") }
+    :add_where{ "login = ? OR notify_email = ?", param.get("login"), param.get("login") }
     :add_where("password_reset_secret ISNULL OR password_reset_secret_expiry < now()")
     :optional_object_mode()
     :exec()
 
+  if not member then
+    slot.put_into("error", _"Sorry, aber ein Account mit diesem Anmeldenamen oder mit dieser Email-Adresse existiert nicht. Bitte wende Dich an den Administrator oder den Support.")
+    return false
+  end
   if member then
     if not member.notify_email then
       slot.put_into("error", _"Sorry, but there is not confirmed email address for your account. Please contact the administrator or support.")
@@ -21,7 +25,8 @@ if not secret then
     member:save()
     local content = slot.use_temporary(function()
       slot.put(_"Hello " .. member.name .. ",\n\n")
-      slot.put(_"to reset your password please click on the following link:\n\n")
+      slot.put(_"your login name is: " .. member.login .. "\n\n")
+      slot.put(_"To reset your password please click on the following link:\n\n")
       slot.put(request.get_absolute_baseurl() .. "index/reset_password.html?secret=" .. member.password_reset_secret .. "\n\n")
       slot.put(_"If this link is not working, please open following url in your web browser:\n\n")
       slot.put(request.get_absolute_baseurl() .. "index/reset_password.html\n\n")

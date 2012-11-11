@@ -1,5 +1,6 @@
 local issue = param.get("issue", "table")
 local initiatives_selector = param.get("initiatives_selector", "table")
+local full = param.get("full", atom.boolean)
 
 local initiatives
 if issue then
@@ -53,11 +54,12 @@ end
 for i, initiative in ipairs(initiatives) do
   execute.view{
     module = "initiative",
-    view = "_list_element",
+    view = full and "_show" or "_list_element",
     params = {
       initiative = initiative,
       selected = highlight_initiative and highlight_initiative.id == initiative.id or nil,
-      for_member = for_member
+      for_member = for_member,
+      full = full
     }
   }
 end

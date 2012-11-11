@@ -5,6 +5,12 @@ local member
 
 local preview = param.get("preview") or param.get("preview2") == "1" and true or false
 
+if not issue then
+  execute.view{
+    module = "index", view = "_index_member"
+  }
+else
+
 if member_id then
   if not issue.closed then
     error("access denied")
@@ -496,4 +502,4 @@ ui.form{
   end
 }
 
-
+end

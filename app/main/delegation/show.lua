@@ -96,9 +96,10 @@ if not delegation then
 end
 
 local contact_members = Member:build_selector{
-  is_contact_of_member_id = app.session.member_id,
+--  is_contact_of_member_id = app.session.member_id,
   voting_right_for_unit_id = voting_right_unit_id,
   active = true,
+  locked = false,
   order = "name"
 }:exec()
 
@@ -253,12 +254,12 @@ ui.form{
     if preview_trustee_id then
       value = preview_trustee_id
     end
-    if preview_trustee_id == nil and delegation and not delegation.trustee_id then
-      value = 0
+    if preview_trustee_id == nil and (not delegation or delegation and not delegation.trustee_id) then
+      value = -1
     end
     
     ui.field.select{
-      attr = { onchange = "updateDelegationInfo();" },
+      attr = { size = 10, onchange = "updateDelegationInfo();" },
       label = _"Trustee",
       name = "trustee_id",
       foreign_records = records,

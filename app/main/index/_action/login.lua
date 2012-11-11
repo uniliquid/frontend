@@ -76,7 +76,10 @@ if member then
   end
 else
   slot.select("error", function()
-    ui.tag{ content = _'Invalid login name or password!' }
+    ui.tag{ content = function()
+       slot.put_into("error", _'Invalid login name or password!')
+    end
+    }
   end)
   trace.debug('User NOT authenticated')
   return false

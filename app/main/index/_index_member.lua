@@ -1,3 +1,4 @@
+local full = param.get("full", atom.boolean)
 
 local tabs = {
   module = "index",

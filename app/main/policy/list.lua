@@ -36,11 +36,11 @@ ui.list{
         if policy.polling then
           ui.field.text{ label = _"New" .. ":", value = _"without" }
         else
-          ui.field.text{ label = _"New" .. ":", value = "≤ " .. policy.admission_time }
+          ui.field.text{ label = _"New" .. ":", value = "≤ " .. policy.admission_time:gsub("days",_"days"):gsub("day",_"day") }
         end
-        ui.field.text{ label = _"Discussion" .. ":", value = policy.discussion_time or _"variable" }
-        ui.field.text{ label = _"Frozen" .. ":", value = policy.verification_time or _"variable" }
-        ui.field.text{ label = _"Voting" .. ":", value = policy.voting_time or _"variable" }
+        ui.field.text{ label = _"Discussion" .. ":", value = policy.discussion_time:gsub("days",_"days"):gsub("day",_"day") or _"variable" }
+        ui.field.text{ label = _"Frozen" .. ":", value = policy.verification_time:gsub("days",_"days"):gsub("day",_"day") or _"variable" }
+        ui.field.text{ label = _"Voting" .. ":", value = policy.voting_time:gsub("days",_"days"):gsub("day",_"day") or _"variable" }
       end
     },
     {
@@ -52,20 +52,20 @@ ui.list{
         else
           ui.field.text{
             label = _"Issue quorum" .. ":", 
-            value = "≥ " .. tostring(policy.issue_quorum_num) .. "/" .. tostring(policy.issue_quorum_den)
+            value = "≥ " .. tonumber(string.format("%.1f", policy.issue_quorum_num / policy.issue_quorum_den * 100)) .. "%"
           }
         end
-        ui.field.text{
-          label = _"Initiative quorum" .. ":", 
-          value = "≥ " .. tostring(policy.initiative_quorum_num) .. "/" .. tostring(policy.initiative_quorum_den)
-        }
-        ui.field.text{
-          label = _"Direct majority" .. ":", 
-          value = (policy.direct_majority_strict and ">" or "≥" ) .. " " .. tostring(policy.direct_majority_num) .. "/" .. tostring(policy.direct_majority_den)
-        }
-        ui.field.text{
-          label = _"Indirect majority" .. ":", 
-          value = (policy.indirect_majority_strict and ">" or "≥" ) .. " " .. tostring(policy.indirect_majority_num) .. "/" .. tostring(policy.indirect_majority_den)
+         ui.field.text{
+           label = _"Initiative quorum" .. ":",
+           value = "≥ " .. tonumber(string.format("%.1f", policy.initiative_quorum_num / policy.initiative_quorum_den * 100)) .. "%"
+         }
+         ui.field.text{
+           label = _"Direct majority" .. ":",
+           value = (policy.direct_majority_strict and ">" or "≥" ) .. " " .. tonumber(string.format("%.1f", policy.direct_majority_num / policy.direct_majority_den * 100)) .. "%"
+         }
+         ui.field.text{
+           label = _"Indirect majority" .. ":",
+           value = (policy.indirect_majority_strict and ">" or "≥" ) .. " " .. tonumber(string.format("%.1f", policy.indirect_majority_num / policy.indirect_majority_den * 100)) .. "%"
         }
       end
     },

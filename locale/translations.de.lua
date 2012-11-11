@@ -1,5 +1,6 @@
 #!/usr/bin/env lua
 return {
+["your login name is: "] = "dein Anmeldename lautet: ";
 ["#{closed_ago} ago"] = "seit #{closed_ago}";
 ["#{count} cancelled"] = "#{count} abgebrochen";
 ["#{count} days ago"] = "vor #{count} Tagen";
@@ -284,7 +285,7 @@ return {
 ["Interested members"] = "Interessierte Mitglieder";
 ["Internal posts"] = "Interne Ämter";
 ["Interval format:"] = "Intervall-Format";
-["Invalid login name or password!"] = "Anmeldename oder Kennwort ungültig";
+["Invalid login name or password!"] = "Anmeldename oder Kennwort ungültig!<br /><br />Klicke bitte auf „<a href=\"https://lqfb.piratenpartei.at/index/reset_password.html\">Anmeldenamen/Kennwort vergessen</a>“, falls du deinen Anmeldenamen oder dein Kennwort vergessen hast. Du kannst dir dort deinen Anmeldenamen sowie einen Code zum Setzen eines neuen Kennworts per E-Mail zusenden lassen.";
 ["Invalid query"] = "Ungültige Anfrage";
 ["Invitation has been refused"] = "Einladung wurde widerrufen";
 ["Invitation to LiquidFeedback"] = "Einladung zu LiquidFeedback";
@@ -336,7 +337,7 @@ return {
 ["Member is now invited to be initiator"] = "Mitglied ist jetzt als Initiator eingeladen";
 ["Member is participating in this area"] = "Mitglied ist Teilnehmer im Themenbereich";
 ["Member list"] = "Mitgliederliste";
-["Member menu"] = "Mietglieds-Menü";
+["Member menu"] = "Mitglieds-Menü";
 ["Member name"] = "Mitglied Name";
 ["Member name history for '#{name}'"] = "Namenshistorie für '#{name}'";
 ["Member of area"] = "Mitglied des Themenbereichs";
@@ -363,7 +364,7 @@ return {
 ["New address"] = "Neue E-Mail-Adresse";
 ["New draft"] = "Neuer Entwurf";
 ["New draft has been added to initiative"] = "Neuer Entwurf wurde der Initiative hinzugefügt";
-["New drafts for #{count} initiative(s) you are supporting"] = "Für #{count} von dir unterstützte Iniativen gibt es neue Entwürfe";
+["New drafts for #{count} initiative(s) you are supporting"] = "Für #{count} von dir unterstützte Initiativen gibt es neue Entwürfe";
 ["New initiative"] = "Neue Initiative";
 ["New initiative draft"] = "Neuer Entwurfstext der Initiative";
 ["New issue"] = "Neues Thema";
@@ -446,7 +447,7 @@ return {
 ["Please enter the email reset code you have received:"] = "Bitte gib den Rücksetzcode ein, den Du erhalten hast:";
 ["Please enter the invite code you've received."] = "Bitte gib den Einladungscode ein, den Du erhalten hast.";
 ["Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."] = "Bitte gib Deine E-Mail-Adresse ein. Diese Adresse wird für automatische Benachrichtigungen (wenn Du diese anforderst) sowie zum Zurücksetzen des Kennworts verwendet. Diese Adresse wird nicht veröffentlicht. Nach Abschluss der Registrierung wirst Du eine E-Mail mit einem Link zum Bestätigen der Adresse erhalten.";
-["Please enter your login name. You will receive an email with a link to reset your password."] = "Bitte gib Deinen Anmeldenamen ein. Du wirst eine E-Mail mit einem Link zum Zurücksetzen des Kennworts erhalten.";
+["Please enter your login name. You will receive an email with a link to reset your password."] = "Bitte gib Deinen Anmeldenamen oder deine E-Mail-Adresse ein. Du wirst eine E-Mail mit deinem Anmeldenamen und einem Link zum Zurücksetzen des Kennworts erhalten.";
 ["Please enter your new password twice."] = "Bitte gib Dein neues Kennwort zweimal ein:";
 ["Please select your preferred notification level"] = "Bitte wähle das gewünschte Benachrichtigungslevel";
 ["Policies"] = "Regelwerke";
@@ -488,7 +489,7 @@ return {
 ["Reset code"] = "Rücksetzcode";
 ["Reset code is invalid!"] = "Rücksetzcode ist ungültig";
 ["Reset link has been send for this member"] = "Rücksetz-Link wurde versendet";
-["Reset password"] = "Kennwort zurücksetzen";
+["Reset password"] = "Anmeldenamen/Kennwort vergessen";
 ["Revoke initiative"] = "Initiative zurückziehen";
 ["Revoked at"] = "Zurückgezogen am/um";
 ["Saturday"] = "Samstag";
@@ -562,7 +563,7 @@ return {
 ["Support this initiative"] = "Diese Initiative unterstützen";
 ["Supported"] = "Unterstützt";
 ["Supporters"] = "Unterstützer";
-["Supporters (before begin of voting)"] = "Unterstützer (zum Abstimmungesbeginn)";
+["Supporters (before begin of voting)"] = "Unterstützer (zum Abstimmungsbeginn)";
 ["Syntax help"] = "Syntax-Hilfe";
 ["Terms of use"] = "Nutzungsbedingungen";
 ["The code you've entered is invalid"] = "Der Code, den Du eingeben hast, ist nicht gültig!";
@@ -753,7 +754,7 @@ return {
 ["satisfied"] = "zufrieden";
 ["should"] = "soll";
 ["should not"] = "soll nicht";
-["to reset your password please click on the following link:\n\n"] = "um Dein Kennwort zurückzusetzen klicke bitte den folgenden Link an:\n\n";
+["To reset your password please click on the following link:\n\n"] = "Um dein Kennwort zurückzusetzen klicke bitte den folgenden Link an:\n\n";
 ["unit"] = "Gliederung";
 ["until"] = "bis";
 ["variable"] = "variabel";
