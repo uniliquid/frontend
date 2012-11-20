@@ -6,12 +6,15 @@ if not secret then
 
   local member = Member:new_selector()
     :add_where{ "login = ? OR notify_email = ?", param.get("login"), param.get("login") }
-    :add_where("password_reset_secret ISNULL OR password_reset_secret_expiry < now()")
     :optional_object_mode()
     :exec()
 
   if not member then
     slot.put_into("error", _"Sorry, aber ein Account mit diesem Anmeldenamen oder mit dieser Email-Adresse existiert nicht. Bitte wende Dich an den Administrator oder den Support.")
+    return false
+  end
+  if member.password_reset_secret then
+    slot.put_into("error", _"Sorry, aber für diesen Account wurde bereits ein Passwort angefordert. Bitte wende Dich an den Administrator oder den Support.")
     return false
   end
   if member then

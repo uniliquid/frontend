@@ -68,8 +68,14 @@ function Event.object:send_notification()
     -- SAFETY FIRST, NEVER send notifications for events more then 3 days in past or future
     :add_where("now() - event_seen_by_member.occurrence BETWEEN '-3 days'::interval AND '3 days'::interval")
     -- do not notify a member about the events caused by the member
-    :add_where("event_seen_by_member.member_id ISNULL OR event_seen_by_member.member_id != member.id")
+    :add_where("event_seen_by_member.member_id ISNULL OR event_seen_by_member.member_id != member.id OR strpos(member.admin_comment, ' " .. self.issue.policy.id .. " ') > 0")
     :exec()
+
+  local members_to_notify_now = Member:new_selector()
+    :add_where("member.activated NOTNULL AND member.locked = false AND member.notify_email NOTNULL AND strpos(member.admin_comment, ' " .. self.issue.policy.id .. " ') > 0")
+    :exec()
+  
+  for k,v in pairs(members_to_notify_now) do members_to_notify[k] = v end
     
   print (_("Event #{id} -> #{num} members", { id = self.id, num = #members_to_notify }))
 
@@ -151,49 +157,48 @@ function Event.object:send_notification()
   locale.do_with(
     { lang = config.default_lang or 'en' },
     function()
-      body = body .. "[url=" ..  request.get_absolute_baseurl() .. "unit/show/" .. self.issue.area.unit.id .. ".html]" .. self.issue.area.unit.name .. "[/url]: [url=" ..  request.get_absolute_baseurl() .. "area/show/" .. self.issue.area.id .. ".html]" .. self.issue.area.name .. "[/url] --- [url=" ..  request.get_absolute_baseurl() .. "policy/list.html]" .. self.issue.policy.name .. "[/url]: [url=" ..  request.get_absolute_baseurl() .. "issue/show/" .. self.issue_id .. ".html]Thema " .. self.issue_id .. "[/url] --- "
-      body = body .. _("[event mail]     Event: #{event}", { event = self.event_name }) .. " --- "
+      if self.event_name == 'Neues Thema' or self.event_name == 'Neue Initiative' or (self.event_name == 'Thema hat die nächste Phase erreicht' and (self.state_name == 'Diskussion' or self.state_name == 'Eingefroren' or self.state_name == 'Abstimmung' or self.state_name == 'Abgeschlossen (mit Gewinner)' and self.state_name == 'Abgeschlossen (ohne Gewinner)')) then
+      body = body .. self.issue.area.unit.name .. ": " .. self.issue.area.name .. "\n" .. self.issue.policy.name .. ": [url=" ..  request.get_absolute_baseurl() .. "issue/show/" .. self.issue_id .. ".html]Thema " .. self.issue_id .. "[/url]\n"
+      body = body .. _("[event mail]     Event: #{event}", { event = self.event_name }) .. "\n"
       body = body .. _("[event mail]     Phase: #{phase}", { phase = self.state_name })
       if not self.issue.closed and self.issue.state_time_left then
         body = body .. " (" .. _("#{time_left} left", { time_left = self.issue.state_time_left:gsub("%..*", ""):gsub("days", _"days"):gsub("day", _"day") }) .. ")"
       end
-      body = body .. " --- "
+      body = body .. "\n"
 
       if self.initiative_id then
-        subject = _("(T#{issue}/I#{ini}) #{name} - #{event}", { issue = self.issue_id, ini = self.initiative_id, name = self.initiative.name, event = self.event_name })
+        subject = _("#{name}", { name = self.initiative.name })
         url = request.get_absolute_baseurl() .. "initiative/show/" .. self.initiative_id .. ".html"
       elseif self.suggestion_id then
-        subject = _("(T#{issue}/S#{sugg}) #{name}", { issue = self.issue_id, sugg = self.suggestion_id, name = self.suggestion.name })
+        subject = _("#{name}", { name = self.suggestion.name })
         url = request.get_absolute_baseurl() .. "suggestion/show/" .. self.suggestion_id .. ".html"
       else
-        subject = _("(T#{issue}) #{name} - #{event}", { issue = self.issue_id, name = self.issue.policy.name, event = self.event_name })
+        subject = _("#{name}", { name = self.issue.policy.name })
         url = request.get_absolute_baseurl() .. "issue/show/" .. self.issue_id .. ".html"
       end
-
-      body = body .. "[url=" .. url .. "]Link zum Thema[/url]\n\n"
 
       if self.initiative_id then
         local initiative = Initiative:by_id(self.initiative_id)
         body = body .. "[b][url=" .. request.get_absolute_baseurl() .. "initiative/show/" .. initiative.id .. ".html]i" .. initiative.id .. ": " .. initiative.name .. "[/url][/b]\n"
-      else
-        local initiative_count = Initiative:new_selector()
-          :add_where{ "initiative.issue_id = ?", self.issue_id }
-          :count()
-        local initiatives = Initiative:new_selector()
-          :add_where{ "initiative.issue_id = ?", self.issue_id }
-          :add_order_by("initiative.supporter_count DESC")
-          :exec()
-        for i, initiative in ipairs(initiatives) do
-          body = body .. "[b][url=" .. request.get_absolute_baseurl() .. "initiative/show/" .. initiative.id .. ".html]i" .. initiative.id .. ": " .. initiative.name .. "[/url][/b]\n"
-        end
+--      else
+--        local initiative_count = Initiative:new_selector()
+--          :add_where{ "initiative.issue_id = ?", self.issue_id }
+--          :count()
+--        local initiatives = Initiative:new_selector()
+--          :add_where{ "initiative.issue_id = ?", self.issue_id }
+--          :add_order_by("initiative.supporter_count DESC")
+--          :exec()
+--        for i, initiative in ipairs(initiatives) do
+--          body = body .. "[b][url=" .. request.get_absolute_baseurl() .. "initiative/show/" .. initiative.id .. ".html]i" .. initiative.id .. ": " .. initiative.name .. "[/url][/b]\n"
+--        end
       end
 
       if self.suggestion_id then
         local suggestion = Suggestion:by_id(self.suggestion_id)
-        body = body .. "[b][url=" .. request.get_absolute_baseurl() .. "suggestion/show/" .. suggestion.id .. ".html]" .. suggestion.name .. "[/url][/b]\n[spoiler]" .. suggestion:get_content("html") .. "[/spoiler]"
+        body = body .. "[b][url=" .. request.get_absolute_baseurl() .. "suggestion/show/" .. suggestion.id .. ".html]" .. suggestion.name .. "[/url][/b]\n[quote]" .. suggestion:get_content("html") .. "[/quote]"
       elseif self.initiative_id then
         local initiative = Initiative:by_id(self.initiative_id)
-        body = body .. "[spoiler]" .. initiative.current_draft:get_content("html") .. "[/spoiler]\n"
+        body = body .. "[quote]" .. initiative.current_draft:get_content("html") .. "[/quote]\n"
       end
 
       local body = "" .. self.issue.area.id .. "\n" .. self.issue_id .. "\n" .. subject .. "\n" .. body
@@ -202,6 +207,7 @@ function Event.object:send_notification()
       file:close()
 
       os.execute("/opt/liquid_feedback_core/lf_forum_post")
+    end
     end
   )
 
