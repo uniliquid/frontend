@@ -345,11 +345,11 @@ ui.form{
                         attr = { style = "float: right; position: relative;" },
                         content = function()
                           ui.link{
-                            attr = { class = "clickable" },
+                            attr = { class = "clickable",
+                                     onclick = "document.getElementById('vote_draft_" .. tostring(initiative.id) .. "').style.display = document.getElementById('vote_draft_" .. tostring(initiative.id) .. "').style.display != 'block' ? 'block' : 'none';",
+                            },
                             content = _"Show",
-                            module = "initiative",
-                            view = "show",
-                            id = initiative.id
+                            external = "#"
                           }
                           slot.put(" ")
                           ui.link{
@@ -425,6 +425,25 @@ ui.form{
                           end
                         end
                       }
+ui.container{ attr = { class = "content", id = "vote_draft_" .. tostring(initiative.id), style = "display:none;" }, content = function()
+
+execute.view{
+  module = "draft",
+  view = "_show",
+  params = {
+    draft = initiative.current_draft
+  }
+}
+execute.view{
+  module = "suggestion",
+  view = "_list",
+  params = {
+    initiative = initiative,
+    suggestions_selector = initiative:get_reference_selector("suggestions"),
+    tab_id = param.get("tab_id")
+  }
+}
+end }
                     end
                   }
                 end
