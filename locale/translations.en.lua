@@ -1,6 +1,5 @@
 #!/usr/bin/env lua
 return {
-["#{closed_ago} ago"] = false;
 ["#{count} cancelled"] = false;
 ["#{count} days ago"] = false;
 ["#{count} finished"] = false;
@@ -13,13 +12,15 @@ return {
 ["#{count} of your outgoing delegation(s) are broken"] = false;
 ["#{date} at #{time}"] = false;
 ["#{interested_issues_to_vote_count} issue(s) you are interested in"] = false;
+["#{interval_text} [interval]"] = "#{interval_text}";
+["#{interval_text} ago"] = false;
+["#{interval_text} left"] = false;
 ["#{issues_to_vote_count} issue(s)"] = false;
 ["#{name}\n\n"] = false;
 ["#{number} Image(s) has been deleted"] = false;
 ["#{number} Image(s) has been updated"] = false;
 ["#{policy_name} ##{issue_id}"] = false;
 ["#{policy} ##{id}"] = false;
-["#{time_left} left"] = false;
 ["(#{more_count} duplicates removed)"] = false;
 ["(new window)"] = false;
 [")) == "] = false;
@@ -726,8 +727,12 @@ return {
 ["at least #{count} approvals"] = false;
 ["at least #{count} approvals or abstentions"] = false;
 ["change discussion URL"] = false;
-["day"] = false;
-["days"] = false;
+["day [interval ago]"] = "day";
+["day [interval time left]"] = "day";
+["day [interval]"] = "day";
+["days [interval ago]"] = "days";
+["days [interval time left]"] = "days";
+["days [interval]"] = "days";
 ["deactivated"] = false;
 ["delegates to"] = false;
 ["delete<br /><br />"] = false;
@@ -739,6 +744,12 @@ return {
 ["inactive"] = false;
 ["last 24 hours"] = false;
 ["login name"] = false;
+["month [interval ago]"] = "month";
+["month [interval time left]"] = "month";
+["month [interval]"] = "month";
+["months [interval ago]"] = "months";
+["months [interval time left]"] = "months";
+["months [interval]"] = "months";
 ["more unsatisfied"] = false;
 ["must"] = false;
 ["must not"] = false;
@@ -761,4 +772,10 @@ return {
 ["without"] = false;
 ["without winner"] = false;
 ["xmpp"] = false;
+["year [interval ago]"] = "year";
+["year [interval time left]"] = "year";
+["year [interval]"] = "year";
+["years [interval ago]"] = "years";
+["years [interval time left]"] = "years";
+["years [interval]"] = "years";
 }

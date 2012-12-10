@@ -18,8 +18,6 @@ if not member then
   return false
 end
 
-local old_notify_email = member.notify_email
-
 local notify_email = param.get("notify_email")
 
 if not config.locked_profile_fields.notify_email and notify_email then
@@ -33,10 +31,9 @@ if not config.locked_profile_fields.notify_email and notify_email then
     }
     return false
   end
-  member.notify_email = notify_email
 end
 
-if member and not member.notify_email then
+if member and not notify_email then
   request.redirect{
     mode   = "redirect",
     module = "index",
@@ -59,7 +56,7 @@ if not config.locked_profile_fields.name and name then
       view   = "register",
       params = {
         code = member.invite_code,
-        notify_email = member.notify_email,
+        notify_email = notify_email,
         step = 1
       }
     }
@@ -75,7 +72,7 @@ if not config.locked_profile_fields.name and name then
       view   = "register",
       params = {
         code = member.invite_code,
-        notify_email = member.notify_email,
+        notify_email = notify_email,
         step = 1
       }
     }
@@ -86,14 +83,14 @@ if not config.locked_profile_fields.name and name then
 
 end
 
-if member.notify_email and not member.name then
+if notify_email and not member.name then
   request.redirect{
     mode   = "redirect",
     module = "index",
     view   = "register",
     params = {
       code = member.invite_code,
-      notify_email = member.notify_email,
+      notify_email = notify_email,
       step = 1
     }
   }
@@ -112,7 +109,7 @@ if not config.locked_profile_fields.login and login then
       view   = "register",
       params = { 
         code = member.invite_code,
-        notify_email = member.notify_email,
+        notify_email = notify_email,
         name = member.name,
         step = 1
       }
@@ -129,7 +126,7 @@ if not config.locked_profile_fields.login and login then
       view   = "register",
       params = { 
         code = member.invite_code,
-        notify_email = member.notify_email,
+        notify_email = notify_email,
         name = member.name,
         step = 1
       }
@@ -146,7 +143,7 @@ if member.name and not member.login then
     view   = "register",
     params = { 
       code = member.invite_code,
-      notify_email = member.notify_email,
+      notify_email = notify_email,
       name = member.name,
       step = 1
     }
@@ -176,7 +173,7 @@ if step > 2 then
       view   = "register",
       params = { 
         code = member.invite_code,
-        notify_email = member.notify_email,
+        notify_email = notify_email,
         name = member.name,
         login = member.login
       }
@@ -195,10 +192,15 @@ if step > 2 then
     return false
   end
 
-  member.login = login
-  member.name = name
+  if not config.locked_profile_fields.login then
+    member.login = login
+  end
 
-  if notify_email ~= old_notify_email then
+  if not config.locked_profile_fields.name then
+    member.name = name
+  end
+
+  if notify_email ~= member.notify_email then
     local success = member:set_notify_email(notify_email)
     if not success then
       slot.put_into("error", _"Can't send confirmation email")

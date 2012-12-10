@@ -96,7 +96,7 @@ filters.content = function()
         elseif event.time_ago == 1 then
           days_ago_text = _("Yesterday at #{time}", { time = format.time(event.occurrence) })
         else
-          days_ago_text = _("#{date} at #{time}", { date = format.date(event.occurrence.date), time = format.time(event.occurrence) })
+          days_ago_text = _("#{date} at #{time}", { date = format.date(event.occurrence.date), time = format.time(event.occurrence, { hide_seconds = true }) })
         end
         ui.tag{ attr = { class = "event_name" }, content = event_name }
         slot.put("<br />") 

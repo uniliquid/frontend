@@ -10,7 +10,7 @@ execute.view{
 slot.put_into("title", " &middot; " .. _"History")
 
 if source then
-  slot.select("actions", function()
+  ui.actions(function()
     ui.link{
       content = _"Rendered",
       module = "draft",
@@ -21,7 +21,7 @@ if source then
     end
   )
 else
-  slot.select("actions", function()
+  ui.actions(function()
     ui.link{
       content = _"Source",
       module = "draft",

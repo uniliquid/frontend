@@ -2,7 +2,7 @@ local initiative_id = param.get("initiative_id")
 
 slot.put_into("title", _"Add new suggestion")
 
-slot.select("actions", function()
+ui.actions(function()
   ui.link{
     content = function()
         ui.image{ static = "icons/16/cancel.png" }

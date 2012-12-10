@@ -1,6 +1,5 @@
 #!/usr/bin/env lua
 return {
-["#{closed_ago} ago"] = "πριν από #{closed_ago}";
 ["#{count} cancelled"] = "#{count} ακυρώθηκαν";
 ["#{count} days ago"] = "#{count} μέρες πριν";
 ["#{count} finished"] = "#{count} ολοκληρώθηκαν";
@@ -13,13 +12,15 @@ return {
 ["#{count} of your outgoing delegation(s) are broken"] = "#{count} από τις αναθέσεις σας δεν ισχύουν πια";
 ["#{date} at #{time}"] = "#{date} στις #{time}";
 ["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} θέμα(τα) που σας ενδιαφέρουν";
+["#{interval_text} [interval]"] = false;
+["#{interval_text} ago"] = false;
+["#{interval_text} left"] = false;
 ["#{issues_to_vote_count} issue(s)"] = "#{issues_to_vote_count} θέμα(τα)";
 ["#{name}\n\n"] = "#{name}\n\n";
 ["#{number} Image(s) has been deleted"] = "Διαγράφηκαν #{number} εικόνες";
 ["#{number} Image(s) has been updated"] = "Ενημερώθηκαν #{number} εικόνες";
 ["#{policy_name} ##{issue_id}"] = "#{policy_name} ##{issue_id}";
 ["#{policy} ##{id}"] = "#{policy} ##{id}";
-["#{time_left} left"] = "απομένουν #{time_left}";
 ["(#{more_count} duplicates removed)"] = "(Αφαιρέθηκαν #{more_count} αντίγραφα)";
 ["(new window)"] = "(νέο παράθυρο)";
 [")) == "] = ")) == ";
@@ -52,7 +53,7 @@ return {
 ["Admin menu"] = "Επιλογές διαχείρισης";
 ["Admin?"] = "Διαχειριστής;";
 ["Admission time"] = "Διάρκεια πρόκρισης";
-["Admitted"] = "Προκρίθηκε"; 
+["Admitted"] = "Προκρίθηκε";
 ["All areas"] = "Όλοι οι τομείς";
 ["All areas in my units"] = "Όλοι οι τομείς στις ενότητές μου";
 ["All issues"] = "Όλα τα θέματα";
@@ -586,10 +587,10 @@ return {
 ["This member is already initiator of this initiative"] = "Αυτό το μέλος είναι ήδη εισηγητής αυτής της πρωτοβουλίας";
 ["This member is already invited to become initiator of this initiative"] = "Αυτό το μέλος έχει ήδη προσκληθεί να γίνει εισηγητής αυτής της πρωτοβουλίας";
 ["This member is inactive"] = "Αυτό το μέλος είναι ανενεργό";
-["This member is initiator of this initiative"] =  "Αυτό το μέλος είναι εισηγητής αυτής της πρωτοβουλίας";
+["This member is initiator of this initiative"] = "Αυτό το μέλος είναι εισηγητής αυτής της πρωτοβουλίας";
 ["This member is locked"] = "Αυτό το μέλος είναι κλειδωμένο";
 ["This member is participating, the rest of delegation chain is suspended while discussing"] = "Αυτό το μέλος συμμετέχει, η υπόλοιπη αλυσίδα αντιπροσώπευσης αναστέλεται κατά τη διάρκεια των συνομιλιών.";
-["This member is potential supporter of this initiative"] =  "Αυτό το μέλος είναι δυνητικός υποστηρικτής αυτής της πρωτοβουλίας";
+["This member is potential supporter of this initiative"] = "Αυτό το μέλος είναι δυνητικός υποστηρικτής αυτής της πρωτοβουλίας";
 ["This member is potential supporter of this initiative via delegation"] = "Αυτό το μέλος είναι δυνητικός υποστηρικτής αυτής της πρωτοβουλίας μέσω ανάθεσης";
 ["This member is supporter of this initiative"] = "Αυτό το μέλος είναι υποστηρικτής αυτής της πρωτοβουλίας";
 ["This member is supporter of this initiative via delegation"] = "Αυτό το μέλος είναι υποστηρικτής αυτής της πρωτοβουλίας μέσω ανάθεσης";
@@ -638,7 +639,7 @@ return {
 ["Voting"] = "Ψηφοφορία";
 ["Voting comment"] = "Σχόλιο ψήφου";
 ["Voting comment (last updated: #{timestamp})"] = "Σχόλια ψήφου (τελευταία ενημέρωση: #{timestamp})";
-["Voting comment (optional)"] = "Σχόλια ψήφου (προαιρετικό)" ;
+["Voting comment (optional)"] = "Σχόλια ψήφου (προαιρετικό)";
 ["Voting comment available"] = "Σχόλια ψήφου διαθέσιμα";
 ["Voting for this issue has already begun."] = "Η ψηφοφορία για αυτό το θέμα έχει ξεκινήσει ήδη.";
 ["Voting has not started yet."] = "Η ψηφοφορία δεν ξεκίνησε ακόμα.";
@@ -726,8 +727,12 @@ return {
 ["at least #{count} approvals"] = "τουλάχιστον #{count} επιδοκιμασίες";
 ["at least #{count} approvals or abstentions"] = "τουλάχιστον #{count} επιδοκιμασίες ή αποχές";
 ["change discussion URL"] = "αλλαγή του URL της συζήτησης";
-["day"] = "ημέρα";
-["days"] = "ημέρες";
+["day [interval ago]"] = false;
+["day [interval time left]"] = false;
+["day [interval]"] = false;
+["days [interval ago]"] = false;
+["days [interval time left]"] = false;
+["days [interval]"] = false;
 ["deactivated"] = "απενεργοποιημένο";
 ["delegates to"] = "αναθέτει στον/στην";
 ["delete<br /><br />"] = "διαγραφή<br /><br />";
@@ -739,6 +744,12 @@ return {
 ["inactive"] = "ανενεργός/ή";
 ["last 24 hours"] = "τις τελευταίες 24 ώρες";
 ["login name"] = "Όνομα σύνδεσης";
+["month [interval ago]"] = false;
+["month [interval time left]"] = false;
+["month [interval]"] = false;
+["months [interval ago]"] = false;
+["months [interval time left]"] = false;
+["months [interval]"] = false;
 ["more unsatisfied"] = "περισσότερο ανικανοποίητος/η";
 ["must"] = "οπωσδήποτε";
 ["must not"] = "με τίποτα";
@@ -761,5 +772,10 @@ return {
 ["without"] = "χωρίς";
 ["without winner"] = "Χωρίς νικητή";
 ["xmpp"] = "Jabber (XMPP)";
+["year [interval ago]"] = false;
+["year [interval time left]"] = false;
+["year [interval]"] = false;
+["years [interval ago]"] = false;
+["years [interval time left]"] = false;
+["years [interval]"] = false;
 }
-
