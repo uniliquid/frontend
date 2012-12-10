@@ -350,7 +350,7 @@ return {
 ["Membership updated"] = false;
 ["Memberships"] = false;
 ["Missing help text: #{id}.#{lang}.txt"] = false;
-["Mobile phone"] = false;
+["Mobile phone"] = "Forum Nickname";
 ["Monday"] = false;
 ["Move down"] = false;
 ["Move up"] = false;

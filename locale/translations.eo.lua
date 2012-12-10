@@ -350,7 +350,7 @@ return {
 ["Membership updated"] = "Membreco ĝisdatigita";
 ["Memberships"] = "Membrecoj";
 ["Missing help text: #{id}.#{lang}.txt"] = "Mankanta helpteksto: #{id}.#{lang}.txt";
-["Mobile phone"] = "Poŝtelefono";
+["Mobile phone"] = "Forum Nickname";
 ["Monday"] = "Lundo";
 ["Move down"] = "Movi malsupren";
 ["Move up"] = "Movi supren";

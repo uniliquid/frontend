@@ -350,7 +350,7 @@ return {
 ["Membership updated"] = "Utente aggiornato";
 ["Memberships"] = "Utenti";
 ["Missing help text: #{id}.#{lang}.txt"] = "Testo mancante: #{id}.#{lang}.txt";
-["Mobile phone"] = "Cellulare";
+["Mobile phone"] = "Forum Nickname";
 ["Monday"] = "Lunedi'";
 ["Move down"] = "Sposta in basso";
 ["Move up"] = "Sposta in alto";

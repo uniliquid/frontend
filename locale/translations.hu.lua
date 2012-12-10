@@ -350,7 +350,7 @@ return {
 ["Membership updated"] = "Tagság frissítve";
 ["Memberships"] = "Tagságok";
 ["Missing help text: #{id}.#{lang}.txt"] = "Hiányzó súgószöveg: #{id}.#{lang}.txt";
-["Mobile phone"] = "Mobil";
+["Mobile phone"] = "Forum Nickname";
 ["Monday"] = "Hétfõ";
 ["Move down"] = "Lejjebb helyezni";
 ["Move up"] = "Feljebb helyezni";

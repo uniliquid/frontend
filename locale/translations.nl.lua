@@ -350,7 +350,7 @@ return {
 ["Membership updated"] = "Lidmaatschap is geactualiseerd";
 ["Memberships"] = "Deelnemers";
 ["Missing help text: #{id}.#{lang}.txt"] = "Helptekst ontbreekt: #{id}.#{lang}.txt";
-["Mobile phone"] = "Mobiele telefoon";
+["Mobile phone"] = "Forum Nickname";
 ["Monday"] = "Maandag";
 ["Move down"] = "Naar beneden";
 ["Move up"] = "Omhoog";

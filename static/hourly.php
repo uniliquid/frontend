@@ -23,8 +23,8 @@
   //error_reporting(E_ALL);
   //ini_set('display_errors', 1);
   $u = 1;
-  $selected = array_fill(0,11,"");
-  if (isset($_GET["unit"]) && preg_match("/^\d+$/", $_GET["unit"], $matches, PREG_OFFSET_CAPTURE) == 1 && $_GET["unit"] >= 1 && $_GET["unit"] <= 10)
+  $selected = array_fill(0,12,"");
+  if (isset($_GET["unit"]) && preg_match("/^\d+$/", $_GET["unit"], $matches, PREG_OFFSET_CAPTURE) == 1 && $_GET["unit"] >= 1 && $_GET["unit"] <= 11)
   {
     $u = $_GET["unit"];
   }
@@ -39,7 +39,8 @@
   echo "<a href=\"?unit=8\"" . $selected[8] . ">Tirol</a>\n";
   echo "<a href=\"?unit=9\"" . $selected[9] . ">Vorarlberg</a>\n";
   echo "<a href=\"?unit=2\"" . $selected[2] . ">Wien</a>\n";
-  if ($u >= 1 && $u <= 10)
+  echo "<a href=\"?unit=11\"" . $selected[11] . ">Graz</a>\n";
+  if ($u >= 1 && $u <= 11)
   {
     echo "</div><br /><div class=\"wiki use_terms\">\n";
     echo "<h2>Stimmberechtigte Nutzer in Liquid Feedback Organisation ";
@@ -63,6 +64,8 @@
       echo "Piratenpartei Vorarlberg</h2>\n";
     else if ($u == 10)
       echo "Piratenpartei Kärnten</h2>\n";
+    else if ($u == 11)
+      echo "Piratenpartei Graz</h2>\n";
 
     if (isset($_GET["full"]) && preg_match("/^\d+$/", $_GET["full"], $matches, PREG_OFFSET_CAPTURE) == 1 && $_GET["full"] == 1)
     {

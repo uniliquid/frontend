@@ -351,7 +351,7 @@ return {
 ["Membership updated"] = "Mitgliedschaft aktualisiert";
 ["Memberships"] = "Mitgliedschaften";
 ["Missing help text: #{id}.#{lang}.txt"] = "Fehlender Hilfetext: #{id}.#{lang}.txt";
-["Mobile phone"] = "Mobiltelefon";
+["Mobile phone"] = "Forum Nickname";
 ["Monday"] = "Montag";
 ["Move down"] = "Runter schieben";
 ["Move up"] = "Hoch schieben";

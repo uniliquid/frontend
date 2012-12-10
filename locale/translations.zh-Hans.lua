@@ -350,7 +350,7 @@ return {
 ["Membership updated"] = "成员身分被更新";
 ["Memberships"] = "成员身分";
 ["Missing help text: #{id}.#{lang}.txt"] = "缺少说明文件： #{id}.#{lang}.txt";
-["Mobile phone"] = "行动电话";
+["Mobile phone"] = "Forum Nickname";
 ["Monday"] = "周一";
 ["Move down"] = "下移";
 ["Move up"] = "上移";

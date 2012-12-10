@@ -350,7 +350,7 @@ return {
 ["Membership updated"] = "Η συμμετοχή ενημερώθηκε";
 ["Memberships"] = "Συμμετοχές";
 ["Missing help text: #{id}.#{lang}.txt"] = "Λείπει κείμενο βοήθειας: #{id}.#{lang}.txt";
-["Mobile phone"] = "Κινητό τηλέφωνο";
+["Mobile phone"] = "Forum Nickname";
 ["Monday"] = "Δευτέρα";
 ["Move down"] = "Μετακίνηση προς τα κάτω";
 ["Move up"] = "Μετακίνηση προς τα πάνω";
