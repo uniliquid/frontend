@@ -7,7 +7,7 @@ ui.form{
   content = function()
     ui.field.text{
       label = _"Created at",
-      value = tostring(initiative.created)
+      value = format.timestamp(initiative.created)
     }
     if initiative.revoked then
       ui.field.text{

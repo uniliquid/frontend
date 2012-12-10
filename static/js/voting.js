@@ -1,4 +1,4 @@
-if (!jsFail) {
+jsProtect(function() {
   voting_text_approval_single               = "Approval"
   voting_text_approval_multi                = "Approval"
   voting_text_first_preference_single       = "Approval (first preference)"
@@ -98,58 +98,74 @@ if (!jsFail) {
       }
     }
   }
-  function voting_move(element, up, dropX, dropY) {
-    if (typeof(element) == "string") element = document.getElementById(element);
-    var mouse = (up == null);
-    var oldParent = element.parentNode;
-    if (mouse) var centerY = dropY + element.clientHeight / 2;
+  function voting_calculateScoring() {
+    var mainDiv = document.getElementById("voting");
+    var form = document.getElementById("voting_form");
+    var scoringString = "";
     var approvalCount = 0;
     var disapprovalCount = 0;
-    var mainDiv = document.getElementById("voting");
     var sections = mainDiv.childNodes;
-    for (var i=0; i<sections.length; i++) {
-      var section = sections[i];
+    for (var j=0; j<sections.length; j++) {
+      var section = sections[j];
       if (section.className == "approval")       approvalCount++;
       if (section.className == "disapproval") disapprovalCount++;
     }
-    if (mouse) {
-      for (var i=0; i<sections.length; i++) {
-        var section = sections[i];
-        if (
-          section.className == "approval" ||
-          section.className == "abstention" ||
-          section.className == "disapproval"
-        ) {
-          if (
-            centerY >= section.offsetTop &&
-            centerY <  section.offsetTop + section.clientHeight
-          ) {
-            var entries = section.childNodes;
-            for (var j=0; j<entries.length; j++) {
-              var entry = entries[j];
-              if (entry.className == "movable") {
-                if (centerY < entry.offsetTop + entry.clientHeight / 2) {
-                  if (element != entry) {
-                    oldParent.removeChild(element);
-                    section.insertBefore(element, entry);
-                  }
-                  break;
-                }
-              }
-            }
-            if (j == entries.length) {
-              oldParent.removeChild(element);
-              section.appendChild(element);
-            }
-            break;
+    var approvalIndex = 0;
+    var disapprovalIndex = 0;
+    for (var j=0; j<sections.length; j++) {
+      var section = sections[j];
+      if (
+        section.className == "approval"    ||
+        section.className == "abstention"  ||
+        section.className == "disapproval"
+      ) {
+        var score;
+        if (section.className == "approval") {
+          score = approvalCount - approvalIndex;
+          approvalIndex++;
+        } else if (section.className == "abstention") {
+          score = 0;
+        } else if (section.className == "disapproval") {
+          score = -1 - disapprovalIndex;
+          disapprovalIndex++;
+        }
+        var entries = section.childNodes;
+        for (var k=0; k<entries.length; k++) {
+          var entry = entries[k];
+          if (entry.className == "movable") {
+            var id = entry.id.match(/[0-9]+/);
+            var field = document.createElement("input");
+            scoringString += id + ":" + score + ";";
           }
         }
       }
-      if (i == sections.length) {
-        var newSection = document.createElement("div");
-        var cathead = document.createElement("div");
-        cathead.setAttribute("class", "cathead");
-        newSection.appendChild(cathead);
+    }
+    var fields = form.childNodes;
+    for (var j=0; j<fields.length; j++) {
+      var field = fields[j];
+      if (field.name == "scoring") {
+        field.setAttribute("value", scoringString);
+        return;
+      }
+    }
+    throw('Hidden input field named "scoring" not found.');
+  }
+  function voting_move(element, up, dropX, dropY) {
+    jsProtect(function() {
+      if (typeof(element) == "string") element = document.getElementById(element);
+      var mouse = (up == null);
+      var oldParent = element.parentNode;
+      if (mouse) var centerY = dropY + element.clientHeight / 2;
+      var approvalCount = 0;
+      var disapprovalCount = 0;
+      var mainDiv = document.getElementById("voting");
+      var sections = mainDiv.childNodes;
+      for (var i=0; i<sections.length; i++) {
+        var section = sections[i];
+        if (section.className == "approval")       approvalCount++;
+        if (section.className == "disapproval") disapprovalCount++;
+      }
+      if (mouse) {
         for (var i=0; i<sections.length; i++) {
           var section = sections[i];
           if (
@@ -157,202 +173,178 @@ if (!jsFail) {
             section.className == "abstention" ||
             section.className == "disapproval"
           ) {
-            if (centerY < section.offsetTop + section.clientHeight / 2) {
-              if (section.className == "disapproval") {
-                newSection.setAttribute("class", "disapproval");
-                disapprovalCount++;
-              } else {
-                newSection.setAttribute("class", "approval");
-                approvalCount++;
+            if (
+              centerY >= section.offsetTop &&
+              centerY <  section.offsetTop + section.clientHeight
+            ) {
+              var entries = section.childNodes;
+              for (var j=0; j<entries.length; j++) {
+                var entry = entries[j];
+                if (entry.className == "movable") {
+                  if (centerY < entry.offsetTop + entry.clientHeight / 2) {
+                    if (element != entry) {
+                      oldParent.removeChild(element);
+                      section.insertBefore(element, entry);
+                    }
+                    break;
+                  }
+                }
               }
-              mainDiv.insertBefore(newSection, section);
+              if (j == entries.length) {
+                oldParent.removeChild(element);
+                section.appendChild(element);
+              }
               break;
             }
           }
         }
         if (i == sections.length) {
-          newSection.setAttribute("class", "disapproval");
-          disapprovalCount++;
-          mainDiv.appendChild(newSection);
+          var newSection = document.createElement("div");
+          var cathead = document.createElement("div");
+          cathead.setAttribute("class", "cathead");
+          newSection.appendChild(cathead);
+          for (var i=0; i<sections.length; i++) {
+            var section = sections[i];
+            if (
+              section.className == "approval" ||
+              section.className == "abstention" ||
+              section.className == "disapproval"
+            ) {
+              if (centerY < section.offsetTop + section.clientHeight / 2) {
+                if (section.className == "disapproval") {
+                  newSection.setAttribute("class", "disapproval");
+                  disapprovalCount++;
+                } else {
+                  newSection.setAttribute("class", "approval");
+                  approvalCount++;
+                }
+                mainDiv.insertBefore(newSection, section);
+                break;
+              }
+            }
+          }
+          if (i == sections.length) {
+            newSection.setAttribute("class", "disapproval");
+            disapprovalCount++;
+            mainDiv.appendChild(newSection);
+          }
+          oldParent.removeChild(element);
+          newSection.appendChild(element);
         }
-        oldParent.removeChild(element);
-        newSection.appendChild(element);
+      } else {
+        var oldFound = false;
+        var prevSection = null;
+        var nextSection = null;
+        for (var i=0; i<sections.length; i++) {
+          var section = sections[i];
+          if (
+            section.className == "approval" ||
+            section.className == "abstention" ||
+            section.className == "disapproval"
+          ) {
+            if (oldFound) {
+              nextSection = section;
+              break;
+            } else if (section == oldParent) {
+              oldFound = true;
+            } else {
+              prevSection = section;
+            }
+          }
+        }
+        var create;
+        if (oldParent.className == "abstention") {
+          create = true;
+        } else {
+          create = false;
+          for (var i=0; i<oldParent.childNodes.length; i++) {
+            var entry = oldParent.childNodes[i];
+            if (entry.className == "movable") {
+              if (entry != element) {
+                create = true;
+                break;
+              }
+            }
+          }
+        }
+        var newSection;
+        if (create) {
+          newSection = document.createElement("div");
+          var cathead = document.createElement("div");
+          cathead.setAttribute("class", "cathead");
+          newSection.appendChild(cathead);
+          if (
+            oldParent.className == "approval" ||
+            (oldParent.className == "abstention" && up)
+          ) {
+            newSection.setAttribute("class", "approval");
+            approvalCount++;
+          } else {
+            newSection.setAttribute("class", "disapproval");
+            disapprovalCount++;
+          }
+          if (up) {
+            mainDiv.insertBefore(newSection, oldParent);
+          } else {
+            if (nextSection) mainDiv.insertBefore(newSection, nextSection);
+            else mainDiv.appendChild(newSection);
+          }
+        } else {
+          if (up) newSection = prevSection;
+          else newSection = nextSection;
+        }
+        if (newSection) {
+          oldParent.removeChild(element);
+          if (create || up) {
+            newSection.appendChild(element);
+          } else {
+            var inserted = false;
+            for (var i=0; i<newSection.childNodes.length; i++) {
+              var entry = newSection.childNodes[i];
+              if (entry.className == "movable") {
+                newSection.insertBefore(element, entry);
+                inserted = true;
+                break;
+              }
+            }
+            if (!inserted) newSection.appendChild(element);
+          }
+        }
       }
-    } else {
-      var oldFound = false;
-      var prevSection = null;
-      var nextSection = null;
-      for (var i=0; i<sections.length; i++) {
+      // sections = mainDiv.childNodes;
+      for (i=0; i<sections.length; i++) {
         var section = sections[i];
         if (
-          section.className == "approval" ||
-          section.className == "abstention" ||
-          section.className == "disapproval"
+          (section.className == "approval"    &&    approvalCount > 1) ||
+          (section.className == "disapproval" && disapprovalCount > 1)
         ) {
-          if (oldFound) {
-            nextSection = section;
-            break;
-          } else if (section == oldParent) {
-            oldFound = true;
-          } else {
-            prevSection = section;
+          var entries = section.childNodes;
+          for (var j=0; j<entries.length; j++) {
+            var entry = entries[j];
+            if (entry.className == "movable") break;
+          }
+          if (j == entries.length) {
+            section.parentNode.removeChild(section);
           }
         }
       }
-      var create;
-      if (oldParent.className == "abstention") {
-        create = true;
-      } else {
-        create = false;
-        for (var i=0; i<oldParent.childNodes.length; i++) {
-          var entry = oldParent.childNodes[i];
-          if (entry.className == "movable") {
-            if (entry != element) {
-              create = true;
-              break;
-            }
-          }
-        }
-      }
-      var newSection;
-      if (create) {
-        newSection = document.createElement("div");
-        var cathead = document.createElement("div");
-        cathead.setAttribute("class", "cathead");
-        newSection.appendChild(cathead);
-        if (
-          oldParent.className == "approval" ||
-          (oldParent.className == "abstention" && up)
-        ) {
-          newSection.setAttribute("class", "approval");
-          approvalCount++;
-        } else {
-          newSection.setAttribute("class", "disapproval");
-          disapprovalCount++;
-        }
-        if (up) {
-          mainDiv.insertBefore(newSection, oldParent);
-        } else {
-          if (nextSection) mainDiv.insertBefore(newSection, nextSection);
-          else mainDiv.appendChild(newSection);
-        }
-      } else {
-        if (up) newSection = prevSection;
-        else newSection = nextSection;
-      }
-      if (newSection) {
-        oldParent.removeChild(element);
-        if (create || up) {
-          newSection.appendChild(element);
-        } else {
-          var inserted = false;
-          for (var i=0; i<newSection.childNodes.length; i++) {
-            var entry = newSection.childNodes[i];
-            if (entry.className == "movable") {
-              newSection.insertBefore(element, entry);
-              inserted = true;
-              break;
-            }
-          }
-          if (!inserted) newSection.appendChild(element);
-        }
-      }
-    }
-    // sections = mainDiv.childNodes;
-    for (i=0; i<sections.length; i++) {
-      var section = sections[i];
-      if (
-        (section.className == "approval"    &&    approvalCount > 1) ||
-        (section.className == "disapproval" && disapprovalCount > 1)
-      ) {
-        var entries = section.childNodes;
-        for (var j=0; j<entries.length; j++) {
-          var entry = entries[j];
-          if (entry.className == "movable") break;
-        }
-        if (j == entries.length) {
-          section.parentNode.removeChild(section);
-        }
-      }
-    }
-    voting_setCategoryHeadings();
+      voting_setCategoryHeadings();
+      voting_calculateScoring();
+    });
   }
-  function elementDropped(element, dropX, dropY) {
+  window.elementDropped = function(element, dropX, dropY) {
     voting_move(element, null, dropX, dropY);
   }
   window.addEventListener("load", function(event) {
-    voting_setCategoryHeadings();
-    var mainDiv = document.getElementById("voting");
-    var form = document.getElementById("voting_form");
-    var elements = document.getElementsByTagName("input");
-    for (var i=0; i<elements.length; i++) {
-      var element = elements[i];
-      if (element.className == "voting_done1" ||
-          element.className == "voting_done2" ||
-          element.name == "preview") {
-        element.addEventListener("click", function(event) {
-          if (event.target.name == "preview") {
-            document.getElementById("preview2").value = "1";
-          }
-          var scoringString = "";
-          var approvalCount = 0;
-          var disapprovalCount = 0;
-          var sections = mainDiv.childNodes;
-          for (var j=0; j<sections.length; j++) {
-            var section = sections[j];
-            if (section.className == "approval")       approvalCount++;
-            if (section.className == "disapproval") disapprovalCount++;
-          }
-          var approvalIndex = 0;
-          var disapprovalIndex = 0;
-          for (var j=0; j<sections.length; j++) {
-            var section = sections[j];
-            if (
-              section.className == "approval"    ||
-              section.className == "abstention"  ||
-              section.className == "disapproval"
-            ) {
-              var score;
-              if (section.className == "approval") {
-                score = approvalCount - approvalIndex;
-                approvalIndex++;
-              } else if (section.className == "abstention") {
-                score = 0;
-              } else if (section.className == "disapproval") {
-                score = -1 - disapprovalIndex;
-                disapprovalIndex++;
-              }
-              var entries = section.childNodes;
-              for (var k=0; k<entries.length; k++) {
-                var entry = entries[k];
-                if (entry.className == "movable") {
-                  var id = entry.id.match(/[0-9]+/);
-                  var field = document.createElement("input");
-                  scoringString += id + ":" + score + ";";
-                }
-              }
-            }
-          }
-          var fields = form.childNodes;
-          for (var j=0; j<fields.length; j++) {
-            var field = fields[j];
-            if (field.name == "scoring") {
-              field.setAttribute("value", scoringString);
-              form.submit();
-              return;
-            }
-          }
-          alert('Hidden input field named "scoring" not found.');
-        }, false);
-      }
-    }
+    jsProtect(function() {
+      voting_setCategoryHeadings();
+      voting_calculateScoring();  // checks if script works fine
+    });
   }, false);
-  function voting_moveUp(element) {
+  window.voting_moveUp = function(element) {
     return voting_move(element, true);
   }
-  function voting_moveDown(element) {
+  window.voting_moveDown = function(element) {
     return voting_move(element, false);
   }
-
-  
-}
+});

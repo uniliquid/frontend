@@ -1,6 +1,5 @@
 #!/usr/bin/env lua
 return {
-["#{closed_ago} ago"] = false;
 ["#{count} cancelled"] = "#{count} annullati";
 ["#{count} days ago"] = "#{count} giorni fa";
 ["#{count} finished"] = "#{count} terminati";
@@ -13,13 +12,15 @@ return {
 ["#{count} of your outgoing delegation(s) are broken"] = "#{count} deleghe che hai dato hanno errori";
 ["#{date} at #{time}"] = "#{date} alle #{time}";
 ["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} tematiche che ti interessano";
+["#{interval_text} [interval]"] = false;
+["#{interval_text} ago"] = false;
+["#{interval_text} left"] = false;
 ["#{issues_to_vote_count} issue(s)"] = "#{issues_to_vote_count} tematiche";
 ["#{name}\n\n"] = "#{name}\n\n";
 ["#{number} Image(s) has been deleted"] = "#{number} immagini sono state rimosse";
 ["#{number} Image(s) has been updated"] = "#{number} immagini sono state aggiornate";
 ["#{policy_name} ##{issue_id}"] = "#{policy_name} ##{issue_id}";
 ["#{policy} ##{id}"] = "#{policy} ##{id}";
-["#{time_left} left"] = "tempo rimanente #{time_left}";
 ["(#{more_count} duplicates removed)"] = "(#{more_count} duplicati eliminati)";
 ["(new window)"] = "(nuova finestra)";
 [")) == "] = false;
@@ -726,8 +727,12 @@ return {
 ["at least #{count} approvals"] = "almeno #{count} approvazioni";
 ["at least #{count} approvals or abstentions"] = "almeno #{count} approvazioni o astensioni";
 ["change discussion URL"] = "cambia l'URL della discussione";
-["day"] = "giorno";
-["days"] = "giorni";
+["day [interval ago]"] = false;
+["day [interval time left]"] = false;
+["day [interval]"] = false;
+["days [interval ago]"] = false;
+["days [interval time left]"] = false;
+["days [interval]"] = false;
 ["deactivated"] = "disattivato";
 ["delegates to"] = "delega a";
 ["delete<br /><br />"] = "elimina<br /><br />";
@@ -739,6 +744,12 @@ return {
 ["inactive"] = "inattivo";
 ["last 24 hours"] = "ultime 24 ore";
 ["login name"] = "nome utente";
+["month [interval ago]"] = false;
+["month [interval time left]"] = false;
+["month [interval]"] = false;
+["months [interval ago]"] = false;
+["months [interval time left]"] = false;
+["months [interval]"] = false;
 ["more unsatisfied"] = "maggiore disaccordo";
 ["must"] = "deve";
 ["must not"] = "non deve";
@@ -761,4 +772,10 @@ return {
 ["without"] = false;
 ["without winner"] = "senza risultato approvato";
 ["xmpp"] = "xmpp";
+["year [interval ago]"] = false;
+["year [interval time left]"] = false;
+["year [interval]"] = false;
+["years [interval ago]"] = false;
+["years [interval time left]"] = false;
+["years [interval]"] = false;
 }

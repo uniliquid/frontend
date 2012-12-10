@@ -98,12 +98,14 @@ slot.select("footer", function()
     module = 'index',
     view   = 'about'
   }
-  slot.put(" &middot; ")
-  ui.link{
-    text   = _"Use terms",
-    module = 'index',
-    view   = 'usage_terms'
-  }
+  if config.use_terms then
+    slot.put(" &middot; ")
+    ui.link{
+      text   = _"Use terms",
+      module = 'index',
+      view   = 'usage_terms'
+    }
+  end
   slot.put(" &middot; ")
   ui.tag{ content = _"This site is using" }
   slot.put(" ")

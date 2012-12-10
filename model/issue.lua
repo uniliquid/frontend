@@ -5,8 +5,12 @@ local new_selector = Issue.new_selector
 
 function Issue:new_selector()
   local selector = new_selector(self)
-  selector:add_field("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()", "state_time_left")
-  selector:add_field("now() - issue.closed", "closed_ago")
+  selector:add_field("justify_interval(admission_time)::text", "admission_time_text")
+  selector:add_field("justify_interval(discussion_time)::text", "discussion_time_text")
+  selector:add_field("justify_interval(verification_time)::text", "verification_time_text")
+  selector:add_field("justify_interval(voting_time)::text", "voting_time_text")
+  selector:add_field("justify_interval(coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now())", "state_time_left")
+  selector:add_field("justify_interval(now() - issue.closed)", "closed_ago")
   return selector
 end
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env lua
 return {
-["#{closed_ago} ago"] = false;
 ["#{count} cancelled"] = false;
 ["#{count} days ago"] = false;
 ["#{count} finished"] = false;
@@ -13,13 +12,15 @@ return {
 ["#{count} of your outgoing delegation(s) are broken"] = false;
 ["#{date} at #{time}"] = false;
 ["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} temoj, kiuj interesas vin";
+["#{interval_text} [interval]"] = false;
+["#{interval_text} ago"] = false;
+["#{interval_text} left"] = false;
 ["#{issues_to_vote_count} issue(s)"] = "#{issues_to_vote_count} temo(j)";
 ["#{name}\n\n"] = false;
 ["#{number} Image(s) has been deleted"] = "#{number} bildo(j) estas viŝita(j)";
 ["#{number} Image(s) has been updated"] = "#{number} bildo(j) estas ĝisdatigita(j)";
 ["#{policy_name} ##{issue_id}"] = false;
 ["#{policy} ##{id}"] = false;
-["#{time_left} left"] = false;
 ["(#{more_count} duplicates removed)"] = "(#{more_count} duoblaĵoj forigitaj)";
 ["(new window)"] = "(nova fenestro)";
 [")) == "] = false;
@@ -726,8 +727,12 @@ return {
 ["at least #{count} approvals"] = false;
 ["at least #{count} approvals or abstentions"] = false;
 ["change discussion URL"] = false;
-["day"] = false;
-["days"] = false;
+["day [interval ago]"] = false;
+["day [interval time left]"] = false;
+["day [interval]"] = false;
+["days [interval ago]"] = false;
+["days [interval time left]"] = false;
+["days [interval]"] = false;
 ["deactivated"] = "malaktivigita";
 ["delegates to"] = false;
 ["delete<br /><br />"] = false;
@@ -739,6 +744,12 @@ return {
 ["inactive"] = false;
 ["last 24 hours"] = "lastaj 24 horoj";
 ["login name"] = "Salutnomo";
+["month [interval ago]"] = false;
+["month [interval time left]"] = false;
+["month [interval]"] = false;
+["months [interval ago]"] = false;
+["months [interval time left]"] = false;
+["months [interval]"] = false;
 ["more unsatisfied"] = "pli malkonsenta";
 ["must"] = "devas";
 ["must not"] = "ne rajtas";
@@ -761,4 +772,10 @@ return {
 ["without"] = false;
 ["without winner"] = false;
 ["xmpp"] = "Jabber (XMPP)";
+["year [interval ago]"] = false;
+["year [interval time left]"] = false;
+["year [interval]"] = false;
+["years [interval ago]"] = false;
+["years [interval time left]"] = false;
+["years [interval]"] = false;
 }

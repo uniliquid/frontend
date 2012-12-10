@@ -11,7 +11,7 @@ ui.form{
     if policy.polling then
       ui.field.text{       label = _"Admission time",        value = _"Implicitly admitted" }
     else
-      ui.field.text{       label = _"Admission time",        value = issue.admission_time }
+      ui.field.text{       label = _"Admission time",        value = format.interval_text(issue.admission_time_text) }
       ui.field.text{
         label = _"Issue quorum",
         value = format.percentage(policy.issue_quorum_num / policy.issue_quorum_den)
@@ -26,11 +26,11 @@ ui.form{
     if issue.accepted then
       ui.field.timestamp{  label = _"Accepted at",           name = "accepted" }
     end
-    ui.field.text{       label = _"Discussion time",       value = issue.discussion_time }
+    ui.field.text{       label = _"Discussion time",       value = format.interval_text(issue.discussion_time_text) }
     if issue.half_frozen then
       ui.field.timestamp{  label = _"Half frozen at",        name = "half_frozen" }
     end
-    ui.field.text{       label = _"Verification time",     value = issue.verification_time }
+    ui.field.text{       label = _"Verification time",     value = format.interval_text(issue.verification_time_text) }
     ui.field.text{
       label   = _"Initiative quorum",
       value = format.percentage(policy.initiative_quorum_num / policy.initiative_quorum_den)
@@ -44,7 +44,7 @@ ui.form{
     if issue.fully_frozen then
       ui.field.timestamp{  label = _"Fully frozen at",       name = "fully_frozen" }
     end
-    ui.field.text{       label = _"Voting time",           value = issue.voting_time }
+    ui.field.text{       label = _"Voting time",           value = format.interval_text(issue.voting_time_text) }
     if issue.closed then
       ui.field.timestamp{  label = _"Closed",                name = "closed" }
     end

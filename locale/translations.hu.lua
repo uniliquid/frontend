@@ -1,6 +1,5 @@
 #!/usr/bin/env lua
 return {
-["#{closed_ago} ago"] = false;
 ["#{count} cancelled"] = false;
 ["#{count} days ago"] = "#{count} nappal ezelõtt";
 ["#{count} finished"] = false;
@@ -13,13 +12,15 @@ return {
 ["#{count} of your outgoing delegation(s) are broken"] = false;
 ["#{date} at #{time}"] = false;
 ["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} téged érdeklõ téma";
+["#{interval_text} [interval]"] = false;
+["#{interval_text} ago"] = false;
+["#{interval_text} left"] = false;
 ["#{issues_to_vote_count} issue(s)"] = "#{issues_to_vote_count} téma";
 ["#{name}\n\n"] = "#{name}\n\n";
 ["#{number} Image(s) has been deleted"] = "#{number} kép törölve";
 ["#{number} Image(s) has been updated"] = "#{number} kép aktualizálva";
 ["#{policy_name} ##{issue_id}"] = false;
 ["#{policy} ##{id}"] = false;
-["#{time_left} left"] = "#{time_left} idõ van hátra";
 ["(#{more_count} duplicates removed)"] = "(#{more_count} másolat eltávolítva)";
 ["(new window)"] = "(új ablak)";
 [")) == "] = false;
@@ -726,8 +727,12 @@ return {
 ["at least #{count} approvals"] = "legalább #{count} egyetértés";
 ["at least #{count} approvals or abstentions"] = "legalább #{count} egyetértés vagy tartózkodás";
 ["change discussion URL"] = "tárgyalás URL-jének megváltoztatása";
-["day"] = "nap";
-["days"] = "napok";
+["day [interval ago]"] = false;
+["day [interval time left]"] = false;
+["day [interval]"] = false;
+["days [interval ago]"] = false;
+["days [interval time left]"] = false;
+["days [interval]"] = false;
 ["deactivated"] = "deaktiválva";
 ["delegates to"] = false;
 ["delete<br /><br />"] = "törlés<br /><br />";
@@ -739,6 +744,12 @@ return {
 ["inactive"] = false;
 ["last 24 hours"] = "elmúlt 24 óra";
 ["login name"] = "bejelentkezési név";
+["month [interval ago]"] = false;
+["month [interval time left]"] = false;
+["month [interval]"] = false;
+["months [interval ago]"] = false;
+["months [interval time left]"] = false;
+["months [interval]"] = false;
 ["more unsatisfied"] = "nagyon elégedetlen";
 ["must"] = "kell";
 ["must not"] = "tilos";
@@ -761,4 +772,10 @@ return {
 ["without"] = false;
 ["without winner"] = "gyõztes nélkül";
 ["xmpp"] = "Fecsegés (XMPP)";
+["year [interval ago]"] = false;
+["year [interval time left]"] = false;
+["year [interval]"] = false;
+["years [interval ago]"] = false;
+["years [interval time left]"] = false;
+["years [interval]"] = false;
 }

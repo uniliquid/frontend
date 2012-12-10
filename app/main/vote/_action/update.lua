@@ -3,7 +3,7 @@ if cancel then return end
 
 local issue = Issue:new_selector():add_where{ "id = ?", param.get("issue_id", atom.integer) }:for_share():single_object_mode():exec()
 
-local preview = param.get("preview") or param.get("preview2") == "1" and true or false
+local preview = param.get("preview") and true or false
 
 if not app.session.member:has_voting_right_for_unit_id(issue.area.unit_id) then
   error("access denied")

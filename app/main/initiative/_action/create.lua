@@ -168,11 +168,13 @@ initiator.member_id = app.session.member.id
 initiator.accepted = true
 initiator:save()
 
-local supporter = Supporter:new()
-supporter.initiative_id = initiative.id
-supporter.member_id = app.session.member.id
-supporter.draft_id = draft.id
-supporter:save()
+if not is_polling then
+  local supporter = Supporter:new()
+  supporter.initiative_id = initiative.id
+  supporter.member_id = app.session.member.id
+  supporter.draft_id = draft.id
+  supporter:save()
+end
 
 slot.put_into("notice", _"Initiative successfully created")
 

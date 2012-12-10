@@ -105,7 +105,7 @@ local function process_line(line)
     if not state_changed then
       slot.put(" ")
     end
-    slot.put(line)
+    slot.put(encode.html(line))
   else
     slot.put("<br />")
   end

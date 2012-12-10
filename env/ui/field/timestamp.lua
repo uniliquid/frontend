@@ -6,7 +6,7 @@ function ui.field.timestamp(args)
       content = function()
         ui.tag{
           attr = { class = "value" },
-          content = tostring(value)
+          content = format.timestamp(value)
         }
       end
     }
