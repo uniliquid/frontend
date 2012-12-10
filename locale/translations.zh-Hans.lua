@@ -1,6 +1,5 @@
 #!/usr/bin/env lua
 return {
-["#{closed_ago} ago"] = "＃{closed_ago} 之前";
 ["#{count} cancelled"] = "#{count} 个已取消";
 ["#{count} days ago"] = "#{count} 日前";
 ["#{count} finished"] = "#{count} 个已结束";
@@ -13,13 +12,15 @@ return {
 ["#{count} of your outgoing delegation(s) are broken"] = "您所委任的表决中有 #{count} 个已经毁损";
 ["#{date} at #{time}"] = "于 #{date} #{time}";
 ["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} 个您所关心的议题";
+["#{interval_text} [interval]"] = false;
+["#{interval_text} ago"] = false;
+["#{interval_text} left"] = false;
 ["#{issues_to_vote_count} issue(s)"] = "#{issues_to_vote_count} 个议题";
 ["#{name}\n\n"] = "#{name}\n\n";
 ["#{number} Image(s) has been deleted"] = "#{number} 张图片已被刪除";
 ["#{number} Image(s) has been updated"] = "#{number} 张图片已被更新";
 ["#{policy_name} ##{issue_id}"] = false;
 ["#{policy} ##{id}"] = false;
-["#{time_left} left"] = "剩下 #{time_left}";
 ["(#{more_count} duplicates removed)"] = "(移除了 #{more_count} 个重复项目)";
 ["(new window)"] = "(新视窗)";
 [")) == "] = false;
@@ -726,8 +727,12 @@ return {
 ["at least #{count} approvals"] = "至少 #{count} 票肯定";
 ["at least #{count} approvals or abstentions"] = "至少 #{count} 票肯定或弃权";
 ["change discussion URL"] = "更改讨论网址";
-["day"] = "日";
-["days"] = "日";
+["day [interval ago]"] = false;
+["day [interval time left]"] = false;
+["day [interval]"] = false;
+["days [interval ago]"] = false;
+["days [interval time left]"] = false;
+["days [interval]"] = false;
 ["deactivated"] = "停用";
 ["delegates to"] = "委任给";
 ["delete<br /><br />"] = "刪除<br /><br />";
@@ -739,6 +744,12 @@ return {
 ["inactive"] = "不活动的";
 ["last 24 hours"] = "最近 24 小时內";
 ["login name"] = "帐号";
+["month [interval ago]"] = false;
+["month [interval time left]"] = false;
+["month [interval]"] = false;
+["months [interval ago]"] = false;
+["months [interval time left]"] = false;
+["months [interval]"] = false;
 ["more unsatisfied"] = "较不满意";
 ["must"] = "必须";
 ["must not"] = "不可";
@@ -761,4 +772,10 @@ return {
 ["without"] = "无须";
 ["without winner"] = "无获选者";
 ["xmpp"] = "Jabber (XMPP)";
+["year [interval ago]"] = false;
+["year [interval time left]"] = false;
+["year [interval]"] = false;
+["years [interval ago]"] = false;
+["years [interval time left]"] = false;
+["years [interval]"] = false;
 }

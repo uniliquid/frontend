@@ -2,7 +2,7 @@ slot.put_into("title", _"Edit draft")
 
 local initiative = Initiative:by_id(param.get("initiative_id"))
 
-slot.select("actions", function()
+ui.actions(function()
   ui.link{
     content = function()
         ui.image{ static = "icons/16/cancel.png" }

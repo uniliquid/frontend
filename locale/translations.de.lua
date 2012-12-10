@@ -1,6 +1,5 @@
 #!/usr/bin/env lua
 return {
-["#{closed_ago} ago"] = "seit #{closed_ago}";
 ["#{count} cancelled"] = "#{count} abgebrochen";
 ["#{count} days ago"] = "vor #{count} Tagen";
 ["#{count} finished"] = "#{count} abgeschlossen";
@@ -13,13 +12,15 @@ return {
 ["#{count} of your outgoing delegation(s) are broken"] = "#{count} deiner ausgehenden Delegationen sind kaputt";
 ["#{date} at #{time}"] = "am #{date} um #{time}";
 ["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} Themen, die Dich interessieren";
+["#{interval_text} [interval]"] = "#{interval_text}";
+["#{interval_text} ago"] = "vor #{interval_text}";
+["#{interval_text} left"] = "noch #{interval_text}";
 ["#{issues_to_vote_count} issue(s)"] = "#{issues_to_vote_count} Themen";
 ["#{name}\n\n"] = "#{name}\n\n";
 ["#{number} Image(s) has been deleted"] = "Es wurde(n) #{number} Bild(er) gelöscht";
 ["#{number} Image(s) has been updated"] = "Es wurde(n) #{number} Bild(er) aktualisiert";
 ["#{policy_name} ##{issue_id}"] = false;
 ["#{policy} ##{id}"] = false;
-["#{time_left} left"] = "noch #{time_left}";
 ["(#{more_count} duplicates removed)"] = "(#{more_count} Duplikate entfernt)";
 ["(new window)"] = "(neues Fenster)";
 [")) == "] = false;
@@ -726,8 +727,12 @@ return {
 ["at least #{count} approvals"] = "mindestens #{count} Zustimmungen";
 ["at least #{count} approvals or abstentions"] = "mindestens #{count} Zustimmungen oder Enthaltungen";
 ["change discussion URL"] = "Diskussions-URL ändern";
-["day"] = "Tag";
-["days"] = "Tage";
+["day [interval ago]"] = "Tag";
+["day [interval time left]"] = "Tag";
+["day [interval]"] = "Tag";
+["days [interval ago]"] = "Tagen";
+["days [interval time left]"] = "Tage";
+["days [interval]"] = "Tage";
 ["deactivated"] = "deaktiviert";
 ["delegates to"] = "delegiert an";
 ["delete<br /><br />"] = "löschen<br /><br />";
@@ -739,6 +744,12 @@ return {
 ["inactive"] = "inaktiv";
 ["last 24 hours"] = "letzte 24 Stunden";
 ["login name"] = "Anmeldename";
+["month [interval ago]"] = "Monat";
+["month [interval time left]"] = "Monat";
+["month [interval]"] = "Monat";
+["months [interval ago]"] = "Monaten";
+["months [interval time left]"] = "Monate";
+["months [interval]"] = "Monate";
 ["more unsatisfied"] = "sehr unzufrieden";
 ["must"] = "muss";
 ["must not"] = "darf nicht";
@@ -761,4 +772,10 @@ return {
 ["without"] = "ohne";
 ["without winner"] = "ohne Gewinner";
 ["xmpp"] = "Jabber (XMPP)";
+["year [interval ago]"] = "Jahr";
+["year [interval time left]"] = "Jahr";
+["year [interval]"] = "Jahr";
+["years [interval ago]"] = "Jahren";
+["years [interval time left]"] = "Jahre";
+["years [interval]"] = "Jahre";
 }

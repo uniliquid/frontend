@@ -10,6 +10,18 @@ Policy:add_reference{
   back_ref      = 'policy'
 }
 
+local new_selector = Policy.new_selector
+
+function Policy:new_selector()
+  local selector = new_selector(self)
+  selector:add_field("justify_interval(admission_time)::text", "admission_time_text")
+  selector:add_field("justify_interval(discussion_time)::text", "discussion_time_text")
+  selector:add_field("justify_interval(verification_time)::text", "verification_time_text")
+  selector:add_field("justify_interval(voting_time)::text", "voting_time_text")
+  return selector
+end
+
+
 function Policy:build_selector(args)
   local selector = self:new_selector()
   if args.active ~= nil then

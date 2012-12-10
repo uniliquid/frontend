@@ -106,7 +106,7 @@ local preview_trustee_id = param.get("preview_trustee_id", atom.integer)
 
 ui.script{ static = "js/update_delegation_info.js" }
 
-slot.select("actions", function()
+ui.actions(function()
   if issue then
     ui.link{
       module = "issue",

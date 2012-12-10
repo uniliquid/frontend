@@ -1,6 +1,5 @@
 #!/usr/bin/env lua
 return {
-["#{closed_ago} ago"] = false;
 ["#{count} cancelled"] = false;
 ["#{count} days ago"] = "#{count} dagen geleden";
 ["#{count} finished"] = "#{count} geëindigd";
@@ -13,13 +12,15 @@ return {
 ["#{count} of your outgoing delegation(s) are broken"] = "#{count} van uw uitgaande delegatie(s) zijn stuk";
 ["#{date} at #{time}"] = "#{date} om #{time}";
 ["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} onderwerpen waarin u geïnteresseerd bent";
+["#{interval_text} [interval]"] = false;
+["#{interval_text} ago"] = false;
+["#{interval_text} left"] = false;
 ["#{issues_to_vote_count} issue(s)"] = "#{issues_to_vote_count} onderwerp(en)";
 ["#{name}\n\n"] = "#{name}\n\n";
 ["#{number} Image(s) has been deleted"] = "Er zijn #{number} plaatje (s) verwijderd";
 ["#{number} Image(s) has been updated"] = "Er zijn #{number} plaatje(s) geaktualiseerd";
 ["#{policy_name} ##{issue_id}"] = false;
 ["#{policy} ##{id}"] = false;
-["#{time_left} left"] = "nog #{time_left}";
 ["(#{more_count} duplicates removed)"] = "(#{more_count} dubbelingen verwijderd)";
 ["(new window)"] = "(nieuw venster)";
 [")) == "] = false;
@@ -726,8 +727,12 @@ return {
 ["at least #{count} approvals"] = "minsten #{count} goedkeuringen";
 ["at least #{count} approvals or abstentions"] = "minstens #{count} goedkeuringen of onthoudingen";
 ["change discussion URL"] = "discussie URL veranderd";
-["day"] = "dag";
-["days"] = "dagen";
+["day [interval ago]"] = false;
+["day [interval time left]"] = false;
+["day [interval]"] = false;
+["days [interval ago]"] = false;
+["days [interval time left]"] = false;
+["days [interval]"] = false;
 ["deactivated"] = "gedeactiveerd";
 ["delegates to"] = "gelegeerd aan";
 ["delete<br /><br />"] = "delete<br /><br />";
@@ -739,6 +744,12 @@ return {
 ["inactive"] = false;
 ["last 24 hours"] = "laatste 24 uur";
 ["login name"] = "login naam";
+["month [interval ago]"] = false;
+["month [interval time left]"] = false;
+["month [interval]"] = false;
+["months [interval ago]"] = false;
+["months [interval time left]"] = false;
+["months [interval]"] = false;
 ["more unsatisfied"] = "meer ontevreden";
 ["must"] = "moet";
 ["must not"] = "mag niet";
@@ -761,4 +772,10 @@ return {
 ["without"] = false;
 ["without winner"] = "zonder winnaar";
 ["xmpp"] = "Jabber (XMPP)";
+["year [interval ago]"] = false;
+["year [interval time left]"] = false;
+["year [interval]"] = false;
+["years [interval ago]"] = false;
+["years [interval time left]"] = false;
+["years [interval]"] = false;
 }

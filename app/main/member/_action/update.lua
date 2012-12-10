@@ -23,11 +23,28 @@ for i, field in ipairs(fields) do
 end
 
 if not config.locked_profile_fields.statement then
+  local formatting_engine = param.get("formatting_engine")
+
+  local formatting_engine_valid = false
+  for fe, dummy in pairs(config.formatting_engine_executeables) do
+    if formatting_engine == fe then
+      formatting_engine_valid = true
+    end
+  end
+  if not formatting_engine_valid then
+    error("invalid formatting engine!")
+  end
+
+
   local statement = param.get("statement")
-  if statement ~= app.session.member.statement then
+
+  if statement ~= app.session.member.statement or 
+     formatting_engine ~= app.session.member.formatting_engine then
+    app.session.member.formatting_engine = formatting_engine
     app.session.member.statement = statement
     app.session.member:render_content(true)
   end
+
 end
 
 if not config.locked_profile_fields.birthday then
