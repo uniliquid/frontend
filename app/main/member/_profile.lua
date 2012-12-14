@@ -56,6 +56,37 @@ ui.form{
     if member.email and #member.email > 0 then
       ui.field.text{ label = _"email", name = "email" }
     end
+    if member.notify_email and #member.notify_email > 0 then
+      ui.container{
+        content = function()
+          ui.tag{
+            tag = "span",
+            content = function()
+            ui.form{
+              record = app.session.member,
+              attr = { class = "vertical" },
+              module = "member",
+              action = "sendmail",
+              id = member.id,
+              routing = {
+                ok = {
+                  mode = "redirect",
+                  module = "member",
+                  view = "show",
+                  id = member.id
+                }
+              },
+              content = function()
+                ui.field.hidden{ id = "member_id", readonly = true, value = member.id }
+                ui.field.text{ label = _"Nachricht", name = "text", multiline = true, readonly = false }
+                ui.submit{ value = _"Senden" }
+              end
+            }
+            end
+          }
+        end
+      }
+    end
     if member.xmpp_address and #member.xmpp_address > 0 then
       ui.field.text{ label = _"xmpp", name = "xmpp_address" }
     end

@@ -1,5 +1,7 @@
 #!/usr/bin/env lua
 return {
+["Your message has not been sent"] = "Deine Nachricht wurde nicht versendet";
+["Your message has been sent"] = "Deine Nachricht wurde versendet";
 ["your login name is: "] = "dein Anmeldename lautet: ";
 ["#{closed_ago} ago"] = "seit #{closed_ago}";
 ["#{count} cancelled"] = "#{count} abgebrochen";
