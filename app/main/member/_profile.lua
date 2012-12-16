@@ -56,7 +56,7 @@ ui.form{
     if member.email and #member.email > 0 then
       ui.field.text{ label = _"email", name = "email" }
     end
-    if member.notify_email and #member.notify_email > 0 then
+    if member.active and not member.locked and member.notify_email and #member.notify_email > 0 then
       ui.container{
         content = function()
           ui.tag{
