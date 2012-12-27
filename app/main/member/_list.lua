@@ -40,21 +40,21 @@ filter[#filter+1] = {
 filter[#filter+1] = {
   name = "name",
   label = _"A-Z",
-  selector_modifier = function(selector) selector:add_order_by("name") end
+  selector_modifier = function(selector) selector:add_order_by("lower(name)") end
 }
 filter[#filter+1] = {
   name = "name_desc",
   label = _"Z-A",
-  selector_modifier = function(selector) selector:add_order_by("name DESC") end
+  selector_modifier = function(selector) selector:add_order_by("lower(name) DESC") end
 }
 
 local ui_filters = ui.filters
 if issue or initiative then
   ui_filters = function(args) args.content() end
   if for_votes then
-      members_selector:add_order_by("voter_weight DESC, name, id")
+      members_selector:add_order_by("voter_weight DESC, lower(name), id")
   else
-      members_selector:add_order_by("weight DESC, name, id")
+      members_selector:add_order_by("weight DESC, lower(name), id")
   end
 end
 
