@@ -8,6 +8,48 @@
 <?php
 require("/opt/liquid_feedback_core/constants.php");
 
+function dateForm()
+{
+$rest = '
+<br />
+<br />
+<hr>
+<br />
+<br />
+';
+$query = "SELECT name,next_time FROM auto_freeze;";
+$result = pg_query($query) or die('Abfrage fehlgeschlagen: ' . pg_last_error());
+while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+$rest .= '
+Next date for <b>' . $line['name'] . '</b>: ' . $line['next_time'] . '<br />
+';
+}
+pg_free_result($result);
+$rest .= '
+Set next date for:
+<form method="POST">
+<select name="date_id">
+';
+$query = "SELECT id,name,next_time FROM auto_freeze;";
+$result = pg_query($query) or die('Abfrage fehlgeschlagen: ' . pg_last_error());
+while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+$rest .= '
+<option value="'.$line['id'].'">' . $line['name'] . '</option>
+';
+}
+pg_free_result($result);
+$rest .= '
+</select>
+<br />
+<input type="text" size="30" name="date" value="">
+<input type="submit" name="changedate" value="Set Date"><br />
+</form>
+';
+return $rest;
+}
+
+$rest = '';
+
 $dbconn = pg_connect("dbname=liquid_feedback")
   or die('Verbindungsaufbau fehlgeschlagen: ' . pg_last_error());
 
@@ -50,6 +92,9 @@ if (isset($_POST["action"]) && preg_match("/^[a-z ]+$/i", $_POST["action"]) == 1
     }
     pg_free_result($result);
   }
+echo '
+<hr>
+';
 }
 if (isset($_POST["id"]) && preg_match("/^[0-9]+$/", $_POST["id"]) == 1)
 {
@@ -93,6 +138,9 @@ echo '
 }
 }
 pg_free_result($result);
+echo '
+<hr>
+';
 }
 else if (isset($_POST["str"]) && preg_match("/^[a-z0-9@äöü ]+$/i", $_POST["str"]) == 1)
 {
@@ -127,21 +175,34 @@ echo '
 }
 }
 pg_free_result($result);
-pg_close($dbconn);
+echo '
+<hr>
+';
+}
+else if (isset($_POST["changedate"]) AND isset($_POST["date"]) AND isset($_POST["date_id"]) AND preg_match("/^\d+$/i",$_POST["date_id"]) == 1 AND preg_match("/^[\d- :+]+$/i",$_POST["date"]) == 1)
+{
+$query = "UPDATE auto_freeze SET next_time = '".$_POST["date"]."' WHERE id = ".$_POST["date_id"].";";
+$result = pg_query($query) or die('Abfrage fehlgeschlagen: ' . pg_last_error());
+if ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+}
+pg_free_result($result);
+$s = '';
+$rest = dateForm();
 }
 else
 {
 echo 'Please enter string to search for';
 $s = '';
+$rest = dateForm();
 }
 echo '
-<hr>
 <form method="POST">
     <p><input type="text" size="40" name="str" value="'.$s.'">
        <input type="submit" name="submit" value="Search">
     </p>
 </form>
 ';
+echo $rest;
 pg_close($dbconn);
 ?>
 </body>
