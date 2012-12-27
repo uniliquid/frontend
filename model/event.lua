@@ -81,6 +81,17 @@ function Event.object:send_notification()
 
   local url
 
+  members_to_notify = function()
+    local newtable
+    newtable = {}
+    for ii,xx in ipairs(members_to_notify) do
+      if(table_count(newtable, xx) == 0) then
+        newtable[#newtable+1] = xx
+      end
+    end
+    return newtable
+  end
+
   for i, member in ipairs(members_to_notify) do
     local subject
     local body = ""
