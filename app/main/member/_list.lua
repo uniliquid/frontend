@@ -52,9 +52,9 @@ local ui_filters = ui.filters
 if issue or initiative then
   ui_filters = function(args) args.content() end
   if for_votes then
-      members_selector:add_order_by("voter_weight DESC, lower(name), id")
+      members_selector:add_order_by("voter_weight DESC, lower(member.name), id")
   else
-      members_selector:add_order_by("weight DESC, lower(name), id")
+      members_selector:add_order_by("weight DESC, lower(member.name), id")
   end
 end
 
