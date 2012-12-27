@@ -51,6 +51,21 @@ tabs[#tabs+1] = {
 }
 
 tabs[#tabs+1] = {
+  name = "bgv",
+  label = _"BGV",
+  module = "issue",
+  view = "_list",
+  params = {
+    issues_selector = Issue:new_selector()
+      :add_where("issue.policy_id IN (4,21,7,9,17)")
+      :add_where("issue.fully_frozen ISNULL OR issue.fully_frozen + issue.voting_time > '2012-10-27'")
+      :add_where("issue.state IN ('admission', 'discussion', 'verification', 'voting', 'finished_with_winner', 'finished_without_winner')")
+      :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()")
+
+  }
+}
+
+tabs[#tabs+1] = {
   name = "members",
   label = _"Members",
   module = 'member',
