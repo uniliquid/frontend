@@ -25,7 +25,7 @@ local closed_issues_selector = area:get_reference_selector("issues")
   :add_where("issue.closed NOTNULL")
   :add_order_by("issue.closed DESC")
 
-local members_selector = area:get_reference_selector("members"):add_where("member.active")
+local members_selector = area:get_reference_selector("members"):add_where("member.active AND NOT member.locked")
 local delegations_selector = area:get_reference_selector("delegations")
   :join("member", "truster", "truster.id = delegation.truster_id AND truster.active")
   :join("member", "trustee", "trustee.id = delegation.trustee_id AND trustee.active")
