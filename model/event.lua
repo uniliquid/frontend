@@ -190,7 +190,7 @@ function Event.object:send_notification()
 
       if self.initiative_id then
         local initiative = Initiative:by_id(self.initiative_id)
-        body = body .. "[b][url=" .. request.get_absolute_baseurl() .. "initiative/show/" .. initiative.id .. ".html]i" .. initiative.id .. ": " .. initiative.name .. "[/url][/b]\n"
+        body = body .. "[b] [url=" .. request.get_absolute_baseurl() .. "initiative/show/" .. initiative.id .. ".html]i" .. initiative.id .. ": " .. initiative.name .. "[/url] [/b]\n"
 --      else
 --        local initiative_count = Initiative:new_selector()
 --          :add_where{ "initiative.issue_id = ?", self.issue_id }
@@ -200,13 +200,13 @@ function Event.object:send_notification()
 --          :add_order_by("initiative.supporter_count DESC")
 --          :exec()
 --        for i, initiative in ipairs(initiatives) do
---          body = body .. "[b][url=" .. request.get_absolute_baseurl() .. "initiative/show/" .. initiative.id .. ".html]i" .. initiative.id .. ": " .. initiative.name .. "[/url][/b]\n"
+--          body = body .. "[b] [url=" .. request.get_absolute_baseurl() .. "initiative/show/" .. initiative.id .. ".html]i" .. initiative.id .. ": " .. initiative.name .. "[/url] [/b]\n"
 --        end
       end
 
       if self.suggestion_id then
         local suggestion = Suggestion:by_id(self.suggestion_id)
-        body = body .. "[b][url=" .. request.get_absolute_baseurl() .. "suggestion/show/" .. suggestion.id .. ".html]" .. suggestion.name .. "[/url][/b]\n[quote]" .. suggestion:get_content("html") .. "[/quote]"
+        body = body .. "[b] [url=" .. request.get_absolute_baseurl() .. "suggestion/show/" .. suggestion.id .. ".html]" .. suggestion.name .. "[/url] [/b]\n[quote]" .. suggestion:get_content("html") .. "[/quote]"
       elseif self.initiative_id then
         local initiative = Initiative:by_id(self.initiative_id)
         body = body .. "[quote]" .. initiative.current_draft:get_content("html") .. "[/quote]\n"
