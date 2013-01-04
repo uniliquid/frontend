@@ -81,15 +81,21 @@ function Event.object:send_notification()
 
   local url
 
-  members_to_notify = function()
-    local newtable
-    newtable = {}
-    for ii,xx in ipairs(members_to_notify) do
-      if(table_count(newtable, xx) == 0) then
-        newtable[#newtable+1] = xx
-      end
+  function table_count(tt, item)
+    local count
+    count = 0
+    for ii,xx in pairs(tt) do
+      if item == xx then count = count + 1 end
     end
-    return newtable
+    return count
+  end
+
+  local members_to_notify_reduced
+  members_to_notify_reduced = {}
+  for ii,xx in ipairs(members_to_notify) do
+    if(table_count(members_to_notify_reduced, xx) == 0) then
+      members_to_notify_reduced[#members_to_notify_reduced+1] = xx
+    end
   end
 
   for i, member in ipairs(members_to_notify) do
@@ -263,8 +269,8 @@ function Event:send_notifications_loop()
   while true do
     local did_work = Event:send_next_notification()
     if not did_work then
-      print "Sleeping 120 second"
-      os.execute("sleep 120")
+      print "Sleeping 60 second"
+     os.execute("sleep 60")
     end
   end
   
