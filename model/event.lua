@@ -68,35 +68,29 @@ function Event.object:send_notification()
     -- SAFETY FIRST, NEVER send notifications for events more then 3 days in past or future
     :add_where("now() - event_seen_by_member.occurrence BETWEEN '-3 days'::interval AND '3 days'::interval")
     -- do not notify a member about the events caused by the member
-    :add_where("event_seen_by_member.member_id ISNULL OR event_seen_by_member.member_id != member.id OR strpos(member.admin_comment, ' " .. self.issue.policy.id .. " ') > 0")
+    :add_where("event_seen_by_member.member_id ISNULL OR event_seen_by_member.member_id != member.id")
     :exec()
 
   local members_to_notify_now = Member:new_selector()
     :add_where("member.activated NOTNULL AND member.locked = false AND member.notify_email NOTNULL AND strpos(member.admin_comment, ' " .. self.issue.policy.id .. " ') > 0")
     :exec()
   
-  for k,v in pairs(members_to_notify_now) do members_to_notify[k] = v end
-    
+  for k,v in ipairs(members_to_notify_now) do table.insert(members_to_notify,v) end
+  --local members_to_notify_reduced = members_to_notify
+  --local dupes ={}  
+  --local members_to_notify_reduced = {};  
+  --for _,v in pairs(members_to_notify) do
+  --  if(dupes[v] == v) then
+  --  else
+  --    table.insert(members_to_notify_reduced,v)
+  --    dupes[v] = v
+  --  end
+  --end  
+
   print (_("Event #{id} -> #{num} members", { id = self.id, num = #members_to_notify }))
+  --print (_("Event #{id} -> REDUCED TO #{num} members", { id = self.id, num = #members_to_notify_reduced }))
 
   local url
-
-  function table_count(tt, item)
-    local count
-    count = 0
-    for ii,xx in pairs(tt) do
-      if item == xx then count = count + 1 end
-    end
-    return count
-  end
-
-  local members_to_notify_reduced
-  members_to_notify_reduced = {}
-  for ii,xx in ipairs(members_to_notify) do
-    if(table_count(members_to_notify_reduced, xx) == 0) then
-      members_to_notify_reduced[#members_to_notify_reduced+1] = xx
-    end
-  end
 
   for i, member in ipairs(members_to_notify) do
     local subject
@@ -174,7 +168,7 @@ function Event.object:send_notification()
   locale.do_with(
     { lang = config.default_lang or 'en' },
     function()
-      if self.event_name == 'Neues Thema' or self.event_name == 'Neue Initiative' or (self.event_name == 'Thema hat die nächste Phase erreicht' and (self.state_name == 'Diskussion' or self.state_name == 'Eingefroren' or self.state_name == 'Abstimmung' or self.state_name == 'Abgeschlossen (mit Gewinner)' and self.state_name == 'Abgeschlossen (ohne Gewinner)')) then
+      if self.event_name == 'Neues Thema' or ((self.event_name == 'Neue Initiative' or (self.event_name == 'Thema hat die nächste Phase erreicht' and (self.state_name == 'Eingefroren' or self.state_name == 'Abstimmung' or self.state_name == 'Abgeschlossen (mit Gewinner)' and self.state_name == 'Abgeschlossen (ohne Gewinner)'))) and (self.issue.policy.name:find('zur Mitgliederversammlung') or self.issue.policy.name:find('direkt'))) then
       body = body .. self.issue.area.unit.name .. ": " .. self.issue.area.name .. "\n" .. self.issue.policy.name .. ": [url=" ..  request.get_absolute_baseurl() .. "issue/show/" .. self.issue_id .. ".html]Thema " .. self.issue_id .. "[/url]\n"
       body = body .. _("[event mail]     Event: #{event}", { event = self.event_name }) .. "\n"
       body = body .. _("[event mail]     Phase: #{phase}", { phase = self.state_name })
@@ -270,7 +264,7 @@ function Event:send_notifications_loop()
     local did_work = Event:send_next_notification()
     if not did_work then
       print "Sleeping 60 second"
-     os.execute("sleep 60")
+      os.execute("sleep 60")
     end
   end
   

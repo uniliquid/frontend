@@ -32,7 +32,9 @@ ui.form{
       ui.field.hidden{ name = "step", value = 1 }
       ui.tag{
         tag = "p",
-        content = _"Please enter the invite code you've received."
+        content = function()
+	  slot.put(_"Please enter the invite code you've received.")
+        end
       }
       ui.field.text{
         label = _'Invite code',
