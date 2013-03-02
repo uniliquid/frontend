@@ -161,6 +161,84 @@ end
 
 filters[#filters+1] = filter
 
+if member then
+  local filter = {
+    name = "filter_policy",
+  }
+  local policies = Policy:build_selector({active = true})
+  if state == "closed" then
+    policies = policies:add_where({"id IN (SELECT policy_id FROM issue WHERE closed NOTNULL)", state})
+  else
+   policies = policies:add_where({"id IN (SELECT policy_id FROM issue WHERE closed ISNULL)", state})
+  end
+
+  policies = policies:exec()  
+
+  filter[#filter+1] = {
+    name = "any",
+    label = _"Alle Regelwerke",
+    selector_modifier = function(selector)  end
+  }
+  filter[#filter+1] = {
+    name = "direct",
+    label = _"Direkte Regelwerke",
+    selector_modifier = function(selector)
+      selector:add_where({"(issue.policy_id IN (SELECT id FROM policy WHERE active AND name LIKE '%direkt%') OR issue.policy_id = 10)"})
+    end
+  }
+  filter[#filter+1] = {
+    name = "mv",
+    label = _"Regelwerke zur Mitgliederversammlung",
+    selector_modifier = function(selector)
+      selector:add_where({"issue.policy_id IN (SELECT id FROM policy WHERE active AND name LIKE '%zur Mitgliederversammlung%')"})
+    end
+  }
+  filter[#filter+1] = {
+    name = "other",
+    label = _"Andere Regelwerke",
+    selector_modifier = function(selector)
+      selector:add_where({"(issue.policy_id IN (SELECT id FROM policy WHERE active AND name NOT LIKE '%direkt%' AND name NOT LIKE '%zur Mitgliederversammlung%') AND issue.policy_id != 10)"})
+    end
+  }
+  filter[#filter+1] = {
+    name = "selection",
+    label = _"Regelwerkauswahl",
+    selector_modifier = function(selector)  end
+  }
+
+  filters[#filters+1] = filter
+end
+
+if member then
+  local filter_policy = param.get_all_cgi()["filter_policy"]
+
+  if filter_policy == "selection" then
+  local filter = {
+    name = "filter_policy_sel",
+  }
+  local policies = Policy:build_selector({active = true})
+  if state == "closed" then
+    policies = policies:add_where({"id IN (SELECT policy_id FROM issue WHERE closed NOTNULL)", state})
+  else
+   policies = policies:add_where({"id IN (SELECT policy_id FROM issue WHERE closed ISNULL)", state})
+  end
+
+  policies = policies:exec()
+
+  for i, policy in ipairs(policies) do
+    filter[#filter+1] = {
+      name = "p" .. policy.id,
+      label = _(policy.name),
+      selector_modifier = function(selector)
+        selector:add_where({"issue.policy_id = ?", policy.id})
+      end
+    }
+  end
+
+  filters[#filters+1] = filter
+
+  end
+end
 
 if member then
   local filter = {
@@ -238,8 +316,6 @@ if member then
 
   filters[#filters+1] = filter
 end
-
-
 
 if app.session.member then
 

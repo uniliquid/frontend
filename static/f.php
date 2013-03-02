@@ -14,6 +14,6 @@ if (ereg("^[0-9]+$", $_SERVER["QUERY_STRING"]))
   pg_free_result($result);
 
   pg_close($dbconn);
-  header("Location: http://red.piratenpartei.at/showthread.php?tid=$tid&action=lastpost");
+  header("Location: https://forum.piratenpartei.at/showthread.php?tid=$tid&action=lastpost");
 }
 ?>

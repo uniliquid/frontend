@@ -17,7 +17,15 @@ slot.select('navigation', function()
       module = 'index',
       view   = 'search'
     }
-  
+
+    if app.session.member_id then
+      ui.link{
+        content = _"Switch Design",
+        module = 'member',
+        view = 'settings_css'
+      }
+    end
+ 
     if app.session.member == nil then
       ui.link{
         text   = _"Login",

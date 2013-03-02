@@ -1,5 +1,9 @@
 #!/usr/bin/env lua
 return {
+["Switch Design"] = "Design wechseln";
+["Change stylesheet settings"] = "Stylesheeteinstellungen ändern";
+["I like to use the following Stylesheet:"] = "Ich möchte das folgende Stylesheet verwenden:";
+["Stylesheet settings"] = "Stylesheeteinstellungen";
 ["Your message has not been sent"] = "Deine Nachricht wurde nicht versendet";
 ["Your message has been sent"] = "Deine Nachricht wurde versendet";
 ["your login name is: "] = "dein Anmeldename lautet: ";
@@ -101,6 +105,12 @@ return {
 ["Can't remove last initiator"] = "Der letzte Initiator kann nicht entfernt werden";
 ["Can't send confirmation email"] = "Bestätigungs-E-Mail kann nicht versendet werden.";
 ["Cancel"] = "Abbrechen";
+["canceled_revoked_before_accepted"] = "Abgebrochen (in Neu-Phase, wegen Rückzug)";
+["canceled_issue_not_accepted"] = "Abgebrochen (Thema nicht akzeptiert)";
+["canceled_after_revocation_during_discussion"] = "Abgebrochen (während Diskussion, wegen Rückzug)";
+["canceled_after_revocation_during_verification"] = "Abgebrochen (während Eingefroren-Phase, wegen Rückzug)";
+["calculation"] = "Auszählung";
+["canceled_no_initiative_admitted"] = "Abgebrochen (Keine Initiative zugelassen)";
 ["Cancel [nullify]"] = "Aufheben";
 ["Cancel password reset"] = "Kennwort-Rücksetzung abbrechen";
 ["Cancel refuse of invitation"] = "Ablehnung der Einladung aufheben";
@@ -192,6 +202,7 @@ return {
 ["Discard voting"] = "Abstimmung zurückziehen";
 ["Discuss with initiators"] = "Diskussion mit den Initiatoren";
 ["Discussion"] = "Diskussion";
+["discussion"] = "Diskussion";
 ["Discussion URL"] = "Diskussions-URL";
 ["Discussion on issue"] = "Diskussion zum Thema";
 ["Discussion started"] = "Diskussion gestartet";
@@ -229,9 +240,12 @@ return {
 ["Finished"] = "Abgeschlossen";
 ["Finished (with winner)"] = "Abgeschlossen (mit Gewinner)";
 ["Finished (without winner)"] = "Abgeschlossen (ohne Gewinner)";
+["finished_without_winner"] = "Abgeschlossen (ohne Gewinner)";
+["finished_with_winner"] = "Abgeschlossen (mit Gewinner)";
 ["Free timing"] = "Freie Zeitsteuerung";
 ["Friday"] = "Freitag";
 ["Frozen"] = "Eingefroren";
+["verification"] = "Eingefroren";
 ["Fully frozen at"] = "Ganz eingefroren am/um";
 ["Generate API key"] = "API-Schlüssel erzeugen";
 ["Global delegation"] = "Globale Delegation";
@@ -365,6 +379,7 @@ return {
 ["My units"] = "Meine Gliederungen";
 ["Name"] = "Name";
 ["New"] = "Neu";
+["admission"] = "Neu";
 ["New address"] = "Neue E-Mail-Adresse";
 ["New draft"] = "Neuer Entwurf";
 ["New draft has been added to initiative"] = "Neuer Entwurf wurde der Initiative hinzugefügt";
@@ -641,6 +656,7 @@ return {
 ["Voted yes"] = "Mit Ja gestimmt";
 ["Voters"] = "Abstimmende";
 ["Voting"] = "Abstimmung";
+["voting"] = "Abstimmung";
 ["Voting comment"] = "Abstimmungskommentar";
 ["Voting comment (last updated: #{timestamp})"] = "Abstimmmungskommentar (Letzte Änderung: #{timestamp})";
 ["Voting comment (optional)"] = "Abstimmmungskommentar (optional)";

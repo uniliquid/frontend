@@ -68,7 +68,7 @@ ui.container{ attr = { class = class }, content = function()
     tag = "div",
     content = function()
     
-      ui.tag{ attr = { class = "event_name" }, content = issue.state_name }
+      ui.tag{ attr = { class = "event_name" }, content = _(issue.state_name) }
 
       if issue.closed then
         slot.put(" &middot; ")
