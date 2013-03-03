@@ -198,9 +198,9 @@ end
 
 function Issue:get_state_name_for_state(value)
   local state_name_table = {
-    admission    = _"New",
-    discussion   = _"Discussion",
-    verification = _"Frozen",
+    new          = _"New",
+    accepted     = _"Discussion",
+    frozen       = _"Frozen",
     voting       = _"Voting",
     finished     = _"Finished",
     cancelled    = _"Cancelled"
