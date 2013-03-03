@@ -37,7 +37,7 @@ Issue:add_reference{
   that_key      = 'issue_id',
   ref           = 'initiatives',
   back_ref      = 'issue',
-  default_order = 'initiative.rank, initiative.supporter_count DESC, id'
+  default_order = 'initiative.rank, initiative.supporter_count DESC, initiative.satisfied_supporter_count DESC, id'
 }
 
 Issue:add_reference{
@@ -109,6 +109,17 @@ Issue:add_reference{
   connected_by_this_key = 'issue_id',
   connected_by_that_key = 'member_id',
   ref                   = 'interested_members_snapshot'
+}
+
+Issue:add_reference{
+  mode                  = 'mm',
+  to                    = "Member",
+  this_key              = 'id',
+  that_key              = 'id',
+  connected_by_table    = 'direct_population_snapshot',
+  connected_by_this_key = 'issue_id',
+  connected_by_that_key = 'member_id',
+  ref                   = 'populating_members_snapshot'
 }
 
 Issue:add_reference{
@@ -202,6 +213,7 @@ function Issue:get_search_selector(search_string)
     :join('"initiative"', nil, '"initiative"."issue_id" = "issue"."id"')
     :join('"draft"', nil, '"draft"."initiative_id" = "initiative"."id"')
     :add_where{ '"initiative"."text_search_data" @@ "text_search_query"(?) OR "draft"."text_search_data" @@ "text_search_query"(?)', search_string, search_string }
+    :add_order_by('"issue"."id" DESC')
     :add_group_by('"issue"."id"')
     :add_group_by('"issue"."state"')
     :add_group_by('"issue"."area_id"')
@@ -218,6 +230,7 @@ function Issue:get_search_selector(search_string)
     :add_group_by('"issue"."latest_snapshot_event"')
     :add_group_by('"issue"."population"')
     :add_group_by('"issue"."voter_count"')
+    :add_group_by('"issue"."direct_voter_count"')
     :add_group_by('"issue"."admission_time"')
     :add_group_by('"issue"."discussion_time"')
     :add_group_by('"issue"."verification_time"')
@@ -243,9 +256,42 @@ function Issue:modify_selector_for_state(initiatives_selector, state)
   end
 end
 
+function Issue.object_get:state()
+  if self.closed then
+    if self.fully_frozen then
+      return "finished"
+    else
+      return "cancelled"
+    end
+  elseif self.fully_frozen then
+    return "voting"
+  elseif self.half_frozen then
+    return "frozen"
+  elseif self.accepted then
+    return "accepted"
+  else
+    return "new"
+  end
+
+end
 
 function Issue.object_get:state_name()
   return Issue:get_state_name_for_state(self.state)
+end
+
+function Issue.object_get:next_states()
+  local state = self.state
+  local next_states
+  if state == "new" then
+    next_states = { "accepted", "cancelled" }
+  elseif state == "accepted" then
+    next_states = { "frozen" }
+  elseif state == "frozen" then
+    next_states = { "voting" }
+  elseif state == "voting" then
+    next_states = { "finished" }
+  end
+  return next_states
 end
 
 function Issue.object_get:next_states_names()

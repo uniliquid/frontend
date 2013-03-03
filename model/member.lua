@@ -401,13 +401,19 @@ end
 function Member:get_search_selector(search_string)
   return self:new_selector()
     :add_field( {'"highlight"("member"."name", ?)', search_string }, "name_highlighted")
-    :add_where{ '"member"."text_search_data" @@ "text_search_query"(?)', search_string }
+    :add_where{
+      '"member"."text_search_data" @@ "text_search_query"(?) OR member.email ILIKE ?',
+      search_string, "%" .. search_string .. "%"
+    }
     :add_where("activated NOTNULL AND active")
 end
 
 function Member.object:send_invitation(template_file, subject)
   trace.disable()
   self.invite_code = multirand.string( 24, "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" )
+  if config.invite_code_expiry then
+    self.invite_code_expiry = db:query("SELECT now() + '" .. config.invite_code_expiry .. "'::interval as expiry", "object").expiry
+  end
   self:save()
   
   local subject = subject
@@ -639,4 +645,40 @@ function Member:send_password_reset(id)
     }
   end
 end
+
+-- selector template for list of delegations, used for incoming, outgoing and broken delegations
+function Member:selector_delegations()
+  return Member:new_selector()
+    :reset_fields()
+    :add_field("member.id", "member_id")
+    :add_field("delegation.unit_id")
+    :add_field("delegation.area_id")
+    :add_field("delegation.issue_id")
+    :add_field("unit.id",   "scope_unit_id")
+    :add_field("unit.name", "scope_unit_name")
+    :add_field("area.id",   "scope_area_id")
+    :add_field("area.name", "scope_area_name")
+    :add_field("policy.name", "policy_name")
+    :join("delegation", "delegation", "member.id = delegation.truster_id")
+    :join("member", "trustee", "trustee.id = delegation.trustee_id")
+    :left_join("issue", "issue", "issue.id = delegation.issue_id")
+    :left_join("policy", "policy", "policy.id = issue.policy_id")
+    :left_join("area", "area", "area.id = delegation.area_id OR area.id = issue.area_id")
+    :left_join("unit", "unit", "unit.id = delegation.unit_id OR unit.id = area.unit_id")
+    :add_where("issue.closed ISNULL")
+    :add_order_by("unit.name, area.name, delegation.issue_id")
+    :add_group_by("member.id, delegation.unit_id, unit.id, unit.name, delegation.area_id, area.id, area.name, delegation.issue_id, policy.name")
+end
+
+-- count direct and indirect weight
+function Member:count_string(members_selector)
+  local tmp = db:query("SELECT count(1) AS count, sum(weight) AS weight FROM (" .. tostring(members_selector) .. ") as subquery", "object")
+  local direct_count = tmp.count
+  local indirect_count = (tmp.weight or 0) - tmp.count
+  if indirect_count > 0 then
+    return " (" .. tostring(direct_count) .. "+" .. tostring(indirect_count) .. ")"
+  end
+  return " (" .. tostring(direct_count) .. ")"
+end
+
 

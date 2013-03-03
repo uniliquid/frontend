@@ -30,6 +30,15 @@ Initiative:add_reference{
 
 Initiative:add_reference{
   mode          = '1m',
+  to            = "Argument",
+  this_key      = 'id',
+  that_key      = 'initiative_id',
+  ref           = 'arguments',
+  back_ref      = 'initiative',
+}
+
+Initiative:add_reference{
+  mode          = '1m',
   to            = "Initiator",
   this_key      = 'id',
   that_key      = 'initiative_id',
@@ -233,11 +242,7 @@ function Initiative.object_get:current_draft()
 end
 
 function Initiative.object_get:shortened_name()
-  local name = self.name
-  if #name > 100 then
-    name = name:sub(1,100) .. "..."
-  end
-  return name
+  return util.ellipsis(self.name, 100)
 end
 
 function Initiative.object_get:initiator_names()
