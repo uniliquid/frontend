@@ -107,7 +107,7 @@ ui.container{ attr = { class = class }, content = function()
               text = initiator.name,
               module = "member", view = "show", id = initiator.id
             }
-            if not initiator.accepted then
+            if not initiator.accepted and not initiative.revoked then
               ui.tag{ attr = { title = _"Not accepted yet" }, content = "?" }
             end
           end
@@ -134,7 +134,7 @@ ui.container{ attr = { class = class }, content = function()
               }
             end
           end
-          if initiator and initiator.accepted == false then
+          if initiator and initiator.accepted == false and not initiative.revoked then
               slot.put(" &middot; ")
               ui.link{
                 text   = _"Cancel refuse of invitation",
@@ -274,7 +274,7 @@ ui.container{ attr = { class = class }, content = function()
 
 
   -- invited as initiator
-  if initiator and initiator.accepted == nil and not initiative.issue.half_frozen and not initiative.issue.closed then
+  if initiator and initiator.accepted == nil and not initiative.revoked and not initiative.issue.half_frozen and not initiative.issue.closed then
     ui.container{
       attr = { class = "initiator_invite_info" },
       content = function()
