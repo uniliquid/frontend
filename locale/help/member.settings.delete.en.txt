@@ -1,0 +1,29 @@
+=Delete personal data and deactivate account=
+
+This will delete as far as possible all personal data. These include:
+- The date of the last login
+- The login name
+- The password
+- The e-mail address
+- All profile data
+- All user images
+- All settings
+- All contacts
+- Which members are ignored
+- What initiatives are ignored
+- All memberships in areas
+- All delegations
+- What issues are marked as to be voted by yourself
+- All votes in unfinished topics
+
+Not be deleted, however:
+- Identification: This is a string, which is used for the assignment of the account when importing members. It will ensure that the account is not created another time when importing.
+- The screen name: The vote in finished issues must retaine, so that the results are understandable. Deleting or changing the screen name would not change anything about that, since the Id of the account is still visible. If you want to change your screen name yet, you can do this yourself before in the "Settings". Note that your previous screen name will still be shown in the user's history.
+
+The account will be locked and no longer usable.
+
+==Create a new account==
+
+If this option is selected, after deleting the personal data and the deactivation of the old account, a new account is created. With this account, you can then register again.
+
+As the only fields the identification and the e-mail address will be taken from the old account. But it is not possible, to recognize a relation between the two accounts by these fields because they are deleted from the old account. The identification is necessary to make sure that the account is not created a second time when importing members. The email address is used to send the invitation code. But it may already be changed during the registration.

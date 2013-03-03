@@ -1,0 +1,29 @@
+=Persönliche Daten löschen und Account deaktivieren=
+
+Es werden so weit wie möglich alle persönlichen Daten gelöscht. Dazu gehören:
+- der Zeitpunkt der letzten Anmeldung
+- der Anmeldename
+- das Passwort
+- die E-Mail-Adresse
+- alle Profildaten
+- alle Benutzerbilder
+- alle Einstellungen
+- alle Kontakte
+- welche Mitglieder ignoriert werden
+- welche Initiativen ignoriert werden
+- alle Mitgliedschaften in Themenbereichen
+- alle Delegationen
+- welche Themen selbst abgestimmt werden sollen
+- alle Stimmabgaben in noch nicht abgeschlossenen Themen
+
+Nicht gelöscht werden dagegen:
+- die Identifikation: Das ist eine Zeichenkette, u.a. für die Zuordung des Accounts beim Mitgliederimport. Damit wird sichergestellt, dass der Account beim Import nicht ein zweites mal angelegt wird.
+- der Screen-Name: Das Abstimmungsverhalten bei abgeschlossenen Themen muss erhalten bleiben, damit die Ergebnisse nachvollziehbar sind. Ein Löschen oder Ändern des Screen-Namen würde das auch nicht ändern, da die Id des Accounts weiterhin sichtbar ist. Falls Du dennoch Deinen Screen-Namen ändern möchtest, kannst Du dies vorher unter "Einstellungen" selbst erledigen. Dein bisheriger Screen-Name wird aber auch in der Benutzer-Historie weiterhin nachvollziehbar sein.
+
+Der Account wird dann gesperrt und ist nicht mehr benutzbar.
+
+==Neuen Account anlegen==
+
+Wenn diese Option ausgewählt wird, wird nach dem Löschen der persönlichen Daten und der Deaktivierung des alten Accounts ein neuer Account angelegt. Mit diesem Account kann man sich dann neu registrieren.
+
+Als einzige Felder werden nur die Identifikation und die E-Mail-Adresse vom alten Account übernommen. Eine Zuordung der beiden Accounts über diese Felder ist aber nicht möglich, da sie im alten Account gelöscht werden. Die Identifikation ist erforderlich, damit beim Mitgliederimport der Account nicht ein zweites mal angelegt wird. Die E-Mail-Adresse wird benutzt, um den Einladungscode zu verschicken. Bei der Registrierung kann sie aber bereits geändert werden.

@@ -1,0 +1,7 @@
+= Argument =
+
+Argumente können von den an der Initiative interessierten Mitgliedern bewertet werden. Anhand der zusammengerechneten Bewertungen wird die Reihenfolge der Argumente in der Auflistung unter der Initiative bestimmt.
+
+Dabei werden jedoch nur Bewertungen von Mitgliedern berücksichtigt, die grundsätzlich in die gleiche Richtung tendieren wie das Argument. Bei Pro-Argumenten werden nur (potentielle) Unterstützer der Initiative gezählt, bei Kontra-Argumenten nur Interessierte, die die Initiative nicht (potentiell) unterstützen. Wenn Deine Bewertung deshalb nicht gezählt wird, wird sie in Klammern angezeigt.
+
+Wenn man ein Argument bewertet, wird man auch automatisch am Thema interessiert. Wenn man sein Interesse am Thema zurückzieht, werden alle Bewertungen von Argumenten zu den enthaltenen Initiativen wieder gelöscht. Wenn man ein neues Argument einträgt, wird es auch automatisch positiv bewertet. Delegationen spielen bei der Bewertung von Argumenten keine Rolle.

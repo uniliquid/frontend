@@ -1,0 +1,7 @@
+= Argument =
+
+Arguments can be rated by interested members of the initiative. Based on the sum of ratings the order of arguments in the list under the initiative is determined.
+
+However, only reviews of members are taken into account, which generally tend in the same direction as the argument. At pro-arguments only (potential) supporters of the initiative are counted. At contra-arguments only members are counted, which are interested in the issue, but do not support the initiative (potentially). If your rating is therefore not counted, it will be shown in parentheses.
+
+When rating an argument, you will be automatically interested in the topic. If one withdraws his interest in the topic, all the ratings of arguments to contained initiatives will be erased. When one enters a new argument, it will also automatically rated positively. Delegations do not have any effect on the rating of arguments.

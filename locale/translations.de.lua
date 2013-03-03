@@ -32,6 +32,7 @@ return {
 ["(#{more_count} duplicates removed)"] = "(#{more_count} Duplikate entfernt)";
 ["(new window)"] = "(neues Fenster)";
 [")) == "] = false;
+["(rank #{rank})"] = "(Rang #{rank})";
 ["+ #{weight}"] = "+ #{weight}";
 ["+getElementById("] = false;
 ["A-Z"] = "A-Z";

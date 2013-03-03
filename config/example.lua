@@ -89,7 +89,14 @@ config.public_access = "none"
 -- ------------------------------------------------------------------------
 -- config.delegation_warning_time = '6 months'
 
--- Prefix of all automatic mails, defaults to "[Liquid Feedback] "
+-- Invite code expiry
+-- after how long is an invite code can't be used anymore
+-- notation is according to postgresql intervals
+-- Default: no expiry
+-- ------------------------------------------------------------------------
+-- config.invite_code_expiry = '1 month'
+
+-- Prefix of all automatic mails, defaults to "[Pirate Feedback] "
 -- ------------------------------------------------------------------------
 -- config.mail_subject_prefix = "[LiquidFeedback] "
 
@@ -162,7 +169,20 @@ config.public_access = "none"
 
 -- Trace debug
 -- uncomment the following line to enable debug trace
+-- ------------------------------------------------------------------------
 -- config.enable_debug_trace = true
+
+-- Registration without invite code (for demonstration purposes)
+-- uncomment the following line to allow registration without an invite code
+-- ------------------------------------------------------------------------
+-- config.register_without_invite_code = true
+
+-- Member import:
+-- Maximum number of members which should be deactivated in one run
+-- helps to avoid deactivating members by accident
+-- Default: no limit
+-- ------------------------------------------------------------------------
+-- config.deactivate_max_members = 50
 
 -- ========================================================================
 -- Do main initialisation (DO NOT REMOVE FOLLOWING SECTION)

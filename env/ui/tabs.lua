@@ -18,7 +18,7 @@ function ui.tabs(tabs)
             end
             params["tab"] = i > 1 and tab.name or nil
             ui.link{
-              attr = { 
+              attr = {
                 class = (
                   tab.name == current_tab and "selected" .. (tab.class and (" " .. tab.class) or "") or
                   not current_tab and i == 1 and "selected" .. (tab.class and (" " .. tab.class) or "") or
@@ -31,7 +31,11 @@ function ui.tabs(tabs)
               content = tab.label,
               params  = params
             }
-            slot.put(" ")
+            if tab.br then
+              slot.put("<br/>")
+            else
+              slot.put(" ")
+            end
           end
         end
       }
