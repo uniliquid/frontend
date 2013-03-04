@@ -3,9 +3,12 @@ local for_member = param.get("for_member", "table")
 local for_unit = param.get("for_unit", "table")
 local for_area = param.get("for_area", "table")
 local event_max_id = param.get_all_cgi()["event_max_id"]
+
+local per_page = 25
+
 local event_selector = Event:new_selector()
   :add_order_by("event.id DESC")
-  :limit(25)
+  :limit(per_page + 1)
   :join("issue", nil, "issue.id = event.issue_id")
   :add_field("now()::date - event.occurrence::date", "time_ago")
   
