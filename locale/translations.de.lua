@@ -1,5 +1,13 @@
 #!/usr/bin/env lua
 return {
+["[wikitoolbar] Heading 1"] = "Überschrift 1. Ordnung";
+["[wikitoolbar] Heading 2"] = "Überschrift 2. Ordnung";
+["[wikitoolbar] Heading 3"] = "Überschrift 3. Ordnung";
+["[wikitoolbar] Italic"] = "Kursiv";
+["[wikitoolbar] Link"] = "Link";
+["[wikitoolbar] Ordered list"] = "Nummerierte Liste";
+["[wikitoolbar] Strong"] = "Fett";
+["[wikitoolbar] Unordered list"] = "Aufzählungsliste";
 ["Switch Design"] = "Design wechseln";
 ["Change stylesheet settings"] = "Stylesheeteinstellungen ändern";
 ["I like to use the following Stylesheet:"] = "Ich möchte das folgende Stylesheet verwenden:";
