@@ -36,7 +36,8 @@ ui.form{
     local initiatives = app.session.member
       :get_reference_selector("supported_initiatives")
       :join("issue", nil, "issue.id = initiative.issue_id")
-      :add_field("'Issue #' || issue.id || ': ' || initiative.name", "myname")
+      :add_field("'Issue #' || issue.id || '- i#' || initiative.id || ': ' || initiative.name", "myname")
+      :add_order_by("issue.id, initiative.id")
       :exec()
 
     local tmp = { { id = -1, myname = _"Suggest no initiative" }}
@@ -56,7 +57,7 @@ ui.form{
       label = _"Are you sure?",
       name = "are_you_sure",
     }
-
+    slot.put("<br clear='all'/>")
     ui.submit{ text = _"Revoke initiative" }
   end
 }

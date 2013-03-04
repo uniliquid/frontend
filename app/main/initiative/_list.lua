@@ -3,7 +3,7 @@ local initiatives_selector = param.get("initiatives_selector", "table")
 local full = param.get("full", atom.boolean)
 
 local initiatives
-if issue then
+if issue and not initiatives_selector then
   initiatives = issue.initiatives
 else
   initiatives = initiatives_selector:exec()

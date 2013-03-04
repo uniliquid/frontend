@@ -7,6 +7,8 @@ end
 local battled_initiatives = Initiative:new_selector()
   :add_field("winning_battle.count", "winning_count")
   :add_field("losing_battle.count", "losing_count")
+  :add_field("winning_battle.direct_count", "winning_direct_count")
+  :add_field("losing_battle.direct_count", "losing_direct_count")
   :join("battle", "winning_battle", { "winning_battle.winning_initiative_id = ? AND winning_battle.losing_initiative_id = initiative.id", initiative.id })
   :join("battle", "losing_battle", { "losing_battle.losing_initiative_id = ? AND losing_battle.winning_initiative_id = initiative.id", initiative.id })
   :add_order_by("rank")
@@ -19,10 +21,18 @@ local number_of_initiatives = Initiative:new_selector()
   :count()
 
 if number_of_initiatives > 1 then
+
+  local function composition(votes, direct_votes)
+    if direct_votes then
+      slot.put("(" .. direct_votes .. "+" .. (votes - direct_votes) .. ")")
+    end
+  end
+
   ui.list{
     records = battled_initiatives,
     columns = {
       {
+        field_attr = { style = "text-align:right" },
         content = function()
           slot.put(_"This initiative")
         end
@@ -49,6 +59,11 @@ if number_of_initiatives > 1 then
       },
       {
         content = function(record)
+          composition(record.winning_count, record.winning_direct_count)
+        end
+      },
+      {
+        content = function(record)
           if record.winning_count == record.losing_count then
             ui.image{ static = "icons/16/bullet_blue.png" }
           elseif record.winning_count > record.losing_count then
@@ -62,6 +77,11 @@ if number_of_initiatives > 1 then
         field_attr = { style = "text-align: right;" },
         content = function(record)
           slot.put(record.losing_count)
+        end
+      },
+      {
+        content = function(record)
+          composition(record.losing_count, record.losing_direct_count)
         end
       },
       {
