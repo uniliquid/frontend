@@ -19,7 +19,7 @@ end
 
 if not full then
 app.html_title.title = initiative.name
-app.html_title.subtitle = _("Initiative ##{id}", { id = initiative.id })
+app.html_title.subtitle = _("Initiative i#{id}", { id = initiative.id })
 
 slot.select("head", function()
   execute.view{
@@ -68,7 +68,7 @@ end
 
 ui.container{ attr = { class = class }, content = function()
 
-  local text = _("Initiative i#{id}: #{name}", { id = initiative.id, name = initiative.name }) 
+  local text = _("Initiative i#{id}: #{name}", { id = initiative.id, name = initiative.name })
   if show_as_head then
     ui.link{
       attr = { class = "title" }, text = text,
@@ -78,7 +78,9 @@ ui.container{ attr = { class = class }, content = function()
     ui.container{ attr = { class = "title" }, content = text }
   end
   if app.session:has_access("authors_pseudonymous") then
-    ui.container{ attr = { class = "content" }, content = function()
+
+    ui.container{ attr = { class = "content left" }, content = function()
+
       ui.tag{
         attr = { class = "initiator_names" },
         content = function()
@@ -186,7 +188,7 @@ ui.container{ attr = { class = class }, content = function()
     end }
 
   if app.session.member_id then
-    ui.container{ attr = { class = "content" }, content = function()
+      ui.container{ attr = { class = "content right" }, content = function()
       execute.view{
         module = "supporter",
         view = "_show_box",

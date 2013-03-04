@@ -65,7 +65,8 @@ body, th, td {
 }
 
 .page,
-.topbar_content {
+.topbar_content,
+.footer {
   max-width: 1130px;
   margin: 0 auto;
 }
@@ -99,6 +100,9 @@ th {
 a.active {
   color: #fff; 
 }
+a.anchor {
+  text-decoration: none;
+}
 
 .revoked {
   text-decoration: line-through;
@@ -107,6 +111,12 @@ a.active {
 .highlighted {
   background-color: #fa7;
   color: #000;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .admin_only {
@@ -120,9 +130,86 @@ h1 {
 h2 {
   font-size: 125%;
 }
+.heading {
+  display: block;
+  font-size: 115%;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+.heading.first {
+  margin-top: 0;
+}
 
 .inline {
   display: inline;
+}
+.clearfix {
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+hr {
+  border-top: 1px solid #ccc;
+  border-bottom: none;
+  margin-top: 2ex;
+  margin-bottom: 2ex;
+}
+
+/* forms */
+input[type=text],
+input[type=password],
+textarea,
+select {
+  font-family: sans-serif;
+  font-size: 100%;
+  border: 1px solid #444;
+  padding: 0.2ex 0.2em 0.2ex 0.2em;
+  margin-bottom: 1ex;
+}
+input[type=submit],
+div.syserr a {
+  font-size: 100%;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 0.75ex;
+}
+
+/* system error */
+div.syserr {
+  font-size: 110%;
+}
+div.syserr a {
+  margin: 1ex;
+  line-height: 120%;
+}
+
+/* common shadow */
+.member_thumb,
+.member_statement,
+.suggestion_content,
+.slot_head,
+.area_list,
+.initiative_head,
+.issues .issue,
+.ui_tabs_links a,
+.ui_filter a,
+.help,
+.use_terms,
+.motd,
+.vote_info .content,
+.box,
+div.notifications,
+.slot_notice,
+.slot_warning,
+.slot_error {
+  background-color: #fff;
+  box-shadow:         #ccc 2px 2px 4px;
+  -moz-box-shadow:    #ccc 2px 2px 4px;
+  -webkit-box-shadow: #ccc 2px 2px 4px;
 }
 
 /*************************************************************************
@@ -348,7 +435,10 @@ div.notifications {
 .initiative_head .title {
   padding: 8px 10px 2px 10px;
 }
-
+.initiative_head .add {
+  float: right;
+  padding: 10px 10px 2px 10px;
+}
 .initiative_head .draft_version {
   font-weight: bold;
 }
@@ -376,12 +466,31 @@ div.notifications {
 .issue .content,
 .initiative_head .content,
 .area_list .unit_head .content,
-.area_list .area .content {
+.area_list .area_head .content {
   padding: 5px 10px 5px 10px;
   line-height: 120%;
 }
 
-.initiative_head {
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.clear_left {
+  clear: left;
+}
+.clear_right {
+  clear: right;
+}
+.clear_both,
+.issue_policy_info,
+.initiator_names {
+  clear: both;
+}
+
+.initiative_head,
+.suggestion_opinion {
   margin-bottom: 2ex;
 }
 
@@ -491,6 +600,31 @@ div.notifications {
 .area_link {
   background-color: #abf;
   color: #000;
+}
+.issue_link {
+  background-color: #e0e9ff;
+  color: #000;
+}
+.ini_link {
+  border: 1px solid #ccc;
+  padding: 4px 4px 2px 4px;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.page_head .path .unit_link,
+.page_head .path .area_link,
+.page_head .path .issue_link,
+.page_head .path .ini_link {
+  margin-top: 0;
+}
+.page_head .path {
+  float: left;
+  padding: 3px 0 3px 10px;
+}
+.issue .path {
+  padding-left: 10px;
 }
 
 .delegation_info {
@@ -844,6 +978,113 @@ div.notifications {
  * Positive / Negtive votes
  */
 
+.overridden {
+  opacity: 0.4;
+}
+.scope_overridden {
+  color: #777;
+}
+
+/* delegation._list */
+.delegation_list_entry {
+  margin-right: 2em;
+  margin-bottom: 2ex;
+  float: left;
+  clear: left;
+}
+.delegation_list_entry .delegation_arrow {
+  float: left;
+}
+.delegation_list_entry .delegation_scope {
+  float: left;
+  width: 25em;
+}
+.delegation_list_entry .delegation_scope a {
+  display: block;
+}
+
+/* List of trustees */
+div.delegation_form_row {
+  position: relative;
+  height: 58px;
+}
+form.delegation_up {
+  position: absolute;
+  left: 224px;
+  top: 12px;
+}
+form.delegation_down {
+  position: absolute;
+  left: 260px;
+  top: 12px;
+}
+form.delegation_delete {
+  position:absolute;
+  left: 310px;
+  top: 15px;
+}
+form.delegation_add {
+  margin-top: 15px;
+}
+form.delegation_add select {
+  width: 90%;
+}
+
+/* Complete preference list over all scopes */
+.delegation_scope {
+  font-size: 110%;
+}
+div.delegation_list_row {
+  height: 58px;
+  position: relative;
+}
+div.delegation_participation {
+  position: absolute;
+  top: 3px;
+  left: 220px;
+  font-style: italic;
+}
+
+/* List of delegations for a unit, an area or a member (incoming and outgoing) */
+.delegations_scope {
+  clear: both;
+}
+.delegations_scope .unit_link,
+.delegations_scope .area_link,
+.delegations_scope .issue_link {
+  margin-bottom: 5px;
+}
+.delegations_list_row {
+  clear: both;
+}
+.delegations_list_row .member_thumb {
+  margin-bottom: 5px;
+}
+.delegation_highlighted .member_thumb,
+.delegations_list_row div.highlighted .member_thumb {
+  border: 2px solid #f90;
+  padding: 1px;
+}
+div.delegations_participation {
+  font-style: italic;
+}
+.delegations_list_row img.delegation_arrow {
+  float: left;
+  margin-top: 14px;
+}
+.delegations_list_row div.more {
+  float: left;
+  padding-left: 5px;
+  padding-top: 8px;
+}
+.delegations_list_row div.dots {
+  font-size: 150%;
+  line-height: 10px;
+}
+
+/*************************************************************************
+ * votes, opinions
+ */
 
 .positive_votes span {
   display: inline;
@@ -871,6 +1112,14 @@ div.notifications {
   padding-left: 0.2ex !important;
   padding-right: 0.2ex !important;
 }
+.suggestion_opinion th {
+  padding: 0.5ex 1em 0.5ex 0;
+}
+.suggestion_opinion td {
+  padding: 0.5ex 1em 1ex 0;
+  vertical-align: middle;
+  white-space: nowrap;
+}
 
 .active {
   background-color: #444;
@@ -888,6 +1137,9 @@ div.notifications {
  * Unit list
  */
 
+.unit_list_box {
+  margin-top: 2ex;
+}
 .unit_list a {
   font-weight: bold;
 }
@@ -1108,7 +1360,6 @@ div.notifications {
 .initiative_link.selected {
   font-weight: bold;
 }
-
 x.initiative_link.supported {
   background-color: #cdf;
   border-radius: 5px;
@@ -1144,7 +1395,38 @@ x.initiative_link.potentially_supported {
   display: block;
 }
 
-.member_list .member_thumb {
+
+td.opinion {
+  vertical-align: middle;
+  padding-left: 20px;
+}
+th.opinion {
+  padding-left: 20px;
+}
+
+/*************************************************************************
+ * members
+ */
+
+.member_image_photo {
+  border-radius: 8px;
+}
+.member_image_avatar {
+  border-radius: 7px;
+}
+.micro_avatar {
+  height: 24px;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.member_list .member_image_avatar {
+  float: left;
+  margin-right: 0.5em;
+}
+
+.member_list .member_thumb,
+.member_list .contact_thumb {
   float: left;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -1162,6 +1444,24 @@ x.initiative_link.potentially_supported {
   border-radius: 8px;
   padding: 2px;
   border: 1px solid #aaa;
+}
+
+.contact_thumb {
+  height: 70px;
+  padding: 0;
+  display: block;
+  float: left;
+  position: relative;
+}
+.contact_thumb .member_thumb {
+  margin: 0 0 2px 0;
+}
+.contact_action {
+  clear: left;
+  text-align: center;
+}
+.contact_thumb .action {
+  margin: 0 10px;
 }
 
 .member_thumb a:hover div {
@@ -1224,11 +1524,16 @@ x.initiative_link.potentially_supported {
 #suggestion_description {
   height: 15ex;
 }
+.deactivated_member_info {
+  background-color: #a00;
+  color: #fff;
+}
 
 .diff {
   background-color: #f2f2f2;
   border: 1px solid #ccc;
   padding: 1ex;
+  line-height: 1.05;
 }
 
 .diff_added {
@@ -1386,6 +1691,11 @@ a.not_voted {
 .deactivated_member_info {
   background-color: #a00;
   color: #fff;
+}
+
+.shortlink {
+  text-align: right;
+  margin-top: 2ex;
 }
 
 /*************************************************************************
