@@ -34,32 +34,31 @@ if param.get("preview") then
   return false
 end
 
-local suggestion = Suggestion:new()
-
-suggestion.author_id = app.session.member.id
-suggestion.name = name
-suggestion.formatting_engine = formatting_engine
-param.update(suggestion, "content", "initiative_id")
-suggestion:save()
+local argument = Argument:new()
+argument.side              = param.get("side")
+argument.author_id         = app.session.member.id
+argument.name              = name
+argument.formatting_engine = formatting_engine
+param.update(argument, "content", "initiative_id")
+argument:save()
 
 -- TODO important m1 selectors returning result _SET_!
-local issue = suggestion.initiative:get_reference_selector("issue"):for_share():single_object_mode():exec()
+local issue = argument.initiative:get_reference_selector("issue"):for_share():single_object_mode():exec()
 
 if issue.closed then
   slot.put_into("error", _"This issue is already closed!")
   return false
-elseif issue.half_frozen then
-  slot.put_into("error", _"This issue is already frozen!")
+elseif issue.fully_frozen then
+  slot.put_into("error", _"Voting for this issue has already begun!")
   return false
 end
 
-local opinion = Opinion:new()
+-- positive rating
+local rating = Rating:new()
+rating.issue_id      = issue.id
+rating.initiative_id = initiative.id
+rating.argument_id   = argument.id
+rating.member_id     = app.session.member.id
+rating:save()
 
-opinion.suggestion_id = suggestion.id
-opinion.member_id     = app.session.member.id
-opinion.degree        = param.get("degree", atom.integer)
-opinion.fulfilled     = false
-
-opinion:save()
-
-slot.put_into("notice", _"Your suggestion has been added.")
+slot.put_into("notice", _"Your argument has been added.")

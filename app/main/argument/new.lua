@@ -1,7 +1,15 @@
 local initiative_id = param.get("initiative_id")
 local initiative = Initiative:by_id(initiative_id)
 
-ui.title(_"New suggestion", initiative.issue.area.unit, initiative.issue.area, initiative.issue, initiative)
+local side = param.get("side")
+
+ui.title(function()
+  if side == "pro" then
+    slot.put(_"Add new argument pro")
+  else
+    slot.put(_"Add new argument contra")
+  end
+end, initiative.issue.area.unit, initiative.issue.area, initiative.issue, initiative)
 
 ui.actions(function()
   ui.link{
@@ -12,21 +20,21 @@ ui.actions(function()
     module = "initiative",
     view = "show",
     id = initiative_id,
-    params = { tab = "suggestions" }
+    params = { tab = "arguments" }
   }
 end)
 
 ui.form{
-  module = "suggestion",
+  module = "argument",
   action = "add",
-  params = { initiative_id = initiative_id },
+  params = { initiative_id = initiative_id, side = side },
   routing = {
     ok = {
       mode = "redirect",
       module = "initiative",
       view = "show",
       id = initiative_id,
-      params = { tab = "suggestions" }
+      params = { tab = "arguments" }
     }
   },
   attr = { class = "vertical" },
@@ -81,30 +89,10 @@ ui.form{
 
       end }
 
-      ui.submit{ text = _"Commit suggestion" }
+      ui.submit{ text = _"Commit argument" }
       slot.put("<br /><br /><br />")
 
     end
-
-    local supported = Supporter:by_pk(initiative_id, app.session.member.id) and true or false
-    if not supported then
-      ui.field.text{
-        attr = { class = "warning" },
-        value = _"You are currently not supporting this initiative directly. By adding suggestions to this initiative you will automatically become a potential supporter."
-      }
-    end
-
-    ui.field.select{
-      label = _"Degree",
-      name = "degree",
-      foreign_records = {
-        { id =  1, name = _"should"},
-        { id =  2, name = _"must"},
-      },
-      foreign_id = "id",
-      foreign_name = "name",
-      value = param.get("degree", atom.integer)
-    }
 
     ui.field.text{
       label = _"Title",
@@ -116,7 +104,7 @@ ui.form{
     ui.wikitextarea("content", _"Description")
 
     ui.submit{ name = "preview", text = _"Preview" }
-    ui.submit{ attr = { class = "additional" }, text = _"Commit suggestion" }
+    ui.submit{ attr = { class = "additional" }, text = _"Commit argument" }
 
   end
 }

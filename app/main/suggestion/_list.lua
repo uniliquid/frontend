@@ -2,7 +2,7 @@
 local initiative = param.get("initiative", "table")
 local suggestions_selector = param.get("suggestions_selector", "table")
 
-suggestions_selector:add_order_by("plus2_unfulfilled_count + plus1_unfulfilled_count DESC, id")
+suggestions_selector:add_order_by("plus2_unfulfilled_count + plus1_unfulfilled_count DESC, plus2_unfulfilled_count DESC, id")
 
 local ui_filters = ui.filters
 if true or not show_filter then
@@ -12,10 +12,29 @@ end
 
 ui.container{ attr = { class = "initiative_head" },
   content = function()
-    ui.container{ attr = { class = "title" }, content = _"Suggestions" }
+
+    if app.session.member_id
+      and not initiative.issue.half_frozen
+      and not initiative.issue.closed
+      and not initiative.revoked
+      and app.session.member:has_voting_right_for_unit_id(initiative.issue.area.unit_id)
+    then
+      ui.link{
+        attr = { class = "add" },
+        module = "suggestion",
+        view = "new",
+        params = { initiative_id = initiative.id },
+        text = _"New suggestion"
+      }
+    end
+
+    ui.anchor{ name = "suggestions", attr = { class = "title anchor" }, content = _"Suggestions" }
+
     ui.container{ attr = { class = "content" }, content = function()
       ui.paginate{
         selector = suggestions_selector,
+        anchor = "suggestions",
+        per_page = 20, -- number of suggestions per page
         content = function()
           local suggestions = suggestions_selector:exec()
           if #suggestions < 1 then
@@ -86,18 +105,5 @@ ui.container{ attr = { class = "initiative_head" },
         end
       }
     end }
-    if app.session.member_id
-      and not initiative.issue.half_frozen
-      and not initiative.issue.closed
-      and not initiative.revoked
-      and app.session.member:has_voting_right_for_unit_id(initiative.issue.area.unit_id)
-    then
-      ui.container{ attr = { class = "content" }, content = function()
-        ui.link{
-          module = "suggestion", view = "new", params = { initiative_id = initiative.id },
-          text = _"New suggestion"
-        }
-      end }
-    end
   end
 }
