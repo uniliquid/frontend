@@ -2,12 +2,12 @@ local old_draft_id = param.get("old_draft_id", atom.integer)
 local new_draft_id = param.get("new_draft_id", atom.integer)
 
 if not old_draft_id or not new_draft_id then
-  slot.put( _"Please choose two versions of the draft to compare")
+  slot.put_into("error", _"Please choose two versions of the draft to compare")
   return
 end
 
 if old_draft_id == new_draft_id then
-  slot.put( _"Please choose two different versions of the draft to compare")
+  slot.put_into("error", _"Please choose two different versions of the draft to compare")
   return
 end
 
@@ -23,14 +23,25 @@ local new_draft = Draft:by_id(new_draft_id)
 execute.view{
   module = "draft",
   view = "_head",
-  params = { draft = new_draft}
+  params = {
+    draft = new_draft,
+    title = _("Difference between the drafts from #{old} and #{new}", {
+      old = format.timestamp(old_draft.created),
+      new = format.timestamp(new_draft.created)
+    })
+  }
 }
-
-ui.title(_"Diff")
-
-if app.session.member_id and not new_draft.initiative.revoked then
-  local supporter = Supporter:new_selector():add_where{"member_id = ?", app.session.member_id}:count()
+-- message about new draft
+local initiative = new_draft.initiative
+if app.session.member_id and not initiative.revoked and not initiative.issue.closed then
+  local supporter = app.session.member:get_reference_selector("supporters")
+    :add_where{ "initiative_id = ?", initiative.id }
+    :optional_object_mode()
+    :exec()
   if supporter then
+    local old_draft_id = supporter.draft_id
+    local new_draft_id = initiative.current_draft.id
+    if old_draft_id ~= new_draft_id then
     ui.container{
       attr = { class = "draft_updated_info" },
       content = function()
@@ -40,13 +51,13 @@ if app.session.member_id and not new_draft.initiative.revoked then
           text   = _"Refresh support to current draft",
           module = "initiative",
           action = "add_support",
-          id     = new_draft.initiative.id,
+          id     = initiative.id,
           routing = {
             default = {
               mode = "redirect",
               module = "initiative",
               view = "show",
-              id = new_draft.initiative.id
+              id = initiative.id
             }
           }
         }

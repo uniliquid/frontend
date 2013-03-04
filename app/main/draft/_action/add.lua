@@ -34,7 +34,7 @@ if not formatting_engine_valid then
   error("invalid formatting engine!")
 end
 
-if param.get("preview") then
+if param.get("preview") or param.get("diff") then
   return false
 end
 
@@ -43,6 +43,12 @@ draft.author_id = app.session.member.id
 draft.initiative_id = initiative.id
 draft.formatting_engine = formatting_engine
 draft.content = param.get("content")
+
+if draft.content == initiative.current_draft.content then
+  slot.put_into("error", _"The draft has not been changed!")
+  return false
+end
+
 draft:save()
 
 local supporter = Supporter:by_pk(initiative.id, app.session.member.id)

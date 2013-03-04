@@ -23,9 +23,24 @@ ui.form{
       records = initiative.drafts,
       columns = {
         {
-          label = _"Created at",
           content = function(record)
-            ui.field.text{ readonly = true, value = format.timestamp(record.created) }
+            slot.put('<input type="radio" name="old_draft_id" value="' .. tostring(record.id) .. '">')
+            slot.put('<input type="radio" name="new_draft_id" value="' .. tostring(record.id) .. '">')
+          end
+        },
+        {
+          label = _"Versions",
+          content = function(record)
+            ui.link{
+              attr = { class = "action" },
+              text = _("Draft created at #{date} #{time}", {
+                date = format.date(record.created),
+                time = format.time(record.created)
+              }),
+              module = "draft",
+              view = "show",
+              id = record.id
+            }
           end
         },
         {
@@ -35,27 +50,9 @@ ui.form{
               return record.author:ui_field_text()
             end
           end
-        },
-        {
-          content = function(record)
-            ui.link{
-              attr = { class = "action" },
-              text = _"Show",
-              module = "draft",
-              view = "show",
-              id = record.id
-            }
-          end
-        },
-        {
-          label = _"Compare",
-          content = function(record)
-            slot.put('<input type="radio" name="old_draft_id" value="' .. tostring(record.id) .. '">')
-            slot.put('<input type="radio" name="new_draft_id" value="' .. tostring(record.id) .. '">')
-          end
         }
       }
     }
-    ui.submit{ text = _"Compare" }
+    ui.submit{ text = _"Compare", attr = { style = "margin-top:1ex" } }
   end
 }

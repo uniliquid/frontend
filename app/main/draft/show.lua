@@ -4,10 +4,14 @@ local source = param.get("source", atom.boolean)
 execute.view{
   module = "draft",
   view = "_head",
-  params = { draft = draft}
+  params = {
+    draft = draft,
+    title = _("Draft created at #{date} #{time}", {
+      date = format.date(draft.created),
+      time = format.time(draft.created, { hide_seconds = true })
+    })
+  }
 }
-
-slot.put_into("title", " &middot; " .. _"History")
 
 if source then
   ui.actions(function()
