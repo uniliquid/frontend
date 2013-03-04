@@ -1,4 +1,14 @@
 local search = param.get("search")
+local search_admin     = param.get("search_admin",     atom.integer)
+local search_activated = param.get("search_activated", atom.integer)
+local search_locked    = param.get("search_locked",    atom.integer)
+local search_active    = param.get("search_active",    atom.integer)
+
+local order = param.get("order")
+local desc  = param.get("desc", atom.integer)
+if not order then
+  order = "id"
+end
 
 ui.title(_"Member list")
 
@@ -7,31 +17,112 @@ ui.actions(function()
     attr = { class = { "admin_only" } },
     text = _"Register new member",
     module = "admin",
-    view = "member_edit"
+    view = "member_edit",
+    params = {
+      search           = search,
+      search_admin     = search_admin,
+      search_activated = search_activated,
+      search_locked    = search_locked,
+      search_active    = search_active,
+      order            = order,
+      desc             = desc,
+      page             = param.get("page", atom.integer)
+    }
   }
 end)
 
 
 ui.form{
   module = "admin", view = "member_list",
+  -- Form method should be GET, but WebMCP adds some unwanted parameters, so we use POST.
+  attr = { class = "member_list_form" },
   content = function()
   
-    ui.field.text{ label = _"Search for members", name = "search" }
-    
-    ui.submit{ value = _"Start search" }
-  
+    ui.field.text{
+      label = _"Search:",
+      name = "search",
+      value = search
+    }
+    ui.field.select{
+      name = "search_admin",
+      foreign_records  = {
+        {id = 0, name = "---" .. _"Admin" .. "?---"},
+        {id = 1, name = _"Admin"},
+        {id = 2, name = _"Not admin"}
+      },
+      foreign_id = "id",
+      foreign_name = "name",
+      selected_record  = search_admin
+    }
+
+    ui.field.select{
+      name = "search_activated",
+      foreign_records  = {
+        {id = 0, name = "---" .. _"Activated" .. "?---"},
+        {id = 1, name = _"Activated"},
+        {id = 2, name = _"Not activated"}
+      },
+      foreign_id = "id",
+      foreign_name = "name",
+      selected_record  = search_activated
+    }
+
+    ui.field.select{
+      name = "search_locked",
+      foreign_records  = {
+        {id = 0, name = "---" .. _"Locked" .. "?---"},
+        {id = 1, name = _"Locked"},
+        {id = 2, name = _"Not locked"}
+      },
+      foreign_id = "id",
+      foreign_name = "name",
+      selected_record  = search_locked
+    }
+
+    ui.field.select{
+      name = "search_active",
+      foreign_records  = {
+        {id = 0, name = "---" .. _"Active" .. "?---"},
+        {id = 1, name = _"Active"},
+        {id = 2, name = _"Not active"}
+      },
+      foreign_id = "id",
+      foreign_name = "name",
+      selected_record  = search_active
+    }
+
+    ui.submit{ value = _"Search / Filter" }
+
+    ui.field.hidden{ name = "order", value = order }
+    ui.field.hidden{ name = "desc",  value = desc }
+
   end
 }
-
-if not search then
-  return
-end
-
 local members_selector = Member:build_selector{
   admin_search = search,
-  order = "identification"
+  admin_search_admin     = search_admin,
+  admin_search_activated = search_activated,
+  admin_search_locked    = search_locked,
+  admin_search_active    = search_active
+}
+if desc then
+  members_selector:add_order_by(order .. " DESC")
+else
+  members_selector:add_order_by(order)
+end
+ 
+ui.tag{
+  tag = "p",
+  content = _("#{count} members found:", { count = members_selector:count() })
 }
 
+local params_tpl = {
+  search           = search,
+  search_admin     = search_admin,
+  search_activated = search_activated,
+  search_locked    = search_locked,
+  search_active    = search_active
+}
 
 ui.paginate{
   selector = members_selector,
@@ -42,41 +133,105 @@ ui.paginate{
       columns = {
         {
           field_attr = { style = "text-align: right;" },
-          label = _"Id",
-          name = "id"
+          name = "id",
+          label = function()
+            local params = params_tpl
+            params['order'] = "id"
+            if not desc then
+              params['desc'] = 1
+            end
+            ui.link{
+              text = _"Id",
+              module = "admin",
+              view = "member_list",
+              params = params
+            }
+            if order == "id" then
+              if desc then
+                slot.put("&uarr;")
+              else
+                slot.put("&darr;")
+              end
+            end
+          end
         },
         {
-          label = _"Identification",
-          name = "identification"
+          name = "identification",
+          label = function()
+            local params = params_tpl
+            params['order'] = "identification"
+            if not desc then
+              params['desc'] = 1
+            end
+            ui.link{
+              text = _"Identification",
+              module = "admin",
+              view = "member_list",
+              params = params
+            }
+            if order == "identification" then
+              if desc then
+                slot.put("&uarr;")
+              else
+                slot.put("&darr;")
+              end
+            end
+          end
         },
         {
-          label = _"Screen name",
-          name = "name"
+          label = function()
+            local params = params_tpl
+            params['order'] = "name"
+            if not desc then
+              params['desc'] = 1
+            end
+            ui.link{
+              text = _"Screen name",
+              module = "admin",
+              view = "member_list",
+              params = params
+            }
+            if order == "name" then
+              if desc then
+                slot.put("&uarr;")
+              else
+                slot.put("&darr;")
+              end
+            end
+          end,
+          content = function(record)
+            if (record.name) then
+              ui.link{
+                text = record.name,
+                module = "member",
+                view = "show",
+                id = record.id
+              }
+            end
+          end
         },
         {
           label = _"Admin?",
           content = function(record)
             if record.admin then
-              ui.field.text{ value = "admin" }
-            end
-          end
-        },
-        {
-          content = function(record)
-            if not record.activated then
-              ui.field.text{ value = "not activated" }
-            elseif not record.active then
-              ui.field.text{ value = "inactive" }
-            else
-              ui.field.text{ value = "active" }
+              ui.field.text{ value = _"Admin" }
             end
           end
         },
         {
           content = function(record)
             if record.locked then
-              ui.field.text{ value = "locked" }
-            end
+              ui.field.text{ value = _"Locked" }
+          end
+        },
+        {
+          content = function(record)
+            if not record.activated then
+              ui.field.text{ value = _"Not activated" }
+            elseif not record.active then
+              ui.field.text{ value = _"Inactive" }
+            else
+              ui.field.text{ value = _"Active" }
           end
         },
         {
@@ -86,7 +241,17 @@ ui.paginate{
               text = _"Edit",
               module = "admin",
               view = "member_edit",
-              id = record.id
+              id = record.id,
+              params = {
+                search           = search,
+                search_admin     = search_admin,
+                search_activated = search_activated,
+                search_locked    = search_locked,
+                search_active    = search_active,
+                order            = order,
+                desc             = desc,
+                page             = param.get("page", atom.integer)
+              }
             }
           end
         }
