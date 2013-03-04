@@ -383,7 +383,6 @@ form.unit_selector {
   color: #89408e;
 }
 
-*/
 /*************************************************************************
  * Title of current page including path and actions
  */
@@ -404,6 +403,10 @@ form.unit_selector {
   border-radius: 0 0 8px 8px;
 }
 
+.initiative_head,
+.suggestion_opinion {
+  margin-bottom: 2ex;
+}
 
 .member_thumb,
 .member_statement,
@@ -1575,6 +1578,94 @@ th.opinion {
   margin-top: 1ex;
   margin-bottom: 2ex;
 }
+
+/******************************
+ * details
+ */
+
+.details_issue {
+  width: 49%;
+  float: left;
+  overflow: hidden;
+}
+.details_initiative {
+  margin-left: 51%;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 720px) {
+  .details_issue {
+    width: auto;
+    float: none;
+  }
+  .details_initiative {
+    margin-left: 0;
+  }
+}
+
+dl.details_left {
+  width: 59%;
+  float: left;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+dl.details_right {
+  margin-left: 61%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 480px) {
+  dl.details_left {
+    width: auto;
+    float: none;
+  }
+  dl.details_right {
+    margin-left: 0;
+  }
+}
+
+dt {
+  font-weight: bold;
+  color: #777;
+}
+dd {
+  margin-left: 5%;
+}
+dt.duration, dd.duration {
+  margin-left: 35%;
+}
+dt.quorum, dd.quorum {
+  margin-left: 55%;
+}
+
+@media screen and (max-width: 280px) {
+  dd {
+    margin-left: 0;
+  }
+  dt.duration, dd.duration {
+    margin-left: 10%;
+  }
+  dt.quorum, dd.quorum {
+    margin-left: 20%;
+  }
+}
+
+/*************************************************************************
+ * admin
+ */
+
+form.member_list_form div {
+  display: inline;
+  margin-right: 10px;
+}
+form.member_list_form input[type=submit] {
+  margin-left: 0.5em;
+}
+form.member_list_form input[type=checkbox] {
+  margin-left: 0;
+}
+
 
 .suggestion_fulfilled {
   width: 15em;
