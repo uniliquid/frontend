@@ -31,6 +31,7 @@ if app.session:has_access("anonymous") then
     or module == "issue" and view == "show"
     or module == "initiative" and view == "show"
     or module == "suggestion" and view == "show"
+    or module == "argument" and view == "show"
     or module == "draft" and view == "diff"
     or module == "draft" and view == "show"
     or module == "draft" and view == "list"
@@ -82,7 +83,8 @@ if auth_needed and app.session.member == nil then
     module = 'index', view = 'login', params = {
       redirect_module = module,
       redirect_view = view,
-      redirect_id = param.get_id()
+      redirect_id     = param.get_id(),
+      redirect_params = param.get_all_cgi_serialize()
     }
   }
 elseif auth_needed and app.session.member.locked then
