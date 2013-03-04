@@ -10,7 +10,7 @@ local event_selector = Event:new_selector()
   :add_field("now()::date - event.occurrence::date", "time_ago")
   
 if event_max_id then
-  event_selector:add_where{ "event.id < ?", event_max_id }
+  event_selector:add_where{ "event.id <= ?", event_max_id }
 end
   
 if for_member then
@@ -56,12 +56,50 @@ filters.content = function()
   events:load("suggestion")
   events:load("member")
 
+  if event_max_id then
+    slot.put("<br />")
+    slot.put("<br />")
+    ui.link{
+      attr = { class = "more_events_links" },
+      text = _"Show newest events",
+      module = request.get_module(),
+      view = request.get_view(),
+      id = for_unit and for_unit.id or for_area and for_area.id,
+      params = {
+        tab = param.get_all_cgi()["tab"],
+        events = param.get_all_cgi()["events"],
+        filter = param.get_all_cgi()["filter"],
+        filter_interest = param.get_all_cgi()["filter_interest"],
+        filter_delegation = param.get_all_cgi()["filter_delegation"]
+      }
+    }
+    slot.put("<br />")
+    slot.put("<br />")
+  end
 
   ui.container{ attr = { class = "issues events" }, content = function()
 
-    local last_event_date
     for i, event in ipairs(events) do
-      last_event_id = event.id
+
+      if i > per_page then
+        slot.put("<br />")
+        ui.link{
+          attr = { class = "more_events_links" },
+          text = _"Show older events",
+          module = request.get_module(),
+          view = request.get_view(),
+          id = for_unit and for_unit.id or for_area and for_area.id,
+          params = {
+            tab = param.get_all_cgi()["tab"],
+            events = param.get_all_cgi()["events"],
+            filter = param.get_all_cgi()["filter"],
+            filter_interest = param.get_all_cgi()["filter_interest"],
+            filter_delegation = param.get_all_cgi()["filter_delegation"],
+            event_max_id = event.id
+          }
+        }
+        break
+      end
 
       ui.container{ attr = { class = "event_info" }, content = function()
         local event_name = event.event_name
@@ -166,7 +204,7 @@ filters.content = function()
           if not event.initiative_id then
             local initiatives_selector = Initiative:new_selector()
               :add_where{ "initiative.issue_id = ?", event.issue_id }
-              :add_order_by("initiative.rank, initiative.supporter_count DESC")
+              :add_order_by("initiative.rank, initiative.supporter_count DESC, initiative.satisfied_supporter_count DESC")
             execute.view{ module = "initiative", view = "_list", params = { 
               issue = event.issue,
               initiatives_selector = initiatives_selector,
@@ -186,37 +224,26 @@ filters.content = function()
           end
         end }
 
-        ui.container{ attr = { class = "content suggestion" }, content = function()
-          if event.suggestion_id then
+        if event.suggestion_id then
+            ui.container{ attr = { class = "content suggestion" }, content = function()
             ui.link{
               text = event.suggestion.name,
               module = "suggestion", view = "show", id = event.suggestion_id
             }
-          end
-        end }
+          end }
+        end
+
+        if event.argument_id then
+          ui.container{ attr = { class = "content suggestion" }, content = function()
+          ui.link{
+              text = event.argument.name,
+              module = "argument", view = "show", id = event.argument_id
+            }
+          end }
+        end
       end }
     end
-
   end }
-
-  slot.put("<br />")
-
-  if #events > 0 then
-    ui.link{
-      attr = { class = "more_events_links" },
-      text = _"Show older events",
-      module = request.get_module(),
-      view = request.get_view(),
-      id = for_unit and for_unit.id or for_area and for_area.id,
-      params = {
-        tab = param.get_all_cgi()["tab"],
-        events = param.get_all_cgi()["events"],
-        event_max_id = last_event_id
-      }
-    }
-  else
-    ui.tag{ content = _"No more events available" }
-  end
 
   slot.put("<br />")
   slot.put("<br />")

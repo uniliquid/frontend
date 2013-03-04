@@ -35,6 +35,7 @@ if not secret then
       slot.put(request.get_absolute_baseurl() .. "index/reset_password.html\n\n")
       slot.put(_"On that page please enter the reset code:\n\n")
       slot.put(member.password_reset_secret .. "\n\n")
+      slot.put(_"The reset code is only valid for one day.\n\n")
     end)
     local success = net.send_mail{
       envelope_from = config.mail_envelope_from,

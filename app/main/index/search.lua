@@ -44,7 +44,8 @@ if search_string then
       execute.view{
         module = "member",
         view = "_list",
-        params = { members_selector = members_selector },
+        params = { members_selector = members_selector,
++          no_filter = true },
       }
     end
   end

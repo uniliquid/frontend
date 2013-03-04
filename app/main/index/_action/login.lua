@@ -70,6 +70,7 @@ if member then
   member:save()
   app.session.member = member
   app.session:save()
+  slot.put_into("notice", _"Login successful")
   trace.debug('User authenticated')
   if config.etherpad then
     do_etherpad_auth(member)
@@ -82,5 +83,4 @@ else
     }
   end)
   trace.debug('User NOT authenticated')
-  return false
 end

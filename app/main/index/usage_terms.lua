@@ -1,3 +1,5 @@
+app.html_title.title = _"Terms of use"
+
 slot.put("<br />")
 
 ui.container{

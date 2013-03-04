@@ -8,11 +8,11 @@ if not for_member then
     ui.container{ attr = { class = "ui_filter_head" }, content = function()
 
       ui.link{
-        attr = { class = filter_unit == "my_areas" and "ui_tabs_link active" or nil },
-        text = _"My areas",
-        module = "index", view = "index", params = { filter_unit = "my_areas" }
+        attr = { class = filter_unit == "global" and "active" or nil },
+        text = _"All units",
+        module = "index", view = "index", params = { filter_unit = "global" }
       }
-      
+
       slot.put(" ")
 
       ui.link{
@@ -24,10 +24,11 @@ if not for_member then
       slot.put(" ")
 
       ui.link{
-        attr = { class = filter_unit == "global" and "active" or nil },
-        text = _"All units",
-        module = "index", view = "index", params = { filter_unit = "global" }
+        attr = { class = filter_unit == "my_areas" and "ui_tabs_link active" or nil },
+        text = _"My areas",
+        module = "index", view = "index", params = { filter_unit = "my_areas" }
       }
+      
     end }
   end }
 end
@@ -62,8 +63,10 @@ for i, unit in ipairs(units) do
       :add_field("(SELECT COUNT(*) FROM issue WHERE issue.area_id = area.id AND issue.fully_frozen NOTNULL AND issue.closed ISNULL)", "issues_voting_count")
       :add_field("(SELECT COUNT(*) FROM issue WHERE issue.area_id = area.id AND issue.fully_frozen NOTNULL AND issue.closed NOTNULL)", "issues_finished_count")
       :add_field("(SELECT COUNT(*) FROM issue WHERE issue.area_id = area.id AND issue.fully_frozen ISNULL AND issue.closed NOTNULL)", "issues_cancelled_count")
+      :add_field({ "(SELECT COUNT(*) FROM issue LEFT JOIN direct_voter ON direct_voter.issue_id = issue.id AND direct_voter.member_id = ? WHERE issue.area_id = area.id AND issue.fully_frozen NOTNULL AND issue.closed ISNULL AND direct_voter.member_id ISNULL)", app.session.member.id }, "issues_to_vote_count")
       :add_where{ "area.unit_id = ?", unit.id }
       :add_where{ "area.active" }
+      :add_order_by("area.direct_member_count DESC")
       :add_order_by("area.name")
 
     if filter_unit == "my_areas" then
@@ -80,6 +83,8 @@ for i, unit in ipairs(units) do
       :count()
     local more_area_count = max_area_count - area_count
     local delegated_count = Area:new_selector()
+      :reset_fields()
+      :add_field("area.id", nil, { "grouped" })
       :add_where{ "area.unit_id = ?", unit.id }
       :add_where{ "area.active" }
       :left_join("membership", nil, { "membership.area_id = area.id AND membership.member_id = ?", member.id } )
@@ -124,7 +129,10 @@ for i, unit in ipairs(units) do
         for i, area in ipairs(areas) do
           execute.view{
             module = "area", view = "_list_entry", params = {
-              area = area, member = member
+              area = area, member = member,
+            hide_unit = true,
+            show_content = true,
+            for_listing = true
             }
           }
         end

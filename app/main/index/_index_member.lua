@@ -1,5 +1,41 @@
 local full = param.get("full", atom.boolean)
 
+-- quick links
+ui.actions(function()
+  ui.link{
+    text = _"Latest vote results",
+    module = "index",
+    view = "index",
+    params = {
+      tab = "closed",
+      filter = "finished",
+      filter_interest = "unit"
+    }
+  }
+  slot.put(" &middot; ")
+  ui.link{
+    text = _"Voted by delegation",
+    module = "index",
+    view = "index",
+    params = {
+      tab = "closed",
+      filter_interest = "voted",
+      filter_delegation = "delegated"
+    }
+  }
+  slot.put(" &middot; ")
+  ui.link{
+    text = _"Not yet voted",
+    module = "index",
+    view = "index",
+    params = {
+      tab = "open",
+      filter = "frozen",
+      filter_interest = "unit"
+    }
+  }
+end)
+ 
 local tabs = {
   module = "index",
   view = "index"
@@ -13,15 +49,6 @@ tabs[#tabs+1] = {
   view = "_member_home",
   params = { member = app.session.member }
 }
-
-tabs[#tabs+1] = {
-  name = "timeline",
-  label = _"Latest events",
-  module = "event",
-  view = "_list",
-  params = { }
-}
-
 
 tabs[#tabs+1] = {
   name = "open",
@@ -51,6 +78,15 @@ tabs[#tabs+1] = {
 }
 
 tabs[#tabs+1] = {
+  name = "timeline",
+  label = _"Latest events",
+  module = "event",
+  view = "_list",
+  params = { }
+}
+
+
+tabs[#tabs+1] = {
   name = "bgv",
   label = _"BGV",
   module = "issue",
@@ -58,7 +94,7 @@ tabs[#tabs+1] = {
   params = {
     issues_selector = Issue:new_selector()
       :add_where("issue.policy_id IN (4,21,7,9,17)")
-      :add_where("issue.fully_frozen ISNULL OR issue.fully_frozen + issue.voting_time > '2012-10-27'")
+      :add_where("issue.fully_frozen ISNULL OR issue.fully_frozen + issue.voting_time > '2013-02-02'")
       --:add_where("issue.state IN ('admission', 'discussion', 'verification', 'voting', 'finished_with_winner', 'finished_without_winner')")
       :add_where("issue.state IN ('verification', 'voting', 'finished_with_winner', 'finished_without_winner')")
       :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()")
