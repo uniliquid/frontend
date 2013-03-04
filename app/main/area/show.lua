@@ -1,5 +1,9 @@
 local area = Area:by_id(param.get_id())
 
+if not area then
+  slot.put_into("error", _"The requested area does not exist!")
+  return
+end
 
 app.html_title.title = area.name
 app.html_title.subtitle = _("Area")
