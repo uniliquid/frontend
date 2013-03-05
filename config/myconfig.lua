@@ -310,8 +310,7 @@ require 'webmcp_accelerator'
 
 config.footer_html = " &middot; <a href=\"" .. config.absolute_base_url .. "static/privacy.php\">Datenschutzerklärung</a></div>\
 <div class=\"slot_footer\" id=\"slot_footer\"><a href=\"" .. config.absolute_base_url .. "static/hourly.php\">Protokoll Stimmberechtigung</a> &middot; <a href=\"http://wiki.piratenpartei.at/wiki/Taskforce:LiquidFeedback/Antragsformatvorlage\">Antragsformatvorlage</a> &middot; <a href=\"" .. config.absolute_base_url .. "policy/list.html\">Regelwerke</a> &middot; <a href=\"http://wiki.piratenpartei.at/wiki/Taskforce:LiquidFeedback/Akkreditierungsbefugte\">Akkreditierung</a> &middot; <a href=\"https://wiki.piratenpartei.at/wiki/Taskforce:LiquidFeedback/FAQ\">FAQ</a> &middot; <a href=\"https://wiki.piratenpartei.at/wiki/Taskforce:LiquidFeedback/Tutorial\">Tutorial</a></div>\
-<div class=\"slot_footer\" id=\"slot_footer\">Auf dieser Seite werden Session-Cookies eingesetzt (<a href=\"" .. config.absolute_base_url .. "static/privacy.php\">Datenschutzerklärung §2.2.4</a>).</div>\
-<div align=\"center\" class=\"ui_tabs_links\"><a href=\"" .. config.absolute_base_url .. "index/index.html?tab=open&filter_policy_sel=p1&filter_policy=direct&filter_voting=not_voted&filter=frozen&filter_interest=unit\">Noch nicht abgestimmte Anträge</a> <a href=\"" .. config.absolute_base_url .. "index/index.html?tab=open&filter_policy_sel=p1&filter_policy=any&filter_voting=not_voted&filter=frozen&filter_interest=unit\">Noch nicht abgestimmt (inkl. Meinungsbilder)</a>"
+<div class=\"slot_footer\" id=\"slot_footer\">Auf dieser Seite werden Session-Cookies eingesetzt (<a href=\"" .. config.absolute_base_url .. "static/privacy.php\">Datenschutzerklärung §2.2.4</a>).</div>"
 
 -- ========================================================================
 -- Do main initialisation (DO NOT REMOVE FOLLOWING SECTION)

@@ -25,11 +25,28 @@ ui.actions(function()
   }
   slot.put(" &middot; ")
   ui.link{
-    text = _"Not yet voted",
+    text = _"Noch nicht abgestimmte Anträge",
     module = "index",
     view = "index",
     params = {
       tab = "open",
+      filter_policy_sel = "p1",
+      filter_policy = "direct",
+      filter_voting = "not_voted",
+      filter = "frozen",
+      filter_interest = "unit"
+    }
+  }
+  slot.put(" &middot; ")
+  ui.link{
+    text = _"Noch nicht abgestimmt (inkl. Meinungsbilder)",
+    module = "index",
+    view = "index",
+    params = {
+      tab = "open",
+      filter_policy_sel = "p1",
+      filter_policy = "any",
+      filter_voting = "not_voted",
       filter = "frozen",
       filter_interest = "unit"
     }
