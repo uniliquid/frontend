@@ -481,25 +481,8 @@ end }
     if app.session.member_id and app.session.member_id == member.id then
       if not readonly or direct_voter then
         ui.field.hidden{ name = "update_comment", value = param.get("update_comment") or issue.closed and "1" }
-        ui.field.select{
-          label = _"Wiki engine for statement",
-          name = "formatting_engine",
-          foreign_records = {
-            { id = "rocketwiki", name = "RocketWiki" },
-            { id = "compat", name = _"Traditional wiki syntax" }
-          },
-          attr = {id = "formatting_engine"},
-          foreign_id = "id",
-          foreign_name = "name",
-          value = param.get("formatting_engine") or direct_voter and direct_voter.formatting_engine
-        }
-        ui.field.text{
-          label = _"Voting comment (optional)",
-          name = "comment",
-          multiline = true,
-          value = param.get("comment") or direct_voter and direct_voter.comment,
-          attr = { style = "height: 20ex;" },
-        }
+
+    ui.wikitextarea("comment", _"Voting comment (optional)")
         ui.submit{
           name = "preview",
           value = _"Preview voting comment",
@@ -530,4 +513,5 @@ if config.absolute_base_short_url then
       ui.link{ external = link, text = link }
     end
   }
+end
 end
