@@ -24,6 +24,39 @@ end
 
 if param.get("delete") then
   if opinion then
+    if not param.get("confirm", atom.boolean) then
+
+      -- find other opinions to this suggestion
+      local opinions_count = Opinion:new_selector()
+        :add_where{ "suggestion_id = ?", suggestion.id }
+        :add_where{ "member_id != ?", member_id }
+        :count()
+      if opinions_count == 0 then
+        slot.select("warning", function()
+          slot.put(_"You are the only one who rated this suggestion. If you rate it neutral now, it will be deleted!")
+          slot.put("<br />")
+          ui.link{
+            text    = _"Rate neutral and delete the suggestion",
+            module  = "opinion",
+            action  = "update",
+            id      = suggestion.initiative_id,
+            params  = { suggestion_id = suggestion.id, delete = true, confirm = true },
+            routing = {
+              default = {
+                mode   = "redirect",
+                module = "suggestion",
+                view   = "show",
+                id     = suggestion.id,
+                params = { initiative_id = suggestion.initiative_id }
+              }
+            },
+            external = "../../opinion/update" -- workaround for bug in WebMCP
+          }
+        end )
+        return false
+      end
+
+    end
     opinion:destroy()
   end
   --slot.put_into("notice", _"Your rating has been deleted")

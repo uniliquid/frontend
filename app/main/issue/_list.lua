@@ -38,7 +38,8 @@ filters.content = function()
         for i, issue in ipairs(issues) do
 
           execute.view{ module = "issue", view = "_show", params = {
-            issue = issue, for_listing = not full, for_member = for_member, full = full
+            issue = issue, for_listing = not full, for_member = for_member, full = full,
+              highlight_string = highlight_string
           } }
           
         end

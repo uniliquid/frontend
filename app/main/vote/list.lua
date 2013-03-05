@@ -521,4 +521,13 @@ end }
   end
 }
 
+if config.absolute_base_short_url then
+  ui.container{
+    attr = { class = "shortlink" },
+    content = function()
+      slot.put(_"Short link" .. ": ")
+      local link = config.absolute_base_short_url .. "v" .. issue.id
+      ui.link{ external = link, text = link }
+    end
+  }
 end

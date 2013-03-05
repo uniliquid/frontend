@@ -22,8 +22,8 @@ end
 
 email = util.trim(email)
 
-if #email < 3 then 
-  slot.put_into("error", _"This email address is too short!")
+if not email:match('^[^@%s]+@[^@%s]+$') then
+  slot.put_into("error", _"This email address is not valid!")
   return false
 end
 

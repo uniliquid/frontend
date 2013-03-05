@@ -1,6 +1,12 @@
 local image_type = param.get("image_type")
 local record = MemberImage:by_pk(param.get_id(), image_type, true)
 
+-- use avatar if no photo
+if record == nil and image_type == "photo" then
+  image_type = "avatar"
+  record = MemberImage:by_pk(param.get_id(), image_type, true)
+end
+
 print('Cache-Control: max-age=300'); -- let the client cache the image for 5 minutes
 
 if record == nil then

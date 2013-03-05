@@ -66,8 +66,8 @@ tabs[#tabs+1] = {
     issues_selector = Issue:new_selector()
       :add_where("issue.closed NOTNULL")
       :add_order_by("issue.closed DESC")
-
-  }
+  },
+  br = true -- line break after this tab
 }
 
 

@@ -2,6 +2,11 @@ local unit_id = config.single_unit_id or param.get_id()
 
 local unit = Unit:by_id(unit_id)
 
+if not unit then
+  slot.put_into("error", _"The requested unit does not exist!")
+  return
+end
+
 slot.select("head", function()
   execute.view{ module = "unit", view = "_head", params = { unit = unit, show_content = true, member = app.session.member } }
 end)

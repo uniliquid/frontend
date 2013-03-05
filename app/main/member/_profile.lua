@@ -39,9 +39,6 @@ ui.form{
       end
     }
     
-    if member.identification then
-      ui.field.text{    label = _"Identification", name = "identification" }
-    end
     if member.name then
       ui.field.text{ label = _"Screen name", name = "name" }
     end

@@ -1,4 +1,10 @@
 local issue = Issue:by_id(param.get_id())
+
+if not issue then
+  slot.put_into("error", _"The requested issue does not exist!")
+  return
+end
+
 if app.session.member_id then
   issue:load_everything_for_member_id(app.session.member_id)
 end
@@ -50,3 +56,13 @@ if issue.snapshot then
   ui.field.timestamp{ label = _"Last snapshot:", value = issue.snapshot }
 end
 
+if config.absolute_base_short_url then
+  ui.container{
+    attr = { class = "shortlink" },
+    content = function()
+      slot.put(_"Short link" .. ": ")
+      local link = config.absolute_base_short_url .. "t" .. issue.id
+      ui.link{ external = link, text = link }
+    end
+  }
+end

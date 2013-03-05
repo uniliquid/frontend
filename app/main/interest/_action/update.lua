@@ -12,12 +12,58 @@ elseif issue.fully_frozen then
   return false
 end
 
+local member = app.session.member
+
+if not param.get("confirm", atom.boolean) then
+
+  -- find suggestions, which have opinions only by this member
+  local suggestions_count = Suggestion:new_selector()
+    :join("initiative", nil, "suggestion.initiative_id = initiative.id")
+    :add_where{ "initiative.issue_id = ?", issue.id }
+    :join("opinion", nil, "opinion.suggestion_id = suggestion.id")
+    :add_where{ "opinion.member_id = ?", member.id }
+   :left_join("opinion", "opinion_others", { "opinion_others.suggestion_id = suggestion.id AND opinion_others.member_id != ?", member.id })
+    :add_where("opinion_others.member_id ISNULL")
+    :count()
+  if suggestions_count > 0 then
+    slot.select("warning", function()
+      local linktext
+      if suggestions_count == 1 then
+        slot.put(_"There is one suggestion, for which only you entered an opinion. If you withdraw your interest, this suggestion will be deleted!")
+        linktext = _"Withdraw interest and delete the suggestion"
+      else
+        slot.put(_("There are #{count} suggestions, for which only you entered an opinion. If you withdraw your interest, these suggestions will be deleted!", { count = suggestions_count }))
+        linktext = _"Withdraw interest and delete the suggestions"
+      end
+      slot.put("<br />")
+      ui.link{
+        text    = linktext,
+        module  = "interest",
+        action  = "update",
+        id      = issue.id,
+        params  = { issue_id = issue.id, delete = true, confirm = true },
+        routing = {
+          default = {
+            mode   = "redirect",
+            module = param.get("module"),
+            view   = "show",
+            id     = param.get("id", atom.integer),
+          }
+        },
+        external = "../../interest/update" -- workaround for bug in WebMCP
+      }
+    end )
+    return false
+  end
+
+end
+
 if param.get("delete", atom.boolean) then
   if interest then
     interest:destroy()
-    --slot.put_into("notice", _"Interest removed")
-  else
-    --slot.put_into("notice", _"Interest not existent")
+    slot.put_into("notice", _"Your interest has been removed from this issue.")
+   else
+    slot.put_into("notice", _"You are already not interested in this issue.")
   end
   return
 end
