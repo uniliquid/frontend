@@ -640,15 +640,6 @@ if not show_as_head then
       slot.put("<br />")
     end
     
-    -- issue details
-    execute.view{
-      module = "issue",
-      view = "_details",
-      params = {
-        issue = initiative.issue
-      }
-    }
-
     -- initiative details
     execute.view {
       module = "initiative",
