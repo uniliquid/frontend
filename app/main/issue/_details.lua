@@ -47,6 +47,10 @@ ui.form{
     ui.field.text{       label = _"Voting time",           value = format.interval_text(issue.voting_time_text) }
     if issue.closed then
       ui.field.timestamp{  label = _"Closed",                name = "closed" }
+      value = ui.link{
+        attr = { class = "title" }, text = _"Show Ballots",
+        module = "issue", view = "ballots", id = issue.id
+      }
     end
   end
 }
