@@ -11,13 +11,13 @@ end
 
 local update_comment = param.get("update_comment") == "1" and true or false
 
-if issue.closed and not update_comment then
-  slot.put_into("error", _"This issue is already closed.")
+if issue.state ~= "voting" and not issue.closed then
+  slot.put_into("error", _"Voting has not started yet.")
   return false
 end
 
-if issue.state ~= "voting" and not issue.closed then
-  slot.put_into("error", _"Voting has not started yet.")
+if issue.phase_finished or issue.closed and not update_comment then
+  slot.put_into("error", _"This issue is already closed.")
   return false
 end
 

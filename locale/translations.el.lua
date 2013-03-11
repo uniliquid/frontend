@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 return {
-["#{count} cancelled"] = "#{count} ακυρώθηκαν";
+["#{count} canceled"] = "#{count} ακυρώθηκαν";
 ["#{count} days ago"] = "#{count} μέρες πριν";
 ["#{count} finished"] = "#{count} ολοκληρώθηκαν";
 ["#{count} in discussion"] = "#{count} σε διαβούλευση";
@@ -101,12 +101,12 @@ return {
 ["Cancel password reset"] = "Ακύρωση επαναφοράς κωδικού πρόσβασης";
 ["Cancel refuse of invitation"] = "Ακύρωση απόρριψης της πρόσκλησης";
 ["Cancel registration"] = "Ακύρωση εγγραφής";
-["Cancelled"] = "Ακυρώθηκε";
-["Cancelled (before accepted due to revocation)"] = "Ακυρώθηκε (στη φάση 'Νέο', λόγω ανάκλησης)";
-["Cancelled (during discussion due to revocation)"] = "Ακυρώθηκε (κατά τη διάρκεια της συζήτησης, λόγω ανάκλησης)";
-["Cancelled (during verification due to revocation)"] = "Ακυρώθηκε (κατά τη διάρκεια της επιβεβαίωσης, λόγω ανάκλησης)";
-["Cancelled (issue not accepted)"] = "Ακυρώθηκε (Δεν έγινε δεκτό)";
-["Cancelled (no initiative admitted)"] = "Ακυρώθηκε (Δεν προκρίθηκε καμία πρωτοβουλία)";
+["Canceled"] = "Ακυρώθηκε";
+["Canceled (before accepted due to revocation)"] = "Ακυρώθηκε (στη φάση 'Νέο', λόγω ανάκλησης)";
+["Canceled (during discussion due to revocation)"] = "Ακυρώθηκε (κατά τη διάρκεια της συζήτησης, λόγω ανάκλησης)";
+["Canceled (during verification due to revocation)"] = "Ακυρώθηκε (κατά τη διάρκεια της επιβεβαίωσης, λόγω ανάκλησης)";
+["Canceled (issue not accepted)"] = "Ακυρώθηκε (Δεν έγινε δεκτό)";
+["Canceled (no initiative admitted)"] = "Ακυρώθηκε (Δεν προκρίθηκε καμία πρωτοβουλία)";
 ["Change area delegation"] = "Αλλαγή ανάθεσης για τον τομέα";
 ["Change email"] = "Αλλαγή email";
 ["Change email address"] = "Αλλαγή διεύθυνσης email";
@@ -577,7 +577,7 @@ return {
 ["This initiative is already revoked"] = "Αυτή η πρωτοβουλία έχει ήδη ανακληθεί";
 ["This initiative is revoked"] = "Αυτή η πρωτοβουλία έχει ανακληθεί";
 ["This invite key is connected with the following information:"] = "Αυτός ο κωδικός πρόσκλησης σχετίζεται με τα ακόλουθα στοιχεία:";
-["This issue has been cancelled. It failed the quorum of #{quorum}."] = "Αυτό το θέμα έχει ακυρωθεί. Δεν είχε την απαιτούμενη απαρτία #{quorum}";
+["This issue has been canceled. It failed the quorum of #{quorum}."] = "Αυτό το θέμα έχει ακυρωθεί. Δεν είχε την απαιτούμενη απαρτία #{quorum}";
 ["This issue is already closed."] = "Αυτό το θέμα έχει ήδη κλείσει.";
 ["This issue is already frozen."] = "Αυτό το θέμα έχει ήδη παγώσει.";
 ["This login is already taken, please choose another one!"] = "Αυτό το όνομα σύνδεσης υπάρχει ήδη, παρακαλώ επιλέξτε κάποιο άλλο!";

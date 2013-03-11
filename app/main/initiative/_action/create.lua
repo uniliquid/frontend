@@ -3,12 +3,15 @@ local area
 
 local issue_id = param.get("issue_id", atom.integer)
 if issue_id then
-  issue = Issue:new_selector():add_where{"id=?",issue_id}:single_object_mode():exec()
+  issue = Issue:new_selector():add_where{"id=?",issue_id}:for_share():single_object_mode():exec()
   if issue.closed then
     slot.put_into("error", _"This issue is already closed.")
     return false
   elseif issue.fully_frozen then 
     slot.put_into("error", _"Voting for this issue has already begun.")
+    return false
+  elseif issue.phase_finished then
+    slot.put_into("error", _"Current phase is already closed.")
     return false
   end
   area = issue.area

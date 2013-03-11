@@ -159,6 +159,49 @@ config.public_access = "none"
 --  cookie_path = "/"
 --}
 
+-- Free timings
+-- ------------------------------------------------------------------------
+-- This example expects a date string entered in the free timing field
+-- by the user creating a poll, interpreting it as target date for then
+-- poll and splits the remaining time at the ratio of 4:1:2
+-- Please note, polling policies never have an admission phase
+-- The available_func is optional, if not set any target date is allowed
+
+config.free_timing = {
+  calculate_func = function(policy, timing_string)
+    function interval_by_seconds(secs)
+      local secs_per_day = 60 * 60 * 24
+      local days
+      days = math.floor(secs / secs_per_day)
+      secs = secs - days * secs_per_day
+      return days .. " days " .. secs .. " seconds"
+    end
+    local target_date = parse.date(timing_string, atom.date)
+    if not target_date then
+      return false
+    end
+    local target_timestamp = target_date.midday
+    local now = atom.timestamp:get_current()
+    trace.debug(target_timestamp, now)
+    local duration = target_timestamp - now
+    if duration < 0 then
+      return false
+    end
+    return {
+      discussion = interval_by_seconds(duration / 7 * 4),
+      verification = interval_by_seconds(duration / 7 * 1),
+      voting = interval_by_seconds(duration / 7 * 2)
+    }
+  end,
+  available_func = function(policy)
+    return { 
+      { name = "End of 2013", id = '2013-12-31' },
+      { name = "End of 2014", id = '2014-12-31' },
+      { name = "End of 2015", id = '2015-12-31' }
+    }
+  end
+}
+
 -- WebMCP accelerator
 -- uncomment the following two lines to use C implementations of chosen
 -- functions and to disable garbage collection during the request, to

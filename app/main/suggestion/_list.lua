@@ -9,10 +9,9 @@ if true or not show_filter then
   ui_filters = function(args) args.content() end
 end
 
-
 ui.container{ attr = { class = "initiative_head" },
   content = function()
-
+    ui.tag{ tag = "a", attr = { class = "title", name = "suggestions" }, content = _"Suggestions" }
     if app.session.member_id
       and not initiative.issue.half_frozen
       and not initiative.issue.closed

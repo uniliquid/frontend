@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 return {
-["#{count} cancelled"] = false;
+["#{count} canceled"] = false;
 ["#{count} days ago"] = false;
 ["#{count} finished"] = false;
 ["#{count} in discussion"] = false;
@@ -101,12 +101,12 @@ return {
 ["Cancel password reset"] = false;
 ["Cancel refuse of invitation"] = false;
 ["Cancel registration"] = false;
-["Cancelled"] = false;
-["Cancelled (before accepted due to revocation)"] = false;
-["Cancelled (during discussion due to revocation)"] = false;
-["Cancelled (during verification due to revocation)"] = false;
-["Cancelled (issue not accepted)"] = false;
-["Cancelled (no initiative admitted)"] = false;
+["Canceled"] = false;
+["Canceled (before accepted due to revocation)"] = false;
+["Canceled (during discussion due to revocation)"] = false;
+["Canceled (during verification due to revocation)"] = false;
+["Canceled (issue not accepted)"] = false;
+["Canceled (no initiative admitted)"] = false;
 ["Change area delegation"] = false;
 ["Change email"] = false;
 ["Change email address"] = false;
@@ -577,7 +577,7 @@ return {
 ["This initiative is already revoked"] = false;
 ["This initiative is revoked"] = false;
 ["This invite key is connected with the following information:"] = false;
-["This issue has been cancelled. It failed the quorum of #{quorum}."] = false;
+["This issue has been canceled. It failed the quorum of #{quorum}."] = false;
 ["This issue is already closed."] = false;
 ["This issue is already frozen."] = false;
 ["This login is already taken, please choose another one!"] = false;

@@ -204,51 +204,33 @@ ui.container{ attr = { class = class }, content = function()
   end
 
   -- voting results
-  if initiative.issue.closed and initiative.issue.ranks_available and initiative.admitted then
+  if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admitted then
     local class = initiative.winner and "admitted_info" or "not_admitted_info"
     ui.container{
       attr = { class = class },
       content = function()
-
-        local function abs(votes, direct_votes)
-          slot.put("<b>" .. votes .. "</b>")
-          if initiative.issue.direct_voter_count then
-            slot.put(" (" .. direct_votes .. "+" .. (votes - direct_votes) .. ")")
-          end
-        end
-
-        local function perc(votes, direct_votes, sum)
-          if sum > 0 then
-            slot.put(" / <b>" .. string.format( "%.f", votes * 100 / sum ) .. "%</b>")
-            if initiative.issue.direct_voter_count then
-              slot.put(" (" .. string.format( "%.f", direct_votes * 100 / sum ) .. "%+" .. string.format( "%.f", (votes - direct_votes) * 100 / sum ) .. "%)")
-            end
-          end
-        end
-
+        local max_value = initiative.issue.voter_count
+        slot.put("&nbsp;")
+        local positive_votes = initiative.positive_votes
+        local negative_votes = initiative.negative_votes
         local sum_votes = initiative.positive_votes + initiative.negative_votes
-
-        slot.put(_"Yes" .. ": ")
-        abs(initiative.positive_votes, initiative.positive_direct_votes)
-        perc(initiative.positive_votes, initiative.positive_direct_votes, sum_votes)
-        slot.put(" &nbsp;&middot;&nbsp; ")
-        slot.put(_"Abstention" .. ": ")
-        if initiative.issue.direct_voter_count then
-          abs(initiative.issue.voter_count - sum_votes, initiative.issue.direct_voter_count - initiative.negative_direct_votes - initiative.positive_direct_votes)
-        else
-          abs(initiative.issue.voter_count - sum_votes)
+        local function perc(votes, sum)
+          if sum > 0 and votes > 0 then return " (" .. string.format( "%.f", votes * 100 / sum ) .. "%)" end
+          return ""
         end
-        slot.put(" &nbsp;&middot;&nbsp; ")
-        slot.put(_"No" .. ": ")
-        abs(initiative.negative_votes, initiative.negative_direct_votes)
-        perc(initiative.negative_votes, initiative.negative_direct_votes, sum_votes)
-        slot.put(" &nbsp;&middot;&nbsp; <b>")
+        slot.put(_"Yes" .. ": <b>" .. tostring(positive_votes) .. perc(positive_votes, sum_votes) .. "</b>")
+        slot.put(" &middot; ")
+        slot.put(_"Abstention" .. ": <b>" .. tostring(max_value - initiative.negative_votes - initiative.positive_votes)  .. "</b>")
+        slot.put(" &middot; ")
+        slot.put(_"No" .. ": <b>" .. tostring(initiative.negative_votes) .. perc(negative_votes, sum_votes) .. "</b>")
+        slot.put(" &middot; ")
+        slot.put("<b>")
         if initiative.winner then
-          slot.put( _"Approved" .. " " .. _("(rank #{rank})", { rank = initiative.rank }) )
+          slot.put(_"Approved")
         elseif initiative.rank then
-          slot.put( _"Not approved" .. " " .. _("(rank #{rank})", { rank = initiative.rank }) )
+          slot.put(_("Not approved (rank #{rank})", { rank = initiative.rank }))
         else
-          slot.put( _"Not approved" )
+          slot.put(_"Not approved")
         end
         slot.put("</b>")
 
@@ -500,7 +482,7 @@ if not show_as_head then
   end
 
   if app.session:has_access("all_pseudonymous") then
-    if initiative.issue.closed and initiative.issue.ranks_available and initiative.admitted then
+    if initiative.issue.fully_frozen and initiative.issue.closed then
       local members_selector = initiative.issue:get_reference_selector("direct_voters")
             :left_join("vote", nil, { "vote.initiative_id = ? AND vote.member_id = member.id", initiative.id })
             :add_field("direct_voter.weight as voter_weight")

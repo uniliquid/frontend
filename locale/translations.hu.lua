@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 return {
-["#{count} cancelled"] = false;
+["#{count} canceled"] = false;
 ["#{count} days ago"] = "#{count} nappal ezelõtt";
 ["#{count} finished"] = false;
 ["#{count} in discussion"] = false;
@@ -101,12 +101,12 @@ return {
 ["Cancel password reset"] = "Jelszóvisszaállítás megszakítása";
 ["Cancel refuse of invitation"] = "Meghívás elutasításának megszakítása";
 ["Cancel registration"] = "Regisztrálás megszakítása";
-["Cancelled"] = "Megszakítva";
-["Cancelled (before accepted due to revocation)"] = "Megszakítva (elfogadás elõtt, visszavonás miatt)";
-["Cancelled (during discussion due to revocation)"] = "Megszakítva (tárgyalás közben, visszavonás miatt)";
-["Cancelled (during verification due to revocation)"] = "Megszakítva (ellenõrzés közben, visszavonás miatt)";
-["Cancelled (issue not accepted)"] = "Megszakítva (el nem fogadott téma)";
-["Cancelled (no initiative admitted)"] = "Megszakítva (nem engedélyezett kezdeményezés)";
+["Canceled"] = "Megszakítva";
+["Canceled (before accepted due to revocation)"] = "Megszakítva (elfogadás elõtt, visszavonás miatt)";
+["Canceled (during discussion due to revocation)"] = "Megszakítva (tárgyalás közben, visszavonás miatt)";
+["Canceled (during verification due to revocation)"] = "Megszakítva (ellenõrzés közben, visszavonás miatt)";
+["Canceled (issue not accepted)"] = "Megszakítva (el nem fogadott téma)";
+["Canceled (no initiative admitted)"] = "Megszakítva (nem engedélyezett kezdeményezés)";
 ["Change area delegation"] = "Témakör-delegáció módosítása";
 ["Change email"] = "Email-cím módosítása";
 ["Change email address"] = "Email-cím módosítása";
@@ -577,7 +577,7 @@ return {
 ["This initiative is already revoked"] = "Ezt a kezdeményezést már visszavonták";
 ["This initiative is revoked"] = "Ezt a kezdeményezést visszavonták";
 ["This invite key is connected with the following information:"] = "Ehhez a meghívókulcshoz a következõ adatok kapcsolódnak:";
-["This issue has been cancelled. It failed the quorum of #{quorum}."] = "Téma megszakítva. Nincs meg a határozatképesség: #(quorum).";
+["This issue has been canceled. It failed the quorum of #{quorum}."] = "Téma megszakítva. Nincs meg a határozatképesség: #(quorum).";
 ["This issue is already closed."] = "Téma már lezárva.";
 ["This issue is already frozen."] = "Téma már befagyasztva.";
 ["This login is already taken, please choose another one!"] = "Ez a bejelentkezési név más foglalt, válassz másikat!";

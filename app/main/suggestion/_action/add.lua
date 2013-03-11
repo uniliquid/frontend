@@ -51,6 +51,12 @@ if issue.closed then
 elseif issue.half_frozen then
   slot.put_into("error", _"This issue is already frozen!")
   return false
+elseif 
+  (issue.half_frozen and issue.phase_finished) or
+  (not issue.accepted and issue.phase_finished) 
+then
+  slot.put_into("error", _"Current phase is already closed.")
+  return false
 end
 
 local opinion = Opinion:new()
