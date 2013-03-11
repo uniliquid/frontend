@@ -166,7 +166,7 @@ filters.content = function()
           if not event.initiative_id then
             local initiatives_selector = Initiative:new_selector()
               :add_where{ "initiative.issue_id = ?", event.issue_id }
-              :add_order_by("initiative.rank, initiative.supporter_count DESC")
+              :add_order_by("initiative.admitted DESC, initiative.rank, initiative.harmonic_weight DESC NULLS LAST, id")
             execute.view{ module = "initiative", view = "_list", params = { 
               issue = event.issue,
               initiatives_selector = initiatives_selector,

@@ -10,6 +10,12 @@ if issue.closed then
 elseif issue.fully_frozen then 
   slot.put_into("error", _"Voting for this issue has already begun.")
   return false
+elseif 
+  (issue.half_frozen and issue.phase_finished) or
+  (not issue.accepted and issue.phase_finished) 
+then
+  slot.put_into("error", _"Current phase is already closed.")
+  return false
 end
 
 if param.get("delete", atom.boolean) then

@@ -34,8 +34,8 @@ ui.container{ attr = { class = "area" }, content = function()
     }
     slot.put(" &middot; ")
     ui.link{ 
-      module = "area", view = "show", id = area.id, params = { tab = "closed", filter = "cancelled" },
-      text = _("#{count} cancelled", { count = area.issues_cancelled_count }) 
+      module = "area", view = "show", id = area.id, params = { tab = "closed", filter = "canceled" },
+      text = _("#{count} canceled", { count = area.issues_canceled_count }) 
     }
   end }
 

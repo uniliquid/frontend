@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 return {
-["#{count} cancelled"] = false;
+["#{count} canceled"] = false;
 ["#{count} days ago"] = false;
 ["#{count} finished"] = false;
 ["#{count} in discussion"] = false;
@@ -101,12 +101,12 @@ return {
 ["Cancel password reset"] = "Nuligi pasvortoremeton";
 ["Cancel refuse of invitation"] = "Nuligi rifuzon de la invito";
 ["Cancel registration"] = "Nuligi registradon";
-["Cancelled"] = "Abolita";
-["Cancelled (before accepted due to revocation)"] = false;
-["Cancelled (during discussion due to revocation)"] = false;
-["Cancelled (during verification due to revocation)"] = false;
-["Cancelled (issue not accepted)"] = false;
-["Cancelled (no initiative admitted)"] = false;
+["Canceled"] = "Abolita";
+["Canceled (before accepted due to revocation)"] = false;
+["Canceled (during discussion due to revocation)"] = false;
+["Canceled (during verification due to revocation)"] = false;
+["Canceled (issue not accepted)"] = false;
+["Canceled (no initiative admitted)"] = false;
 ["Change area delegation"] = "Ŝanĝi delegacion por temaro";
 ["Change email"] = "Ŝanĝi retpoŝton";
 ["Change email address"] = "Ŝanĝi retpoŝtadreson";
@@ -577,7 +577,7 @@ return {
 ["This initiative is already revoked"] = "Tiu iniciato estas jam nuligita";
 ["This initiative is revoked"] = "Tiu iniciato estas nuligita";
 ["This invite key is connected with the following information:"] = false;
-["This issue has been cancelled. It failed the quorum of #{quorum}."] = "Tiu temo estas abolita. Ĝi malsukcesis la kvorumon de #{quorum}.";
+["This issue has been canceled. It failed the quorum of #{quorum}."] = "Tiu temo estas abolita. Ĝi malsukcesis la kvorumon de #{quorum}.";
 ["This issue is already closed."] = "La temo estas jam fermita.";
 ["This issue is already frozen."] = "La temo estas jam ĝelita";
 ["This login is already taken, please choose another one!"] = "Tiu salutnomo estas jam prenita, bonvolu elekti alian!";

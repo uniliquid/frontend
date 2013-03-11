@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 return {
-["#{count} cancelled"] = "#{count} annullati";
+["#{count} canceled"] = "#{count} annullati";
 ["#{count} days ago"] = "#{count} giorni fa";
 ["#{count} finished"] = "#{count} terminati";
 ["#{count} in discussion"] = "#{count} discussione in corso";
@@ -101,12 +101,12 @@ return {
 ["Cancel password reset"] = "Annulla il ripristino della password";
 ["Cancel refuse of invitation"] = "Annulla il rifiuto all'invito";
 ["Cancel registration"] = "Annulla la registrazione";
-["Cancelled"] = "Annullato";
-["Cancelled (before accepted due to revocation)"] = "Annullato (revocato prima dell'approvazione)";
-["Cancelled (during discussion due to revocation)"] = "Annullato (revocato durante la discussione)";
-["Cancelled (during verification due to revocation)"] = "Annullato (revocato durante la verifica)";
-["Cancelled (issue not accepted)"] = "Annullato (tematica non approvata)";
-["Cancelled (no initiative admitted)"] = "Annullato (nessuna iniziativa ammessa)";
+["Canceled"] = "Annullato";
+["Canceled (before accepted due to revocation)"] = "Annullato (revocato prima dell'approvazione)";
+["Canceled (during discussion due to revocation)"] = "Annullato (revocato durante la discussione)";
+["Canceled (during verification due to revocation)"] = "Annullato (revocato durante la verifica)";
+["Canceled (issue not accepted)"] = "Annullato (tematica non approvata)";
+["Canceled (no initiative admitted)"] = "Annullato (nessuna iniziativa ammessa)";
 ["Change area delegation"] = "Cambia la delega per l'area";
 ["Change email"] = "Cambia email";
 ["Change email address"] = "Cambia email";
@@ -577,7 +577,7 @@ return {
 ["This initiative is already revoked"] = "Questa iniziativa e' gia' revocata";
 ["This initiative is revoked"] = "Questa iniziativa e' stata revocata";
 ["This invite key is connected with the following information:"] = "Questo codice invito e' associato alle seguenti informazioni:";
-["This issue has been cancelled. It failed the quorum of #{quorum}."] = "Questa tematica e' stata annullata. Non ha raggiunto il quorum di #{quorum}.";
+["This issue has been canceled. It failed the quorum of #{quorum}."] = "Questa tematica e' stata annullata. Non ha raggiunto il quorum di #{quorum}.";
 ["This issue is already closed."] = "Questa tematica e' stata chiusa.";
 ["This issue is already frozen."] = "Questa tematica e' stata sospesa.";
 ["This login is already taken, please choose another one!"] = "Questo nome utente e' stato gia' scelto, prova a sceglierne un altro!";

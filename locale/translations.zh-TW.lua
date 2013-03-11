@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 return {
-["#{count} cancelled"] = "#{count} 個已取消";
+["#{count} canceled"] = "#{count} 個已取消";
 ["#{count} days ago"] = "#{count} 日前";
 ["#{count} finished"] = "#{count} 個已結束";
 ["#{count} in discussion"] = "#{count} 個項目討論中";
@@ -101,12 +101,12 @@ return {
 ["Cancel password reset"] = "取消密碼重設";
 ["Cancel refuse of invitation"] = "取消婉拒邀請";
 ["Cancel registration"] = "取消註冊";
-["Cancelled"] = "已取消";
-["Cancelled (before accepted due to revocation)"] = "已取消 (未被接受即撤銷)";
-["Cancelled (during discussion due to revocation)"] = "已取消 (在討論期撤銷)";
-["Cancelled (during verification due to revocation)"] = "已取消 (在驗證期撤銷)";
-["Cancelled (issue not accepted)"] = "已取消 (議題不被接受)";
-["Cancelled (no initiative admitted)"] = "已取消 (無提案被遞交)";
+["Canceled"] = "已取消";
+["Canceled (before accepted due to revocation)"] = "已取消 (未被接受即撤銷)";
+["Canceled (during discussion due to revocation)"] = "已取消 (在討論期撤銷)";
+["Canceled (during verification due to revocation)"] = "已取消 (在驗證期撤銷)";
+["Canceled (issue not accepted)"] = "已取消 (議題不被接受)";
+["Canceled (no initiative admitted)"] = "已取消 (無提案被遞交)";
 ["Change area delegation"] = "更改領域的委任";
 ["Change email"] = "更改電郵地址";
 ["Change email address"] = "更改電郵地址";
@@ -577,7 +577,7 @@ return {
 ["This initiative is already revoked"] = "此提案已撤銷";
 ["This initiative is revoked"] = "此提案被撤銷";
 ["This invite key is connected with the following information:"] = "此邀請碼與下列資訊連結：";
-["This issue has been cancelled. It failed the quorum of #{quorum}."] = "此議題因未達 #{quorum} 的法定門檻而被取消。";
+["This issue has been canceled. It failed the quorum of #{quorum}."] = "此議題因未達 #{quorum} 的法定門檻而被取消。";
 ["This issue is already closed."] = "此議題已結案。";
 ["This issue is already frozen."] = "此議題已底定。";
 ["This login is already taken, please choose another one!"] = "此帳號已被使用，請另擇一！";

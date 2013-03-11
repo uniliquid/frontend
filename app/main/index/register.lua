@@ -48,7 +48,6 @@ ui.form{
         :add_where{ "invite_code = ?", code }
         :add_where{ "activated ISNULL" }
         :optional_object_mode()
-        :for_update()
         :exec()
 
       if not member.notify_email and not notify_email or not member.name and not name or not member.login and not login or step == 1 then

@@ -250,11 +250,16 @@ ui.container{ attr = { class = class }, content = function()
   end }
 
   if not for_listing then
-    if issue.state:sub(1, #("canceled_")) == "canceled_" then
+    if issue.state == "canceled_issue_not_accepted" then
       local policy = issue.policy
       ui.container{
         attr = { class = "not_admitted_info" },
-        content = _("This issue has been cancelled. It failed the quorum of #{quorum}.", { quorum = format.percentage(policy.issue_quorum_num / policy.issue_quorum_den) })
+        content = _("This issue has been canceled. It failed the quorum of #{quorum}.", { quorum = format.percentage(policy.issue_quorum_num / policy.issue_quorum_den) })
+      }
+    elseif issue.state:sub(1, #("canceled_")) == "canceled_" then
+      ui.container{
+        attr = { class = "not_admitted_info" },
+        content = _("This issue has been canceled.")
       }
     end
   end

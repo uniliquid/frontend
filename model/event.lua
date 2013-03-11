@@ -45,20 +45,7 @@ function Event.object_get:event_name()
 end
   
 function Event.object_get:state_name()
-  return ({
-    admission = _"New",
-    discussion = _"Discussion",
-    verification = _"Frozen",
-    voting = _"Voting",
-    canceled_revoked_before_accepted = _"Cancelled (before accepted due to revocation)",
-    canceled_issue_not_accepted = _"Cancelled (issue not accepted)",
-    canceled_after_revocation_during_discussion = _"Cancelled (during discussion due to revocation)",
-    canceled_after_revocation_during_verification = _"Cancelled (during verification due to revocation)",
-    calculation = _"Calculation",
-    canceled_no_initiative_admitted = _"Cancelled (no initiative admitted)",
-    finished_without_winner = _"Finished (without winner)",
-    finished_with_winner = _"Finished (with winner)"
-  })[self.state]
+  return Issue:get_state_name_for_state(self.state)
 end
   
 function Event.object:send_notification()

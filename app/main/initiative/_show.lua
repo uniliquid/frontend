@@ -193,7 +193,7 @@ ui.container{ attr = { class = class }, content = function()
 
   
   -- voting results
-  if initiative.issue.ranks_available and initiative.admitted then
+  if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admitted then
     local class = initiative.winner and "admitted_info" or "not_admitted_info"
     ui.container{
       attr = { class = class },
@@ -428,7 +428,7 @@ if not show_as_head then
 
 
   if app.session:has_access("all_pseudonymous") then
-    if initiative.issue.ranks_available then
+    if initiative.issue.fully_frozen and initiative.issue.closed then
       local members_selector = initiative.issue:get_reference_selector("direct_voters")
             :left_join("vote", nil, { "vote.initiative_id = ? AND vote.member_id = member.id", initiative.id })
             :add_field("direct_voter.weight as voter_weight")

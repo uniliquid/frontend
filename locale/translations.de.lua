@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 return {
-["#{count} cancelled"] = "#{count} abgebrochen";
+["#{count} canceled"] = "#{count} abgebrochen";
 ["#{count} days ago"] = "vor #{count} Tagen";
 ["#{count} finished"] = "#{count} abgeschlossen";
 ["#{count} in discussion"] = "#{count} in Diskussion";
@@ -101,12 +101,12 @@ return {
 ["Cancel password reset"] = "Kennwort-Rücksetzung abbrechen";
 ["Cancel refuse of invitation"] = "Ablehnung der Einladung aufheben";
 ["Cancel registration"] = "Registrierung abbrechen";
-["Cancelled"] = "Abgebrochen";
-["Cancelled (before accepted due to revocation)"] = "Abgebrochen (in Neu-Phase, wegen Rückzug)";
-["Cancelled (during discussion due to revocation)"] = "Abgebrochen (während Diskussion, wegen Rückzug)";
-["Cancelled (during verification due to revocation)"] = "Abgebrochen (während Eingefroren-Phase, wegen Rückzug)";
-["Cancelled (issue not accepted)"] = "Abgebrochen (Thema nicht akzeptiert)";
-["Cancelled (no initiative admitted)"] = "Abgebrochen (Keine Initiative zugelassen)";
+["Canceled"] = "Abgebrochen";
+["Canceled (before accepted due to revocation)"] = "Abgebrochen (in Neu-Phase, wegen Rückzug)";
+["Canceled (during discussion due to revocation)"] = "Abgebrochen (während Diskussion, wegen Rückzug)";
+["Canceled (during verification due to revocation)"] = "Abgebrochen (während Eingefroren-Phase, wegen Rückzug)";
+["Canceled (issue not accepted)"] = "Abgebrochen (Thema nicht akzeptiert)";
+["Canceled (no initiative admitted)"] = "Abgebrochen (Keine Initiative zugelassen)";
 ["Change area delegation"] = "Delegation für Themenbereich ändern";
 ["Change email"] = "E-Mail-Adresse ändern";
 ["Change email address"] = "E-Mail-Adresse ändern";
@@ -577,7 +577,7 @@ return {
 ["This initiative is already revoked"] = "Diese Initiative ist schon zurückgezogen";
 ["This initiative is revoked"] = "Diese Initiative wurde zurückgezogen";
 ["This invite key is connected with the following information:"] = "Dieser Einladungscode ist mit den folgenden Daten verknüpft:";
-["This issue has been cancelled. It failed the quorum of #{quorum}."] = "Dieses Thema wurde abgebrochen. Es hat das Quorum von #{quorum} nicht erfüllt.";
+["This issue has been canceled. It failed the quorum of #{quorum}."] = "Dieses Thema wurde abgebrochen. Es hat das Quorum von #{quorum} nicht erfüllt.";
 ["This issue is already closed."] = "Das Thema ist schon geschlossen.";
 ["This issue is already frozen."] = "Das Thema ist schon eingefroren";
 ["This login is already taken, please choose another one!"] = "Dieser Anmeldename ist bereits vergeben, bitte wähle einen anderen!";

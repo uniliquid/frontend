@@ -15,8 +15,8 @@ end
 ui.container{ attr = { class = class }, content = function()
 
   ui.container{ attr = { class = "rank" }, content = function()
-    if initiative.issue.accepted and initiative.issue.closed
-      and initiative.issue.ranks_available or initiative.admitted == false
+    if initiative.issue.fully_frozen and initiative.issue.closed
+      or initiative.admitted == false
     then 
       ui.field.rank{ attr = { class = "rank" }, value = initiative.rank, eligible = initiative.eligible }
     elseif not initiative.issue.closed then
@@ -28,23 +28,19 @@ ui.container{ attr = { class = class }, content = function()
 
   ui.container{ attr = { class = "bar" }, content = function()
     if initiative.issue.fully_frozen and initiative.issue.closed then
-      if initiative.issue.ranks_available then 
-        if initiative.negative_votes and initiative.positive_votes then
-          local max_value = initiative.issue.voter_count
-          ui.bargraph{
-            max_value = max_value,
-            width = 100,
-            bars = {
-              { color = "#0a5", value = initiative.positive_votes },
-              { color = "#aaa", value = max_value - initiative.negative_votes - initiative.positive_votes },
-              { color = "#a00", value = initiative.negative_votes },
-            }
+      if initiative.negative_votes and initiative.positive_votes then
+        local max_value = initiative.issue.voter_count
+        ui.bargraph{
+          max_value = max_value,
+          width = 100,
+          bars = {
+            { color = "#0a5", value = initiative.positive_votes },
+            { color = "#aaa", value = max_value - initiative.negative_votes - initiative.positive_votes },
+            { color = "#a00", value = initiative.negative_votes },
           }
-        else
-          slot.put("&nbsp;")
-        end
+        }
       else
-        slot.put(_"Counting of votes")
+         slot.put("&nbsp;")
       end
     else
       local max_value = initiative.issue.population or 0

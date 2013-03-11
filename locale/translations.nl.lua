@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 return {
-["#{count} cancelled"] = false;
+["#{count} canceled"] = false;
 ["#{count} days ago"] = "#{count} dagen geleden";
 ["#{count} finished"] = "#{count} geëindigd";
 ["#{count} in discussion"] = "#{count} in discussie";
@@ -101,12 +101,12 @@ return {
 ["Cancel password reset"] = "Wachtwoord reset afbreken";
 ["Cancel refuse of invitation"] = "Uitnodiging weigeren afbreken";
 ["Cancel registration"] = "Registratie afbreken";
-["Cancelled"] = "Afgebroken";
-["Cancelled (before accepted due to revocation)"] = "Afgebroken (wegens terugtrekking)";
-["Cancelled (during discussion due to revocation)"] = "Afgebroken (tijdens de discussie, wegens terugtrekking)";
-["Cancelled (during verification due to revocation)"] = "Afgebroken (tijdens de verificatie, wegens terugtrekking)";
-["Cancelled (issue not accepted)"] = "Afgebroken (onderwerp niet geaccepteerd)";
-["Cancelled (no initiative admitted)"] = "Afgebroken (geen initiatiefvoorstel is toegelaten)";
+["Canceled"] = "Afgebroken";
+["Canceled (before accepted due to revocation)"] = "Afgebroken (wegens terugtrekking)";
+["Canceled (during discussion due to revocation)"] = "Afgebroken (tijdens de discussie, wegens terugtrekking)";
+["Canceled (during verification due to revocation)"] = "Afgebroken (tijdens de verificatie, wegens terugtrekking)";
+["Canceled (issue not accepted)"] = "Afgebroken (onderwerp niet geaccepteerd)";
+["Canceled (no initiative admitted)"] = "Afgebroken (geen initiatiefvoorstel is toegelaten)";
 ["Change area delegation"] = "Verander delegatie themagebied";
 ["Change email"] = "Verander het emailadres";
 ["Change email address"] = "Verander het emailadres";
@@ -577,7 +577,7 @@ return {
 ["This initiative is already revoked"] = "Dit initiatief is al teruggetrokken";
 ["This initiative is revoked"] = "Dit initiatief is teruggetrokken";
 ["This invite key is connected with the following information:"] = "Deze uitnodigingscode is gekoppeld aan de volgende informatie:";
-["This issue has been cancelled. It failed the quorum of #{quorum}."] = "Dit onderwerp is geannuleerd, het heeft het quorum #{quorum} niet gehaald.";
+["This issue has been canceled. It failed the quorum of #{quorum}."] = "Dit onderwerp is geannuleerd, het heeft het quorum #{quorum} niet gehaald.";
 ["This issue is already closed."] = "Dit onderwerp is al afgesloten.";
 ["This issue is already frozen."] = "Dit onderwerp is al bevroren";
 ["This login is already taken, please choose another one!"] = "Deze loginnaam is al bezet, kiest u alstublieft een andere!";

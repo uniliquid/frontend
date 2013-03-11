@@ -9,13 +9,13 @@ if true or not show_filter then
   ui_filters = function(args) args.content() end
 end
 
-
 ui.container{ attr = { class = "initiative_head" },
   content = function()
-    ui.container{ attr = { class = "title" }, content = _"Suggestions" }
+    ui.tag{ tag = "a", attr = { class = "title", name = "suggestions" }, content = _"Suggestions" }
     ui.container{ attr = { class = "content" }, content = function()
       ui.paginate{
         selector = suggestions_selector,
+        anchor = "suggestions",
         content = function()
           local suggestions = suggestions_selector:exec()
           if #suggestions < 1 then
