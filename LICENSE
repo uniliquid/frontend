@@ -1,8 +1,7 @@
 This software is a fork of LiquidFeedback, you can find the license for the
 according parts of the program in the file LICENSE.PSG.
-It applies to all code in the master branch as it is unchanged code of the
-Public Software Group.
+It applies to all code in the master branch, as it is unchanged code of the
+Public Software Group, as well as to all parts in other branches which are identical to the master branch.
 
-The branch austria contains extensions to the original software.
-It is licensed under GPL - the license can be found in the file LICENSE.
+The branch austria contains extensions to the original software. Code which can only be found in this branch and not in the master branch is licensed under GPL - the license can be found in the file LICENSE.
 
