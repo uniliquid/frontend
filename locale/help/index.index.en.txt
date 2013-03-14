@@ -1,4 +1,4 @@
-= Welcome to LiquidFeedback and your homepage =
+= Welcome to Liquid and your homepage =
 All over the system, you'll find these boxes with help texts. You can switch off each help text, by clicking on "hide this help message" in the upper right corner of the yellow box, and switch it on again, by clicking on the small blue question mark in the menu bar above.
 
 Below you find: 

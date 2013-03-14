@@ -38,7 +38,7 @@ config.use_terms_checkboxes = {
 config.absolute_base_url = "http://example.com/"
 
 
--- Connection information for the LiquidFeedback database
+-- Connection information for the Liquid database
 -- ------------------------------------------------------------------------
 config.database = { engine='postgresql', dbname='liquid_feedback' }
 
@@ -98,12 +98,12 @@ config.public_access = "none"
 
 -- Prefix of all automatic mails, defaults to "[Pirate Feedback] "
 -- ------------------------------------------------------------------------
--- config.mail_subject_prefix = "[LiquidFeedback] "
+-- config.mail_subject_prefix = "[Liquid] "
 
 -- Sender of all automatic mails, defaults to system defaults
 -- ------------------------------------------------------------------------
 -- config.mail_envelope_from = "liquidfeedback@example.com"
--- config.mail_from = { name = "LiquidFeedback", address = "liquidfeedback@example.com" }
+-- config.mail_from = { name = "Liquid", address = "liquidfeedback@example.com" }
 -- config.mail_reply_to = { name = "Support", address = "support@example.com" }
 
 -- Configuration of password hashing algorithm (defaults to "crypt_sha512")

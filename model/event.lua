@@ -157,7 +157,7 @@ function Event.object:send_notification()
             .. _("[event mail]      Unit: #{name}", { name = self.issue.area.unit.name }) .. "\n"
             .. _("[event mail]      Area: #{name}", { name = self.issue.area.name }) .. "\n"
             .. _("[event mail]     Issue: #{policy} ##{id}", { policy = self.issue.policy.name, id = self.issue_id }) .. "\n\n"
-            .. _("[event mail]     Event: #{event}", { event = self.event_name }) .. "\n"
+            .. _("[event mail]     Event: #{event}", { event = self.event_name or _("New argument")}) .. "\n"
             .. _("[event mail]     Phase: #{phase}", { phase = self.state_name }) .. "\n\n"
 
           -- initiative(s)

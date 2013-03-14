@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Stimmberechtigte Nutzer in Liquid Feedback</title>
+<title>Stimmberechtigte Nutzer in Liquid</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" media="screen" href="gregor.js/gregor.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
@@ -11,7 +11,7 @@
     <div class="topbar">
       <div class="topbar_content">
         <div class="navigation" id="navigation">
-          <div class="slot_navigation" id="slot_navigation"><a href="../index/index.html"><span class="logo_liquidfeedback">LiquidFeedback</span> &middot; Piratenpartei Österreichs</a><a href="../index/search.html">Suchen</a></div>
+          <div class="slot_navigation" id="slot_navigation"><a href="../index/index.html"><span class="logo">Liquid</span> &middot; Piratenpartei Österreichs</a><a href="../index/search.html">Suchen</a></div>
         </div>
         <br style="clear: both;" />
       </div>
@@ -39,7 +39,6 @@
   echo "<a href=\"?unit=8\"" . $selected[8] . ">Tirol</a>\n";
   echo "<a href=\"?unit=9\"" . $selected[9] . ">Vorarlberg</a>\n";
   echo "<a href=\"?unit=2\"" . $selected[2] . ">Wien</a>\n";
-  echo "<a href=\"?unit=11\"" . $selected[11] . ">Graz</a>\n";
   if ($u >= 1 && $u <= 11)
   {
     echo "</div><br /><div class=\"wiki use_terms\">\n";
@@ -64,8 +63,6 @@
       echo "Piratenpartei Vorarlberg</h2>\n";
     else if ($u == 10)
       echo "Piratenpartei Kärnten</h2>\n";
-    else if ($u == 11)
-      echo "Piratenpartei Graz</h2>\n";
 
     if (isset($_GET["full"]) && preg_match("/^\d+$/", $_GET["full"], $matches, PREG_OFFSET_CAPTURE) == 1 && $_GET["full"] == 1)
     {
@@ -98,7 +95,7 @@ echo <<<END
       <br style="clear: both;" />
     </div>
     <div class="footer" id="footer">
-      <div class="slot_footer" id="slot_footer"><a href="../admin/index.html">Admin</a> &middot; <a href="../index/about.html">Impressum</a> &middot; <a href="../index/usage_terms.html">Nutzungsbedingungen</a> &middot; Diese Seite benutzt <a href="http://www.public-software-group.org/liquid_feedback">LiquidFeedback</a>
+      <div class="slot_footer" id="slot_footer"><a href="../admin/index.html">Admin</a> &middot; <a href="../index/about.html">Impressum</a> &middot; <a href="../index/usage_terms.html">Nutzungsbedingungen</a>
 END;
   echo shell_exec("/opt/liquid_feedback_core/config_footer.sh");
 ?>

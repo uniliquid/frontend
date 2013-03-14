@@ -263,7 +263,7 @@ div.notifications,
   font-size: 115%;
 }
 
-.logo_liquidfeedback {
+.logo {
   font-weight: bold;
   margin-left: 15px;
 }
@@ -275,9 +275,9 @@ div.notifications,
 }
 
 .topbar a:hover, 
-.topbar a:hover .logo_liquidfeedback,
+.topbar a:hover .logo
 .topbar a:focus, 
-.topbar a:focus .logo_liquidfeedback {
+.topbar a:focus .logo {
   color: #89408e;
 }
 
@@ -672,11 +672,6 @@ a.delegation_info:focus {
   height: 24px;
   border-radius: 4px;
   vertical-align: middle;
-}
-
-.logo { 
-  float: right;
-  margin-right: 1%;
 }
 
 

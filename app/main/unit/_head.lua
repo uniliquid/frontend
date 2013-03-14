@@ -2,9 +2,65 @@ local unit = param.get("unit", "table")
 local member = param.get("member", "table")
 
 local show_content = param.get("show_content", atom.boolean)
+local show_links = param.get("show_links", atom.boolean)
 
 if app.session.member_id then
   unit:load_delegation_info_once_for_member_id(app.session.member_id)
+end
+
+if show_links then
+-- quick links
+ui.actions(function()
+  ui.link{
+    text = _"Latest vote results",
+    module = "index",
+    view = "index",
+    params = {
+      tab = "closed",
+      filter = "finished",
+      filter_interest = "unit"
+    }
+  }
+  slot.put(" &middot; ")
+  ui.link{
+    text = _"Voted by delegation",
+    module = "index",
+    view = "index",
+    params = {
+      tab = "closed",
+      filter_interest = "voted",
+      filter_delegation = "delegated"
+    }
+  }
+  slot.put(" &middot; ")
+  ui.link{
+    text = _"Noch nicht abgestimmte Anträge",
+    module = "index",
+    view = "index",
+    params = {
+      tab = "open",
+      filter_policy_sel = "p1",
+      filter_policy = "direct",
+      filter_voting = "not_voted",
+      filter = "frozen",
+      filter_interest = "unit"
+    }
+  }
+  slot.put(" &middot; ")
+  ui.link{
+    text = _"Noch nicht abgestimmt (inkl. Meinungsbilder)",
+    module = "index",
+    view = "index",
+    params = {
+      tab = "open",
+      filter_policy_sel = "p1",
+      filter_policy = "any",
+      filter_voting = "not_voted",
+      filter = "frozen",
+      filter_interest = "unit"
+    }
+  }
+end)
 end
 
 ui.container{ attr = { class = "unit_head" }, content = function()
@@ -20,7 +76,7 @@ ui.container{ attr = { class = "unit_head" }, content = function()
     else
       ui.link{ 
         module = "unit", view = "show", id = unit.id,
-        attr = { class = "unit_name" }, content = _"LiquidFeedback" .. " &middot; " .. config.instance_name
+        attr = { class = "unit_name" }, content = _"Liquid" .. " &middot; " .. config.instance_name
       }
     end
   end }

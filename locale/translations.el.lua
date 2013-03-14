@@ -288,7 +288,7 @@ return {
 ["Invalid login name or password!"] = "Μη έγκυρο όνομα σύνδεσης ή κωδικός πρόσβασης";
 ["Invalid query"] = "Μη έγκυρο αίτημα";
 ["Invitation has been refused"] = "Η πρόσκληση απορρίφθηκε";
-["Invitation to LiquidFeedback"] = "Πρόσκληση στο Liquid Feedback";
+["Invitation to Liquid"] = "Πρόσκληση στο Liquid";
 ["Invite an initiator to initiative"] = "Πρόσκληση εισηγητή στην πρωτοβουλία";
 ["Invite code"] = "Κωδικός πρόσκλησης";
 ["Invite initiator"] = "Πρόσκληση εισηγητή";
@@ -314,7 +314,7 @@ return {
 ["Latest draft created at #{date} #{time}"] = "Το τελευταίο προσχέδιο δημιουργήθηκε στις #{date} #{time}";
 ["Latest events"] = "Πρόσφατα συμβάντα";
 ["License"] = "Άδεια";
-["LiquidFeedback"] = "LiquidFeedback";
+["Liquid"] = "Liquid";
 ["List all revisions (#{count})"] = "Λίστα όλων των αναθεωρήσεων (#{count})";
 ["Lock member?"] = "Κλείδωμα μέλους;";
 ["Locked?"] = "Κλειστό;";
@@ -666,7 +666,7 @@ return {
 ["You are interested"] = "Σας ενδιαφέρει";
 ["You are interested in this issue"] = "Το θέμα σας ενδιαφέρει";
 ["You are invited to #{count} initiative(s)"] = "Είστε προσκεκλημένος σε #{count} πρωτοβουλία/ες";
-["You are invited to LiquidFeedback. To register please click the following link:\n\n"] = "Σας προσκάλεσαν στο Liquid Feedback. Κάντε κλικ στον παρακάτω σύνδεσμο για να εγγραφείτε:";
+["You are invited to Liquid. To register please click the following link:\n\n"] = "Σας προσκάλεσαν στο Liquid. Κάντε κλικ στον παρακάτω σύνδεσμο για να εγγραφείτε:";
 ["You are invited to become initiator of this initiative."] = "Είστε προσκεκλημένος να γίνεται εισηγητής αυτής της πρωτοβουλίας.";
 ["You are member"] = "Είστε μέλος";
 ["You are not participating in any of the #{count} areas in this unit"] = "Δεν συμμετέχετε σε κανέναν από τους #{count} τομείς αυτής της ενότητας";

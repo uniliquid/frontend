@@ -14,7 +14,7 @@ if not app.html_title.title then
 end
 
 slot.select("head", function()
-  execute.view{ module = "area", view = "_head", params = { area = issue.area } }
+  execute.view{ module = "area", view = "_head", params = { area = issue.area, show_links = true } }
 end)
 
 util.help("issue.show")

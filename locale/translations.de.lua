@@ -420,7 +420,7 @@ return {
 ["Invalid query"] = "Ungültige Anfrage";
 ["Invitation has been refused"] = "Einladung wurde widerrufen";
 ["Invitation has been refused."] = "Einladung wurde widerrufen.";
-["Invitation to LiquidFeedback"] = "Einladung zu LiquidFeedback";
+["Invitation to Liquid"] = "Einladung zu Liquid";
 ["Invitation to Pirate Feedback"] = "Einladung zu Pirate Feedback";
 ["Invite an initiator to initiative"] = "Initiator zur Initiative einladen";
 ["Invite code"] = "Einladungscode";
@@ -470,7 +470,7 @@ return {
 ["Latest events"] = "Letzte Ereignisse";
 ["Latest vote results"] = "Neuste Abstimmungsergebnisse";
 ["License"] = "Lizenz";
-["LiquidFeedback"] = "LiquidFeedback";
+["Liquid"] = "Liquid";
 ["List all revisions (#{count})"] = "Zeige alle Versionen (#{count})";
 ["List of trustees"] = "Liste der Bevollmächtigten";
 ["Lock and deactivate Member?"] = "Mitglied sperren und deaktivieren?";
@@ -702,7 +702,7 @@ return {
 ["Please confirm your email address"] = "Bitte bestätige Deine E-Mail-Adresse";
 ["Please enter the email reset code you have received:"] = "Bitte gib den Rücksetzcode ein, den du erhalten hast:";
 ["Please enter the invite code you've received."] = "Bitte gib den Einladungscode ein, den du erhalten hast.";
-["Please enter the invite code you've received."] = "In unserem LiquidFeedback sind derzeit nur Mitglieder der Piratenpartei Österreichs stimmberechtigt, die ihren Mitgliedsbeitrag (€12/Jahr) bezahlt haben und von einem befugten Vertreter der Partei <a href=\"http://wiki.piratenpartei.at/wiki/Taskforce:LiquidFeedback/Akkreditierungsbefugte\">akkreditiert</a> wurden.<br /><br /><a href=\"https://mitglieder.piratenpartei.at/adm_program/modules/profile/profile_new.php?new_user=2\">Hier kannst du <b>Mitglied werden</b></a>.<br /><br />Bei Fragen zur Anmeldung wende dich bitte an die <a href=\"mailto:lqfbsupport@piratenpartei.at\">Arbeitsgruppe LiquidFeedback</a>.<br /><br />Bitte gib hier den Einladungscode ein, den du erhalten hast:";
+["Please enter the invite code you've received."] = "In unserem Liquid sind derzeit nur Mitglieder der Piratenpartei Österreichs stimmberechtigt, die ihren Mitgliedsbeitrag (€12/Jahr) bezahlt haben und von einem befugten Vertreter der Partei <a href=\"http://wiki.piratenpartei.at/wiki/Taskforce:Liquid/Akkreditierungsbefugte\">akkreditiert</a> wurden.<br /><br /><a href=\"https://mitglieder.piratenpartei.at/adm_program/modules/profile/profile_new.php?new_user=2\">Hier kannst du <b>Mitglied werden</b></a>.<br /><br />Bei Fragen zur Anmeldung wende dich bitte an die <a href=\"mailto:lqfbsupport@piratenpartei.at\">Arbeitsgruppe Liquid</a>.<br /><br />Bitte gib hier den Einladungscode ein, den du erhalten hast:";
 ["Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."] = "Bitte gib deine E-Mail-Adresse ein. Diese Adresse wird für automatische Benachrichtigungen (wenn du diese anforderst) sowie zum Zurücksetzen des Kennworts verwendet. Diese Adresse wird nicht veröffentlicht. Nach Abschluss der Registrierung wirst du eine E-Mail mit einem Link zum Bestätigen der Adresse erhalten.";
 ["Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."] = "Bitte gib Deine E-Mail-Adresse ein. Diese Adresse wird für automatische Benachrichtigungen (wenn Du diese anforderst) sowie zum Zurücksetzen des Kennworts verwendet. Diese Adresse wird nicht veröffentlicht. Nach Abschluss der Registrierung wirst Du eine E-Mail mit einem Link zum Bestätigen der Adresse erhalten.";
 ["Please enter your login name! You will receive an email with a link to reset your password. Note that your login name might be distinct from your screen name!"] = "Bitte gib deinen Anmeldenamen ein! du wirst eine E-Mail mit einem Link zum Zurücksetzen des Kennworts erhalten. Beachte, dass sich dein Anmeldename möglicherweise von deinem Screen-Namen unterscheidet!";
@@ -1055,7 +1055,7 @@ return {
 ["You are invited to #{count} initiative(s)"] = "Du bist zu #{count} Initiativen als Initiator eingeladen";
 ["You are invited to #{count} initiatives."] = "Du bist zu #{count} Initiativen als Initiator eingeladen.";
 ["You are invited to become initiator of this initiative."] = "Du bist eingeladen Initiator dieser Initiative zu werden.";
-["You are invited to LiquidFeedback. To register please click the following link:\n\n"] = "Du bist zu LiquidFeedback eingeladen. Bitte klicke auf den folgenden Link, um dich zu registrieren:\n\n";
+["You are invited to Liquid. To register please click the following link:\n\n"] = "Du bist zu Liquid eingeladen. Bitte klicke auf den folgenden Link, um dich zu registrieren:\n\n";
 ["You are invited to one initiative."] = "Du bist zu einer Initiative eingeladen.";
 ["You are invited to Pirate Feedback. To register please click the following link:\n\n"] = "Du bist zu Pirate Feedback eingeladen. Bitte klicke auf den folgenden Link, um dich zu registrieren:\n\n";
 ["You are member"] = "Du bist Mitglied";

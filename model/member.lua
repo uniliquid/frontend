@@ -424,10 +424,10 @@ function Member.object:send_invitation(template_file, subject)
     content = fh:read("*a")
     content = (content:gsub("#{invite_code}", self.invite_code))
   else
-    subject = config.mail_subject_prefix .. _"Invitation to LiquidFeedback"
+    subject = config.mail_subject_prefix .. _"Invitation to Liquid"
     content = slot.use_temporary(function()
       slot.put(_"Hello\n\n")
-      slot.put(_"You are invited to LiquidFeedback. To register please click the following link:\n\n")
+      slot.put(_"You are invited to Liquid. To register please click the following link:\n\n")
       slot.put(request.get_absolute_baseurl() .. "index/register.html?invite=" .. self.invite_code .. "\n\n")
       slot.put(_"If this link is not working, please open following url in your web browser:\n\n")
       slot.put(request.get_absolute_baseurl() .. "index/register.html\n\n")

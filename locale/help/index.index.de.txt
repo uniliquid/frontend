@@ -1,4 +1,4 @@
-= Willkommen bei LiquidFeedback und auf deiner Startseite =
+= Willkommen bei Liquid und auf deiner Startseite =
 Überall im System finden sich Kästen wie dieser mit Hilfetexten. Man kann jeden Hilfetext mit einem Klick auf "Diesen Hilfetext ausblenden" rechts oben im gelben Kasten ausblenden und durch einen Klick auf das kleine blaue Fragezeichen oben in der Menüzeile wieder einblenden.
 
 Unten finden sich folgende Ansichten:

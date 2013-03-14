@@ -288,7 +288,7 @@ return {
 ["Invalid login name or password!"] = false;
 ["Invalid query"] = false;
 ["Invitation has been refused"] = false;
-["Invitation to LiquidFeedback"] = false;
+["Invitation to Liquid"] = false;
 ["Invite an initiator to initiative"] = false;
 ["Invite code"] = false;
 ["Invite initiator"] = false;
@@ -314,7 +314,7 @@ return {
 ["Latest draft created at #{date} #{time}"] = false;
 ["Latest events"] = false;
 ["License"] = false;
-["LiquidFeedback"] = false;
+["Liquid"] = false;
 ["List all revisions (#{count})"] = false;
 ["Lock member?"] = false;
 ["Locked?"] = false;
@@ -666,7 +666,7 @@ return {
 ["You are interested"] = false;
 ["You are interested in this issue"] = false;
 ["You are invited to #{count} initiative(s)"] = false;
-["You are invited to LiquidFeedback. To register please click the following link:\n\n"] = false;
+["You are invited to Liquid. To register please click the following link:\n\n"] = false;
 ["You are invited to become initiator of this initiative."] = false;
 ["You are member"] = false;
 ["You are not participating in any of the #{count} areas in this unit"] = false;
