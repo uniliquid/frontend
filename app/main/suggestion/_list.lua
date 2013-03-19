@@ -2,7 +2,7 @@
 local initiative = param.get("initiative", "table")
 local suggestions_selector = param.get("suggestions_selector", "table")
 
-suggestions_selector:add_order_by("plus2_unfulfilled_count + plus1_unfulfilled_count DESC, plus2_unfulfilled_count DESC, id")
+suggestions_selector:add_order_by("proportional_order NULLS LAST, plus2_unfulfilled_count + plus1_unfulfilled_count DESC, plus2_unfulfilled_count DESC, id")
 
 local ui_filters = ui.filters
 if true or not show_filter then
