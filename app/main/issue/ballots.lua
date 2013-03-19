@@ -38,6 +38,7 @@ ui.container{
     ui.container{ attr = { class = "initiative_head" }, content = function()
       ui.tag{ attr = { class = "title" }, content = _"Initiatives" }
       ui.container{ attr = { class = "draft_content wiki" }, content = function()
+        slot.put(_('This is the candidates input file for <a href="http://www.public-software-group.org/preftools">preftools</a> or this <a href="http://gruss.cc/schulze">online tool</a>. It simply lists all candidates.'))
         ui.tag{
           tag = "pre", content = function()
             local initiatives = issue:get_reference_selector("initiatives"):add_where("initiative.admitted"):exec()
@@ -55,6 +56,7 @@ ui.container{
     ui.container{ attr = { class = "initiative_head" }, content = function()
       ui.tag{ attr = { class = "title" }, content = _"Ballots" }
       ui.container{ attr = { class = "draft_content wiki" }, content = function()
+        slot.put(_('This is the ballots input file for <a href="http://www.public-software-group.org/preftools">preftools</a> or this <a href="http://gruss.cc/schulze">online tool</a>. It lists all ballots in a form where &quot;<code>A ; B</code>&quot; means <code>A</code> is preferred over <code>B</code>. &quot;<code>A , B</code>&quot; means <code>A</code> and <code>B</code> are equally ranked and neither one preferred. <code>/</code> divides the Yes / Abstention / No groups.'))
         ui.tag{   
           tag = "pre", content = function()
 
@@ -149,6 +151,7 @@ local battles = {}
     ui.container{ attr = { class = "initiative_head" }, content = function()
       ui.tag{ attr = { class = "title" }, content = _"Battles" }
       ui.container{ attr = { class = "draft_content wiki" }, content = function()
+        slot.put(_('Count on how many ballots an initiative <code>A</code> is preferred over another initiative <code>B</code>. Now count on how many ballots it is the other way round, e.g. <code>B</code> is preferred over <code>A</code>. Ignore ballots which have the two initiatives equally ranked. This table shows exactly these comparisons. The initiative on the left is preferred over the initiative on the top on the number of ballots given in the according cell of the table.<br />For the next step of the schulze method you have to highlight each winner. Just compare both table entries for <code>A</code> vs. <code>B</code>. We call this a <b>battle</b>. If one of the numbers is bigger, it is highlighted and the according initiative wins the battle.<br /><br />'))
 battles["SQ"] = {}
 local initiatives = issue:get_reference_selector("initiatives"):add_where("initiative.admitted"):exec()
 for i, ini_x in ipairs(initiatives) do
@@ -201,13 +204,238 @@ inis[#inis+1] = "SQ";
     ui.container{ attr = { class = "initiative_head" }, content = function()
       ui.tag{ attr = { class = "title" }, content = _"Graph" }
       ui.container{ attr = { class = "draft_content wiki" }, content = function()
+      slot.put(_('Now in this step we draw a circle for each initiative. We now need to draw arrows between some of these circles. For each highlighted number from the previous table we draw an edge from the winning initiative to the losing initiative, of the according battle. (Instead of arrowheads you will see circles with the number of the edge within it. They were easier to draw automatically.) Add the (highlighted) number from the table to the edge, we will need it later.'))
+      slot.put([[
+<div id="content"><div id="canvas"><canvas id="canvas" width="800" height="600"></canvas></div></div>
+<script type="text/javascript" src="../../static/js/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="../../static/js/jcanvas.min.js"></script>
+<script type="text/javascript">
+var displayWidth = 800;
+var displayHeight = 600;
+
+var nodes = []]);
+for i, ini_y in ipairs(inis) do
+  slot.put([[
+    {
+        x: 0,
+        y: 0,
+        velocityX: 0,
+        velocityY: 0,
+        radius: 25,]]);
+  slot.put("text: '" .. ini_y .. "'");
+  slot.put('},');
+end
+slot.put([[
+];
+
+var edges = [
+]]);
+for i, ini_x in ipairs(inis) do
+  for j, ini_y in ipairs(inis) do
+    if battles[ini_x][ini_y] ~= nil and string.len(battles[ini_x][ini_y]) > 0 then
+      if battles[ini_x][ini_y] > battles[ini_y][ini_x] then
+slot.put([[
+    {
+        node1: ]] .. (i-1) .. [[,
+        node2: ]] .. (j-1) .. [[,
+        text: ']] .. battles[ini_x][ini_y] .. [['
+    },
+]]);
+      end
+    end
+  end
+end
+slot.put([[
+];
+
+$(function() {
+    // set random starting position
+    $.each(nodes, function(index) {
+        nodes[index].x = Math.random() * displayWidth;
+        nodes[index].y = Math.random() * displayHeight;
+    });
+
+    //gameloop
+    this.intervalId = setInterval(function() {
+        update();
+        render();
+    }, 1000 / 60);
+});
+
+function update() {
+    // calculate force between ALL nodes
+    $.each(nodes, function(index) {
+        $.each(nodes, function(index2) {
+            if (index != index2) {
+                var dX = nodes[index].x - nodes[index2].x;
+                var dY = nodes[index].y - nodes[index2].y;
+                var distance = Math.sqrt(dX * dX + dY * dY) * 0.5;
+
+                // attract
+                var attractFactor = 0.008;
+                nodes[index].velocityX += -dX * attractFactor;
+                nodes[index].velocityY += -dY * attractFactor;
+                nodes[index2].velocityX += dX * attractFactor;
+                nodes[index2].velocityY += dY * attractFactor;
+
+                // disperse
+                nodes[index].velocityX += dX / distance;
+                nodes[index].velocityY += dY / distance;
+                nodes[index2].velocityX += -dX / distance;
+                nodes[index2].velocityY += -dY / distance;
+            }
+        });
+    });
+
+    // or only between nodes with edges
+    /*$.each(edges, function(index) {
+var node1Index = edges[index].node1;
+var node2Index = edges[index].node2;
+
+var node1 = nodes[node1Index];
+var node2 = nodes[node2Index];
+
+var dX = node1.x - node2.x;
+var dY = node1.y - node2.y;
+var distance = Math.sqrt(dX * dX + dY * dY);
+
+// attract
+var attractFactor = 0.01;
+node1.velocityX += -dX * attractFactor;
+node1.velocityY += -dY * attractFactor;
+node2.velocityX += dX * attractFactor;
+node2.velocityY += dY * attractFactor;
+
+// disperse
+node1.velocityX += dX / distance;
+node1.velocityY += dY / distance;
+node2.velocityX += -dX / distance;
+node2.velocityY += -dY / distance;
+});*/
+
+    // basis node movement
+    $.each(nodes, function(index) {
+        // add velocity to position
+        nodes[index].x += nodes[index].velocityX;
+        nodes[index].y += nodes[index].velocityY;
+
+        // damping
+        nodes[index].velocityX *= 0.9;
+        nodes[index].velocityY *= 0.9;
+
+        // clamping on edge
+        if (nodes[index].x < 0) {
+            nodes[index].x = 0;
+            nodes[index].velocityX = 0;
+        }
+        if (nodes[index].y < 0) {
+            nodes[index].y = 0;
+            nodes[index].velocityY = 0;
+        }
+        if (nodes[index].x > displayWidth) {
+            nodes[index].x = displayWidth;
+            nodes[index].velocityX = 0;
+        }
+        if (nodes[index].y > displayHeight) {
+            nodes[index].y = displayHeight;
+            nodes[index].velocityY = 0;
+        }
+
+        // attract to middle of display
+        var dX = nodes[index].x - displayWidth / 2;
+        var dY = nodes[index].y - displayHeight / 2;
+        var distance = Math.sqrt(dX * dX + dY * dY);
+
+        nodes[index].velocityX -= dX / (10 * distance);
+        nodes[index].velocityY -= dY / (10 * distance);
+    });
+}
+
+function render() {
+    $('canvas').clearCanvas();
+
+    $.each(nodes, function(index) {
+        $('canvas').drawArc({
+            strokeStyle: '#000000',
+            fillStyle: '#ffffff',
+            strokeWidth: 1,
+            x: nodes[index].x,
+            y: nodes[index].y,
+            radius: nodes[index].radius,
+            closed: true
+        });
+        $('canvas').drawText({
+          x: nodes[index].x,
+          y: nodes[index].y,
+          fillStyle: '#000000',
+          strokeWidth: 1,
+          font: '11pt sans-serif',
+          text: 'i' + nodes[index].text
+        });
+    });
+
+    $.each(edges, function(index) {
+        var node1Index = edges[index].node1;
+        var node2Index = edges[index].node2;
+
+        var node1 = nodes[node1Index];
+        var node2 = nodes[node2Index];
+
+        var dX = node1.x - node2.x;
+        var dY = node1.y - node2.y;
+        var distance = Math.sqrt(dX * dX + dY * dY);
+        dX /= distance;
+        dY /= distance;
+
+        var x1 = node1.x - dX * node1.radius;
+        var y1 = node1.y - dY * node1.radius;
+        var x2 = node2.x + dX * node2.radius;
+        var y2 = node2.y + dY * node2.radius;
+
+        var vx = x2 - x1;
+        var vy = y2 - y1;
+
+        console.log(x1);
+
+        // draw line
+        $('canvas').drawLine({
+            strokeStyle: '#000000',
+            strokeWidth: 1,
+            x1: x1,
+            y1: y1,
+            x2: x2,
+            y2: y2
+        });
+        $("canvas").drawEllipse({
+          strokeStyle: "#000000",
+          strokeWidth: 1,
+          fillStyle: "#ffffff",
+          x: x2 * 0.99 + x1 * 0.01,
+          y: y2 * 0.99 + y1 * 0.01,
+          width: 16,
+          height: 16,
+        });
+        $('canvas').drawText({
+          x: x2 * 0.99 + x1 * 0.01,
+          y: y2 * 0.99 + y1 * 0.01,
+          fillStyle: '#000000',
+          strokeWidth: 1,
+          font: '6pt sans-serif',
+          text: edges[index].text
+        });
+    });
+}
+</script>
+]]);
         end
       }
       end
     }
     ui.container{ attr = { class = "initiative_head" }, content = function()
+      local better = ""
       ui.tag{ attr = { class = "title" }, content = _"Winning Beatpaths" }
       ui.container{ attr = { class = "draft_content wiki" }, content = function()
+        slot.put(_('Now we want to consider indirect comparisons between initiatives to finally calculate the order of the initiatives.<br />For reasons of easy understanding, think of the graph above as a map with possible flights from one city to another. The number at the edges is how much kilograms of baggage you may take upon this flight. You want to take a lot of baggage with you, so you want to find a flight (direct or with intermediate landings), such that you can take as much baggage as possible with you. You find the number of kilograms for each route (direct or with intermediate landings) in the following table.<br /><br />'))
         local p = {}
         local initiatives = issue:get_reference_selector("initiatives"):add_where("initiative.admitted"):exec()
         for a,i in ipairs(inis) do
@@ -254,6 +482,7 @@ inis[#inis+1] = "SQ";
                   local battle
                   if p[ini_y][ini_x] > p[ini_x][ini_y] then
                     battle = ui.tag{ tag = "td", content = function() ui.tag{ tag = "b", content = p[ini_y][ini_x] } end }
+                    better = better .. "<br />" .. ini_y .. _" is better than " .. ini_x
                   else
                     battle = ui.tag{ tag = "td", content = p[ini_y][ini_x] }
                   end
@@ -263,6 +492,8 @@ inis[#inis+1] = "SQ";
           end
           end
         }
+        slot.put(_'<br /><br />In this table again you compare the two directions from initiative <code>A</code> to initiative <code>B</code> and from initiative <code>B</code> to initiative <code>A</code>. If one of the numbers is bigger, highlight it.<br />Now we are finished. Each highlighted number can be read as &quot;<code>A</code> is better than <code>B</code>&quot;. If you write down all variants of which initiative is better, you will get the following list, which directly defines the order of the initiatives.<br /><br />')
+        ui.tag{ tag = "b", content = function() slot.put(better) end };
 
         end
       }

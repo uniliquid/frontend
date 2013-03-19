@@ -222,6 +222,7 @@ ui.paginate{
           content = function(record)
             if record.locked then
               ui.field.text{ value = _"Locked" }
+            end
           end
         },
         {
@@ -232,6 +233,7 @@ ui.paginate{
               ui.field.text{ value = _"Inactive" }
             else
               ui.field.text{ value = _"Active" }
+            end
           end
         },
         {

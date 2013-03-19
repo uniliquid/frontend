@@ -18,17 +18,17 @@
     </div>
 <div class="page">
 <div class="main" id="default">
-<div class="slot_default" id="slot_default"><div class="ui_tabs"><div class="ui_tabs_links">
+<div class="slot_default" id="slot_default"><div class="ui_tabs ui_tabs_content"><div class="ui_filter ui_filter_head">
 <?php
   //error_reporting(E_ALL);
   //ini_set('display_errors', 1);
   $u = 1;
-  $selected = array_fill(0,12,"");
-  if (isset($_GET["unit"]) && preg_match("/^\d+$/", $_GET["unit"], $matches, PREG_OFFSET_CAPTURE) == 1 && $_GET["unit"] >= 1 && $_GET["unit"] <= 11)
+  $selected = array_fill(0,20,"");
+  if (isset($_GET["unit"]) && preg_match("/^\d+$/", $_GET["unit"], $matches, PREG_OFFSET_CAPTURE) == 1 && $_GET["unit"] >= 1 && $_GET["unit"] <= 20)
   {
     $u = $_GET["unit"];
   }
-  $selected[$u] = " class=\"selected\"";
+  $selected[$u] = " class=\"active\"";
   echo "<a href=\"?unit=1\"" . $selected[1] . ">Österreich</a>\n";
   echo "<a href=\"?unit=6\"" . $selected[6] . ">Burgenland</a>\n";
   echo "<a href=\"?unit=10\"" . $selected[10] . ">Kärnten</a>\n";
@@ -39,10 +39,12 @@
   echo "<a href=\"?unit=8\"" . $selected[8] . ">Tirol</a>\n";
   echo "<a href=\"?unit=9\"" . $selected[9] . ">Vorarlberg</a>\n";
   echo "<a href=\"?unit=2\"" . $selected[2] . ">Wien</a>\n";
-  if ($u >= 1 && $u <= 11)
+  echo '<br /><br />';
+  echo "<a href=\"?unit=11\"" . $selected[11] . ">Graz</a>\n";
+  if ($u >= 1 && $u <= 20)
   {
-    echo "</div><br /><div class=\"wiki use_terms\">\n";
-    echo "<h2>Stimmberechtigte Nutzer in Liquid Feedback Organisation ";
+    echo "<br /> <br /><div class=\"wiki use_terms\">\n";
+    echo "<h2>Stimmberechtigte Nutzer in Liquid Gliederung ";
     if ($u == 1)
       echo "Piratenpartei Österreichs</h2>\n";
     else if ($u == 2)
@@ -63,6 +65,10 @@
       echo "Piratenpartei Vorarlberg</h2>\n";
     else if ($u == 10)
       echo "Piratenpartei Kärnten</h2>\n";
+    else if ($u == 11)
+      echo "Region Graz</h2>\n";
+    else
+      echo "$u</h2>\n";
 
     if (isset($_GET["full"]) && preg_match("/^\d+$/", $_GET["full"], $matches, PREG_OFFSET_CAPTURE) == 1 && $_GET["full"] == 1)
     {
@@ -99,7 +105,6 @@ echo <<<END
 END;
   echo shell_exec("/opt/liquid_feedback_core/config_footer.sh");
 ?>
-    </div>
     </div>
   </body>
 </html>
