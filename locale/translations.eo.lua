@@ -288,7 +288,7 @@ return {
 ["Invalid login name or password!"] = false;
 ["Invalid query"] = "Malvalida demando";
 ["Invitation has been refused"] = "Invito estas rifuzita";
-["Invitation to LiquidFeedback"] = false;
+["Invitation to Liquid"] = false;
 ["Invite an initiator to initiative"] = "Inviti inicionton al la iniciato";
 ["Invite code"] = "Invitokodo";
 ["Invite initiator"] = "Inviti inicionton";
@@ -314,7 +314,7 @@ return {
 ["Latest draft created at #{date} #{time}"] = false;
 ["Latest events"] = false;
 ["License"] = "Licenco";
-["LiquidFeedback"] = false;
+["Liquid"] = false;
 ["List all revisions (#{count})"] = false;
 ["Lock member?"] = false;
 ["Locked?"] = "Ĉu blokita?";
@@ -666,7 +666,7 @@ return {
 ["You are interested"] = false;
 ["You are interested in this issue"] = "Vin interesas tiu temo";
 ["You are invited to #{count} initiative(s)"] = false;
-["You are invited to LiquidFeedback. To register please click the following link:\n\n"] = false;
+["You are invited to Liquid. To register please click the following link:\n\n"] = false;
 ["You are invited to become initiator of this initiative."] = "Vi estas invitita por esti inicionto de tiu iniciato.";
 ["You are member"] = "Vi estas membro";
 ["You are not participating in any of the #{count} areas in this unit"] = false;

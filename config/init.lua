@@ -26,7 +26,7 @@ if config.default_lang == nil then
 end
 
 if config.mail_subject_prefix == nil then
-  config.mail_subject_prefix = "[LiquidFeedback] "
+  config.mail_subject_prefix = "[Liquid] "
 end
 
 if config.member_image_content_type == nil then

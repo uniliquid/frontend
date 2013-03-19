@@ -8,7 +8,7 @@ if not unit then
 end
 
 slot.select("head", function()
-  execute.view{ module = "unit", view = "_head", params = { unit = unit, show_content = true, member = app.session.member } }
+  execute.view{ module = "unit", view = "_head", params = { unit = unit, show_content = true, show_links = true, member = app.session.member } }
 end)
 
 if config.single_unit_id and not app.session.member_id and config.motd_public then

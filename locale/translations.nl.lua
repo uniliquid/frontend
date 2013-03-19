@@ -288,7 +288,7 @@ return {
 ["Invalid login name or password!"] = "Ongeldige loginnaam en wachtwoord";
 ["Invalid query"] = "Invalid query";
 ["Invitation has been refused"] = "De uitnodiging is geweigerd";
-["Invitation to LiquidFeedback"] = "Uitnodiging voor Liquid Feedback";
+["Invitation to Liquid"] = "Uitnodiging voor Liquid";
 ["Invite an initiator to initiative"] = "Nodig een initiatiefnemer bij een initiatief uit";
 ["Invite code"] = "Invite-Code";
 ["Invite initiator"] = "Nodig een initiatiefnemer uit";
@@ -314,7 +314,7 @@ return {
 ["Latest draft created at #{date} #{time}"] = "Het laatste ontwerp is gecreerd op #{date} #{time}";
 ["Latest events"] = "Laatste evenementen";
 ["License"] = "License";
-["LiquidFeedback"] = "LiquidFeedback";
+["Liquid"] = "Liquid";
 ["List all revisions (#{count})"] = "Lijst van alle revisies (#{count})";
 ["Lock member?"] = "Vergrendel deelnemer?";
 ["Locked?"] = "Gesloten?";
@@ -666,7 +666,7 @@ return {
 ["You are interested"] = "U bent geïnteresseerd";
 ["You are interested in this issue"] = "U bent in dit onderwerp geinteresseerd";
 ["You are invited to #{count} initiative(s)"] = false;
-["You are invited to LiquidFeedback. To register please click the following link:\n\n"] = "U wordt uitgenodigd voor LiquidFeedback. Klik alstublieft op de volgende link om u te registreren:";
+["You are invited to Liquid. To register please click the following link:\n\n"] = "U wordt uitgenodigd voor Liquid. Klik alstublieft op de volgende link om u te registreren:";
 ["You are invited to become initiator of this initiative."] = "U wordt uitgenodigd om dit initiatief te initieeren.";
 ["You are member"] = "U bent deelnemer";
 ["You are not participating in any of the #{count} areas in this unit"] = "U neemt niet deel aan enige van de #{count} themagebieden in dit dossier";

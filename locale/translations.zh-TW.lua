@@ -288,7 +288,7 @@ return {
 ["Invalid login name or password!"] = "帳號或是密碼無效！";
 ["Invalid query"] = "查詢無效";
 ["Invitation has been refused"] = "邀請已被婉拒";
-["Invitation to LiquidFeedback"] = "邀請至 LiquidFeedback";
+["Invitation to Liquid"] = "邀請至 Liquid";
 ["Invite an initiator to initiative"] = "邀請發起者來提案";
 ["Invite code"] = "邀請碼";
 ["Invite initiator"] = "邀請發起者";
@@ -314,7 +314,7 @@ return {
 ["Latest draft created at #{date} #{time}"] = "最新的草案設置於 #{date}  #{time}";
 ["Latest events"] = "最新動態";
 ["License"] = "許可證";
-["LiquidFeedback"] = "LiquidFeedback";
+["Liquid"] = "Liquid";
 ["List all revisions (#{count})"] = "列出所有修正 (#{count})";
 ["Lock member?"] = "封鎖成員？";
 ["Locked?"] = "被封鎖？";
@@ -666,7 +666,7 @@ return {
 ["You are interested"] = "您對此關心";
 ["You are interested in this issue"] = "您關心此議題";
 ["You are invited to #{count} initiative(s)"] = "您被邀請參與 #{count} 個提案";
-["You are invited to LiquidFeedback. To register please click the following link:\n\n"] = "您被邀請參與 LiquidFeedback。請點擊下列連結以註冊：\n\n";
+["You are invited to Liquid. To register please click the following link:\n\n"] = "您被邀請參與 Liquid。請點擊下列連結以註冊：\n\n";
 ["You are invited to become initiator of this initiative."] = "您被邀請成為此議題之發起者。";
 ["You are member"] = "您是成員";
 ["You are not participating in any of the #{count} areas in this unit"] = "您並未參與此單位中 #{count} 個領域的任何一個";

@@ -200,6 +200,9 @@ end
 
 function Issue:get_state_name_for_state(value)
   local state_name_table = {
+    accepted = _"Discussion",
+    frozen = _"Frozen",
+    new = _"New",
     admission = _"New",
     discussion = _"Discussion",
     verification = _"Frozen",
@@ -210,6 +213,7 @@ function Issue:get_state_name_for_state(value)
     canceled_after_revocation_during_verification = _"Canceled (during verification due to revocation)",
     calculation = _"Calculation",
     canceled_no_initiative_admitted = _"Canceled (no initiative admitted)",
+    finished = _"Finished",
     finished_without_winner = _"Finished (without winner)",
     finished_with_winner = _"Finished (with winner)"
   }
