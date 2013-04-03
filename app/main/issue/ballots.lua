@@ -186,7 +186,7 @@ inis[#inis+1] = "SQ";
                 ui.tag{ tag = "td", content = "i" .. ini_y }
                 for i, ini_x in ipairs(inis) do
                   local battle
-                  if battles[ini_y][ini_x] > battles[ini_x][ini_y] then
+                  if battles[ini_y][ini_x] ~= nil and battles[ini_y][ini_x] > battles[ini_x][ini_y] then
                     battle = ui.tag{ tag = "td", content = function() ui.tag{ tag = "b", content = battles[ini_y][ini_x] } end }
                   else
                     battle = ui.tag{ tag = "td", content = battles[ini_y][ini_x] }
@@ -442,7 +442,7 @@ function render() {
           p[i] = {}
           for b,j in ipairs(inis) do
             if i ~= j then
-              if battles[i][j] > battles[j][i] then
+              if battles[i][j] ~= nil and battles[i][j] > battles[j][i] then
                 p[i][j] = battles[i][j]
               else
                 p[i][j] = 0

@@ -278,7 +278,7 @@ end
 
 -- Display a public message of the day
 -- ------------------------------------------------------------------------
-config.motd_public = '===Disclaimer===\nTexte und Anträge in Liquid stellen bis zur [https://wiki.piratenpartei.at/wiki/Taskforce:Liquid/Beschlussregister erfolgreichen Abstimmung in direkten Regelwerken] keine offizielle Parteimeinung dar.'
+config.motd_public = '===Disclaimer===\nTexte und Anträge in Liquid stellen bis zur [https://wiki.piratenpartei.at/wiki/AG:Liquid/Beschlussregister erfolgreichen Abstimmung in direkten Regelwerken] keine offizielle Parteimeinung dar.'
 
 -- Automatic issue related discussion URL
 -- ------------------------------------------------------------------------
@@ -309,7 +309,7 @@ require 'webmcp_accelerator'
 -- config.enable_debug_trace = true
 
 config.footer_html = " &middot; <a href=\"" .. config.absolute_base_url .. "static/privacy.php\">Datenschutzerklärung</a></div>\
-<div class=\"slot_footer\" id=\"slot_footer\"><a href=\"" .. config.absolute_base_url .. "static/hourly.php\">Protokoll Stimmberechtigung</a> &middot; <a href=\"http://wiki.piratenpartei.at/wiki/Taskforce:Liquid/Antragsformatvorlage\">Antragsformatvorlage</a> &middot; <a href=\"" .. config.absolute_base_url .. "policy/list.html\">Regelwerke</a> &middot; <a href=\"http://wiki.piratenpartei.at/wiki/Taskforce:Liquid/Akkreditierungsbefugte\">Akkreditierung</a> &middot; <a href=\"https://wiki.piratenpartei.at/wiki/Taskforce:Liquid/FAQ\">FAQ</a> &middot; <a href=\"https://wiki.piratenpartei.at/wiki/Taskforce:Liquid/Tutorial\">Tutorial</a></div>\
+<div class=\"slot_footer\" id=\"slot_footer\"><a href=\"" .. config.absolute_base_url .. "static/hourly.php\">Protokoll Stimmberechtigung</a> &middot; <a href=\"http://wiki.piratenpartei.at/wiki/AG:Liquid/Antragsformatvorlage\">Antragsformatvorlage</a> &middot; <a href=\"" .. config.absolute_base_url .. "policy/list.html\">Regelwerke</a> &middot; <a href=\"http://wiki.piratenpartei.at/wiki/AG:Liquid/Akkreditierungsbefugte\">Akkreditierung</a> &middot; <a href=\"https://wiki.piratenpartei.at/wiki/AG:Liquid/FAQ\">FAQ</a> &middot; <a href=\"https://wiki.piratenpartei.at/wiki/AG:Liquid/Tutorial\">Tutorial</a></div>\
 <div class=\"slot_footer\" id=\"slot_footer\">Auf dieser Seite werden Session-Cookies eingesetzt (<a href=\"" .. config.absolute_base_url .. "static/privacy.php\">Datenschutzerklärung §2.2.4</a>).</div>"
 
 -- ========================================================================

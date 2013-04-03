@@ -252,7 +252,7 @@ function Event.object:send_notification()
   locale.do_with(
     { lang = config.default_lang or 'en' },
     function()
-      if self.event_name == 'Neues Thema' or ((self.event_name == 'Neue Initiative' or (self.event_name == 'Thema hat die nächste Phase erreicht' and (self.state_name == 'Eingefroren' or self.state_name == 'Abstimmung' or self.state_name == 'Abgeschlossen (mit Gewinner)' and self.state_name == 'Abgeschlossen (ohne Gewinner)'))) and (self.issue.policy.name:find('zur Mitgliederversammlung') or self.issue.policy.name:find('direkt'))) then
+      if self.event_name == 'Neues Thema' or self.event_name == 'Neue Initiative' or ((self.event_name == 'Thema hat die nächste Phase erreicht' and (self.state_name == 'Eingefroren' or self.state_name == 'Abstimmung' or self.state_name == 'Abgeschlossen (mit Gewinner)' and self.state_name == 'Abgeschlossen (ohne Gewinner)')) and (self.issue.policy.name:find('zur Mitgliederversammlung') or self.issue.policy.name:find('direkt'))) then
       body = body .. self.issue.area.unit.name .. ": " .. self.issue.area.name .. "\n" .. self.issue.policy.name .. ": [url=" ..  request.get_absolute_baseurl() .. "issue/show/" .. self.issue_id .. ".html]Thema " .. self.issue_id .. "[/url]\n"
       body = body .. _("[event mail]     Event: #{event}", { event = self.event_name }) .. "\n"
       body = body .. _("[event mail]     Phase: #{phase}", { phase = self.state_name })
