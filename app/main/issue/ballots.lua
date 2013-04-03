@@ -206,12 +206,12 @@ inis[#inis+1] = "SQ";
       ui.container{ attr = { class = "draft_content wiki" }, content = function()
       slot.put(_('Now in this step we draw a circle for each initiative. We now need to draw arrows between some of these circles. For each highlighted number from the previous table we draw an edge from the winning initiative to the losing initiative, of the according battle. (Instead of arrowheads you will see circles with the number of the edge within it. They were easier to draw automatically.) Add the (highlighted) number from the table to the edge, we will need it later.'))
       slot.put([[
-<div id="content"><div id="canvas"><canvas id="canvas" width="800" height="600"></canvas></div></div>
-<script type="text/javascript" src="../../static/js/jquery-1.8.2.js"></script>
+<div id="content"><div id="canvas"><canvas id="canvas" width="1000" height="700"></canvas></div></div>
+<script type="text/javascript" src="../../static/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="../../static/js/jcanvas.min.js"></script>
 <script type="text/javascript">
-var displayWidth = 800;
-var displayHeight = 600;
+var displayWidth = 1000;
+var displayHeight = 700;
 
 var nodes = []]);
 for i, ini_y in ipairs(inis) do
@@ -272,17 +272,17 @@ function update() {
                 var distance = Math.sqrt(dX * dX + dY * dY) * 0.5;
 
                 // attract
-                var attractFactor = 0.008;
+                /*var attractFactor = 0.008;
                 nodes[index].velocityX += -dX * attractFactor;
                 nodes[index].velocityY += -dY * attractFactor;
                 nodes[index2].velocityX += dX * attractFactor;
-                nodes[index2].velocityY += dY * attractFactor;
+                nodes[index2].velocityY += dY * attractFactor;*/
 
                 // disperse
-                nodes[index].velocityX += dX / distance;
-                nodes[index].velocityY += dY / distance;
-                nodes[index2].velocityX += -dX / distance;
-                nodes[index2].velocityY += -dY / distance;
+                nodes[index].velocityX += (20 / (0.5 * nodes.length)) * (dX / (10 * distance));
+                nodes[index].velocityY += (20 / (0.5 * nodes.length)) * (dY / (10 * distance));
+                nodes[index2].velocityX += (20 / (0.5 * nodes.length)) * (dX / (10 * distance));
+                nodes[index2].velocityY += (20 / (0.5 * nodes.length)) * (dY / (10 * distance));
             }
         });
     });
@@ -341,13 +341,17 @@ node2.velocityY += -dY / distance;
             nodes[index].velocityY = 0;
         }
 
-        // attract to middle of display
         var dX = nodes[index].x - displayWidth / 2;
         var dY = nodes[index].y - displayHeight / 2;
         var distance = Math.sqrt(dX * dX + dY * dY);
 
-        nodes[index].velocityX -= dX / (10 * distance);
-        nodes[index].velocityY -= dY / (10 * distance);
+        // attract to middle
+        nodes[index].velocityX -= dX * attractFactor;
+        nodes[index].velocityY -= dY * attractFactor;
+
+        // disperse from middle
+        nodes[index].velocityX += dX / distance;
+        nodes[index].velocityY += dY / distance;
     });
 }
 
@@ -394,8 +398,6 @@ function render() {
 
         var vx = x2 - x1;
         var vy = y2 - y1;
-
-        console.log(x1);
 
         // draw line
         $('canvas').drawLine({
