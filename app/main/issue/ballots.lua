@@ -324,7 +324,7 @@ function update(dt) {
             if (index != index2) {
                 var dX = nodes[index].x - nodes[index2].x;
                 var dY = nodes[index].y - nodes[index2].y;
-                var distance = Math.sqrt(dX * dX + dY * dY) * 0.5;
+                var distance = Math.sqrt(dX * dX + dY * dY) * 0.9;
 
                 // attract
                 /*var attractFactor = 0.008;
