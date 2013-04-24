@@ -103,10 +103,10 @@ ui.container{ attr = { class = class }, content = function()
       end
     else
       local max_value = initiative.issue.population or 0
-      local quorum
+      local quorum = 0
       if initiative.issue.accepted then
         quorum = initiative.issue.policy.initiative_quorum_num / initiative.issue.policy.initiative_quorum_den
-      else
+      elseif initiative.issue.policy.issue_quorum_num then
         quorum = initiative.issue.policy.issue_quorum_num / initiative.issue.policy.issue_quorum_den
       end
       ui.bargraph{

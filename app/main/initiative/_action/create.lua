@@ -100,10 +100,11 @@ if not issue then
   issue = Issue:new()
   issue.area_id = area.id
   issue.policy_id = policy_id
-  
   if policy.polling then
-    issue.accepted = 'now'
-    issue.state = 'discussion'
+    issue.state = 'verification'
+    issue.created = os.date('%Y-%m-%d %H:%M:%S')
+    issue.accepted = os.date('%Y-%m-%d %H:%M:%S')
+    issue.half_frozen = os.date('%Y-%m-%d %H:%M:%S')
     initiative.polling = true
     
     if policy.free_timeable then
@@ -130,6 +131,7 @@ if not issue then
       if not timing then
         error("error in free timing config")
       end
+      issue.admission_time = timing.admission
       issue.discussion_time = timing.discussion
       issue.verification_time = timing.verification
       issue.voting_time = timing.voting

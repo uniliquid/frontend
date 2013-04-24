@@ -315,5 +315,42 @@ config.footer_html = " &middot; <a href=\"" .. config.absolute_base_url .. "stat
 -- ========================================================================
 -- Do main initialisation (DO NOT REMOVE FOLLOWING SECTION)
 -- ========================================================================
+config.free_timing = {
+  calculate_func = function(policy, timing_string)
+    function interval_by_seconds(secs)
+      local days = math.floor(secs / 86400)
+      secs = secs - days * 86400
+      return days .. " days " .. secs .. " seconds"
+    end
+    local year, month, day, hour = string.match(timing_string, "^%s*([0-9]+)%-([0-9]+)%-([0-9]+)% ([0-9]+)%:00:00s*$")
+    local target_date = os.time{year=tonumber(year), month=tonumber(month), day=tonumber(day), hour=tonumber(hour)}
+    if not target_date then
+      return false
+    end
+    local now = os.time(os.date("*t"))
+    local duration = target_date - now
+    if duration < 0 then
+      return false
+    end
+    return {
+      admission = interval_by_seconds(3600),
+      discussion = interval_by_seconds(0),
+      verification = interval_by_seconds(0),
+      voting = interval_by_seconds(duration)
+    }
+  end,
+  available_func = function(policy)
+    local policies = {}
+    local time = os.time(os.date("*t"))
+    for i = 0, 30 do
+      for j = 0,23 do
+        local now = os.date("*t",time)
+        policies[i*24+j] = { name = now.day .. "." .. now.month .. "." .. now.year .. " -- " .. now.hour .. " Uhr", id = now.year .. "-" .. now.month .. "-" .. now.day .. " " .. now.hour .. ":00:00" }
+        time = time + 3600
+      end
+    end
+    return policies
+  end
+}
 
 execute.config("init")

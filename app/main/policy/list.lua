@@ -34,13 +34,13 @@ ui.list{
       label = _"Phases",
       content = function(policy)
         if policy.polling then
-          ui.field.text{ label = _"New" .. ":", value = _"without" }
+          ui.field.text{ label = _"" }
         else
           ui.field.text{ label = _"New" .. ":", value = "≤ " .. policy.admission_time:gsub("days",_"days"):gsub("day",_"day") }
+          ui.field.text{ label = _"Discussion" .. ":", value = policy.discussion_time:gsub("days",_"days"):gsub("day",_"day") or _"variable" }
+          ui.field.text{ label = _"Frozen" .. ":", value = policy.verification_time:gsub("days",_"days"):gsub("day",_"day") or _"variable" }
+          ui.field.text{ label = _"Voting" .. ":", value = policy.voting_time:gsub("days",_"days"):gsub("day",_"day") or _"variable" }
         end
-        ui.field.text{ label = _"Discussion" .. ":", value = policy.discussion_time:gsub("days",_"days"):gsub("day",_"day") or _"variable" }
-        ui.field.text{ label = _"Frozen" .. ":", value = policy.verification_time:gsub("days",_"days"):gsub("day",_"day") or _"variable" }
-        ui.field.text{ label = _"Voting" .. ":", value = policy.voting_time:gsub("days",_"days"):gsub("day",_"day") or _"variable" }
       end
     },
     {

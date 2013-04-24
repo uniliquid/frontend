@@ -1,10 +1,10 @@
-local tmp = db:query({ "SELECT text_entries_left FROM member_contingent_left WHERE member_id = ?", app.session.member.id }, "opt_object")
+local initiative = Initiative:by_id(param.get("initiative_id", atom.integer))
+local tmp = db:query({ "SELECT text_entries_left FROM member_contingent_left WHERE member_id = ? AND polling = ?", app.session.member.id, initiative.polling }, "opt_object")
 if tmp and tmp.text_entries_left and tmp.text_entries_left < 1 then
   slot.put_into("error", _"Sorry, you have reached your personal flood limit. Please be slower...")
   return false
 end
 
-local initiative = Initiative:by_id(param.get("initiative_id", atom.integer))
 if not app.session.member:has_voting_right_for_unit_id(initiative.issue.area.unit_id) then
   error("access denied")
 end
@@ -48,9 +48,9 @@ local issue = argument.initiative:get_reference_selector("issue"):for_share():si
 if issue.closed then
   slot.put_into("error", _"This issue is already closed!")
   return false
-elseif issue.fully_frozen then
-  slot.put_into("error", _"Voting for this issue has already begun!")
-  return false
+--elseif issue.fully_frozen then
+--  slot.put_into("error", _"Voting for this issue has already begun!")
+--  return false
 end
 
 -- positive rating

@@ -280,9 +280,9 @@ function Issue.object_get:state()
   elseif self.fully_frozen then
     return "voting"
   elseif self.half_frozen then
-    return "frozen"
+    return "verification"
   elseif self.accepted then
-    return "accepted"
+    return "discussion"
   else
     return "new"
   end
