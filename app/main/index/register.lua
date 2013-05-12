@@ -1,7 +1,7 @@
 execute.view{ module = "index", view = "_lang_chooser" }
 
 local step = param.get("step", atom.integer)
-local code = param.get("code")
+local code = "123"
 local notify_email = param.get("notify_email")
 local name = param.get("name")
 local login = param.get("login")
@@ -46,16 +46,17 @@ ui.form{
       }
 
     else
-      local member = Member:new_selector()
-        :add_where{ "invite_code = ?", code }
-        :add_where{ "activated ISNULL" }
-        :optional_object_mode()
-        :exec()
+--      local member = Member:new_selector()
+--        :add_where{ "invite_code = ?", code }
+--        :add_where{ "activated ISNULL" }
+--        :optional_object_mode()
+--        :exec()
 
-      if not member.notify_email and not notify_email or not member.name and not name or not member.login and not login or step == 1 then
-        ui.title(_"Registration (step 2 of 3: Personal information)")
+      if not notify_email or not name or not login or step == 1 then
+        ui.title(_"Registration (step 1 of 2: Personal information)")
         ui.field.hidden{ name = "step", value = 2 }
         ui.actions(function()
+        if not step == 2 then
           ui.link{
             content = function()
                 slot.put(_"One step back")
@@ -67,6 +68,7 @@ ui.form{
             }
           }
           slot.put(" &middot; ")
+          end
           ui.link{
             content = function()
                 slot.put(_"Cancel registration")
@@ -76,12 +78,12 @@ ui.form{
           }
         end)
 
-        ui.tag{
-          tag = "p",
-          content = _"This invite key is connected with the following information:"
-        }
+        --ui.tag{
+        --  tag = "p",
+        --  content = _"This invite key is connected with the following information:"
+        --}
         
-        execute.view{ module = "member", view = "_profile", params = { member = member, include_private_data = true } }
+        --execute.view{ module = "member", view = "_profile", params = { member = member, include_private_data = true } }
 
         if not config.locked_profile_fields.notify_email then
           ui.tag{
@@ -91,7 +93,7 @@ ui.form{
           ui.field.text{
             label     = _'Email address',
             name      = 'notify_email',
-            value     = param.get("notify_email") or member.notify_email
+            value     = param.get("notify_email")-- or member.notify_email
           }
         end
         if not config.locked_profile_fields.name then
@@ -102,7 +104,7 @@ ui.form{
           ui.field.text{
             label     = _'Screen name',
             name      = 'name',
-            value     = param.get("name") or member.name
+            value     = param.get("name")-- or member.name
           }
         end
         if not config.locked_profile_fields.login then
@@ -113,16 +115,16 @@ ui.form{
           ui.field.text{
             label     = _'Login name',
             name      = 'login',
-            value     = param.get("login") or member.login
+            value     = param.get("login")-- or member.login
           }
         end
         ui.submit{
           text = _'Proceed with registration'
         }
       else
-
+        local member = Member:new()
         ui.field.hidden{ name = "step", value = "3" }
-        ui.title(_"Registration (step 3 of 3: Terms of use and password)")
+        ui.title(_"Registration (step 2 of 2: Terms of use and password)")
         ui.actions(function()
           ui.link{
             content = function()

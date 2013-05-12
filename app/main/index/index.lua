@@ -48,14 +48,6 @@ elseif app.session:has_access("anonymous") then
   }
 
   tabs[#tabs+1] = {
-    name = "timeline",
-    label = _"Latest events",
-    module = "event",
-    view = "_list",
-    params = { global = true }
-  }
-
-  tabs[#tabs+1] = {
     name = "open",
     label = _"Open issues",
     module = "issue",
@@ -74,6 +66,14 @@ elseif app.session:has_access("anonymous") then
       for_state = "closed",
       issues_selector = closed_issues_selector
     }
+  }
+
+  tabs[#tabs+1] = {
+    name = "timeline",
+    label = _"Latest events",
+    module = "event",
+    view = "_list",
+    params = { global = true }
   }
 
   if app.session:has_access('all_pseudonymous') then

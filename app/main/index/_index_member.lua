@@ -24,22 +24,17 @@ ui.actions(function()
     }
   }
   slot.put(" &middot; ")
+  ui.tag{ tag = "b", content = function()
   ui.link{
-    text = _"Noch nicht abgestimmte Anträge",
-    module = "index",
-    view = "index",
-    params = {
-      tab = "open",
-      filter_policy_sel = "p1",
-      filter_policy = "direct",
-      filter_voting = "not_voted",
-      filter = "frozen",
-      filter_interest = "unit"
-    }
+    text = _"My voting rights",
+    module = "member",
+    view = "rights"
+  }
+  end
   }
   slot.put(" &middot; ")
   ui.link{
-    text = _"Noch nicht abgestimmt (inkl. Meinungsbilder)",
+    text = _"Noch nicht abgestimmte Anträge",
     module = "index",
     view = "index",
     params = {
@@ -100,23 +95,6 @@ tabs[#tabs+1] = {
   module = "event",
   view = "_list",
   params = { }
-}
-
-
-tabs[#tabs+1] = {
-  name = "bgv",
-  label = _"BGV",
-  module = "issue",
-  view = "_list",
-  params = {
-    issues_selector = Issue:new_selector()
-      :add_where("issue.policy_id IN (4,21,7,9,17)")
-      :add_where("issue.fully_frozen ISNULL OR issue.fully_frozen + issue.voting_time > '2013-02-02'")
-      --:add_where("issue.state IN ('admission', 'discussion', 'verification', 'voting', 'finished_with_winner', 'finished_without_winner')")
-      :add_where("issue.state IN ('verification', 'voting', 'finished_with_winner', 'finished_without_winner')")
-      :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()")
-
-  }
 }
 
 tabs[#tabs+1] = {

@@ -29,7 +29,7 @@ ui.form{
         attr = {
           id = "css_default",
           type = "radio", name = "css", value = "default",
-          checked = svalue == nil and "checked" or svalue == config.absolute_base_url .. 'static/style.css' and "checked" or nil
+          checked = svalue == nil and "checked" or svalue == config.absolute_base_url .. '/static/style.css' and "checked" or nil
         }
       }
       ui.tag{
@@ -46,7 +46,7 @@ ui.form{
         attr = {
           id = "friendly",
           type = "radio", name = "css", value = "friendly",
-          checked = svalue == config.absolute_base_url .. 'static/friendly.css' and "checked" or nil
+          checked = svalue == config.absolute_base_url .. '/static/friendly.css' and "checked" or nil
         }
       }
       ui.tag{

@@ -1,12 +1,13 @@
 local code = util.trim(param.get("code"))
 
-local member = Member:new_selector()
-  :add_where{ "invite_code = ?", code }
-  :add_where{ "activated ISNULL" }
-  :add_where{ "NOT locked" }
-  :optional_object_mode()
-  :for_update()
-  :exec()
+local member = Member:new()
+-- Member:new_selector()
+--  :add_where{ "invite_code = ?", code }
+--  :add_where{ "activated ISNULL" }
+--  :add_where{ "NOT locked" }
+--  :optional_object_mode()
+--  :for_update()
+--  :exec()
   
 if not member then
   slot.put_into("error", _"The code you've entered is invalid")
@@ -221,6 +222,20 @@ if step > 2 then
   member.active = true
   member.last_activity = 'now'
   member:save()
+
+local units = Unit:new_selector()
+  :add_field("privilege.member_id NOTNULL", "privilege_exists")
+  :add_field("privilege.voting_right", "voting_right")
+  :left_join("privilege", nil, { "privilege.member_id = ? AND privilege.unit_id = unit.id", member.id })
+  :exec()
+
+for i, unit in ipairs(units) do
+    privilege = Privilege:new()
+    privilege.unit_id = unit.id
+    privilege.member_id = member.id
+    privilege.voting_right = true
+    privilege:save()
+end
 
   slot.put_into("notice", _"You've successfully registered and you can login now with your login and password!")
 
