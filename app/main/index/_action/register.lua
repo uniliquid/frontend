@@ -223,15 +223,9 @@ if step > 2 then
   member.last_activity = 'now'
   member:save()
 
-local units = Unit:new_selector()
-  :add_field("privilege.member_id NOTNULL", "privilege_exists")
-  :add_field("privilege.voting_right", "voting_right")
-  :left_join("privilege", nil, { "privilege.member_id = ? AND privilege.unit_id = unit.id", member.id })
-  :exec()
-
 for i, unit in ipairs(units) do
     privilege = Privilege:new()
-    privilege.unit_id = unit.id
+    privilege.unit_id = 2
     privilege.member_id = member.id
     privilege.voting_right = true
     privilege:save()
