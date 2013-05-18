@@ -5,7 +5,7 @@ member_me = Member:by_id(member_id_me)
 trace.disable()
 local content = slot.use_temporary(function()
   slot.put(_"Hallo " .. member.name .. ",\n\n")
-  slot.put(member_me.name .. _" aus dem Liquid von gruss.cc hat dir folgende Nachricht geschickt:\n\n------------------------------------------\n\n")
+  slot.put(member_me.name .. _" aus dem uniliquid.at dir folgende Nachricht geschickt:\n\n------------------------------------------\n\n")
   slot.put(param.get("text") .. "\n\n")
   slot.put("------------------------------------------\n\n")
   slot.put(_"Unter " .. request.get_absolute_baseurl() .. "member/show/" .. member_me.id .. ".html" .. " kannst du auf die Nachricht antworten.\n\n---\n")
@@ -13,9 +13,9 @@ end)
 local success = net.send_mail{
   envelope_from = config.mail_envelope_from,
   from          = config.mail_from,
-  reply_to      = 'noreply@gruss.cc',
+  reply_to      = 'noreply@uniliquid.at',
   to            = member.notify_email,
-  subject       = "[Liquid] Nachricht eines Benutzers",
+  subject       = "[UniLiquid] Nachricht eines Benutzers",
   content_type  = "text/plain; charset=UTF-8",
   content       = content
 }

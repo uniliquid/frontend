@@ -107,27 +107,6 @@ ui.form{
       ui.tag{
         tag = "input",
         attr = {
-          id = "notify_level_s",
-          type = "checkbox", name = "notify_level_s", value = "39",
-          checked = notify_level_s and "checked" or nil
-        }
-      }
-      ui.tag{
-        tag = "label", attr = { ['for'] = "notify_level_s" },
-        content = function()
-          slot.put("Unabhängig davon möchte ich per E-Mail über ")
-          ui.tag{ tag = "b", content = "Satzungsänderungen" }
-          slot.put(" informiert werden.")
-        end
-      }
-    end }
-    
-    slot.put("<br />")
-
-    ui.container{ content = function()
-      ui.tag{
-        tag = "input",
-        attr = {
           id = "notify_level_expert",
           type = "radio", name = "notify_level", value = "expert",
           checked = app.session.member.notify_level == 'expert' and "checked" or nil

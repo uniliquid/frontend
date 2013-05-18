@@ -34,7 +34,7 @@ ui.actions(function()
   }
   slot.put(" &middot; ")
   ui.link{
-    text = _"Noch nicht abgestimmte Anträge",
+    text = _"Not yet voted",
     module = "index",
     view = "index",
     params = {

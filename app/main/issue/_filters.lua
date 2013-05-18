@@ -161,7 +161,7 @@ end
 
 filters[#filters+1] = filter
 
-if member then
+--[[if member then
   local filter = {
     name = "filter_policy",
   }
@@ -207,12 +207,12 @@ if member then
   }
 
   filters[#filters+1] = filter
-end
+end]]
 
 if member then
-  local filter_policy = param.get_all_cgi()["filter_policy"]
+  --local filter_policy = param.get_all_cgi()["filter_policy"]
 
-  if filter_policy == "selection" then
+  --if filter_policy == "selection" then
   local filter = {
     name = "filter_policy_sel",
   }
@@ -224,6 +224,12 @@ if member then
   end
 
   policies = policies:exec()
+
+  filter[#filter+1] = {
+    name = "any",
+    label = _"Alle Regelwerke",
+    selector_modifier = function(selector)  end
+  }
 
   for i, policy in ipairs(policies) do
     filter[#filter+1] = {
@@ -237,7 +243,7 @@ if member then
 
   filters[#filters+1] = filter
 
-  end
+  --end
 end
 
 if member then

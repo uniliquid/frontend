@@ -15,3 +15,10 @@ function Rights:by_pk(member_id, key)
     :optional_object_mode()
     :exec()
 end
+
+function Rights:by_kv(key, value)
+  return self:new_selector()
+    :add_where{ "key = ? AND value = ?", key, value }
+    :optional_object_mode()
+    :exec()
+end

@@ -24,22 +24,13 @@ ui.actions(function()
     }
   }
   slot.put(" &middot; ")
-  ui.tag{ tag = "b", content = function()
   ui.link{
-    text = _"My voting rights",
-    module = "member",
-    view = "rights"
-  }
-  end
-  }
-  slot.put(" &middot; ")
-  ui.link{
-    text = _"Noch nicht abgestimmte Anträge",
+    text = _"Not yet voted",
     module = "index",
     view = "index",
     params = {
       tab = "open",
-      filter_policy_sel = "p1",
+      --filter_policy_sel = "p1",
       filter_policy = "any",
       filter_voting = "not_voted",
       filter = "frozen",

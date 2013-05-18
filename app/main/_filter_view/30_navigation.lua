@@ -2,9 +2,13 @@ slot.select('navigation', function()
 
   ui.link{
     content = function()
-      ui.tag{ attr = { class = "logo" }, content = _"Liquid" }
-      slot.put(" &middot; ")
-      ui.tag{ content = config.instance_name }
+      ui.tag{ attr = { class = "logo" }, content = "UniLiquid" }
+    end,
+    external = "http://uniliquid.at"
+  }
+  ui.link{
+    content = function()
+      ui.tag{ content = _"Overview" }
     end,
     module = 'index',
     view   = 'index'
@@ -36,6 +40,12 @@ slot.select('navigation', function()
           redirect_view = request.get_view(),
           redirect_id = param.get_id()
         }
+      }
+    else
+      ui.link{
+        text   = _"My voting rights",
+        module = 'member',
+        view   = 'rights'
       }
     end
     

@@ -4,40 +4,194 @@
 
 -- Name of this instance, defaults to name of config file
 -- ------------------------------------------------------------------------
-config.instance_name = "TestLiquid"
+config.instance_name = "UniLiquid"
 
 
 -- Information about service provider (HTML)
 -- ------------------------------------------------------------------------
-config.app_service_provider = "gruss.cc"
+config.app_service_provider = "Unipiraten<br />8010 Graz"
 
+-- Absolute base url of application
+-- ------------------------------------------------------------------------
+config.absolute_base_url = "http://uniliquid.at/liquid/"
 
 -- A rocketwiki formatted text the user has to accept while registering
 -- ------------------------------------------------------------------------
-config.use_terms = "=== Terms of Use ==="
-
+config.use_terms = "==== Nutzungsbedingungen für das UniLiquid ==== \
+=== Inhaltsverzeichnis === \
+# Geltungsbereich \
+# UniLiquid \
+# Registrierung für UniLiquid \
+# Zugangsdaten \
+# Inhalte der Mitglieder und Nutzungsrechte \
+# Generelle Regeln für die Nutzung des UniLiquid \
+# Gewährleistung und Haftung des Teilnehmers / Freistellung mit Blick auf rechtswidrige Inhalte \
+# Unsere Haftung \
+# Verstöße gegen die Allgemeinen Nutzungsbedingungen, Beitragsrückstand, Entzug des Stimmrechts \
+# Beendigung der Nutzungsvereinbarung \
+# Datenschutz \
+# Änderungen der Allgemeinen Nutzungsbedingungen \
+# Rechtswahl \
+=== §1. Geltungsbereich === \
+ \
+(1) Die nachfolgenden Nutzungsbedingungen in der jeweils letzten Fassung gelten für die Nutzung der UniLiquid-Plattform (im Folgenden auch als „UniLiquid“ bezeichnet) der Unipiraten (im Folgenden auch als „wir“ bezeichnet) durch Teilnehmer (im Folgenden auch als „du“/„ihr“/„euch“ bezeichnet) und alle von uns in diesem Verhältnis angebotenen und erbrachten Leistungen. \
+ \
+(2) Unsere Nutzungsbedingungen gelten auch für die Nutzung des UniLiquid über mobile Endgeräte. \
+ \
+=== §2. UniLiquid === \
+ \
+(1) UniLiquid ist ein Angebot der Unipiraten an alle Studierenden an österreichischen Universitäten, im Internet, an einem Meinungsbildungsprozess zu Themen die Studierende betreffen, teilzunehmen. Die Teilnehmer können Anträge einbringen, Initiativen beginnen und bereits existierende Anträge und Initiativen unterstützen oder ablehnen, Anregungen geben und vieles mehr. Über die Anträge und Initiativen können die Teilnehmer online abstimmen. Dabei ist es möglich, die eigene Stimme global, themenbereichs- oder themenbezogen der Stimme eines anderen Teilnehmers folgen zu lassen (in UniLiquid „delegieren“ genannt). \
+ \
+(2) Die Details zu den Nutzungsmöglichkeiten des UniLiquid werden euch auf der Website im Zusammenhang mit den jeweiligen Funktionen erläutert. Jeder Teilnehmer erklärt sich damit einverstanden, die jeweils gültigen Funktionsweisen von UniLiquid in eigener Verantwortung und auf eigene Gefahr zu überprüfen und anzuwenden. \
+ \
+=== §3. Registrierung für UniLiquid === \
+ \
+(1) Um Teilnehmer bei UniLiquid zu werden, musst du dich auf der Plattform registrieren. Das Stimmrecht in den UniLiquid-Gliederungen erhältst du jedoch erst nachdem wir einen Nachweis haben, dass du an der jeweiligen Uni bzw. überhaupt studierst. \
+ \
+(2) Bei der Wahl deines Pseudonyms wie auch deines Logins im Rahmen des Registrierungsprozesses darfst du keine Namen oder verwechslungsfähige Aliase von dritten Personen angeben. \
+ \
+(3) Die im Zuge der Registrierung erfragte E-Mail-Adresse muss erreichbar sein und dir gehören. Wir schicken dir zum Zwecke der Verifizierung der E-Mail-Adresse eine Bestätigungs-E-Mail, die einen von dir anzuwählenden Bestätigungslink und hilfsweise einen Link zu einer gesonderten Website zusammen mit einem dort einzugebenden Code enthält. Du bist verpflichtet, uns jede Änderung der von dir für die Verwendung innerhalb von UniLiquid bestimmten E-Mail-Adresse anzuzeigen. \
+ \
+(4) Wenn du den Registrierungsprozess durchlaufen hast und deine Zustimmung zu diesen Nutzungsbedingungen, der Datenschutzerklärung und den Lizenzbedingungen für die dir eingestellten Inhalte (siehe hierzu unten unter §5) erklärt hast, gibst du durch das Klicken des Buttons „Registrierung abschließen“ ein Angebot auf Abschluss einer vertraglichen Vereinbarung zwischen dir und den Unipiraten über die Nutzung von UniLiquid ab (im Folgenden „Nutzungsvereinbarung“ genannt). Dieses Angebot nehmen wir durch die Weiterleitung auf die UniLiquid-Startseite an. \
+ \
+(5) Wir behalten uns vor, die erneute Registrierung eines einmal aus UniLiquid ausgeschlossenen Teilnehmers genau zu prüfen und gegebenenfalls auch zu verweigern. \
+ \
+(6) Die Unipiraten behalten sich die jederzeitige, unter größtmöglicher Wahrung individueller Rechte zu handhabende, temporäre oder permanente Sperrung eines Teilenehmers im Fall von Verstößen gegen die Nutzungsbedingungen oder damit verbundener Erklärungen/Verträgen sowie jegliche Maßnahmen nach §9 vor. \
+ \
+=== §4. Zugangsdaten === \
+ \
+(1) Deine Zugangsdaten (Login und Passwort) sind ausschließlich für die Nutzung durch dich persönlich bestimmt. Du darfst die Zugangsdaten an niemand anderen weitergeben, auch nicht an andere Parteimitglieder. Du bist verpflichtet, die Zugangsdaten geheim zu halten und die unberechtigte Nutzung von UniLiquid durch Dritte auf diesem Weg zu verhindern. \
+ \
+Teilnehmer, die aus in ihrer Person liegenden Gründen UniLiquid nicht uneingeschränkt nutzen können und dafür die Hilfe Dritter benötigen, können beim UniLiquid Support um eine Aussetzung dieses Punktes der Nutzungsbedingungen anfragen. \
+ \
+(2) Erhältst du Kenntnis von einem Missbrauch deiner Zugangsdaten oder hast du auch nur einen solchen Verdacht, musst du uns das umgehend mitteilen. Du haftest für alle Folgen der Drittnutzung, sofern der Missbrauch der Zugangsdaten von dir zu vertreten ist. Zu vertreten hast du den Missbrauch insbesondere auch dann, wenn du die unbefugte Nutzung der Zugangsdaten auch nur fahrlässig möglich gemacht hast. Deine Haftung endet erst, wenn du uns über die unberechtigte Nutzung oder das Abhandenkommen der Zugangsdaten informierst und das Passwort, falls erforderlich, geändert hast. \
+ \
+=== §5. Inhalte der Teilnehmer und Nutzungsrechte === \
+== §5.1 Nutzungsrechte für den Betrieb von UniLiquid == \
+ \
+Der Betrieb einer Internet-Plattform wie UniLiquid bedingt es, dass wir einige Nutzungsrechte von unseren Teilnehmern tatsächlich eingeräumt erhalten. Vor diesem Hintergrund gilt: \
+ \
+(1) Wenn du Anträge, Initiativen, Kommentare, Bewertungen, Stimmabgaben und sonstige Beiträge in UniLiquid einstellst (im Folgenden „Inhalte“ genannt“), räumst du uns an diesen Inhalten jeweils unwiderrufliche, räumlich und zeitlich unbeschränkte Nutzungsrechte in dem zum Betrieb von UniLiquid erforderlichen Umfang ein. Insbesondere räumst du uns das Recht ein, die betreffenden Inhalte im Rahmen der Plattform technisch zum Abruf bereitzustellen und die hierfür erforderlichen Vervielfältigungen vorzunehmen (Speichern auf unseren Servern etc.). Darüber hinaus räumst du uns insbesondere das Recht ein, die Inhalte im Rahmen unserer Funktion als Betreiber von UniLiquid öffentlich zugänglich zu machen, zu senden und anderweitig öffentlich wiederzugeben. In diesem Zusammenhang weisen wir auf die folgenden technischen Besonderheiten hin: \
+ \
+UniLiquid verändert sich und erweitert ggf. auch seine Funktionen mit dem Stand der Technik. Daher kann es für die Teilnehmer bestimmte Zusatzfunktionen wie Newsfeeds (ggf. in verschiedenen Formaten) und andere Abonnement-Dienste (Push-Dienste) oder Abruf-Dienste (Pull-Dienste) geben. Auch technisch optimierte Versionen von UniLiquid für die Nutzung auf mobilen Endgeräten bzw. entsprechende Apps können angeboten werden, ebenso E-Mail-Newsletter. Die uns gemäß dieses §5.1 (1) eingeräumten nicht-ausschließlichen Rechte erstrecken sich auch auf solche Zusatzfunktionen. Die eingeräumten Rechte sind dabei aber stets auf die Funktionen, die Nutzungsmöglichkeiten, den Betrieb und die Bewerbung des UniLiquid beschränkt. \
+ \
+Wir behalten es uns zudem vor, UniLiquid technisch mittels einer entsprechenden Programmierschnittstelle (sog. API) zu öffnen, über die die Inhalte (ohne deine Profildaten natürlich) abrufbar sind und die den Zugang zu UniLiquid auch von verschiedenen mobileren Endgeräten aus zu ermöglichen, sei es über Anwendungsprogramme (Apps) oder für mobile Endgeräte optimierte Versionen der Website (siehe oben). Die nach diesem §5.1 (1) eingeräumten Nutzungsrechte umfassen auch diese Nutzung der Inhalte. \
+ \
+(2) UniLiquid ist technisch betrachtet ein sehr komplexes System mit vielfältigen Verknüpfungen. Inhalte der Teilnehmer bauen auf anderen Inhalten von Teilnehmern auf, sind mit ihnen vielfach verknüpft, etc. Zudem muss UniLiquid als Plattform für einen digitalen Meinungsbildungsprozess ein besonderes Maß an Transparenz und Nachvollziehbarkeit aufweisen – auch was die Ermittlung von in der Vergangenheit belegenen Sachverhalten anbelangt. Die Einräumung der Nutzungsrechte gemäß dieses §5.1 ist daher unwiderruflich und dauert über ein etwaiges Ende der Nutzungsvereinbarung hinaus fort. Inhalte, die du in UniLiquid eingestellt hast, können daher auf der Plattform abrufbar bleiben, auch wenn du nicht mehr Teilnehmer bist. Das gilt natürlich nicht für dein Teilnehmerprofil, wohl aber für alle anderen Inhalte. \
+ \
+(3) Wie in §4.1 der Datenschutzerklärung erläutert, ist es jedem Teilnehmer zu jedem Zeitpunkt gestattet, die gesamte UniLiquid-Datenbank herunterzuladen und zu speichern. Hiervon ausgenommen sind selbstverständlich die Bestands- und Nutzungsdaten sowie alle Daten der Teilnehmerprofile. Alle anderen Inhalte stehen aber zum Download bereit. Um den Download auch rechtlich zu ermöglichen, räumst du uns im Rahmen der Nutzung deiner Inhalte explizit und insbesondere auch das Recht ein, dem downloadenden Teilnehmer das einfache Recht zum Download und zur Speicherung auch deiner Inhalte einzuräumen. \
+ \
+== §5.2 Nutzungsrechte für wissenschaftliche Zwecke und statistische Auswertungen == \
+ \
+(1) Zudem räumst du uns das unwiderrufliche, räumlich und zeitlich unbeschränkte Recht ein, deine Inhalte (ausgenommen natürlich die Profilinhalte (zu diesen siehe §2.3 der Datenschutzerklärung)) für wissenschaftliche Zwecke zu nutzen und/oder durch Dritte nutzen zu lassen. Für Letzteres dürfen wir die Daten auch aktiv an die Wissenschaftler weitergeben. Die Nutzung für wissenschaftliche Zwecke umfasst wissenschaftlich-statistische Auswertungen ebenso wie auch Zusammenfassungen, Zitate und andere typisch wissenschaftliche Verwertungen. \
+ \
+(2) Weiters räumst du uns das unwiderrufliche, räumlich und zeitlich unbeschränkte Recht ein, deine Inhalte (ausgenommen natürlich die Profilinhalte (zu diesen siehe §2.3 der Datenschutzerklärung)) für sonstige statistische Zwecke zu nutzen und/oder durch Dritte nutzen zu lassen. \
+ \
+== §5.3 Nutzungsrechte an den Inhalten der Nutzer für Teilnehmer und Dritte == \
+ \
+(1) Alle Initiativen, Anträge und sonstigen Beiträge, die auf Liquid eingestellt werden, werden, soweit sie schutzfähig sind, unter der Creative Commons Attribution-Share Alike 3.0 Austria-Lizenz veröffentlicht. Durch Klicken der entsprechenden Checkbox im Zuge deiner Registrierung willigst du in die Veröffentlichung auch deiner Initiativen, Anträge und sonstigen Beiträge unter der genannten Lizenz ein. Zudem stimmst du einer Autoren-Nennung mindestens durch URL oder Verweis auf den Beitrag zu. \
+ \
+(2) Die Creative Commons Attribution-Share Alike 3.0 Austria-Lizenz erlaubt – vereinfacht gesagt – jedermann die Vervielfältigung, Bearbeitung, Verbreitung und öffentliche Zugänglichmachung des Inhalts. Derjenige, der eine entsprechende Handlung durchführen will, muss aber dich als Autor wie in (1) erläutert nennen. Inhalte, die nicht urheber- oder leistungsschutzrechtlich schutzfähig sind, werden durch die Lizenz nicht berührt, ebenso wenig wie dir zustehende persönlichkeitsrechtliche Positionen und Rechtspositionen Dritter am betreffenden Inhalt (z. B. das Recht am eigenen Bild eines auf einem Foto abgebildeten Dritten). Wenn der Inhalt verbreitet oder öffentlich zugänglich gemacht werden soll, muss dabei stets eine Kopie der Lizenz oder deren vollständige Internetadresse in Form des Uniform-Resource-Identifier (URI) beigefügt werden. Der vollständige Lizenztext ist abrufbar unter [http://creativecommons.org/licenses/by-sa/3.0/at/legalcode ]. \
+ \
+=== §6. Generelle Regeln für die Nutzung von UniLiquid === \
+ \
+Wir wollen die Nutzung von UniLiquid und insbesondere die Interaktion der Teilnehmer untereinander mit so wenig Regeln und Verboten beschränken wie irgend möglich. Auf der anderen Seite geht es natürlich ohne Regeln nicht. Schließlich geht es bei UniLiquid nicht um ein „Privatvergnügen“ der Teilnehmer, sondern um ein „höheres Ziel“, nämlich der Meinungs- und Willensbildung zwischen allen Studierenden Österreichsi durch die direkte und laufende Partizipation durch die Teilnehmer. Es ist daher nicht zuletzt im Interesse aller Teilnehmer, dass gewisse Grenzen nicht überschritten werden. Vor diesem Hintergrund gelten insbesondere die nachfolgend aufgeführten Verbote, zu deren Beachtung du gegenüber uns verpflichtest bist und deren Missachtung mit jeweilig von uns für nötig erachteten Massnahmen begegnet wird, deren Akzeptanz du mit Vereinbarung dieser Nutzungsbedingungen zustimmst. \
+ \
+== §6.1 Stalking und Mobbing == \
+ \
+Stalking oder Mobbing hat auf Liquid nichts verloren. Wenn dir ein anderer Teilnehmer deutlich macht, dass er von dir nicht bzw. nicht mehr kontaktiert werden will, ist dieser Wunsch zu respektieren. Wenn wir von Stalking-Fällen Kenntnis erlangen, werden wir angemessene Maßnahmen ergreifen. Dies kann auch bedeuten, dass wir die Strafverfolgungsbehörden informieren. Auch Mobbing jeder Art und Form hat bei uns nichts zu suchen. Kein Teilnehmer darf andere Teilnehmer oder auch Dritte ständig bzw. wiederholt und regelmäßig schikanieren, psychisch quälen oder seelisch verletzen. Auch hier behalten wir uns angemessene Gegenmaßnahmen vor, wenn wir von entsprechenden Vorgängen erfahren. \
+ \
+== §6.2 Nutzung nur für die „richtigen“ Zwecke == \
+ \
+UniLiquid ist ausschließlich zur Nutzung für die Meinungs- und Willensbildung zwischen Studierenden gedacht. Eine Nutzung der Plattform für gewerbliche, geschäftliche oder andere Zwecke jenseits der Bestimmung von UniLiquid ist nicht gestattet. Dieses Verbot gilt in der gleichen Weise im Verhältnis der Teilnehmer untereinander, sofern die betreffende Kommunikation unter Nutzung von UniLiquid und seiner Funktionen erfolgt. \
+ \
+== §6.3 Anderweitig unzulässige Inhalte == \
+ \
+Die Teilnehmer sind beim Einstellen von Inhalten grundsätzlich frei. Die Teilnehmer sind dabei verpflichtet, keine in irgendeiner Form rechtswidrigen Inhalte einzustellen. Das betrifft natürlich alles strafrechtlich Relevante, aber auch solche Inhalte, die nur zivilrechtlich verfolgt werden können. Insbesondere sind folgende Inhalte in UniLiquid absolut unzulässig: \
+* Inhalte, die bzw. deren Inhalt und/oder Zielrichtung zum Hass gegen Teile der Bevölkerung oder gegen eine nationale, ethnische, religiöse oder durch ihr Volkstum bestimmte Gruppe aufstacheln, zu Gewalt- oder Willkürmaßnahmen gegen sie auffordern oder die Menschenwürde und allgemeinen Persönlichkeitsrechte anderer dadurch angreifen, dass Teile der Bevölkerung oder eine vorbezeichnete Gruppe beschimpft, böswillig verächtlich gemacht oder verleumdet werden; \
+* Inhalte, die pornografisch sind oder die – ganz egal, ob sie pornografisch sind oder nicht – Kinder oder Jugendliche in unnatürlich geschlechtsbetonter Körperhaltung darstellen oder beschreiben oder auch nur einen Bezug zu solchen Inhalten herstellen; \
+* Inhalte, durch die Spiele beworben werden, die einer staatlichen Erlaubnis bedürfen (insb. Glücksspiele), oder die Kettenbriefe, Pyramidenschemata, Wetten oder verwandte Dinge zum Gegenstand haben oder bewerben; \
+* Inhalte, die beleidigenden, verleumderischen oder sonst ehrverletzenden Inhalts sind und/oder rassistische oder ausländerfeindliche Tendenzen aufweisen; \
+* Inhalte, die das Recht auf Schutz der Privat- und Intimsphäre und/oder sonst das allgemeine Persönlichkeitsrecht verletzen und/oder andere in irgendeiner Weise bedrohen oder anderweitig unter Druck setzen oder setzen würden, würden sie durchgeführt; \
+* Inhalte, die das Recht Dritter am eigenen Bild verletzen; \
+* Inhalte, die Kennzeichenrechte (Marken, Unternehmenskennzeichen, Titel) oder andere gewerbliche Schutzrechte (z. B. Patente) Dritter verletzen; und/oder \
+* Inhalte, die urheber- und/oder leistungsschutzrechtlich geschützte Positionen Dritter verletzen (z. B. Kopien von Musik, Filmen und Software zum Gegenstand haben). \
+ \
+== §6.4 Fotos == \
+ \
+Wenn du ein Foto in dein Teilnehmerprofil einstellen willst, darf dieses nur dich selbst oder ein gegenständliches Motiv, nicht aber andere Personen darstellen, soweit diese Personen identifizierbar sind. \
+ \
+== §6.5 Links == \
+ \
+Du darfst grundsätzlich Links zu Internetangeboten Dritter setzen. Du musst dabei jedoch stets sicherstellen, dass die Inhalte, die auf den verlinkten Internetseiten abrufbar sind, ihrerseits nicht gegen die in diesem §6, insbesondere §6.3, festgelegten Regeln verstoßen. \
+ \
+== §6.6 Personenbezogene Daten anderer Teilnehmer == \
+ \
+Unzulässig ist stets das Veröffentlichen, das Versenden oder die sonstige Weitergabe von personenbezogenen Daten aus den Teilnehmerprofilen anderer Teilnehmer oder von personenbezogenen Daten Dritter (z. B. Namen, Telefonnummern, E-Mail-Adressen), es sei denn, der betreffende Teilnehmer oder Dritte hat dem zugestimmt. \
+ \
+== §6.7 Viren und anderer Schadcode == \
+ \
+In UniLiquid dürfen keine Viren, Trojaner und entsprechende Skripte und Programme oder ähnlicher Schadcode eingebracht werden. \
+ \
+=== §7. Gewährleistung und Haftung des Teilnehmers / Freistellung mit Blick auf rechtswidrige Inhalte === \
+ \
+(1) Du gewährleistest uns gegenüber, dass du zur Einräumung der Rechte in dem durch §5 bestimmten Umfang berechtigt und in der Lage bist. Du gewährleistest uns gegenüber ebenso, keine Inhalte in UniLiquid einzustellen, deren Gegenstand oder Inhalt gegen die Regelungen der §6 verstoßen, sowie auch keine der dort verbotenen Handlungen zu begehen oder dort bezeichnete Einschränkungen zu übertreten sowie keine unzutreffenden Daten anzugeben, wenn du dich für die Angabe von Daten entscheidest. \
+ \
+(2) Du bist für sämtliche von dir in UniLiquid eingestellten Inhalte, insbesondere die Texte, und für das Vorhandensein der hierfür etwaig erforderlichen Rechtspositionen ebenso allein verantwortlich wie für deine Handlungen in UniLiquid. Wir prüfen deine Inhalte und Handlungen grundsätzlich nicht. \
+ \
+Du verpflichtest dich in diesem Zusammenhang, uns sowie die Mitglieder des Vorstands, unsere Angestellten und sonstigen Mitarbeiter von jeder Haftung und sämtlichen Kosten, einschließlich Rechtsanwaltskosten zur Rechtsverteidigung sowie möglicher und tatsächlicher Kosten eines gerichtlichen Verfahrens sowie etwaiger von einem Gericht festgesetzter bzw. festzusetzender Ordnungsgelder oder Ähnlichem, freizuhalten bzw. freizustellen, falls wir, Mitglieder des Vorstands, Angestellte und/oder sonstige Mitarbeiter von uns von Dritten in Anspruch genommen werden, weil du unter schuldhafter, sei es auch nur fahrlässiger, Verletzung deiner Pflichten nach §5 und §6 Rechte Dritter oder die Rechte der von ihnen vertretenen Personen verletzt hast. \
+ \
+Entsprechendes gilt, falls die Inanspruchnahme aus einem anderweitig rechtswidrigen Inhalt resultiert, sowie in Fällen, in denen die Inanspruchnahme seitens einer Behörde erfolgt. Wir werden dich über die Inanspruchnahme unterrichten und dir, soweit möglich und zumutbar, Gelegenheit zur Abwehr des geltend gemachten Anspruchs geben. Du bist auf der anderen Seite verpflichtet, uns unverzüglich alle dir verfügbaren Informationen über den betreffenden Sachverhalt vollständig mitzuteilen. \
+ \
+Uns etwaig darüber hinaus zustehende Schadensersatzansprüche bleiben unberührt. \
+ \
+(3) Wir behalten es uns überdies vor, in solchen Fällen deine Identität und sämtliche uns über dich bekannten Daten innerhalb der gesetzlichen Verpflichtungen offenzulegen, wozu du dich durch Vereinbarung dieser Nutzungsbedingungen unwiderruflich einverstanden erklärst. \
+ \
+=== §8. Unsere Haftung === \
+ \
+Wir haften grundsätzlich nach den gesetzlichen Bestimmungen. Zwei Einschränkungen gelten dabei aber: Sofern Schäden bei dir aus dem Verlust von Daten resultieren, haften wir dafür nicht, soweit die Schäden durch eine regelmäßige und vollständige Sicherung aller relevanten Daten durch dich vermieden worden wären. Bei nur fahrlässigem Handeln oder Unterlassen ist unsere Haftung zudem für vertragsuntypische oder unvorhersehbare Schäden ausgeschlossen, sofern der Schaden nicht Leben, Körper oder die Gesundheit oder eine übernommene Garantie betrifft. \
+ \
+=== §9. Verstöße gegen die Allgemeinen Nutzungsbedingungen, Entzug des Stimmrechts === \
+ \
+(1) Wir behalten uns vor, nach diesen Nutzungsbedingungen unzulässige Inhalte zu löschen, verbotene Aktionen zu unterbinden/rückgängig zu machen sowie die Teilnehmer nach Verstößen gegen diese Nutzungsbedingungen (zum Beispiel durch Weitergabe der Zugangsdaten) zu verwarnen und/oder ihre Teilnehmer-Accounts zeitweilig oder permanent zu sperren, um sie zur Einhaltung ihrer Verpflichtungen anzuhalten. Verwarnungen und Sperrungen werden dem betreffenden Teilnehmer in Textform mitgeteilt. Zudem kann eine außerordentliche Kündigung der Nutzungsvereinbarung ausgesprochen werden, wenn die Fortführung der Nutzungsvereinbarung für die Piratenpartei unzumutbar ist. Nach einem solchen Fall ist eine erneute Registrierung nur nach eingehender Prüfung durch uns zulässig. \
+ \
+=== §10. Beendigung der Nutzungsvereinbarung === \
+ \
+(1) Die Nutzungsvereinbarung kann von dir zudem jederzeit ordentlich binnen 14 Tagen gekündigt werden. Eine fristlose außerordentliche Kündigung aus wichtigem Grund ist beiden Parteien vorbehalten. Jede Kündigung bedarf der Textform, das heißt mindestens einer E-Mail. \
+ \
+(2) Wie wir nach Beendigung der Nutzungsvereinbarung mit deinen Inhalten verfahren, ist in §4.3 der Datenschutzerklärung im Einzelnen erläutert. \
+ \
+(3) Eine Reaktivierung eines Teilnehmer-Accounts nach Kündigung ist grundsätzlich nicht möglich. \
+ \
+=== §11. Datenschutz === \
+ \
+Der Schutz und die Sicherheit der personenbezogenen Daten unserer Teilnehmer ist uns sehr wichtig. Alle Informationen hierzu findest du in der Datenschutzerklärung. \
+ \
+=== §12. Änderungen der Allgemeinen Nutzungsbedingungen === \
+ \
+Wie behalten uns vor, diese Allgemeinen Nutzungsbedingungen jederzeit zu ändern. Die neuen Allgemeinen Nutzungsbedingungen werden dir per E-Mail übermittelt. Sie gelten als vereinbart, wenn du ihrer Geltung nicht innerhalb von 14 Tagen nach Zugang der E-Mail widersprichst. Der Widerspruch bedarf der Textform, also zumindest einer E-Mail. Wir werden dich in der E-Mail auf die Widerspruchsmöglichkeit, die Frist und die Folgen deiner Untätigkeit gesondert hinweisen. Widersprichst du, haben sowohl du als auch wir das Recht, die Nutzungsvereinbarung durch Kündigung mit sofortiger Wirkung zu beenden. \
+ \
+=== §13. Rechtswahl === \
+ \
+Auf das Vertragsverhältnis zwischen uns und dir sowie auf diese Allgemeinen Nutzungsbedingungen einschließlich deren Auslegung findet ausschließlich das Recht der Republik Österreich Anwendung. Die Anwendung des internationalen Privatrechts ist ausgeschlossen. \
+ \
+//Stand: Mai 2013//"
 
 -- Checkbox(es) the user has to accept while registering
 -- ------------------------------------------------------------------------
 config.use_terms_checkboxes = {
   {
     name = "terms_of_use_v1",
-    html = "I accept the terms of use.",
-    not_accepted_error = "You have to accept the terms of use to be able to register."
+    html = "Ich akzeptiere die Nutzungsbedingungen.",
+    not_accepted_error = "Um dich zu registrieren, musst du die Nutzungsbedingungen akzeptieren."
   },
---  {
---    name = "extra_terms_of_use_v1",
---    html = "I accept the extra terms of use.",
---    not_accepted_error = "You have to accept the extra terms of use to be able to register."
---  }
+  {
+    name = "extra_terms_of_use_v1",
+    html = "Ich akzeptiere die <a href=\"" .. config.absolute_base_url .. "index/privacy.html\">Datenschutzerklärung</a>.",
+    not_accepted_error = "Um dich zu registrieren, musst du die <a href=\"" .. config.absolute_base_url .. "index/privacy.html\">Datenschutzerklärung</a> akzeptieren."
+  }
 }
-
   
--- Absolute base url of application
--- ------------------------------------------------------------------------
-config.absolute_base_url = "http://gruss.cc:8080/liquid/"
-
-
 -- Connection information for the Liquid database
 -- ------------------------------------------------------------------------
 config.database = { engine='postgresql', dbname='liquid_feedback' }
@@ -87,7 +241,7 @@ config.default_lang = "de"
 -- after how long is a user considered inactive and the trustee will see warning,
 -- notation is according to postgresql intervals, default: no warning at all
 -- ------------------------------------------------------------------------
--- config.delegation_warning_time = '6 months'
+config.delegation_warning_time = '6 months'
 
 -- Invite code expiry
 -- after how long is an invite code can't be used anymore
@@ -98,13 +252,13 @@ config.default_lang = "de"
 
 -- Prefix of all automatic mails, defaults to "[Pirate Feedback] "
 -- ------------------------------------------------------------------------
-config.mail_subject_prefix = "[Liquid] "
+config.mail_subject_prefix = "[UniLiquid] "
 
 -- Sender of all automatic mails, defaults to system defaults
 -- ------------------------------------------------------------------------
-config.mail_envelope_from = "liquid@gruss.cc"
-config.mail_from = { name = "Liquid", address = "liquid@gruss.cc" }
-config.mail_reply_to = { name = "Support", address = "liquid@gruss.cc" }
+config.mail_envelope_from = "support@uniliquid.at"
+config.mail_from = { name = "Liquid Support", address = "support@uniliquid.at" }
+config.mail_reply_to = { name = "Liquid Support", address = "support@uniliquid.at" }
 
 -- Configuration of password hashing algorithm (defaults to "crypt_sha512")
 -- ------------------------------------------------------------------------
@@ -132,7 +286,8 @@ config.download_dir = "/opt/liquid_feedback_dumps/"
 -- Special use terms for database dump download
 -- ------------------------------------------------------------------------
 config.download_use_terms = "==== Nutzungsbedingungen Downloads ====\
-TODO ;)"
+In Punkt 5.1.3 der [usage_terms.html Nutzungsbedingungen] sowie Punkt 4.2 der Datenschutzerklärung wird erläutert, dass jedem Teilnehmer das Recht eingeräumt wird, die Liquid-Datenbank herunterzuladen und zu speichern. Hiervon sind jedoch bestimmte Daten ausgenommen (z.B. Profildaten) und daher nicht im Download enthalten.\
+Bitte beachte: Die Daten sind nur für den persönlichen Gebrauch zur Sicherung der Nachvollziehbarkeit der Meinungsbildungsprozesse durch die Systemteilnehmer bestimmt."
 
 -- Use custom image conversion, defaults to ImageMagick's convert
 -- ------------------------------------------------------------------------
@@ -144,7 +299,7 @@ config.member_image_convert_func = {
 
 -- Display a public message of the day
 -- ------------------------------------------------------------------------
--- config.motd_public = "===Message of the day===\nThe MOTD is formatted with rocket wiki"
+config.motd_public = "===Hinweis===\nFür alle Texte im UniLiquid sind die Autoren der jeweiligen Texte verantwortlich. Abgesehen vom Benutzerprofil sowie privaten und Verifikationsdaten sind alle Daten im UniLiquid **öffentlich**, deswegen raten wir unbedingt zur Verwendung eines Pseudonyms. Auch dein Abstimmungsverhalten ist **öffentlich**. Dein Benutzerprofil kann von allen registrierten Benutzern eingesehen werden."
 
 -- Automatic issue related discussion URL
 -- ------------------------------------------------------------------------
@@ -161,49 +316,6 @@ config.member_image_convert_func = {
 --  group_id = "mygroupname",
 --  cookie_path = "/"
 --}
-
--- Free timings
--- ------------------------------------------------------------------------
--- This example expects a date string entered in the free timing field
--- by the user creating a poll, interpreting it as target date for then
--- poll and splits the remaining time at the ratio of 4:1:2
--- Please note, polling policies never have an admission phase
--- The available_func is optional, if not set any target date is allowed
-
-config.free_timing = {
-  calculate_func = function(policy, timing_string)
-    function interval_by_seconds(secs)
-      local secs_per_day = 60 * 60 * 24
-      local days
-      days = math.floor(secs / secs_per_day)
-      secs = secs - days * secs_per_day
-      return days .. " days " .. secs .. " seconds"
-    end
-    local target_date = parse.date(timing_string, atom.date)
-    if not target_date then
-      return false
-    end
-    local target_timestamp = target_date.midday
-    local now = atom.timestamp:get_current()
-    trace.debug(target_timestamp, now)
-    local duration = target_timestamp - now
-    if duration < 0 then
-      return false
-    end
-    return {
-      discussion = interval_by_seconds(duration / 7 * 4),
-      verification = interval_by_seconds(duration / 7 * 1),
-      voting = interval_by_seconds(duration / 7 * 2)
-    }
-  end,
-  available_func = function(policy)
-    return { 
-      { name = "End of 2013", id = '2013-12-31' },
-      { name = "End of 2014", id = '2014-12-31' },
-      { name = "End of 2015", id = '2015-12-31' }
-    }
-  end
-}
 
 -- WebMCP accelerator
 -- uncomment the following two lines to use C implementations of chosen
@@ -230,8 +342,48 @@ config.register_without_invite_code = true
 -- ------------------------------------------------------------------------
 -- config.deactivate_max_members = 50
 
+config.footer_html = " &middot; <a href=\"" .. config.absolute_base_url .. "index/privacy.html\">Datenschutzerklärung</a> &middot; <a href=\"" .. config.absolute_base_url .. "policy/list.html\">Regelwerke</a></div>\
+<div class=\"slot_footer\" id=\"slot_footer\">Auf dieser Seite werden Session-Cookies eingesetzt (<a href=\"" .. config.absolute_base_url .. "index/privacy.html\">Datenschutzerklärung §2.2.4</a>).</div>"
+
 -- ========================================================================
 -- Do main initialisation (DO NOT REMOVE FOLLOWING SECTION)
 -- ========================================================================
+config.free_timing = {
+  calculate_func = function(policy, timing_string)
+    function interval_by_seconds(secs)
+      local days = math.floor(secs / 86400)
+      secs = secs - days * 86400
+      return days .. " days " .. secs .. " seconds"
+    end
+    local year, month, day, hour = string.match(timing_string, "^%s*([0-9]+)%-([0-9]+)%-([0-9]+)% ([0-9]+)%:00:00s*$")
+    local target_date = os.time{year=tonumber(year), month=tonumber(month), day=tonumber(day), hour=tonumber(hour)}
+    if not target_date then
+      return false
+    end
+    local now = os.time(os.date("*t"))
+    local duration = target_date - now
+    if duration < 0 then
+      return false
+    end
+    return {
+      admission = interval_by_seconds(3600),
+      discussion = interval_by_seconds(0),
+      verification = interval_by_seconds(0),
+      voting = interval_by_seconds(duration)
+    }
+  end,
+  available_func = function(policy)
+    local policies = {}
+    local time = os.time(os.date("*t"))
+    for i = 0, 30 do
+      for j = 0,23 do
+        local now = os.date("*t",time)
+        policies[i*24+j] = { name = now.day .. "." .. now.month .. "." .. now.year .. " -- " .. now.hour .. " Uhr", id = now.year .. "-" .. now.month .. "-" .. now.day .. " " .. now.hour .. ":00:00" }
+        time = time + 3600
+      end
+    end
+    return policies
+  end
+}
 
 execute.config("init")

@@ -34,13 +34,7 @@ ui.actions(function()
   }
   slot.put(" &middot; ")
   ui.link{
-    text = _"My voting rights",
-    module = "member",
-    view = "rights"
-  }
-  slot.put(" &middot; ")
-  ui.link{
-    text = _"Noch nicht abgestimmte Anträge",
+    text = _"Not yet voted",
     module = "index",
     view = "index",
     params = {

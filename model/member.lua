@@ -461,6 +461,8 @@ function Member.object:send_mail_verification(notify_email, secret, for_unit)
       slot.put(request.get_absolute_baseurl() .. "index/confirm_rights.html\n\n")
       slot.put(_"On that page please enter the confirmation code:\n\n")
       slot.put(secret .. "\n\n")
+      slot.put(_"and for unit\n\n")
+      slot.put(for_unit .. "\n\n")
     end)
   local success = net.send_mail{
     envelope_from = config.mail_envelope_from,

@@ -223,13 +223,16 @@ if step > 2 then
   member.last_activity = 'now'
   member:save()
 
-for i, unit in ipairs(units) do
-    privilege = Privilege:new()
-    privilege.unit_id = 2
-    privilege.member_id = member.id
-    privilege.voting_right = true
-    privilege:save()
-end
+  privilege = Privilege:new()
+  privilege.unit_id = 2
+  privilege.member_id = member.id
+  privilege.voting_right = true
+  privilege:save()
+
+  membership = Membership:new()
+  membership.area_id    = 4
+  membership.member_id  = member.id
+  membership:save()
 
   slot.put_into("notice", _"You've successfully registered and you can login now with your login and password!")
 
