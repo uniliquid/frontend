@@ -3,7 +3,10 @@ local full = param.get("full", atom.boolean)
 -- quick links
 ui.actions(function()
   ui.link{
-    text = _"Latest vote results",
+    text = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_stack.png" }
+      ui.tag { content = _"Latest vote results" }
+    end,
     module = "index",
     view = "index",
     params = {
@@ -14,7 +17,10 @@ ui.actions(function()
   }
   slot.put(" &middot; ")
   ui.link{
-    text = _"Voted by delegation",
+    text = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_go.png" }
+      ui.tag { content = _"Voted by delegation" }
+    end,
     module = "index",
     view = "index",
     params = {
@@ -25,7 +31,10 @@ ui.actions(function()
   }
   slot.put(" &middot; ")
   ui.link{
-    text = _"Not yet voted",
+    text = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_edit.png" }
+      ui.tag { content = _"Not yet voted" }
+    end,
     module = "index",
     view = "index",
     params = {
@@ -46,8 +55,10 @@ local tabs = {
 
 tabs[#tabs+1] = {
   name = "areas",
-  label = _"Home",
-  icon = { static = "icons/16/package.png" },
+  label = function()
+    ui.image{ attr = { class = "spaceicon" }, static = "icons/16/world.png" }
+    ui.tag{ content = _"Overview" }
+  end,
   module = "index",
   view = "_member_home",
   params = { member = app.session.member }
@@ -55,7 +66,10 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "open",
-  label = _"Open issues",
+  label = function()
+    ui.image{ attr = { class = "spaceicon" }, static = "icons/16/arrow_in.png" }
+    ui.tag{ content = _"Open issues" }
+  end,
   module = "issue",
   view = "_list",
   params = {
@@ -68,7 +82,10 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "closed",
-  label = _"Closed issues",
+  label = function()
+    ui.image{ attr = { class = "spaceicon" }, static = "icons/16/lock.png" }
+    ui.tag{ content = _"Closed issues" }
+  end,
   module = "issue",
   view = "_list",
   params = {
