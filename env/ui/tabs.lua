@@ -28,7 +28,12 @@ function ui.tabs(tabs)
               module  = request.get_module(),
               view    = request.get_view(),
               id      = param.get_id_cgi(),
-              content = tab.label,
+              content = function()
+                if tab.icon then
+                  ui.image{ attr = { class = "spaceicon" }, static = tab.icon } 
+                end
+                ui.tag{ content = tab.label }
+              end,
               params  = params
             }
             if tab.br then

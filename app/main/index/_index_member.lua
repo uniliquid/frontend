@@ -55,10 +55,8 @@ local tabs = {
 
 tabs[#tabs+1] = {
   name = "areas",
-  label = function()
-    ui.image{ attr = { class = "spaceicon" }, static = "icons/16/world.png" }
-    ui.tag{ content = _"Overview" }
-  end,
+  label = _"Overview",
+  icon = "icons/16/world.png",
   module = "index",
   view = "_member_home",
   params = { member = app.session.member }
@@ -66,10 +64,8 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "open",
-  label = function()
-    ui.image{ attr = { class = "spaceicon" }, static = "icons/16/arrow_in.png" }
-    ui.tag{ content = _"Open issues" }
-  end,
+  icon = "icons/16/arrow_in.png",
+  label = _"Open issues",
   module = "issue",
   view = "_list",
   params = {
@@ -82,10 +78,8 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "closed",
-  label = function()
-    ui.image{ attr = { class = "spaceicon" }, static = "icons/16/lock.png" }
-    ui.tag{ content = _"Closed issues" }
-  end,
+  icon = "icons/16/lock.png",
+  label = _"Closed issues",
   module = "issue",
   view = "_list",
   params = {
@@ -99,6 +93,7 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "timeline",
+  icon = "icons/16/clock.png",
   label = _"Latest events",
   module = "event",
   view = "_list",
@@ -107,6 +102,7 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "members",
+  icon = "icons/16/group.png",
   label = _"Members",
   module = 'member',
   view   = '_list',
