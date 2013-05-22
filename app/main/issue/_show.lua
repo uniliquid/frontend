@@ -142,12 +142,14 @@ ui.container{ attr = { class = class }, content = function()
     end
   end
 
+  if issue.closed then
   links[#links+1] ={
     content = _"Show Ballots",
     module = "issue",
     view = "ballots",
     id = issue.id
   }
+  end
 
   if not for_member or for_member.id == app.session.member_id then
     

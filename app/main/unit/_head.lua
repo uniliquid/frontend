@@ -52,7 +52,12 @@ ui.actions(function()
 end)
 end
 
-ui.container{ attr = { class = "unit_head" }, content = function()
+local style = ""
+if unit.name == 'Sandkasten/Spielwiese' then
+  style = "background: linear-gradient(rgb(147, 147, 147), rgb(85, 85, 85)) repeat scroll 0% 0% rgb(102, 102, 102)";
+end
+
+ui.container{ attr = { class = "unit_head", style = style }, content = function()
 
   execute.view{ module = "delegation", view = "_info", params = { unit = unit, member = member } }
 
