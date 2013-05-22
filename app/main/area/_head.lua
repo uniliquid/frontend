@@ -53,7 +53,12 @@ if not param.get("hide_unit", atom.boolean) then
   execute.view{ module = "unit", view = "_head", params = { unit = area.unit, member = member } }
 end
 
-ui.container{ attr = { class = "area_head" }, content = function()
+local style = ""
+if area.name == 'Spielwiese' then
+  style = "background: linear-gradient(rgb(227, 227, 227), rgb(198, 198, 198)) repeat scroll 0% 0% rgb(204, 204, 204)"
+end
+
+ui.container{ attr = { class = "area_head", style = style }, content = function()
 
   execute.view{ module = "delegation", view = "_info", params = { area = area, member = member } }
 

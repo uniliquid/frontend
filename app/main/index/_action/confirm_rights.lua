@@ -37,8 +37,8 @@ local mail = Rights:by_pk(app.session.member.id, "mail_ack_unit_mail_" .. found_
 local stored_secret = Rights:by_pk(app.session.member.id, "mail_ack_unit_mail_secret_" .. found_unit.id)
 local matn = Rights:by_pk(app.session.member.id, "matn")
 
-if member.id == 1 or (stored_secret and secret == stored_secret.value) then
-if matn and not (string.sub(found_unit.mail,1,1) == "@") and not (string.sub(found_unit.mail,1,1) == "^") then
+if stored_secret and secret == stored_secret.value then
+if matn and not (string.sub(found_unit.mail,1,1) == "@") and not (string.sub(found_unit.mail,1,1) == "^") and not (string.sub(found_unit.mail,1,1) == "!") then
 
 if not locked then
   slot.put_into("error", _"Verification link too old. Please request a new one.")
@@ -95,7 +95,7 @@ end
 
 slot.put_into("notice", _"Email address is confirmed now")
 return true
-elseif string.sub(found_unit.mail,1,1) == "^" or string.sub(found_unit.mail,1,1) == "@" then
+elseif string.sub(found_unit.mail,1,1) == "^" or string.sub(found_unit.mail,1,1) == "!" or string.sub(found_unit.mail,1,1) == "@" then
   if not locked then
     slot.put_into("error", _"Verification link too old. Please request a new one.")
     return false

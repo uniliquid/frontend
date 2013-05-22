@@ -14,6 +14,36 @@ if app.session.member.notify_level == nil then
   }
 end
 
+if app.session.member then
+local units_selector = Unit:new_selector()
+
+units_selector
+  :left_join("privilege", nil, { "privilege.member_id = ? AND privilege.unit_id = unit.id", app.session.member.id })
+  :add_field("privilege.voting_right", "voting_right")
+  :add_field("unit.mail", "mail")
+
+local units = units_selector:exec()
+
+local found_unit = nil
+for i, unit in ipairs(units) do
+  if unit.id ~= 2 and unit.voting_right then
+    found_unit = unit
+    break
+  end
+end
+
+if found_unit == nil then
+  notification_links[#notification_links+1] = {
+    module = "member", view = "rights",
+    text = function()
+      ui.tag { tag = "b",
+      content = _"Please select the universities you study at"
+      }
+    end
+  }
+end
+end
+
 local broken_delegations_count = Delegation:selector_for_broken(app.session.member_id):count()
 
 if broken_delegations_count > 0 then

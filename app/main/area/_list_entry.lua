@@ -5,7 +5,12 @@ ui.container{ attr = { class = "area" }, content = function()
 
   execute.view{ module = "area", view = "_head", params = { area = area, hide_unit = true, show_content = true, member = member } }
   
-  ui.container{ attr = { class = "content" }, content = function()
+  local style = ""
+  if area.name == 'Spielwiese' then
+    style = "background: linear-gradient(rgb(251, 251, 251), rgb(237, 237, 237)) repeat scroll 0% 0% rgb(237, 237, 237);"
+  end
+
+  ui.container{ attr = { class = "content", style = style }, content = function()
     ui.tag{ content = _"Issues:" }
     slot.put(" ")
     ui.link{ 

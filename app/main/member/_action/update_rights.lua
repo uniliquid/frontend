@@ -93,28 +93,51 @@ mail:save()
 slot.put_into("notice", _"Verification mail sent!")
 
 return true
-elseif found_unit.mail and string.len(found_unit.mail) > 5 and string.sub(found_unit.mail,1,1) == "^" then
+elseif found_unit.mail and string.len(found_unit.mail) > 5 and (string.sub(found_unit.mail,1,1) == "^" or string.sub(found_unit.mail,1,1) == "!") then
+  local mustcontain = false
+  if string.sub(found_unit.mail,1,1) == "!" then
+    mustcontain = true
+  end
   local host = ""
   local mask = ""
   for w in string.gmatch(found_unit.mail, "@.*") do
     host = w
   end
   local email = param.get("email", atom.string)
+  local email_db = Rights:by_kv("mail_ack_unit_mail_" .. found_unit.id, email)
+  if email_db and email_db.member_id ~= app.session.member.id then
+    slot.put_into("error", _"Your mail address is already taken.")
+    return false
+  end
+
+  local name = ""
+  if email then
+  for w in string.gmatch(email, ".*@") do
+    name = w
+  end
+  end
   local valid = true
   for w in string.gmatch(found_unit.mail, ".") do
     mask = w
-    if w ~= '^' then
-      if string.find(email, w) then
-        invalid = false
-        break
+    if w ~= '^' and w ~= '!' and w ~= '@' then
+      if string.find(name, w, 1, true) then
+        if not mustcontain then
+          valid = false
+          break
+        end
+      else
+        if mustcontain then
+          valid = false
+          break
+        end
       end
     end
     if w == '@' then
       break
     end
   end
-  if valid and not (email and string.sub(email,-string.len(host))==host) then
-    slot.put_into("error", _"Your student mail address is not valid for this university." .. valid)
+  if not valid or not (email and string.sub(email,-string.len(host))==host) then
+    slot.put_into("error", _"Your student mail address is not valid for this university.")
     return false
   end
   
@@ -169,8 +192,8 @@ elseif found_unit.mail and string.len(found_unit.mail) > 5 then
     return false
   end
 
-  local email_db = Rights:by_kv("email", email)
-  if email_db and not matn_db.member_id == app.session.member.id then
+  local email_db = Rights:by_kv("mail_ack_unit_mail_" .. found_unit.id, email)
+  if email_db and email_db.member_id ~= app.session.member.id then                
     slot.put_into("error", _"Your student mail address is already taken.")
     return false
   end

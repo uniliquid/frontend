@@ -1,5 +1,7 @@
 #!/usr/bin/env lua
 return {
+["Please select the universities you study at"] = "Bitte wähle die Universitäten aus, an denen du studierst";
+["To get voting rights in this unit, we need to verify your matriculation number. Currently this is possible at one of the following universities:<br />"] = "Um Stimmrecht in dieser Gliederung zu erhalten, müssen wir deine Matrikelnummer verifizieren. Derzeit ist dies bei den folgenden Universitäten möglich:<br />";
 ["Overview"] = "Überblick";
 ["Show Ballots"] = "Stimmzettel und Auszählung";
 ["Initiatives"] = "Initiativen";

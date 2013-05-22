@@ -3,7 +3,7 @@ local for_unit = param.get("for_unit", atom.integer)
 local revoke = param.get("revoke", atom.boolean)
 
 local member = Member:by_id(id)
-
+local all_units = true
 if not member then
   return false
 end
@@ -75,6 +75,7 @@ ui.form{
     ui.submit{ value = _"Request Confirmation Mail" }
   end
 }
+return true
 elseif found_unit.mail and string.len(found_unit.mail) > 5 then
 ui.form{
   attr = { class = "vertical" },
@@ -93,10 +94,12 @@ ui.form{
     ui.submit{ value = _"Request Confirmation Mail" }
   end
 }
+return true
 else
-slot.put(_"Sorry, not yet possible.")
+slot.put(_"To get voting rights in this unit, we need to verify your matriculation number. Currently this is possible at one of the following universities:<br />")
+all_units = false
 end
-else
+end
 ui.container{
   attr = { class = "vertical" },
   id = member and member.id,
@@ -104,6 +107,7 @@ ui.container{
   readonly = true,
   content = function()
     for i, unit in ipairs(units) do
+     if all_units or not unit.voting_right and unit.mail and string.find(unit.mail, 'XXXXXXX') then
       ui.tag{ tag = "p", content = function()
       ui.tag{ tag = "b", content = unit.name .. ": " }
       if unit.voting_right then
@@ -139,7 +143,7 @@ ui.container{
       end
       slot.put('<div class="clearfix"></div>')
       end }
+     end
     end
   end
 }
-end
