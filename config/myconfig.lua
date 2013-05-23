@@ -299,7 +299,7 @@ config.member_image_convert_func = {
 
 -- Display a public message of the day
 -- ------------------------------------------------------------------------
-config.motd_public = "===Hinweis===\nFür alle Texte im UniLiquid sind die Autoren der jeweiligen Texte verantwortlich. Abgesehen vom Benutzerprofil sowie privaten und Verifikationsdaten sind alle Daten im UniLiquid **öffentlich**, deswegen raten wir unbedingt zur Verwendung eines Pseudonyms. Auch dein Abstimmungsverhalten ist **öffentlich**. Dein Benutzerprofil kann von allen registrierten Benutzern eingesehen werden."
+config.motd_public = "Für alle Texte im UniLiquid sind die Autoren der jeweiligen Texte verantwortlich. Abgesehen vom Benutzerprofil sowie privaten und Verifikationsdaten sind alle Daten im UniLiquid **öffentlich**, deswegen raten wir unbedingt zur Verwendung eines Pseudonyms. Auch dein Abstimmungsverhalten ist **öffentlich**. Dein Benutzerprofil kann von allen registrierten Benutzern eingesehen werden."
 
 -- Automatic issue related discussion URL
 -- ------------------------------------------------------------------------
