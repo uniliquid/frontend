@@ -9,7 +9,10 @@ if not for_member then
 
       ui.link{
         attr = { class = filter_unit == "global" and "active" or nil },
-        text = _"All units",
+        text = function()
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder.png" }
+          ui.tag{ content = _"All units" }
+        end,
         module = "index", view = "index", params = { filter_unit = "global" }
       }
 
@@ -17,7 +20,10 @@ if not for_member then
 
       ui.link{
         attr = { class = filter_unit == "my_units" and "ui_tabs_link active" or nil },
-        text = _"All areas in my units",
+        text = function()
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_table.png" }
+          ui.tag{ content = _"All areas in my units" }
+        end,
         module = "index", view = "index", params = { filter_unit = "my_units" }
       }
       
@@ -25,7 +31,10 @@ if not for_member then
 
       ui.link{
         attr = { class = filter_unit == "my_areas" and "ui_tabs_link active" or nil },
-        text = _"My areas",
+        text = function()
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_user.png" }
+          ui.tag{ content = _"My areas" }
+        end,
         module = "index", view = "index", params = { filter_unit = "my_areas" }
       }
       
@@ -146,7 +155,7 @@ for i, unit in ipairs(units) do
     ui.container{ attr = { class = "area", style="margin-top: 1ex; margin-left: 10px;" }, content = function()
       ui.container{ attr = { class = "title" }, content = function()
         if more_area_text then
-          ui.link{ module = "unit", view = "show", id = unit.id, text = more_area_text }
+          ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/add.png" }, module = "unit", view = "show", id = unit.id, text = more_area_text }
         end
         if delegated_text then
           slot.put(" &middot; ")

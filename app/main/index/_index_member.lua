@@ -93,7 +93,7 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "timeline",
-  icon = "icons/16/clock.png",
+  icon = "icons/16/time.png",
   label = _"Latest events",
   module = "event",
   view = "_list",

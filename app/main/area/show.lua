@@ -42,6 +42,7 @@ local tabs = {
 
 tabs[#tabs+1] = {
   name = "open",
+  icon = "icons/16/arrow_in.png",
   label = _"Open issues",
   module = "issue",
   view = "_list",
@@ -52,6 +53,7 @@ tabs[#tabs+1] = {
 }
 tabs[#tabs+1] = {
   name = "closed",
+  icon = "icons/16/lock.png",
   label = _"Closed issues",
   module = "issue",
   view = "_list",
@@ -63,6 +65,7 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "timeline",
+  icon = "icons/16/time.png",
   label = _"Latest events",
   module = "event",
   view = "_list",
@@ -73,8 +76,8 @@ if app.session:has_access("all_pseudonymous") then
   tabs[#tabs+1] =
     {
       name = "members",
+      icon = "icons/16/group.png",
       label = _"Participants" .. " (" .. tostring(members_selector:count()) .. ")",
-      icon = { static = "icons/16/group.png" },
       module = "member",
       view = "_list",
       params = { members_selector = members_selector }
@@ -83,8 +86,8 @@ if app.session:has_access("all_pseudonymous") then
   tabs[#tabs+1] =
     {
       name = "delegations",
+      icon = "icons/16/group_go.png",
       label = _"Delegations" .. " (" .. tostring(delegations_selector:count()) .. ")",
-      icon = { static = "icons/16/table_go.png" },
       module = "delegation",
       view = "_list",
       params = { delegations_selector = delegations_selector }
