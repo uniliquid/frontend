@@ -11,7 +11,7 @@ function ui.tabs(tabs)
         attr = { class = "ui_tabs_links" },
         content = function()
           for i, tab in ipairs(tabs) do
-            if tab.icon then
+            if tab.icon and type(tab.icon) == "string" and string.len(tab.icon) > 5 then
               image = { attr = { class = "spaceicon" }, static = tab.icon }
             end
             local params = param.get_all_cgi()

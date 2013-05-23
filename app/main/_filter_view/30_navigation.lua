@@ -2,10 +2,10 @@ slot.select('navigation', function()
 
   ui.link{
     content = function()
+      ui.image{ static = "favicon.ico" }
       ui.tag{ attr = { class = "logo" }, content = _"Liquid" }
       slot.put(" &middot; ")
       ui.tag{ content = config.instance_name }
-      ui.image{ static = "icons/16/world.png" }
     end,
     module = 'index',
     view   = 'index'
