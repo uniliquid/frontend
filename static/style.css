@@ -1577,7 +1577,7 @@ th.opinion {
 
 .motd {
   margin-bottom: -8px;
-  margin-top: -8px;
+  margin-top: 2px;
   padding-top: 0.8px;
   padding-bottom: 0.2px;
   padding-left: 10px;
