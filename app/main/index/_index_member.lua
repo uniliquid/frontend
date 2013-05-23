@@ -39,7 +39,7 @@ ui.actions(function()
     view = "index",
     params = {
       tab = "open",
-      filter_policy_sel = "p1",
+      -- filter_policy_sel = "p1",
       filter_policy = "any",
       filter_voting = "not_voted",
       filter = "frozen",

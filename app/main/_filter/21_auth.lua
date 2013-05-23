@@ -6,6 +6,9 @@ local auth_needed = not (
   module == 'index'
   and (
        view   == "index"
+    or view   == "privacy"
+    or view   == "usage_terms"
+    or view   == "landing"
     or view   == "login"
     or action == "login"
     or view   == "register"
@@ -48,6 +51,7 @@ if app.session:has_access("all_pseudonymous") then
    or module == "vote" and view == "show_incoming"
    or module == "interest" and view == "show_incoming"
    or module == "supporter" and view == "show_incoming" 
+   or module == "issue" and view == "ballots"
    or module == "vote" and view == "list" then
     auth_needed = false
   end
