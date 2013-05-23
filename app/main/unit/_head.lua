@@ -12,7 +12,10 @@ if show_links then
 -- quick links
 ui.actions(function()
   ui.link{
-    text = _"Latest vote results",
+    text = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_stack.png" }
+      ui.tag { content = _"Latest vote results" }
+    end,
     module = "index",
     view = "index",
     params = {
@@ -23,7 +26,10 @@ ui.actions(function()
   }
   slot.put(" &middot; ")
   ui.link{
-    text = _"Voted by delegation",
+    text = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_go.png" }
+      ui.tag { content = _"Voted by delegation" }
+    end,
     module = "index",
     view = "index",
     params = {
@@ -64,6 +70,7 @@ ui.container{ attr = { class = "unit_head", style = style }, content = function(
   ui.container{ attr = { class = "title" }, content = function()
     if not config.single_unit_id then
       ui.link{ 
+        image = ui.image{ attr = { class = "spaceicon", style = "width: 16px; height: 16px;" }, static = "icons/units/" .. unit.name .. ".ico" },
         module = "unit", view = "show", id = unit.id,
         attr = { class = "unit_name" }, content = unit.name
       }
@@ -83,9 +90,9 @@ ui.container{ attr = { class = "unit_head", style = style }, content = function(
           ui.tag{ content = _"You have voting privileges for this unit" }
           slot.put(" &middot; ")
           if unit.delegation_info.first_trustee_id == nil then
-            ui.link{ text = _"Delegate unit", module = "delegation", view = "show", params = { unit_id = unit.id } }
+            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/group_go.png" }, text = _"Delegate unit", module = "delegation", view = "show", params = { unit_id = unit.id } }
           else
-            ui.link{ text = _"Change unit delegation", module = "delegation", view = "show", params = { unit_id = unit.id } }
+            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/group_go.png" }, text = _"Change unit delegation", module = "delegation", view = "show", params = { unit_id = unit.id } }
           end
         else
           ui.tag{ content = _"Member has voting privileges for this unit" }
