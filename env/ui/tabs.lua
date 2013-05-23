@@ -5,11 +5,15 @@ function ui.tabs(tabs)
     attr = attr,
     content = function()
       local params = param.get_all_cgi()
+      local image = nil
       local current_tab = params["tab"]
       ui.container{
         attr = { class = "ui_tabs_links" },
         content = function()
           for i, tab in ipairs(tabs) do
+            if tab.icon then
+              image = { attr = { class = "spaceicon" }, static = tab.icon }
+            end
             local params = param.get_all_cgi()
             if tab.link_params then
               for key, value in pairs(tab.link_params) do
@@ -28,6 +32,7 @@ function ui.tabs(tabs)
               module  = request.get_module(),
               view    = request.get_view(),
               id      = param.get_id_cgi(),
+              image   = image,
               content = tab.label,
               params  = params
             }

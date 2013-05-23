@@ -740,6 +740,7 @@ a.delegation_info:focus {
 .ui_filter_head {
   color: #777;
   line-height: 200%;
+  padding-top: 2px;
   padding-bottom: 8px;
   margin-bottom: 6px;
   border-bottom: 1px solid #888;
@@ -1574,6 +1575,15 @@ th.opinion {
   margin-bottom: 2ex;
 }
 
+.motd {
+  margin-bottom: -8px;
+  margin-top: -8px;
+  padding-top: 0.8px;
+  padding-bottom: 0.2px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 /******************************
  * details
  */
@@ -2039,4 +2049,9 @@ table.notify .ui_list_odd {
 }
 .negative {
   color: #a00;
+}
+
+.spaceicon {
+  margin-right: 5px;
+  margin-bottom: -2px;
 }

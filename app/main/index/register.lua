@@ -97,7 +97,7 @@ ui.form{
         if not config.locked_profile_fields.name then
           ui.tag{
             tag = "p",
-            content = _"Please choose a name, i.e. your real name or your nick name. This name will be shown to others to identify you."
+            content = _"Please choose a name. This name will be shown to others to identify you. We recommend using a pseudonym."
           }
           ui.field.text{
             label     = _'Screen name',
@@ -108,7 +108,7 @@ ui.form{
         if not config.locked_profile_fields.login then
           ui.tag{
             tag = "p",
-            content = _"Please choose a login name. This name will not be shown to others and is used only by you to login into the system. The login name is case sensitive."
+            content = _"Please choose a login name. This name will not be shown to others and is used only by you to login into the system. Anyway - we recommend using a pseudonym. The login name is case sensitive."
           }
           ui.field.text{
             label     = _'Login name',

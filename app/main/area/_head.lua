@@ -34,26 +34,15 @@ ui.actions(function()
   }
   slot.put(" &middot; ")
   ui.link{
-    text = _"Noch nicht abgestimmte Anträge",
+    text = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_edit.png" }
+      ui.tag { content = _"Not yet voted" }
+    end,
     module = "index",
     view = "index",
     params = {
       tab = "open",
-      filter_policy_sel = "p1",
-      filter_policy = "direct",
-      filter_voting = "not_voted",
-      filter = "frozen",
-      filter_interest = "unit"
-    }
-  }
-  slot.put(" &middot; ")
-  ui.link{
-    text = _"Noch nicht abgestimmt (inkl. Meinungsbilder)",
-    module = "index",
-    view = "index",
-    params = {
-      tab = "open",
-      filter_policy_sel = "p1",
+      -- filter_policy_sel = "p1",
       filter_policy = "any",
       filter_voting = "not_voted",
       filter = "frozen",
@@ -67,7 +56,12 @@ if not param.get("hide_unit", atom.boolean) then
   execute.view{ module = "unit", view = "_head", params = { unit = area.unit, member = member } }
 end
 
-ui.container{ attr = { class = "area_head" }, content = function()
+local style = ""
+if area.name == 'Sandkasten/Spielwiese' then
+  style = "background: linear-gradient(rgb(227, 227, 227), rgb(198, 198, 198)) repeat scroll 0% 0% rgb(204, 204, 204)"
+end
+
+ui.container{ attr = { class = "area_head", style = style }, content = function()
 
   execute.view{ module = "delegation", view = "_info", params = { area = area, member = member } }
 
