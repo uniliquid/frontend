@@ -25,7 +25,7 @@ if util._hidden_helps ~= nil then
         },
         content = function()
           ui.image{
-            attr = { class = "help_icon" },
+            attr = { class = "help_icon", style = "width: 18px; margin-left: -1px; margin-top: -1px;" },
             static = "icons/16/help.png"
           }
         end,

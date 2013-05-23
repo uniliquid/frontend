@@ -278,7 +278,7 @@ end
 
 -- Display a public message of the day
 -- ------------------------------------------------------------------------
-config.motd_public = '===Disclaimer===\nTexte und Anträge in Liquid stellen bis zur [https://wiki.piratenpartei.at/wiki/AG:Liquid/Beschlussregister erfolgreichen Abstimmung in direkten Regelwerken] keine offizielle Parteimeinung dar.'
+config.motd_public = 'Texte und Anträge in Liquid stellen bis zur [https://wiki.piratenpartei.at/wiki/AG:Liquid/Beschlussregister erfolgreichen Abstimmung in direkten Regelwerken] keine offizielle Parteimeinung dar.'
 
 -- Automatic issue related discussion URL
 -- ------------------------------------------------------------------------
@@ -302,10 +302,11 @@ end
 -- increase speed:
 -- ------------------------------------------------------------------------
 require 'webmcp_accelerator'
--- collectgarbage("stop")
+-- if cgi then collectgarbage("stop") end
 
 -- Trace debug
 -- uncomment the following line to enable debug trace
+-- ------------------------------------------------------------------------
 -- config.enable_debug_trace = true
 
 config.footer_html = " &middot; <a href=\"" .. config.absolute_base_url .. "static/privacy.php\">Datenschutzerklärung</a></div>\

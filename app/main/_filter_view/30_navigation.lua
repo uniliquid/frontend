@@ -5,6 +5,7 @@ slot.select('navigation', function()
       ui.tag{ attr = { class = "logo" }, content = _"Liquid" }
       slot.put(" &middot; ")
       ui.tag{ content = config.instance_name }
+      ui.image{ static = "icons/16/world.png" }
     end,
     module = 'index',
     view   = 'index'
@@ -13,14 +14,20 @@ slot.select('navigation', function()
   if app.session:has_access("anonymous") then
 
     ui.link{
-      content = _"Search",
+      content = function()
+        ui.image{ static = "icons/16/magnifier.png" }
+        ui.tag{ content = _"Search" }
+      end,
       module = 'index',
       view   = 'search'
     }
 
     if app.session.member_id then
       ui.link{
-        content = _"Switch Design",
+        content = function()
+          ui.image{ static = "icons/16/css.png" }
+          ui.tag{ content = _"Switch Design" }
+        end,
         module = 'member',
         view = 'settings_css'
       }
@@ -28,7 +35,10 @@ slot.select('navigation', function()
  
     if app.session.member == nil then
       ui.link{
-        text   = _"Login",
+        content = function()
+          ui.image{ static = "icons/16/key.png" }
+          ui.tag{ content = _"Login" }
+        end,
         module = 'index',
         view   = 'login',
         params = {
@@ -43,12 +53,18 @@ slot.select('navigation', function()
 
   if app.session.member == nil then
     ui.link{
-      text   = _"Registration",
+      content = function()
+        ui.image{ static = "icons/16/user_add.png" }
+        ui.tag{ content = _"Registration" }
+      end,
       module = 'index',
       view   = 'register'
     }
     ui.link{
-      text   = _"Reset password",
+      content = function()
+        ui.image{ static = "icons/16/user_edit.png" }
+        ui.tag{ content = _"Reset password" }
+      end,
       module = 'index',
       view   = 'reset_password'
     }
@@ -81,6 +97,7 @@ slot.select('navigation_right', function()
                 }
                 ui.tag{ content = app.session.member.name }
               else
+                ui.image{ static = "icons/16/user.png" }
                 ui.tag{ content = _"Select language" }
               end
             end
