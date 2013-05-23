@@ -34,9 +34,7 @@ if policy_id then
   policy = Policy:by_id(policy_id)
 end
 
-if issue_id then
-  ui.title(_"Add alternative initiative to issue")
-else
+if not issue_id then
   ui.title(_"Create new issue")
 end
 
