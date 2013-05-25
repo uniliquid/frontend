@@ -21,7 +21,9 @@ end
 if not state then
   filter[#filter+1] = {
     name = "open",
-    label = _"Open",
+    label = function()
+      ui.tag{ content = _"Open" }
+    end,
     selector_modifier = function(selector)
       if for_events then
         selector:add_where("event.state in ('admission', 'discussion', 'verification', 'voting')")
@@ -35,7 +37,10 @@ end
 if not state or state == "open" then
   filter[#filter+1] = {
     name = "new",
-    label = _"New",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/new.png" }
+      ui.tag{ content = _"New" }
+    end,
     selector_modifier = function(selector)
       if for_events then
         selector:add_where("event.state = 'admission'")
@@ -46,7 +51,10 @@ if not state or state == "open" then
   }
   filter[#filter+1] = {
     name = "accepted",
-    label = _"Discussion",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/comments.png" }
+      ui.tag{ content = _"Discussion" }
+    end,
     selector_modifier = function(selector)
       if for_events then
         selector:add_where("event.state = 'discussion'")
@@ -57,7 +65,10 @@ if not state or state == "open" then
   }
   filter[#filter+1] = {
     name = "half_frozen",
-    label = _"Frozen",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/lock.png" }
+      ui.tag{ content = _"Frozen" }
+    end,
     selector_modifier = function(selector)
       if for_events then
         selector:add_where("event.state = 'verification'")
@@ -68,7 +79,10 @@ if not state or state == "open" then
   }
   filter[#filter+1] = {
     name = "frozen",
-    label = _"Voting",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_open.png" }
+      ui.tag{ content = _"Voting" }
+    end,
     selector_modifier = function(selector)
       if for_events then
         selector:add_where("event.state = 'voting'")
@@ -83,7 +97,9 @@ end
 if not state then
   filter[#filter+1] = {
     name = "finished",
-    label = _"Finished",
+    label = function()
+      ui.tag{ content = _"Finished" }
+    end,
     selector_modifier = function(selector)
       if for_events then
         selector:add_where("event.state IN ('finished_with_winner', 'finished_without_winner')")
@@ -94,7 +110,9 @@ if not state then
   }
   filter[#filter+1] = {
     name = "canceled",
-    label = _"Canceled",
+    label = function()
+      ui.tag{ content = _"Canceled" }
+    end,
     selector_modifier = function(selector)
         
       if for_events then
@@ -109,13 +127,17 @@ end
 if state == "closed" then
   filter[#filter+1] = {
     name = "any",
-    label = _"Any state",
+    label = function()
+      ui.tag{ content = _"Any state" }
+    end,
     selector_modifier = function(selector) end
   }
 
   filter[#filter+1] = {
     name = "finished",
-    label = _"Finished",
+    label = function()
+      ui.tag{ content = _"Finished" }
+    end,
     selector_modifier = function(selector)
       if for_events then
         selector:add_where("event.state IN ('finished_with_winner', 'finished_without_winner')")
@@ -126,7 +148,9 @@ if state == "closed" then
   }
   filter[#filter+1] = {
     name = "finished_with_winner",
-    label = _"with winner",
+    label = function()
+      ui.tag{ content = _"with winner" }
+    end,
     selector_modifier = function(selector)
       if for_events then
         selector:add_where("event.state = 'finished_with_winner'")
@@ -137,7 +161,9 @@ if state == "closed" then
   }
   filter[#filter+1] = {
     name = "finished_without_winner",
-    label = _"without winner",
+    label = function()
+      ui.tag{ content = _"without winner" }
+    end,
     selector_modifier = function(selector)
       if for_events then
         selector:add_where("event.state = 'finished_without_winner'")
@@ -148,7 +174,9 @@ if state == "closed" then
   }
   filter[#filter+1] = {
     name = "canceled",
-    label = _"Canceled",
+    label = function()
+      ui.tag{ content = _"Canceled" }
+    end,
     selector_modifier = function(selector)
       if for_events then
         selector:add_where("event.state NOT IN ('finished_with_winner', 'finished_without_winner')")
@@ -248,12 +276,16 @@ if member then
     if not for_unit and not for_area then
       filter[#filter+1] = {
         name = "any",
-        label = _"All units",
+        label = function()
+          ui.tag{ content = _"All units" }
+        end,
         selector_modifier = function()  end
       }
       filter[#filter+1] = {
         name = "unit",
-        label = _"My units",
+        label = function()
+          ui.tag{ content = _"My units" }
+        end,
         selector_modifier = function(selector)
           selector:join("area", nil, "area.id = issue.area_id")
           selector:join("privilege", nil, { "privilege.unit_id = area.unit_id AND privilege.member_id = ? AND privilege.voting_right", member.id })
@@ -263,14 +295,18 @@ if member then
     if for_unit and not for_area then
     filter[#filter+1] = {
         name = "any",
-        label = _"All areas",
+        label = function()
+          ui.tag{ content = _"All areas" }
+        end,
         selector_modifier = function()  end
       }
     end
     if not for_area then
       filter[#filter+1] = {
         name = "area",
-        label = _"My areas",
+        label = function()
+          ui.tag{ content = _"My areas" }
+        end,
         selector_modifier = function(selector)
           selector:join("membership", nil, { "membership.area_id = issue.area_id AND membership.member_id = ?", member.id })
         end
@@ -279,37 +315,53 @@ if member then
     if for_area then
     filter[#filter+1] = {
         name = "any",
-        label = _"All issues",
+        label = function()
+          ui.tag{ content = _"All issues" }
+        end,
         selector_modifier = function()  end
       }
     end
   end
   filter[#filter+1] = {
     name = "issue",
-    label = _"Interested",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/eye.png" }
+      ui.tag{ content = _"Interested" }
+    end,
     selector_modifier = function() end
   }
   filter[#filter+1] = {
     name = "initiated",
-    label = _"Initiated",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/user_edit.png" }
+      ui.tag{ content = _"Initiated" }
+    end,
     selector_modifier = function(selector)
       selector:add_where({ "EXISTS (SELECT 1 FROM initiative JOIN initiator ON initiator.initiative_id = initiative.id AND initiator.member_id = ? AND initiator.accepted WHERE initiative.issue_id = issue.id)", member.id })
     end
   }
   filter[#filter+1] = {
     name = "supported",
-    label = _"Supported",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" }
+      ui.tag{ content = _"Supported" }
+    end,
     selector_modifier = function() end
   }
   filter[#filter+1] = {
     name = "potentially_supported",
-    label = _"Potentially supported",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up.png" }
+      ui.tag{ content = _"Potentially supported" }
+    end,
     selector_modifier = function() end
   }
   if state == 'closed' or (for_events) then
     filter[#filter+1] = {
       name = "voted",
-      label = _"Voted",
+      label = function()
+        ui.tag{ content = _"Voted" }
+      end,
       selector_modifier = function() end
     }
   end
@@ -365,7 +417,10 @@ if app.session.member then
       },
       {
         name = "direct",
-        label = _"Direct",
+        label = function()
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/user.png" }
+          ui.tag{ content = _"Direct" }
+        end,
         selector_modifier = function(selector)
           add_default_joins(selector)
           selector:add_where("CASE WHEN issue.fully_frozen ISNULL AND issue.closed ISNULL THEN filter_interest.member_id NOTNULL ELSE filter_interest_s.member_id NOTNULL END")
@@ -393,7 +448,10 @@ if app.session.member then
       },
       {
         name = "delegated",
-        label = _"By delegation",
+        label = function()
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/user_go.png" }
+          ui.tag{ content = _"By delegation" }
+        end,
         selector_modifier = function(selector)
           add_default_joins(selector)
           selector:add_where("filter_d_interest_s.member_id NOTNULL AND filter_interest.member_id ISNULL")
@@ -426,7 +484,10 @@ if state == 'open' and app.session.member and member.id == app.session.member_id
     },
     {
       name = "not_voted",
-      label = _"Not voted",
+      label = function()
+        ui.image{ attr = { class = "spaceicon" }, static = "icons/16/delete.png" }
+        ui.tag{ content = _"Not voted" }
+      end,
       selector_modifier = function(selector)
         selector:left_join("direct_voter", nil, { "direct_voter.issue_id = issue.id AND direct_voter.member_id = ?", member.id })
         selector:add_where("direct_voter.member_id ISNULL")
@@ -436,7 +497,10 @@ if state == 'open' and app.session.member and member.id == app.session.member_id
     },
     {
       name = "voted",
-      label = _"Voted",
+      label = function()
+        ui.image{ attr = { class = "spaceicon" }, static = "icons/16/accept.png" }
+        ui.tag{ content = _"Voted" }
+      end,
       selector_modifier = function(selector)
         selector:join("direct_voter", nil, { "direct_voter.issue_id = issue.id AND direct_voter.member_id = ?", member.id })
       end

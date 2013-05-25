@@ -13,7 +13,7 @@ if show_links then
 ui.actions(function()
   ui.link{
     text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_stack.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email.png" }
       ui.tag { content = _"Latest vote results" }
     end,
     module = "index",
@@ -27,7 +27,7 @@ ui.actions(function()
   slot.put(" &middot; ")
   ui.link{
     text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_go.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_go.png" }
       ui.tag { content = _"Voted by delegation" }
     end,
     module = "index",
@@ -41,7 +41,7 @@ ui.actions(function()
   slot.put(" &middot; ")
   ui.link{
     text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_edit.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_open.png" }
       ui.tag { content = _"Not yet voted" }
     end,
     module = "index",
@@ -141,15 +141,15 @@ ui.container{ attr = { class = "area_head", style = style }, content = function(
 
           slot.put(" &middot; ")
           if area.delegation_info.own_delegation_scope ~= "area" then
-            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/group_go.png" }, text = _"Delegate area", module = "delegation", view = "show", params = { area_id = area.id } }
+            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_go.png" }, text = _"Delegate area", module = "delegation", view = "show", params = { area_id = area.id } }
           else
-            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/group_go.png" }, text = _"Change area delegation", module = "delegation", view = "show", params = { area_id = area.id } }
+            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_go.png" }, text = _"Change area delegation", module = "delegation", view = "show", params = { area_id = area.id } }
           end
           slot.put(" &middot; ")
 
           ui.link{
             content = function()
-              ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_edit.png" }
+              ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_add.png" }
               slot.put(_"Create new issue")
             end,
             module = "initiative",

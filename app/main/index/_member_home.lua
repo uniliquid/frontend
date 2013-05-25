@@ -10,7 +10,7 @@ if not for_member then
       ui.link{
         attr = { class = filter_unit == "global" and "active" or nil },
         text = function()
-          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder.png" }
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/house.png" }
           ui.tag{ content = _"All units" }
         end,
         module = "index", view = "index", params = { filter_unit = "global" }
