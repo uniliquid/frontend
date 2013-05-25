@@ -176,7 +176,7 @@ ui.container{
           }
         }
         ui.container{
-          attr = { style = "height: 100%; width: 100%" },
+          attr = { class = "member_link" },
           content = function()
         ui.container{
           attr = { class = "member_name" },
