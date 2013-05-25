@@ -32,6 +32,9 @@ end
 -- redirect after successful login
 local redirect_module = param.get("redirect_module")
 local redirect_view   = param.get("redirect_view")
+if redirect_view == "landing" and redirect_module == "index" then
+  redirect_view = "index"
+end
 local redirect_id     = param.get("redirect_id")
 local redirect_params = param.get_unserialize("redirect_params")
 

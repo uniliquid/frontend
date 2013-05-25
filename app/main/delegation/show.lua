@@ -114,7 +114,7 @@ ui.actions(function()
       view = "show",
       id = issue.id,
       content = function()
-          ui.image{ static = "icons/16/cancel.png" }
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/cross.png" }
           slot.put(_"Cancel")
       end,
     }
@@ -124,7 +124,7 @@ ui.actions(function()
       view = "show",
       id = area.id,
       content = function()
-          ui.image{ static = "icons/16/cancel.png" }
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/cross.png" }
           slot.put(_"Cancel")
       end,
     }
@@ -133,7 +133,7 @@ ui.actions(function()
       module = "index",
       view = "index",
       content = function()
-          ui.image{ static = "icons/16/cancel.png" }
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/cross.png" }
           slot.put(_"Cancel")
       end,
     }

@@ -56,6 +56,7 @@ local tabs = {
 
 tabs[#tabs+1] = {
   name = "areas",
+  icon = "icons/16/folder.png",
   label = _"Areas",
   module = "area",
   view = "_list",
@@ -72,6 +73,7 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "open",
+  icon = "icons/16/email_open.png",
   label = _"Open issues",
   module = "issue",
   view = "_list",
@@ -82,6 +84,7 @@ tabs[#tabs+1] = {
 }
 tabs[#tabs+1] = {
   name = "closed",
+  icon = "icons/16/email.png",
   label = _"Closed issues",
   module = "issue",
   view = "_list",
@@ -91,9 +94,11 @@ tabs[#tabs+1] = {
   }
 }
 
+  icon = "icons/16/time.png",
 if app.session:has_access("all_pseudonymous") then
   tabs[#tabs+1] = {
     name = "eligible_voters",
+    icon = "icons/16/group.png",
     label = _"Eligible voters",
     module = "member",
     view = "_list",
@@ -102,6 +107,7 @@ if app.session:has_access("all_pseudonymous") then
 
   tabs[#tabs+1] = {
     name = "delegations",
+    icon = "icons/16/house_go.png",
     label = _"Delegations",
     module = "delegation",
     view = "_list",

@@ -12,7 +12,10 @@ if show_links then
 -- quick links
 ui.actions(function()
   ui.link{
-    text = _"Latest vote results",
+    text = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email.png" }
+      ui.tag { content = _"Latest vote results" }
+    end,
     module = "index",
     view = "index",
     params = {
@@ -23,7 +26,10 @@ ui.actions(function()
   }
   slot.put(" &middot; ")
   ui.link{
-    text = _"Voted by delegation",
+    text = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_go.png" }
+      ui.tag { content = _"Voted by delegation" }
+    end,
     module = "index",
     view = "index",
     params = {
@@ -35,7 +41,7 @@ ui.actions(function()
   slot.put(" &middot; ")
   ui.link{
     text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_edit.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_open.png" }
       ui.tag { content = _"Not yet voted" }
     end,
     module = "index",
@@ -91,6 +97,7 @@ ui.container{ attr = { class = "area_head", style = style }, content = function(
             ui.tag{ content = function()
               slot.put("(")
               ui.link{
+                image   = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_delete.png" },
                 text    = _"Withdraw",
                 module  = "membership",
                 action  = "update",
@@ -113,6 +120,7 @@ ui.container{ attr = { class = "area_head", style = style }, content = function(
 
         elseif app.session.member_id == member.id and member:has_voting_right_for_unit_id(area.unit_id) then
           ui.link{
+            image   = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_add.png" },
             text   = _"Participate in this area",
             module = "membership",
             action = "update",
@@ -133,14 +141,15 @@ ui.container{ attr = { class = "area_head", style = style }, content = function(
 
           slot.put(" &middot; ")
           if area.delegation_info.own_delegation_scope ~= "area" then
-            ui.link{ text = _"Delegate area", module = "delegation", view = "show", params = { area_id = area.id } }
+            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_go.png" }, text = _"Delegate area", module = "delegation", view = "show", params = { area_id = area.id } }
           else
-            ui.link{ text = _"Change area delegation", module = "delegation", view = "show", params = { area_id = area.id } }
+            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_go.png" }, text = _"Change area delegation", module = "delegation", view = "show", params = { area_id = area.id } }
           end
           slot.put(" &middot; ")
 
           ui.link{
             content = function()
+              ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_add.png" }
               slot.put(_"Create new issue")
             end,
             module = "initiative",
