@@ -4,7 +4,7 @@ local full = param.get("full", atom.boolean)
 ui.actions(function()
   ui.link{
     text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_stack.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email.png" }
       ui.tag { content = _"Latest vote results" }
     end,
     module = "index",
@@ -18,7 +18,7 @@ ui.actions(function()
   slot.put(" &middot; ")
   ui.link{
     text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_go.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_go.png" }
       ui.tag { content = _"Voted by delegation" }
     end,
     module = "index",
@@ -32,7 +32,7 @@ ui.actions(function()
   slot.put(" &middot; ")
   ui.link{
     text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_edit.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_open.png" }
       ui.tag { content = _"Not yet voted" }
     end,
     module = "index",
@@ -64,7 +64,7 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "open",
-  icon = "icons/16/arrow_in.png",
+  icon = "icons/16/email_open.png",
   label = _"Open issues",
   module = "issue",
   view = "_list",
@@ -78,7 +78,7 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "closed",
-  icon = "icons/16/lock.png",
+  icon = "icons/16/email.png",
   label = _"Closed issues",
   module = "issue",
   view = "_list",

@@ -13,7 +13,7 @@ if show_links then
 ui.actions(function()
   ui.link{
     text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_stack.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email.png" }
       ui.tag { content = _"Latest vote results" }
     end,
     module = "index",
@@ -27,7 +27,7 @@ ui.actions(function()
   slot.put(" &middot; ")
   ui.link{
     text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_go.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_go.png" }
       ui.tag { content = _"Voted by delegation" }
     end,
     module = "index",
@@ -41,7 +41,7 @@ ui.actions(function()
   slot.put(" &middot; ")
   ui.link{
     text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/page_white_edit.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_open.png" }
       ui.tag { content = _"Not yet voted" }
     end,
     module = "index",
@@ -90,9 +90,9 @@ ui.container{ attr = { class = "unit_head", style = style }, content = function(
           ui.tag{ content = _"You have voting privileges for this unit" }
           slot.put(" &middot; ")
           if unit.delegation_info.first_trustee_id == nil then
-            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/group_go.png" }, text = _"Delegate unit", module = "delegation", view = "show", params = { unit_id = unit.id } }
+            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/house_go.png" }, text = _"Delegate unit", module = "delegation", view = "show", params = { unit_id = unit.id } }
           else
-            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/group_go.png" }, text = _"Change unit delegation", module = "delegation", view = "show", params = { unit_id = unit.id } }
+            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/house_go.png" }, text = _"Change unit delegation", module = "delegation", view = "show", params = { unit_id = unit.id } }
           end
         else
           ui.tag{ content = _"Member has voting privileges for this unit" }

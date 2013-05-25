@@ -1,6 +1,8 @@
 #!/usr/bin/env lua
 return {
 ["Please select the universities you study at"] = "Bitte wähle die Universitäten aus, an denen du studierst";
+["Meet your local UniLiquid support to get voting rights"] = "Bitte triff dich mit dem UniLiquid Support an deiner Universität um Stimmrecht zu erhalten";
+["I'm not studying at any of the universities above"] = "Ich studiere an keiner dieser Universitäten";
 ["To get voting rights in this unit, we need to verify your matriculation number. Currently this is possible at one of the following universities:<br />"] = "Um Stimmrecht in dieser Gliederung zu erhalten, müssen wir deine Matrikelnummer verifizieren. Derzeit ist dies bei den folgenden Universitäten möglich:<br />";
 ["Overview"] = "Überblick";
 ["Show Ballots"] = "Stimmzettel und Auszählung";
@@ -186,6 +188,7 @@ return {
 ["canceled_after_revocation_during_verification"] = "Abgebrochen (während Eingefroren-Phase, wegen Rückzug)";
 ["canceled_issue_not_accepted"] = "Abgebrochen (Thema nicht akzeptiert)";
 ["canceled_no_initiative_admitted"] = "Abgebrochen (Keine Initiative zugelassen)";
+["cancelled"] = "Abgebrochen";
 ["Canceled"] = "Abgebrochen";
 ["Canceled (before accepted due to revocation)"] = "Abgebrochen (in Neu-Phase, wegen Rückzug)";
 ["Canceled (during discussion due to revocation)"] = "Abgebrochen (während Diskussion, wegen Rückzug)";
@@ -702,7 +705,7 @@ return {
 ["Password reset request"] = "Passwort-Rücksetzung anfordern";
 ["Password"] = "Passwort";
 ["Passwords don't match!"] = "Kennwörter stimmen nicht überein!";
-["Passwords must consist of at least 8 characters!"] = "Das Passwort muss zumindest 8 Zeichen lang sein!";
+["Passwords must consist of at least 8 characters!"] = "Das Passwort muss mindestens 8 Zeichen lang sein!";
 ["Personal data deleted and account deactivated"] = "Persönliche Daten gelöscht und Account deaktiviert";
 ["Phase"] = "Phase";
 ["Phases"] = "Phasen";

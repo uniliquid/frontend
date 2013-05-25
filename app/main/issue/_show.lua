@@ -68,6 +68,19 @@ ui.container{ attr = { class = class }, content = function()
     tag = "div",
     content = function()
     
+        if issue.state == "admission" then
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/new.png" }
+        elseif issue.state == "discussion" then
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/comments.png" }
+        elseif issue.state == "verification" then
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/lock.png" }
+        elseif issue.state == "voting" then
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_open.png" }
+        elseif issue.state == "cancelled" then
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/cross.png" }
+        elseif issue.state == "finished" then
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/chart_bar.png" }
+        end
       ui.tag{ attr = { class = "event_name" }, content = _(issue.state_name) }
 
       if issue.closed then
@@ -77,12 +90,16 @@ ui.container{ attr = { class = class }, content = function()
         slot.put(" &middot; ")
         if issue.state_time_left:sub(1,1) == "-" then
           if issue.state == "admission" then
+            ui.image{ attr = { class = "spaceicon" }, static = "icons/16/comments.png" }
             ui.tag{ content = _("Discussion starts soon") }
           elseif issue.state == "discussion" then
+            ui.image{ attr = { class = "spaceicon" }, static = "icons/16/lock.png" }
             ui.tag{ content = _("Verification starts soon") }
           elseif issue.state == "verification" then
+            ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_open.png" }
             ui.tag{ content = _("Voting starts soon") }
           elseif issue.state == "voting" then
+            ui.image{ attr = { class = "spaceicon" }, static = "icons/16/calculator_error.png" }
             ui.tag{ content = _("Counting starts soon") }
           end
         else
@@ -97,7 +114,10 @@ ui.container{ attr = { class = class }, content = function()
   
   if vote_link_text then
     links[#links+1] ={
-      content = vote_link_text,
+      content = function()
+        ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_edit.png" }
+        ui.tag{ content = vote_link_text }
+      end,
       module = "vote",
       view = "list",
       params = { issue_id = issue.id }
@@ -107,6 +127,7 @@ ui.container{ attr = { class = class }, content = function()
   if voteable and not direct_voter then
     if not issue.member_info.non_voter then
       links[#links+1] ={
+        image = { attr = { class = "spaceicon" }, static = "icons/16/email_delete.png" },
         content = _"Do not vote directly",
         module = "vote",
         action = "non_voter",
@@ -122,7 +143,7 @@ ui.container{ attr = { class = class }, content = function()
         }
       }
     else
-      links[#links+1] = { attr = { class = "action" }, content = _"Do not vote directly" }
+      links[#links+1] = { attr = { class = "action" }, content = _"Do not vote directly", image = { attr = { class = "spaceicon" }, static = "icons/16/email_delete.png" } }
       links[#links+1] ={
         in_brackets = true,
         content = _"Cancel [nullify]",
@@ -144,7 +165,10 @@ ui.container{ attr = { class = class }, content = function()
   
   if issue.closed then
   links[#links+1] ={
-    content = _"Show Ballots",
+    content = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/vector.png" }
+      ui.tag{ content = _"Show Ballots" }
+    end,
     module = "issue",
     view = "ballots",
     id = issue.id
@@ -157,9 +181,17 @@ ui.container{ attr = { class = class }, content = function()
 
       if issue.member_info.own_participation then
         if issue.closed then
-          links[#links+1] = { content = _"You were interested" }
+          links[#links+1] = { content = function()
+            ui.image{ attr = { class = "spaceicon" }, static = "icons/16/eye.png" }
+            ui.tag{ content = _"You were interested" }
+          end
+          }
         else
-          links[#links+1] = { content = _"You are interested" }
+          links[#links+1] = { content = function()
+            ui.image{ attr = { class = "spaceicon" }, static = "icons/16/eye.png" }
+            ui.tag{ content = _"You are interested" }
+          end
+          }
         end
       end
       
@@ -183,6 +215,7 @@ ui.container{ attr = { class = class }, content = function()
           }
         elseif app.session.member:has_voting_right_for_unit_id(issue.area.unit_id) then
           links[#links+1] = {
+            image   = { attr = { class = "spaceicon" }, static = "icons/16/eye.png" },
             text    = _"Add my interest",
             module  = "interest",
             action  = "update",
@@ -202,9 +235,9 @@ ui.container{ attr = { class = class }, content = function()
 
       if not issue.closed and app.session.member:has_voting_right_for_unit_id(issue.area.unit_id) then
         if issue.member_info.own_delegation_scope ~= "issue" then
-          links[#links+1] = { text = _"Delegate issue", module = "delegation", view = "show", params = { issue_id = issue.id, initiative_id = for_initiative_id } }
+          links[#links+1] = { text = _"Delegate issue", module = "delegation", view = "show", params = { issue_id = issue.id, initiative_id = for_initiative_id }, image = { attr = { class = "spaceicon" }, static = "icons/16/page_white_go.png" } }
         else
-          links[#links+1] = { text = _"Change issue delegation", module = "delegation", view = "show", params = { issue_id = issue.id, initiative_id = for_initiative_id } }
+          links[#links+1] = { text = _"Change issue delegation", module = "delegation", view = "show", params = { issue_id = issue.id, initiative_id = for_initiative_id }, image = { attr = { class = "spaceicon" }, static = "icons/16/page_white_go.png" } }
         end
       end
     end
@@ -212,6 +245,7 @@ ui.container{ attr = { class = class }, content = function()
     if config.issue_discussion_url_func then
       local url = config.issue_discussion_url_func(issue)
       links[#links+1] = {
+        image = { attr = { class = "spaceicon" }, static = "icons/16/comments.png" },
         attr = { target = "_blank" },
         external = url,
         content = _"Discussion on issue"
@@ -220,6 +254,7 @@ ui.container{ attr = { class = class }, content = function()
 
     if config.etherpad and app.session.member then
       links[#links+1] = {
+        image = { attr = { class = "spaceicon" }, static = "icons/16/coments_edit.png" },
         attr = { target = "_blank" },
         external = issue.etherpad_url,
         content = _"Issue pad"
@@ -231,6 +266,7 @@ ui.container{ attr = { class = class }, content = function()
       if not issue.fully_frozen and not issue.closed then
       links[#links+1] = {
           attr   = { class = "action" },
+          image = { attr = { class = "spaceicon" }, static = "icons/16/script_add_delete.png" },
           text   = _"Create alternative initiative",
           module = "initiative",
           view   = "new",

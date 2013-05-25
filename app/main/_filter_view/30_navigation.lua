@@ -52,7 +52,7 @@ slot.select('navigation', function()
     else
       ui.link{
         content = function()
-          ui.image{ static = "icons/16/pencil_add.png" }
+          ui.image{ static = "icons/16/pencil.png" }
           ui.tag{ content = _"My voting rights" }
         end,
         module = 'member',
