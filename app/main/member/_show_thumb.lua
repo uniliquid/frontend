@@ -38,6 +38,12 @@ if in_delegation_chain or highlight or ((issue or initiative) and member.id == a
   container_class = container_class .. " in_delegation_chain"
 end
 
+    ui.link{
+      attr = { title = _"Show member" },
+      module = "member",
+      view = "show",
+      id = member.id,
+      content = function()
 ui.container{
   attr = { class = container_class },
   content = function()
@@ -160,13 +166,7 @@ ui.container{
       end
     }
 
-    ui.link{
-      attr = { title = _"Show member" },
-      module = "member",
-      view = "show",
-      id = member.id,
-      content = function()
-        execute.view{
+       execute.view{
           module = "member_image",
           view = "_show",
           params = {
@@ -179,7 +179,7 @@ ui.container{
           attr = { class = "member_name" },
           content = function() slot.put(name_html) end
         }
-      end
-    }
   end
 }
+      end
+    }

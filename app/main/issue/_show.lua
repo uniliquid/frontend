@@ -266,7 +266,7 @@ ui.container{ attr = { class = class }, content = function()
       if not issue.fully_frozen and not issue.closed then
       links[#links+1] = {
           attr   = { class = "action" },
-          image = { attr = { class = "spaceicon" }, static = "icons/16/script_add_delete.png" },
+          image = { attr = { class = "spaceicon" }, static = "icons/16/script_add.png" },
           text   = _"Create alternative initiative",
           module = "initiative",
           view   = "new",
