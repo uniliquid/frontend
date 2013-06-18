@@ -159,14 +159,14 @@ ui.container{
 
       end
     }
-
     ui.link{
       attr = { title = _"Show member" },
       module = "member",
       view = "show",
       id = member.id,
       content = function()
-        execute.view{
+
+       execute.view{
           module = "member_image",
           view = "_show",
           params = {
@@ -176,8 +176,13 @@ ui.container{
           }
         }
         ui.container{
+          attr = { class = "member_link" },
+          content = function()
+        ui.container{
           attr = { class = "member_name" },
           content = function() slot.put(name_html) end
+        }
+          end
         }
       end
     }

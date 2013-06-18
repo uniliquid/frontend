@@ -1445,6 +1445,13 @@ th.opinion {
   border: 1px solid #aaa;
 }
 
+.member_link {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+
 .contact_thumb {
   height: 70px;
   padding: 0;
@@ -1480,7 +1487,6 @@ th.opinion {
   left: 56px;
   top: 2ex;
   font-size: 100%;
-  width: 14em;
 }
 
 .member_thumb .flags {
