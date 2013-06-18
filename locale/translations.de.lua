@@ -44,7 +44,7 @@ return {
 ["#{count} not voted"] = "#{count} nicht abgestimmt";
 ["#{count} of them have an area delegation set"] = "bei #{count} davon ist eine Delegation für den Themenbereichs gesetzt";
 ["#{count} of them have an area delegation set."] = "bei #{count} davon ist eine Delegation für den Themenbereich gesetzt.";
-["#{count} of your outgoing delegation(s) are broken"] = "#{count} deiner ausgehenden Delegationen sind kaputt";
+["#{count} of your outgoing delegation(s) are broken, because the delegee is inactive or soon will be inactive"] = "#{count} deiner ausgehenden Delegationen sind kaputt, da dein Delegierter inaktiv ist oder bald inaktiv wird";
 ["#{count} of your outgoing delegations are broken."] = "#{count} deiner ausgehenden Delegationen sind kaputt.";
 ["#{date} at #{time}"] = "am #{date} um #{time}";
 ["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} Themen, die Dich interessieren";
@@ -447,7 +447,7 @@ return {
 ["Interested"] = "Interessiert";
 ["Internal posts"] = "Interne Ämter";
 ["Interval format:"] = "Intervall-Format";
-["Invalid login name or password!"] = "Login oder Passwort ungültig!<br /><br />Klicke bitte auf „<a href=\"https://lqfb.piratenpartei.at/index/reset_password.html\">Login/Passwort vergessen</a>“, falls du deinen Login oder dein Passwort vergessen hast. Du kannst dir dort deinen Login sowie einen Code zum Setzen eines neuen Passworts per E-Mail zusenden lassen.";
+["Invalid login name or password!"] = "Login oder Passwort ungültig!<br /><br />Klicke bitte auf „<a href=\"https://liquid.piratenpartei.at/index/reset_password.html\">Login/Passwort vergessen</a>“, falls du deinen Login oder dein Passwort vergessen hast. Du kannst dir dort deinen Login sowie einen Code zum Setzen eines neuen Passworts per E-Mail zusenden lassen.";
 ["Invalid login name or password!"] = "Login oder Passwort ungültig";
 ["Invalid query"] = "Ungültige Anfrage";
 ["Invitation has been refused"] = "Einladung wurde widerrufen";
@@ -729,7 +729,7 @@ return {
 ["Please confirm your email address!"] = "Bitte bestätige deine E-Mail-Adresse";
 ["Please confirm your email address"] = "Bitte bestätige Deine E-Mail-Adresse";
 ["Please enter the email reset code you have received:"] = "Bitte gib den Rücksetzcode ein, den du erhalten hast:";
-["Please enter the invite code you've received."] = "In unserem Liquid sind derzeit nur Mitglieder der Piratenpartei Österreichs stimmberechtigt, die ihren Mitgliedsbeitrag (€12/Jahr) bezahlt haben und von einem befugten Vertreter der Partei <a href=\"http://wiki.piratenpartei.at/wiki/AG:Liquid/Akkreditierungsbefugte\">akkreditiert</a> wurden.<br /><br /><a href=\"https://mitglieder.piratenpartei.at/adm_program/modules/profile/profile_new.php?new_user=2\">Hier kannst du <b>Mitglied werden</b></a>.<br /><br />Bei Fragen zur Anmeldung wende dich bitte an die <a href=\"mailto:lqfbsupport@piratenpartei.at\">Arbeitsgruppe Liquid</a>.<br /><br />Bitte gib hier den Einladungscode ein, den du erhalten hast:";
+["Please enter the invite code you've received."] = "In unserem Liquid sind derzeit nur Mitglieder der Piratenpartei Österreichs stimmberechtigt, die ihren Mitgliedsbeitrag (€12/Jahr) bezahlt haben und von einem befugten Vertreter der Partei <a href=\"http://wiki.piratenpartei.at/wiki/AG:Liquid/Akkreditierungsbefugte\">akkreditiert</a> wurden.<br /><br /><a href=\"https://mitglieder.piratenpartei.at/adm_program/modules/profile/profile_new.php?new_user=2\">Hier kannst du <b>Mitglied werden</b></a>.<br /><br />Bei Fragen zur Anmeldung wende dich bitte an die <a href=\"mailto:liquidsupport@piratenpartei.at\">Arbeitsgruppe Liquid</a>.<br /><br />Bitte gib hier den Einladungscode ein, den du erhalten hast:";
 ["Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."] = "Bitte gib Deine E-Mail-Adresse ein. Diese Adresse wird für automatische Benachrichtigungen (wenn Du diese anforderst) sowie zum Zurücksetzen des Passworts verwendet. Diese Adresse wird nicht veröffentlicht. Nach Abschluss der Registrierung wirst Du eine E-Mail mit einem Link zum Bestätigen der Adresse erhalten.";
 ["Please enter your login name! You will receive an email with a link to reset your password. Note that your login name might be distinct from your screen name!"] = "Bitte gib deinen Login ein! Du wirst eine E-Mail mit einem Link zum Zurücksetzen des Passworts erhalten. Beachte, dass sich dein Login möglicherweise von deinem Pseudonym unterscheidet!";
 ["Please enter your login name. You will receive an email with a link to reset your password."] = "Bitte gib Deinen Login oder deine E-Mail-Adresse ein. Du wirst eine E-Mail mit deinem Pseudonym und einem Link zum Zurücksetzen des Passworts erhalten.";

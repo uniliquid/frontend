@@ -148,7 +148,7 @@ $s = $_POST["str"];
 
 $query = "SELECT id,login,locked,active,created,activated,last_login,notify_email,name,identification FROM member WHERE lower(invite_code) LIKE '%".strtolower($s)."%' OR lower(login) LIKE '%".strtolower($s)."%' OR lower(notify_email) LIKE '%".strtolower($s)."%' OR lower(name) LIKE '%".strtolower($s)."%' OR lower(identification) LIKE '%".strtolower($s)."%' OR lower(authentication) LIKE '%".strtolower($s)."%' OR lower(organizational_unit) LIKE '%".strtolower($s)."%' OR lower(realname) LIKE '%".strtolower($s)."%' OR lower(address) LIKE '%".strtolower($s)."%' OR lower(email) LIKE '%".strtolower($s)."%' OR lower(xmpp_address) LIKE '%".strtolower($s)."%' OR lower(website) LIKE '%".strtolower($s)."%';";
 $result = pg_query($query) or die('Abfrage fehlgeschlagen: ' . pg_last_error());
-if (pg_num_rows($result) > 10) {
+if (pg_num_rows($result) > 20) {
 echo 'Too many results...';
 }
 else {

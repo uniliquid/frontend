@@ -65,6 +65,7 @@ tabs[#tabs+1] = {
 
 tabs[#tabs+1] = {
   name = "timeline",
+  icon = "icons/16/time.png",
   label = _"Latest events",
   module = "event",
   view = "_list",
@@ -94,7 +95,6 @@ tabs[#tabs+1] = {
   }
 }
 
-  icon = "icons/16/time.png",
 if app.session:has_access("all_pseudonymous") then
   tabs[#tabs+1] = {
     name = "eligible_voters",

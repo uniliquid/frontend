@@ -110,7 +110,7 @@ tabs[#tabs+1] = {
   params = {
     issues_selector = Issue:new_selector()
       :add_where("issue.policy_id IN (4,21,7,9,17)")
-      :add_where("issue.fully_frozen ISNULL ")
+      :add_where("issue.fully_frozen > now() - '2 months'::interval OR (issue.fully_frozen ISNULL AND issue.accepted + issue.discussion_time < now() + '2 months'::interval)")
       --:add_where("issue.state IN ('admission', 'discussion', 'verification', 'voting', 'finished_with_winner', 'finished_without_winner')")
       :add_where("issue.state IN ('discussion', 'verification', 'voting', 'finished_with_winner', 'finished_without_winner')")
       :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()")

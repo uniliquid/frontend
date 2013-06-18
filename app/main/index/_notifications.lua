@@ -19,7 +19,7 @@ local broken_delegations_count = Delegation:selector_for_broken(app.session.memb
 if broken_delegations_count > 0 then
   notification_links[#notification_links+1] = {
     module = "index", view = "broken_delegations",
-    text = _("#{count} of your outgoing delegation(s) are broken", { count = broken_delegations_count })
+    text = _("#{count} of your outgoing delegation(s) are broken, because the delegee is inactive or soon will be inactive", { count = broken_delegations_count })
   }
   
 end

@@ -13,7 +13,7 @@ if (isset($_GET["t"]))
 $dbconn = pg_connect("dbname=liquid_feedback")
   or die('Verbindungsaufbau fehlgeschlagen: ' . pg_last_error());
 
-$query = "SELECT issue_id,initiative.id,name FROM initiative LEFT JOIN issue ON initiative.issue_id = issue.id WHERE issue.area_id IN (1,2,3,4,5,6,7,9,10,11,12,23,32) AND issue.policy_id IN (17,7,9,21,4) AND issue_id IN (895,894,856,857,883,902,866,877,886,887,899,900,882,897,885,894,852,853,880,882,859,896,903,904,905,906,888,889,890,892,833,873,891,855) ORDER BY issue_id ASC, id ASC;";
+$query = "SELECT issue_id,initiative.id,name FROM initiative LEFT JOIN issue ON initiative.issue_id = issue.id WHERE issue_id IN (1128,1186,1395,1371,1396,1361,1362,1401,1402,1403,1277,1384,1332,1266,1367,1366,1392,1368,1393,1372,1388,1394,1325,1364) ORDER BY issue_id ASC, id ASC;";
 $result = pg_query($query) or die('Abfrage fehlgeschlagen: ' . pg_last_error());
 $last_issue_id = "";
 while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
@@ -81,11 +81,11 @@ echo '
   $last_issue_id = $issue_id;
 if ($l == 1)
 {
-    echo "http://lqfb.piratenpartei.at/i?$id\n";
+    echo "https://liquid.piratenpartei.at/i?$id\n";
 }
 else if ($l == 2)
 {
-    echo "http://lqfb.piratenpartei.at/t?$issue_id\n";
+    echo "https://liquid.piratenpartei.at/t?$issue_id\n";
 }
 else
 {
@@ -97,7 +97,7 @@ else
 |Begründung      = '.$reason.' 
 |Ergebnis        = '. ($pv + 0) .' / '. ($neutral + 0) .' / '. ($nv + 0) .'
 |Farbe           = '. ((($pv + 0) / ($nv + 0)) > 0.5 ? "0f0" : "f00") . '
-|Link            = http://lqfb.piratenpartei.at/i?'.$id.'
+|Link            = https://liquid.piratenpartei.at/i?'.$id.'
 }}';
 }
 }

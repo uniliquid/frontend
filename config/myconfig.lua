@@ -180,7 +180,7 @@ Auf das Vertragsverhältnis zwischen uns und dir sowie auf diese Allgemeinen Nut
 
 -- Absolute base url of application
 -- ------------------------------------------------------------------------
-config.absolute_base_url = "https://lqfb.piratenpartei.at/"
+config.absolute_base_url = "https://liquid.piratenpartei.at/"
 
 -- Checkbox(es) the user has to accept while registering
 -- ------------------------------------------------------------------------
@@ -229,7 +229,7 @@ config.default_lang = "de"
 -- after how long is a user considered inactive and the trustee will see warning,
 -- notation is according to postgresql intervals, default: no warning at all
 -- ------------------------------------------------------------------------
-config.delegation_warning_time = '1 months'
+config.delegation_warning_time = '5 months'
 
 -- Prefix of all automatic mails, defaults to "[Liquid] "
 -- ------------------------------------------------------------------------
@@ -237,9 +237,9 @@ config.mail_subject_prefix = "[Liquid] "
 
 -- Sender of all automatic mails, defaults to system defaults
 -- ------------------------------------------------------------------------
-config.mail_envelope_from = "lqfbsupport@piratenpartei.at"
-config.mail_from = { name = "Liquid", address = "lqfbsupport@piratenpartei.at" }
-config.mail_reply_to = "lqfbsupport@piratenpartei.at"
+config.mail_envelope_from = "liquidsupport@piratenpartei.at"
+config.mail_from = { name = "Liquid", address = "liquidsupport@piratenpartei.at" }
+config.mail_reply_to = "liquidsupport@piratenpartei.at"
 
 -- Supply custom url for avatar/photo delivery
 -- ------------------------------------------------------------------------
