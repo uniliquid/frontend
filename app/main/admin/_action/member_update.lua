@@ -27,8 +27,22 @@ if identification then
     identification = nil
   end
 end
-member.identification = identification
-
+if id then
+  member.identification = identification
+  local matn_p = param.get("matn")
+  if string.len(matn_p) == 7 then
+    local matn = Rights:by_pk(id, "matn")
+    if not matn then
+      matn = Rights:new()
+      matn.member_id = id
+      matn.key = "matn"
+      matn.value = param.get("matn")
+    else
+      matn.value = param.get("matn")
+    end
+    matn:save()
+  end
+end
 local err = member:try_save()
 
 if err then
