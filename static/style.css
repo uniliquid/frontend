@@ -265,7 +265,7 @@ div.notifications,
 
 .logo {
   font-weight: bold;
-  margin-left: 15px;
+  margin-left: 1px;
 }
 
 .topbar .instance_name,
@@ -274,11 +274,9 @@ div.notifications,
   color: #f7f7f7;
 }
 
-.topbar a:hover, 
-.topbar a:hover .logo
-.topbar a:focus, 
-.topbar a:focus .logo {
-  color: #89408e;
+a:not(.anchor):hover,
+a:not(.anchor):focus {
+  background-color: rgba(0,0,0,0.1);
 }
 
 .navigation {
@@ -564,6 +562,7 @@ div.notifications {
 .unit_head .content, .unit_head a {
   color: #f7f7f7;
 }
+
 .area_head,
 .area_list .area_head {
   background: -webkit-linear-gradient(top, #cdf, #abe);
@@ -599,6 +598,10 @@ div.notifications {
   background-color: #44a;
   color: #fff;
 }
+.unit_link:hover,
+.unit_link:focus {
+  color: #BD9EE8;
+}
 
 .area_link {
   background-color: #abf;
@@ -608,6 +611,7 @@ div.notifications {
   background-color: #e0e9ff;
   color: #000;
 }
+
 .ini_link {
   border: 1px solid #ccc;
   padding: 4px 4px 2px 4px;
@@ -660,6 +664,7 @@ a.delegation_info:focus {
 .delegation_info .micro_avatar.highlighted {
   margin: 0;
   border: 2px solid #89408e;
+  margin-bottom: -100%;
 }
 
 
@@ -737,13 +742,18 @@ a.delegation_info:focus {
   margin-top: 15px;
 }
 
-.ui_filter_head {
-  color: #777;
+.ui_filter_head_sub {
   line-height: 200%;
-  padding-top: 2px;
+  color: #777;
+}
+
+.ui_filter_head {
+  line-height: 200%;
+  color: #777;
+/*  padding-top: 2px;
   padding-bottom: 8px;
   margin-bottom: 6px;
-  border-bottom: 1px solid #888;
+  border-bottom: 1px solid #888;*/
 }
 
 .ui_filter_head:last-child {
@@ -760,6 +770,19 @@ a.delegation_info:focus {
 }
 
 .ui_filter_head a.active {
+  border: 1px solid #666;
+  text-decoration: none;
+  background: -webkit-linear-gradient(top, #666, #222);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #666), color-stop(100%,#222));
+  background: -moz-linear-gradient(#666, #222);
+  background: -ms-linear-gradient(#666, #222);
+  background: -o-linear-gradient(#666, #222);
+  background: linear-gradient(#666, #222);
+  background-color: #444;
+  color: #fff;
+}
+
+.ui_filter_head_sub a.active {
   border: 1px solid #666;
   text-decoration: none;
   background: -webkit-linear-gradient(top, #666, #222);
@@ -1471,8 +1494,8 @@ th.opinion {
 }
 
 .member_thumb a:hover div {
-  background-color: #444;
-  color: #fff;
+  background-color: #AAA;
+  color: #000;
 }
 
 .member_thumb img {
@@ -2060,4 +2083,121 @@ table.notify .ui_list_odd {
 .spaceicon {
   margin-right: 5px;
   margin-bottom: -2px;
+}
+
+.spaceicon2 {
+  margin-right: 5px;
+  margin-bottom: -3px;
+}
+
+.filter_menu {
+ z-index: 2;
+}
+
+.filter_menu li {
+ float: left;
+}
+
+.filter_menu li:hover {
+ position: relative;
+ z-index: 4;
+ cursor: default;
+}
+
+.filter_menu {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.filter_menu li {
+  padding-right: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.filter_menu_sub li {
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+
+.filter_menu li a {
+  float: right;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 0px;
+  outline: 0px none;
+  color: rgb(0, 0, 0);
+  min-width: 150px;
+  padding: 0.5ex 0.5em;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 2px 2px 4px rgb(204, 204, 204);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(187, 187, 187);
+  line-height: 100%;
+}
+  
+.filter_menu ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 3;
+  background: #fff; 
+  overflow: hidden;
+  border: 1px solid rgb(119, 119, 119);
+  border-radius: 5px 5px 5px 5px;
+  margin-bottom: 4ex;
+}
+
+.filter_menu_sub li a {
+  float: right;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 0px;
+  outline: 0px none;
+  color: rgb(0, 0, 0);
+  min-width: 200px;
+  padding: 0.5ex 0.5em;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 2px 2px 4px rgb(204, 204, 204);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(187, 187, 187);
+  line-height: 100%;
+}
+
+.filter_menu_sub ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 3;
+  background: #fff;
+  overflow: hidden;
+  border: 1px solid rgb(119, 119, 119);
+  border-radius: 5px 5px 5px 5px;
+  margin-bottom: 4ex;
+}
+
+.filter_menu li:hover ul {
+  display: block;
+}
+
+.filter_menu li li a {
+  border: 0px;
+  box-shadow: 0px 0px 0px rgb(0,0,0);
+  border-radius: 0px;
+}
+
+.filter_menu_head {
+  border-bottom: medium none;
+  color: rgb(119, 119, 119);
+  padding-top: 2px;
+  padding-bottom: 8px;
+  margin-bottom: 30px;
 }

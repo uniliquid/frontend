@@ -3,3 +3,5 @@ locale
 *.bak
 *.rej
 *.tmp
+static/icons/*
+fastpath/getpic
