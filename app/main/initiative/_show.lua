@@ -116,6 +116,7 @@ ui.container{ attr = { class = class }, content = function()
           if initiator and initiator.accepted and not initiative.issue.fully_frozen and not initiative.issue.closed and not initiative.revoked then
             slot.put(" &middot; ")
             ui.link{
+              image = { attr = { class = "spaceicon" }, static = "icons/16/user_add.png" },
               attr = { class = "action" },
               content = function()
                 slot.put(_"Invite initiator")
@@ -128,6 +129,7 @@ ui.container{ attr = { class = class }, content = function()
               slot.put(" &middot; ")
               ui.link{
                 content = function()
+                  image = { attr = { class = "spaceicon" }, static = "icons/16/user_delete.png" },
                   slot.put(_"Remove initiator")
                 end,
                 module = "initiative",
@@ -139,6 +141,7 @@ ui.container{ attr = { class = class }, content = function()
           if initiator and initiator.accepted == false and not initiative.revoked then
               slot.put(" &middot; ")
               ui.link{
+                image = { attr = { class = "spaceicon" }, static = "icons/16/cross.png" },
                 text   = _"Cancel refuse of invitation",
                 module = "initiative",
                 action = "remove_initiator",
@@ -165,6 +168,7 @@ ui.container{ attr = { class = class }, content = function()
                     target = "_blank",
                     title = initiative.discussion_url
                   },
+                  image = { attr = { class = "spaceicon" }, static = "icons/16/comments.png" },
                   text = _"Discuss with initiators",
                   external = initiative.discussion_url
                 }
@@ -176,6 +180,7 @@ ui.container{ attr = { class = class }, content = function()
           if initiator and initiator.accepted and not initiative.issue.half_frozen and not initiative.issue.closed and not initiative.revoked then
             slot.put(" &middot; ")
             ui.link{
+              image = { attr = { class = "spaceicon" }, static = "icons/16/comment_edit.png" },
               text   = _"change discussion URL",
               module = "initiative",
               view   = "edit",
@@ -345,9 +350,11 @@ ui.container{ attr = { class = class }, content = function()
         ui.container{
           attr = { class = "draft_updated_info" },
           content = function()
+            ui.image{ attr = { class = "spaceicon" }, static = "icons/16/arrow_refresh.png" }
             slot.put(_"The draft of this initiative has been updated!")
             slot.put(" ")
             ui.link{
+              image = { attr = { class = "spaceicon" }, static = "icons/16/script_code.png" },
               content = _"Show diff",
               module = "draft",
               view = "diff",
@@ -359,6 +366,7 @@ ui.container{ attr = { class = class }, content = function()
             if not initiative.revoked then
               slot.put(" ")
               ui.link{
+                image = { attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" },
                 text   = _"Refresh support to current draft",
                 module = "initiative",
                 action = "add_support",
@@ -387,6 +395,7 @@ ui.container{ attr = { class = class }, content = function()
       if initiator and initiator.accepted and not initiative.issue.half_frozen and not initiative.issue.closed and not initiative.revoked then
         ui.link{
           content = function()
+            ui.image{ attr = { class = "spaceicon" }, static = "icons/16/script_edit.png" }
             slot.put(_"Edit draft")
           end,
           module = "draft",
@@ -396,6 +405,7 @@ ui.container{ attr = { class = class }, content = function()
         slot.put(" &middot; ")
         ui.link{
           content = function()
+            ui.image{ attr = { class = "spaceicon" }, static = "icons/16/script_delete.png" }
             slot.put(_"Revoke initiative")
           end,
           module = "initiative",
@@ -418,6 +428,7 @@ ui.container{ attr = { class = class }, content = function()
         view = "show",
         id = initiative.current_draft.id,
         params = { source = 1 },
+        image = { attr = { class = "spaceicon" }, static = "icons/16/script_code_red.png" },
         content = _("Source")
       }
 
@@ -425,6 +436,7 @@ ui.container{ attr = { class = class }, content = function()
         slot.put(" &middot; ")
         ui.link{
           module = "draft", view = "list", params = { initiative_id = initiative.id },
+          image = { attr = { class = "spaceicon" }, static = "icons/16/script_code.png" },
           text = _("List all revisions (#{count})", { count = drafts_count })
         }
       end
@@ -568,7 +580,10 @@ if not show_as_head then
       ui.anchor{
         name = "supporters",
         attr = { class = "heading" },
-        content = _"Supporters" .. before_voting  .. Member:count_string(members_selector)
+        content = function()
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" }
+          slot.put(_"Supporters" .. before_voting  .. Member:count_string(members_selector))
+        end
       }    
       
       execute.view{
@@ -584,7 +599,10 @@ if not show_as_head then
       ui.anchor{
         name = "supporters",
         attr = { class = "heading" },
-        content = _"No supporters" .. before_voting
+        content = function()
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" }
+          slot.put(_"No supporters" .. before_voting)
+        end
       }
       slot.put("<br />")
     end
@@ -601,7 +619,10 @@ if not show_as_head then
       ui.anchor{
         name = "potential_supporters",
         attr = { class = "heading" },
-        content = _"Potential supporters" .. before_voting  .. Member:count_string(members_selector)
+        content = function()
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up.png" }
+          slot.put(_"Potential supporters" .. before_voting  .. Member:count_string(members_selector))
+        end
       }
                 
       execute.view{
@@ -617,7 +638,10 @@ if not show_as_head then
       ui.anchor{
         name = "potential_supporters",
         attr = { class = "heading" },
-        content = _"No potential supporters" .. before_voting
+        content = function()
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up.png" }
+          slot.put(_"No potential supporters" .. before_voting)
+        end
       }
       slot.put("<br />")
     end
@@ -642,7 +666,7 @@ if not show_as_head then
       content = function()
         slot.put(_"Short link" .. ": ")
         local link = config.absolute_base_short_url .. "i" .. initiative.id
-        ui.link{ external = link, text = link }
+        ui.link{ external = link, text = link, image = { attr = { class = "spaceicon" }, static = "icons/16/link.png" } }
       end
     }
   end

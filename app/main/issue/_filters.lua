@@ -9,7 +9,7 @@ local for_events = param.get("for_events", atom.boolean)
 local filters = {}
 
 local filter = { name = "filter" }
-  
+
 if state ~= "closed" then
   filter[#filter+1] = {
     name = "any",

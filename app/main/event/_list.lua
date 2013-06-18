@@ -116,20 +116,31 @@ filters.content = function()
             event_image = "lock.png"
           elseif event.state == "voting" then
             event_name = _"Voting started"
-            event_image = "email_open.png"
+            event_image = "email_open_image.png"
           elseif event.state == "finished_with_winner" then
             event_name = event.state_name
             event_image = "award_star_gold_2.png"
           elseif event.state == "finished_without_winner" then
             event_name = event.state_name
-            event_image = "cross.png"
+            event_image = "chart_bar_error.png"
           else
             event_name = event.state_name
+            event_image = "error.png"
           end
-          if event_image then
-            ui.image{ static = "icons/16/" .. event_image }
-            slot.put(" ")
+        elseif event_name then
+          event_image = "error.png"
+        else
+          if event.event == "argument_created" then
+            event_name = _"New argument"
+            event_image = "comment_add.png"
+          else
+            event_name = event.event
+            event_image = "error.png"
           end
+        end
+        if event_image then
+          ui.image{ static = "icons/16/" .. event_image }
+          slot.put(" ")
         end
         local days_ago_text
         if event.time_ago == 0 then
@@ -184,6 +195,7 @@ filters.content = function()
         ui.container{ attr = { class = "content" }, content = function()
           ui.link{
             module = "unit", view = "show", id = event.issue.area.unit_id,
+            image = { attr = { class = "spaceicon2" }, static = "icons/units/" .. event.issue.area.unit.name .. ".ico" },
             attr = { class = "unit_link" }, text = event.issue.area.unit.name
           }
           slot.put(" ")

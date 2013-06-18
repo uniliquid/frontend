@@ -41,7 +41,7 @@ ui.actions(function()
   slot.put(" &middot; ")
   ui.link{
     text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_open.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_open_image.png" }
       ui.tag { content = _"Not yet voted" }
     end,
     module = "index",

@@ -29,7 +29,7 @@ end
 tabs[#tabs+1] = {
   name = "not_voted_issues",
   label = _"Not voted issues" .. " (" .. tostring(issues_to_vote_count) .. ")",
-  icon = { static = "icons/16/email_open.png" },
+  icon = { static = "icons/16/email_open_image.png" },
   module = "index",
   view = "_not_voted_issues",
   params = {

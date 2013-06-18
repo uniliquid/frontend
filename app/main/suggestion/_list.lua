@@ -11,7 +11,11 @@ end
 
 ui.container{ attr = { class = "initiative_head" },
   content = function()
-    ui.tag{ tag = "a", attr = { class = "title", name = "suggestions" }, content = _"Suggestions" }
+    ui.anchor{ name = "suggestions", attr = { class = "title anchor" }, content = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/note.png" }
+      slot.put(_"Suggestions")
+    end
+    }
     if app.session.member_id
       and not initiative.issue.half_frozen
       and not initiative.issue.closed
@@ -20,14 +24,13 @@ ui.container{ attr = { class = "initiative_head" },
     then
       ui.link{
         attr = { class = "add" },
+        image = { attr = { class = "spaceicon" }, static = "icons/16/note_add.png" },
         module = "suggestion",
         view = "new",
         params = { initiative_id = initiative.id },
         text = _"New suggestion"
       }
     end
-
-    ui.anchor{ name = "suggestions", attr = { class = "title anchor" }, content = _"Suggestions" }
 
     ui.container{ attr = { class = "content" }, content = function()
       ui.paginate{
@@ -38,9 +41,15 @@ ui.container{ attr = { class = "initiative_head" },
           local suggestions = suggestions_selector:exec()
           if #suggestions < 1 then
             if not initiative.issue.fully_frozen and not initiative.issue.closed then
-              ui.tag{ content = _"No suggestions yet" }
+              ui.tag{ content = function()
+                    ui.image{ attr = { class = "spaceicon" }, static = "icons/16/note.png" }
+                    slot.put(_"No suggestions yet")
+                    end }
             else
-              ui.tag{ content = _"No suggestions" }
+              ui.tag{ content = function()
+                    ui.image{ attr = { class = "spaceicon" }, static = "icons/16/note.png" }
+                    slot.put(_"No suggestions")
+                    end }
             end
           else
             ui.list{
