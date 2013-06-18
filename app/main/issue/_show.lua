@@ -5,6 +5,8 @@ local for_listing = param.get("for_listing", atom.boolean)
 local for_initiative = param.get("for_initiative", "table")
 local for_initiative_id = for_initiative and for_initiative.id or nil
 local full = param.get("full", atom.boolean)
+local for_unit = param.get("for_unit", atom.boolean)
+local for_area = param.get("for_area", atom.boolean)
 
 local direct_voter
 if app.session.member_id then
@@ -36,16 +38,20 @@ ui.container{ attr = { class = class }, content = function()
   execute.view{ module = "delegation", view = "_info", params = { issue = issue, member = for_member } }
 
   if for_listing then
-    ui.container{ attr = { class = "content" }, content = function()
+    ui.container{ attr = { class = "content", style = "float: right;" }, content = function()
+      if not for_area then
+        if not for_unit then
       ui.link{
         module = "unit", view = "show", id = issue.area.unit_id,
         attr = { class = "unit_link" }, text = issue.area.unit.name
       }
       slot.put(" ")
+      end
       ui.link{
         module = "area", view = "show", id = issue.area_id,
         attr = { class = "area_link" }, text = issue.area.name
       }
+      end
     end }
   end
 

@@ -39,7 +39,7 @@ filters.content = function()
 
           execute.view{ module = "issue", view = "_show", params = {
             issue = issue, for_listing = not full, for_member = for_member, full = full,
-              highlight_string = highlight_string
+              highlight_string = highlight_string, for_unit = for_unit, for_area = for_area
           } }
           
         end

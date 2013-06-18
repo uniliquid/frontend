@@ -29,14 +29,22 @@ ui.container{
         module = "argument",
         view = "new",
         params = { initiative_id = initiative.id, side = side },
-        text = side == "pro" and _"New argument pro" or _"New argument contra"
+        text = side == "pro" and _"New argument pro" or _"New argument contra",
+        image = { attr = { class = "spaceicon" }, static = side == "pro" and "icons/16/comment_add.png" or "icons/16/comment_delete.png" }
       }
     end
 
     ui.anchor{
       name = "arguments",
       attr = { class = "title anchor" },
-      content = side == "pro" and _"Arguments pro" or _"Arguments contra"
+      content = side == "pro" and function()
+        ui.image{ attr = { class = "spaceicon" }, static = "icons/16/add.png" }
+        slot.put(_"Arguments pro")
+      end
+      or function()
+        ui.image{ attr = { class = "spaceicon" }, static = "icons/16/delete.png" }
+        slot.put(_"Arguments contra")
+      end
     }
 
     ui.container{ attr = { class = "content" }, content = function()
