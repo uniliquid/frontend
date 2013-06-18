@@ -176,6 +176,7 @@ slot.put([[
 </div>
 <div class="content">
 <p>UniLiquid bietet den Studierenden auf Österreichs Universitäten die Möglichkeit, auch nach der Wahl ihre Ideen einzubringen, mitzugestalten und mitzubestimmen. </p>
+<p>UniLiquid ist ein kostenloses und fraktionsübergreifendes Service für alle Studierenden auf der einen Seite und Mandatare in Studienvertretungen, Universitätsvertretungen und der Bundesvertretung auf der anderen Seite, um Meinungsbilder von Studierenden in Entscheidungsprozesse einzubinden.</p>
 <p>Die Kontrolle, ob jemand wirklich studiert, erfolgt über die universitätsspezifischen E-Mail-Adressen. Durch die Nutzung von Pseudonymen kann das System anonym genutzt werden. Die gleichzeitige Öffentlichkeit der Abstimmergebnisse garantiert Transparenz beim Ergebnis.</p>
 <p>UniLiquid wird von den Unipiraten Österreich betrieben. Die Matrikelnummern und E-Mail-Adressen unterliegen größtem Datenschutz und werden weder weitergegeben noch von uns ausgewertet, sondern lediglich zur Kontaktaufnahme mit dir und damit zur Verifikation deines Studierendenstatus verwendet.</p>
 <p>Die verwendete Software ist eine Weiterentwicklung von <a href="http://liquidfeedback.org/">LiquidFeedback</a>. Eine kurze Videoanleitung zum Gebrauch findest du <a href="https://www.youtube.com/watch?v=WVa2Txtqe1g">hier auf YouTube</a>.</p>
@@ -208,6 +209,7 @@ margin-right:auto; margin-top:10px;"></div>
 <h2>Hinweise & Neuigkeiten</h2>
 </div>
         <ul>
+          <li><b>28.05.2013</b> Umstellung auf SSL</li>
           <li><b>13.05.2013</b> Freischaltung einiger weiterer Universitäten. Insgesamt sind jetzt 16 Universitäten freigeschaltet. Sollte deine fehlen kontaktiere einfach den Support.</li>
           <li><b>13.05.2013:</b> Freischaltung der Themenbereiche und Einführung <a href="http://uniliquid.at/liquid/policy/list.html">verschiedener Regelwerke</a>. Für weitere Regelwerks- oder Themenbereichsänderungen wurde das Regelwerk <a href="http://uniliquid.at/liquid/policy/show/4.html">Änderung von Themenbereichen und Regelwerken</a> eingeführt.</li>
           <li><b>12.05.2013:</b> Freischaltung BOKU Wien, MedUni Wien, TU Wien, Uni Linz, Uni Wien</li>
