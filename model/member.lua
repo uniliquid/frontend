@@ -373,7 +373,7 @@ end
 
 function Member:by_login_and_password(login, password)
   local selector = self:new_selector()
-  selector:add_where{'"login" = ?', login }
+  selector:add_where{'lower("login") = ?', string.lower(login) }
   selector:add_where('NOT "locked"')
   selector:optional_object_mode()
   local member = selector:exec()
@@ -386,14 +386,14 @@ end
 
 function Member:by_login(login)
   local selector = self:new_selector()
-  selector:add_where{'"login" = ?', login }
+  selector:add_where{'lower("login") = ?', string.lower(login) }
   selector:optional_object_mode()
   return selector:exec()
 end
 
 function Member:by_name(name)
   local selector = self:new_selector()
-  selector:add_where{'"name" = ?', name }
+  selector:add_where{'lower("name") = ?', string.lower(name) }
   selector:optional_object_mode()
   return selector:exec()
 end

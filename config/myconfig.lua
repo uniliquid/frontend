@@ -286,6 +286,12 @@ config.issue_discussion_url_func = function(issue)
    return config.absolute_base_url .. "f?" .. tostring(issue.id)
 end
 
+-- Automatic issue related reddit URL
+-- ------------------------------------------------------------------------
+--config.issue_reddit_url_func = function(issue)
+--   return config.absolute_base_url .. "r?" .. tostring(issue.id)
+--end
+
 -- Integration of Etherpad, disabled by default
 -- ------------------------------------------------------------------------
 --config.etherpad = {
@@ -335,9 +341,9 @@ config.free_timing = {
     end
     return {
       admission = interval_by_seconds(3600),
-      discussion = interval_by_seconds(0),
-      verification = interval_by_seconds(0),
-      voting = interval_by_seconds(duration)
+      discussion = interval_by_seconds(3600),
+      verification = interval_by_seconds(3600),
+      voting = interval_by_seconds(duration-7200)
     }
   end,
   available_func = function(policy)

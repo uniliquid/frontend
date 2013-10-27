@@ -5,6 +5,9 @@ function ui.bargraph(args)
       text = text .. " / "
     end
     text = text .. tostring(bar.value)
+    if bar.text ~= nil then
+      text = text .. " " .. bar.text
+    end
   end
   ui.container{
     attr = {

@@ -184,7 +184,10 @@ ui.script{
     )
   end
 }
-
+ui.tag { content = function()
+  ui.tag{ tag = "h2", content = _"This is preferential voting. Drag the initiatives into an order which expresses your preferences." }
+end
+}
 ui.form{
   record = direct_voter,
   attr = {

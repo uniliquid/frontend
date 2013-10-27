@@ -78,11 +78,11 @@ ui.container{ attr = { class = class }, content = function()
               max_value = max_value,
               width = 100,
               bars = {
-                { color = "#0a5", value = initiative.positive_direct_votes },
-                { color = "#0b6", value = initiative.positive_votes - initiative.positive_direct_votes },
-                { color = "#aaa", value = max_value - initiative.negative_votes - initiative.positive_votes },
-                { color = "#b55", value = initiative.negative_votes - initiative.negative_direct_votes },
-                { color = "#a00", value = initiative.negative_direct_votes }
+                { color = "#0a5", value = initiative.positive_direct_votes, text = _"Yes (direct)" },
+                { color = "#0b6", value = initiative.positive_votes - initiative.positive_direct_votes, text = _"Yes (delegation)" },
+                { color = "#aaa", value = max_value - initiative.negative_votes - initiative.positive_votes, text = _"Abstention" },
+                { color = "#b55", value = initiative.negative_votes - initiative.negative_direct_votes, text = _"No (delegation)" },
+                { color = "#a00", value = initiative.negative_direct_votes, text = _"No (direct)" }
               }
             }
           else
@@ -92,9 +92,9 @@ ui.container{ attr = { class = class }, content = function()
           max_value = max_value,
           width = 100,
           bars = {
-            { color = "#0a5", value = initiative.positive_votes },
-            { color = "#aaa", value = max_value - initiative.negative_votes - initiative.positive_votes },
-            { color = "#a00", value = initiative.negative_votes },
+            { color = "#0a5", value = initiative.positive_votes, text = _"Yes" },
+            { color = "#aaa", value = max_value - initiative.negative_votes - initiative.positive_votes, text = _"Abstentions" },
+            { color = "#a00", value = initiative.negative_votes, text = _"No" },
           }
         }
         end
@@ -116,9 +116,9 @@ ui.container{ attr = { class = class }, content = function()
         quorum = max_value * quorum,
         quorum_color = "#00F",
         bars = {
-          { color = "#4c6", value = (initiative.satisfied_supporter_count or 0) },
-          { color = "#aaa", value = (initiative.supporter_count or 0) - (initiative.satisfied_supporter_count or 0) },
-          { color = "#fff", value = max_value - (initiative.supporter_count or 0) },
+          { color = "#4c6", value = (initiative.satisfied_supporter_count or 0), text = _"Supporters" },
+          { color = "#aaa", value = (initiative.supporter_count or 0) - (initiative.satisfied_supporter_count or 0), text = _"Potential supporters"  },
+          { color = "#fff", value = max_value - (initiative.supporter_count or 0), text = _"Interested non-supporters" },
         }
       }
     end

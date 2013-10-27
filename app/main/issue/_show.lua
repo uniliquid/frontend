@@ -38,7 +38,7 @@ ui.container{ attr = { class = class }, content = function()
   execute.view{ module = "delegation", view = "_info", params = { issue = issue, member = for_member } }
 
   if for_listing then
-    ui.container{ attr = { class = "content", style = "float: right;" }, content = function()
+    ui.container{ attr = { class = "content", style = "float: right; margin-right: 100px; margin-bottom: -100%" }, content = function()
       if not for_area then
         if not for_unit then
       ui.link{
@@ -255,6 +255,16 @@ ui.container{ attr = { class = class }, content = function()
         attr = { target = "_blank" },
         external = url,
         content = _"Discussion on issue"
+      }
+    end
+
+    if config.issue_reddit_url_func then
+      local url = config.issue_reddit_url_func(issue)
+      links[#links+1] = {
+        image = { attr = { class = "spaceicon" }, static = "icons/16/comments.png" },
+        attr = { target = "_blank" },
+        external = url,
+        content = _"Reddit-discussion on issue"
       }
     end
 

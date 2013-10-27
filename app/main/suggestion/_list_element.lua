@@ -46,11 +46,11 @@ ui.container{ attr = { class = "box suggestion_opinion" },
                 max_value = max_value,
                 width = 100,
                 bars = {
-                  { color = "#0a0", value = record.plus2_unfulfilled_count + record.plus2_fulfilled_count },
-                  { color = "#8f8", value = record.plus1_unfulfilled_count + record.plus1_fulfilled_count },
-                  { color = "#eee", value = max_value - record.minus2_unfulfilled_count - record.minus1_unfulfilled_count - record.minus2_fulfilled_count - record.minus1_fulfilled_count - record.plus1_unfulfilled_count - record.plus2_unfulfilled_count - record.plus1_fulfilled_count - record.plus2_fulfilled_count},
-                  { color = "#f88", value = record.minus1_unfulfilled_count + record.minus1_fulfilled_count },
-                  { color = "#a00", value = record.minus2_unfulfilled_count + record.minus2_fulfilled_count },
+                  { color = "#0a0", value = record.plus2_unfulfilled_count + record.plus2_fulfilled_count, text = _"must" },
+                  { color = "#8f8", value = record.plus1_unfulfilled_count + record.plus1_fulfilled_count, text = _"should" },
+                  { color = "#eee", value = max_value - record.minus2_unfulfilled_count - record.minus1_unfulfilled_count - record.minus2_fulfilled_count - record.minus1_fulfilled_count - record.plus1_unfulfilled_count - record.plus2_unfulfilled_count - record.plus1_fulfilled_count - record.plus2_fulfilled_count, text = _"neutral" },
+                  { color = "#f88", value = record.minus1_unfulfilled_count + record.minus1_fulfilled_count, text = _"should not" },
+                  { color = "#a00", value = record.minus2_unfulfilled_count + record.minus2_fulfilled_count, text = _"must not" },
                 }
               }
             end
@@ -183,11 +183,11 @@ ui.container{ attr = { class = "box suggestion_opinion" },
                 max_value = max_value,
                 width = 100,
                 bars = {
-                  { color = "#0a0", value = record.plus2_unfulfilled_count },
-                  { color = "#8f8", value =record.plus1_unfulfilled_count },
-                  { color = "#eee", value = max_value -record.minus2_unfulfilled_count - record.minus1_unfulfilled_count - record.plus1_unfulfilled_count- record.plus2_unfulfilled_count },
-                  { color = "#f88", value = record.minus1_unfulfilled_count },
-                  { color = "#a00", value = record.minus2_unfulfilled_count }
+                  { color = "#0a0", value = record.plus2_unfulfilled_count, text = _"must" .. " " .. _"and" .. " " .. _"not implemented" },
+                  { color = "#8f8", value =record.plus1_unfulfilled_count, text = _"should" .. " " .. _"and" .. " " .. _"not implemented" },
+                  { color = "#eee", value = max_value -record.minus2_unfulfilled_count - record.minus1_unfulfilled_count - record.plus1_unfulfilled_count- record.plus2_unfulfilled_count, text = _"neutral" },
+                  { color = "#f88", value = record.minus1_unfulfilled_count, text = _"should not" .. " " .. _"and" .. " " .. _"implemented" },
+                  { color = "#a00", value = record.minus2_unfulfilled_count, text = _"must not" .. " " .. _"and" .. " " .. _"implemented" }
                 }
               }
             end
@@ -203,11 +203,11 @@ ui.container{ attr = { class = "box suggestion_opinion" },
                 max_value = max_value,
                 width = 100,
                 bars = {
-                  { color = "#0a0", value = record.plus2_fulfilled_count },
-                  { color = "#8f8", value = record.plus1_fulfilled_count },
-                  { color = "#eee", value = max_value - record.minus2_fulfilled_count - record.minus1_fulfilled_count - record.plus1_fulfilled_count - record.plus2_fulfilled_count},
-                  { color = "#f88",value = record.minus1_fulfilled_count },
-                  { color = "#a00", value = record.minus2_fulfilled_count }
+                  { color = "#0a0", value = record.plus2_fulfilled_count, text = _"must" .. " " .. _"and" .. " " .. _"implemented" },
+                  { color = "#8f8", value = record.plus1_fulfilled_count, text = _"should" .. " " .. _"and" .. " " .. _"implemented" },
+                  { color = "#eee", value = max_value - record.minus2_fulfilled_count - record.minus1_fulfilled_count - record.plus1_fulfilled_count - record.plus2_fulfilled_count, text = _"neutral" },
+                  { color = "#f88",value = record.minus1_fulfilled_count, text = _"should not" .. " " .. _"and" .. " " .. _"not implemented" },
+                  { color = "#a00", value = record.minus2_fulfilled_count, text = _"must not" .. " " .. _"and" .. " " .. _"not implemented" }
                 }
               }
             end

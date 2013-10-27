@@ -27,7 +27,7 @@ Dort werden Anträge gestellt (zum Programm, zur Geschäftsordnung, ...) oder Um
 Falls du eine ausführlichere Erklärung zu Liquid willst, um es voll nutzen zu können, gibt es mehrere Möglichkeiten:
 * Es gibt ein Video-Tutorial des deutschen Piraten Lars Reineke unter http://larsreineke.de/liquid-feedback-video-tutorials/ – dieses ist zwar leider noch für die alte Oberfläche, aber die prinzipiellen Funktionen sind die gleichen geblieben, nur das Interface ist in der aktuellen Version etwas anders.
 * Ein kurzes schriftliches Tutorial (mit Bildern) findest du unter http://wiki.piratenpartei.at/wiki/AG:Liquid/Tutorial (in Vorbereitung), es gibt auch Antworten auf häufig gestellte Fragen unter http://wiki.piratenpartei.at/wiki/AG:Liquid/FAQ.
-* Weiters bieten die AG Liquid und andere Piraten regelmäßig Schulungen an, einerseits online (via TeamViewer und Mumble) und andererseits im „Real Life“, also als Workshop. Bei Interesse wende dich bitte an die AG Liquid (Details unter http://wiki.piratenpartei.at/wiki/AG:Liquid, per E-Mail erreichbar unter tf-liquidfeedback@piratenpartei.at).
+* Weiters bieten die AG Liquid und andere Piraten regelmäßig Schulungen an, einerseits online (via TeamViewer und Mumble) und andererseits im „Real Life“, also als Workshop. Bei Interesse wende dich bitte an die AG Liquid (Details unter http://wiki.piratenpartei.at/wiki/AG:Liquid, per E-Mail erreichbar unter liquidsupport@piratenpartei.at).
 
 Auf Anfrage bei der AG Liquid kannst du dir auch deinen Zugangscode erneut schicken lassen; der alte wird damit ungültig, du kannst also natürlich immer nur einen aktiven Account auf einmal haben.
 

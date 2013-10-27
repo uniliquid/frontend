@@ -639,6 +639,7 @@ div.notifications {
   text-decoration: none;
   padding: 5px;
   border-radius: 0px 5px 0px 5px;
+  margin-bottom: -100%;
 }
 
 .delegation_arrow {
@@ -664,7 +665,6 @@ a.delegation_info:focus {
 .delegation_info .micro_avatar.highlighted {
   margin: 0;
   border: 2px solid #89408e;
-  margin-bottom: -100%;
 }
 
 

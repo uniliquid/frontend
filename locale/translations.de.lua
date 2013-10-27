@@ -1,5 +1,12 @@
 #!/usr/bin/env lua
 return {
+["Yes (direct)"] = "Ja (direkt)";
+["Yes (delegation)"] = "Ja (Delegation)";
+["No (direct)"] = "Nein (direkt)";
+["No (delegation)"] = "Nein (Delegation)";
+["Interested non-supporters"] = "Interessierte Nicht-Unterstützer";
+["and"] = "und";
+["This is preferential voting. Drag the initiatives into an order which expresses your preferences."] = "Dies ist eine Präferenzwahl. Bringe die Initiativen in eine Reihenfolge die deinen Präferenzen entspricht.";
 ["Please select the universities you study at"] = "Bitte wähle die Universitäten aus, an denen du studierst";
 ["Meet your local UniLiquid support to get voting rights"] = "Bitte triff dich mit dem UniLiquid Support an deiner Universität um Stimmrecht zu erhalten";
 ["I'm not studying at any of the universities above"] = "Ich studiere an keiner dieser Universitäten";
@@ -306,6 +313,7 @@ return {
 ["Discard voting"] = "Abstimmung zurückziehen";
 ["Discuss with initiators"] = "Diskussion mit den Initiatoren";
 ["Discussion on issue"] = "Diskussion zum Thema";
+["Reddit-discussion on issue"] = "Reddit-Diskussion zum Thema";
 ["Discussion started"] = "Diskussion gestartet";
 ["Discussion starts soon"] = "Diskussion startet in Kürze";
 ["Discussion starts soon."] = "Diskussion beginnt in Kürze.";

@@ -159,7 +159,8 @@ for i, ini_x in ipairs(initiatives) do
   battles[ini_x.id][ini_x.id] = ""
   local battled_initiatives = Initiative:new_selector()
     :add_field("winning_battle.count", "winning_count")
-    :join("battle", "winning_battle", { "winning_battle.winning_initiative_id = ? AND winning_battle.losing_initiative_id = initiative.id", ini_x.id })
+    :join("battle_view_any_state", "winning_battle", { "winning_battle.winning_initiative_id = ? AND winning_battle.losing_initiative_id = initiative.id", ini_x.id })
+    :add_where({"initiative.id != ?", ini_x.id})
     :exec()
   for i, ini_y in ipairs(battled_initiatives) do
     battles[ini_x.id][ini_y.id] = ini_y.winning_count
