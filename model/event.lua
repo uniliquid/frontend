@@ -290,10 +290,10 @@ function Event.object:send_notification()
 
       if self.argument_id then
         local argument = Argument:by_id(self.argument_id)
-        body = body .. "<b> <a href=\"" .. request.get_absolute_baseurl() .. "argument/show/" .. self.argument_id .. ".html\">" .. (argument.side == "pro" and _("Argument pro") or _("Argument contra")) .. ": " .. argument.name .. "</a> </b>\n[quote]" .. argument:get_content("html") .. "[/quote]"
+        body = "<b>" .. (argument.side == "pro" and _("New argument pro") or _("New argument contra")) .. ": <a href=\"" .. request.get_absolute_baseurl() .. "argument/show/" .. self.argument_id .. ".html\">" .. argument.name .. "</a> </b>\n[quote]" .. argument:get_content("html") .. "[/quote]"
       elseif self.suggestion_id then
         local suggestion = Suggestion:by_id(self.suggestion_id)
-        body = body .. "<b> <a href=\"" .. request.get_absolute_baseurl() .. "suggestion/show/" .. suggestion.id .. ".html\">" .. suggestion.name .. "</a> </b>\n[quote]" .. suggestion:get_content("html") .. "[/quote]"
+        body = "<b>" .. _("New suggestion") .. ": <a href=\"" .. request.get_absolute_baseurl() .. "suggestion/show/" .. suggestion.id .. ".html\">" .. suggestion.name .. "</a> </b>\n[quote]" .. suggestion:get_content("html") .. "[/quote]"
       elseif self.initiative_id then
         local initiative = Initiative:by_id(self.initiative_id)
         body = body .. "[quote]" .. initiative.current_draft:get_content("html") .. "[/quote]\n"
