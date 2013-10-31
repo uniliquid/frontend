@@ -454,7 +454,7 @@ if app.session.member then
         end,
         selector_modifier = function(selector)
           add_default_joins(selector)
-          selector:add_where("filter_d_interest_s.member_id NOTNULL AND filter_interest.member_id ISNULL")
+          --selector:add_where("filter_d_interest_s.member_id NOTNULL AND filter_interest.member_id ISNULL")
 
           if filter_interest == "supported" then
             selector:add_where({ 
