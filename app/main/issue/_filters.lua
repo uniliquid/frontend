@@ -10,12 +10,41 @@ local filters = {}
 
 local filter = { name = "filter" }
 
+local hide_new
+if app.session.member then
+  local setting_key = "liquidfeedback_frontend_hide_new_issues"
+  local setting = Setting:by_pk(app.session.member.id, setting_key)
+  hide_new = setting and setting.value
+end
+
 if state ~= "closed" then
+  for i=1,2 do
+  if (i == 2 and hide_new) or (i == 1 and not hide_new) then
   filter[#filter+1] = {
     name = "any",
-    label = _"Any phase",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/application_form_add.png" }
+      ui.tag{ content = _"Any phase" }
+    end,
     selector_modifier = function(selector) end
   }
+  else
+  filter[#filter+1] = {
+    name = "not_new",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/application_form_delete.png" }
+      ui.tag{ content = _"Any phase (except new)" }
+    end,
+    selector_modifier = function(selector)
+      if for_events then
+        selector:add_where("event.state != 'admission'")
+      else
+        selector:add_where("issue.accepted NOTNULL OR issue.closed NOTNULL")
+      end
+    end
+  }
+  end
+  end
 end
 
 if not state then

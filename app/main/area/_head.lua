@@ -8,56 +8,6 @@ if app.session.member_id then
   area:load_delegation_info_once_for_member_id(app.session.member_id)
 end
 
-if show_links then
--- quick links
-ui.actions(function()
-  ui.link{
-    text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email.png" }
-      ui.tag { content = _"Latest vote results" }
-    end,
-    module = "index",
-    view = "index",
-    params = {
-      tab = "closed",
-      filter = "finished",
-      filter_interest = "unit"
-    }
-  }
-  slot.put(" &middot; ")
-  ui.link{
-    text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_go.png" }
-      ui.tag { content = _"Voted by delegation" }
-    end,
-    module = "index",
-    view = "index",
-    params = {
-      tab = "closed",
-      filter_interest = "voted",
-      filter_delegation = "delegated"
-    }
-  }
-  slot.put(" &middot; ")
-  ui.link{
-    text = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_open_image.png" }
-      ui.tag { content = _"Not yet voted" }
-    end,
-    module = "index",
-    view = "index",
-    params = {
-      tab = "open",
-      -- filter_policy_sel = "p1",
-      filter_policy = "any",
-      filter_voting = "not_voted",
-      filter = "frozen",
-      filter_interest = "unit"
-    }
-  }
-end)
-end
-
 if not param.get("hide_unit", atom.boolean) then
   execute.view{ module = "unit", view = "_head", params = { unit = area.unit, member = member } }
 end

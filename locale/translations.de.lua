@@ -1,5 +1,13 @@
 #!/usr/bin/env lua
 return {
+[""] = "";
+[""] = "";
+[""] = "";
+[""] = "";
+["Show only issues i am interested in in 'Not yet voted'-tab"] = "Nur Themen an denen ich interessiert bin im 'Noch nicht abgestimmt'-Tab anzeigen";
+["Show only issues in direct policies in 'Not yet voted'-tab"] = "Nur Themen in direkten Regelwerken im 'Noch nicht abgestimmt-Tab anzeigen";
+["Any phase (except new)"] = "Alle Phasen (außer Neu)";
+["Hide new issues per default"] = "Neue Themen per Default ausblenden";
 ["Important Links"] = "Nützliche Links";
 ["Voting rights log"] = "Protokoll Stimmberechtigung";
 ["Initiative style sheet"] = "Antragsformatvorlage";
@@ -217,7 +225,7 @@ return {
 ["Change notification settings"] = "Benachrichtigungseinstellungen ändern";
 ["Change order"] = "Sortierung ändern";
 ["Change password"] = "Passwort ändern";
-["Change stylesheet settings"] = "Stylesheeteinstellungen ändern";
+["Change display settings"] = "Darstellungseinstellungen ändern";
 ["Change unit delegation"] = "Delegation für Gliederung ändern";
 ["Change vote"] = "Abstimmung ändern";
 ["Change your login"] = "Deinen Login ändern";
@@ -878,8 +886,8 @@ return {
 ["Stop ignoring member"] = "nicht mehr ignorieren";
 ["Strict direct majority"] = "Strenge direkte Mehrheit";
 ["Strict indirect majority"] = "Strenge indirekte Mehrheit";
-["Stylesheet settings"] = "Stylesheeteinstellungen";
-["Stylesheet URL has been updated"] = "Stylesheet URL wurde aktualisiert";
+["Display settings"] = "Darstellungseinstellungen";
+["Display settings have been updated"] = "Darstellungseinstellungen wurden aktualisiert";
 ["Stylesheet URL"] = "Stylesheet URL";
 ["Suggest no initiative"] = "Keine Initiative empfehlen";
 ["Suggested initiative"] = "Empfohlene Initiative";

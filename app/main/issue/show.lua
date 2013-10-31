@@ -13,6 +13,10 @@ if not app.html_title.title then
 	app.html_title.title = _("Issue ##{id}", { id = issue.id })
 end
 
+execute.view{
+  module = "index", view = "_quicklinks"
+}
+
 slot.select("head", function()
   execute.view{ module = "area", view = "_head", params = { area = issue.area, show_links = true } }
 end)
