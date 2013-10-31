@@ -14,6 +14,12 @@ if true or not show_filter then
   ui_filters = function(args) args.content() end
 end
 
+local arguments = arguments_selector:exec()
+if #arguments < 1 and initiative.issue.closed then
+  return
+end
+
+
 ui.container{
   attr = { class = "initiative_head " .. (side == "pro" and "details_issue" or "details_initiative") },
   content = function()
