@@ -1,5 +1,9 @@
 #!/usr/bin/env lua
 return {
+["Important Links"] = "Nützliche Links";
+["Voting rights log"] = "Protokoll Stimmberechtigung";
+["Initiative style sheet"] = "Antragsformatvorlage";
+["Accreditation"] = "Akkreditierung";
 ["Yes (direct)"] = "Ja (direkt)";
 ["Yes (delegation)"] = "Ja (Delegation)";
 ["No (direct)"] = "Nein (direkt)";

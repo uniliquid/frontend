@@ -71,13 +71,30 @@ slot.select('navigation', function()
   end
 end)
 
-
 slot.select('navigation_right', function()
+  ui.tag{ 
+    tag = "ul",
+    attr = { id = "link_menu" },
+    content = function()
+    ui.tag{ 
+        tag = "li",
+        content = function()
+          ui.link{
+            module = "index",
+            view = "menu",
+            attr = { style = "position: absolute; padding: 0; margin: 0 -0.5em;" },
+            content = _"Important Links"
+          }
+          execute.view{ module = "index", view = "_linkmenu" }
+        end
+      }
+    end
+  }
   ui.tag{ 
     tag = "ul",
     attr = { id = "member_menu" },
     content = function()
-      ui.tag{ 
+    ui.tag{ 
         tag = "li",
         content = function()
           ui.link{
