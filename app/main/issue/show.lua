@@ -69,11 +69,6 @@ end
 
 end
 
-if issue.snapshot then
-  slot.put("<br />")
-  ui.field.timestamp{ label = _"Last snapshot:", value = issue.snapshot }
-end
-
 if config.absolute_base_short_url then
   ui.container{
     attr = { class = "shortlink" },

@@ -902,7 +902,7 @@ return {
 ["Supported"] = "Unterstützt";
 ["Supporters (before begin of voting)"] = "Unterstützer (zum Abstimmungsbeginn)";
 ["Supporters"] = "Unterstützer";
-["Switch Design"] = "Design wechseln";
+["Display settings"] = "Darstellungsoptionen";
 ["Syntax help"] = "Syntax-Hilfe";
 ["Terms of use"] = "Nutzungsbedingungen";
 ["The code you've entered is expired! Please contact #{support} to get a new one!"] = "Der Code, den du eingegeben hast, ist abgelaufen! Bitte wende dich an #{support}, um einen Neuen zu erhalten!";
