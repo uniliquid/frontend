@@ -647,6 +647,20 @@ if not show_as_head then
     end
     
     -- initiative details
+ ui.link{ name = "details_link1", attr = { id = "details_link1", class = "heading", onclick = "return toggleDetails();" }, content = function()
+  ui.image{ attr = { class = "spaceicon" }, static = "icons/16/table.png" }
+  slot.put(_"Show Details")
+end,
+  external = "#"
+}
+ui.link{ name = "details_link2", attr = { id = "details_link2", class = "heading", onclick = "return toggleDetails();", style = "display: none;" }, content = function()
+  ui.image{ attr = { class = "spaceicon" }, static = "icons/16/table.png" }
+  slot.put(_"Hide Details")
+end,
+  external = "#"
+}
+ui.container{ attr = { id = "details", style = "display: none;", class = "initiative_head" },
+content = function()
     execute.view {
       module = "initiative",
       view = "_details",
@@ -655,6 +669,8 @@ if not show_as_head then
         members_selector = members_selector
       }
     }
+end
+}
 
     slot.put('<div class="clearfix"></div>')
 

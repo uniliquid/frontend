@@ -269,3 +269,19 @@ function partialMultiLoad(
     }
   );
 }
+function toggleDetails(e)
+{
+  if (document.getElementById('details').style.display == 'none')
+  {
+    document.getElementById('details').style.display = 'block';
+    document.getElementById('details_link1').style.display = 'none';
+    document.getElementById('details_link2').style.display = 'block';
+  }
+  else
+  {
+    document.getElementById('details').style.display = 'none';
+    document.getElementById('details_link1').style.display = 'block';
+    document.getElementById('details_link2').style.display = 'none';
+  }
+  return false;
+}

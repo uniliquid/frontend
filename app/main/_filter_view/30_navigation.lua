@@ -69,9 +69,7 @@ slot.select('navigation', function()
       view   = 'reset_password'
     }
   end
-end)
 
-slot.select('navigation_right', function()
   ui.tag{ 
     tag = "ul",
     attr = { id = "link_menu" },
@@ -82,14 +80,20 @@ slot.select('navigation_right', function()
           ui.link{
             module = "index",
             view = "menu",
-            attr = { style = "position: absolute; padding: 0; margin: 0 -0.5em;" },
-            content = _"Important Links"
+            content = function()
+              ui.image{ static = "icons/16/page_white_magnify.png" }
+              ui.tag{ content = _"Important Links" }
+            end
           }
           execute.view{ module = "index", view = "_linkmenu" }
         end
       }
     end
   }
+
+end)
+
+slot.select('navigation_right', function()
   ui.tag{ 
     tag = "ul",
     attr = { id = "member_menu" },

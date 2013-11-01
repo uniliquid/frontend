@@ -1,9 +1,7 @@
 #!/usr/bin/env lua
 return {
-[""] = "";
-[""] = "";
-[""] = "";
-[""] = "";
+["Hide Details"] = "Details ausblenden";
+["Show Details"] = "Details anzeigen";
 ["Show only issues i am interested in in 'Not yet voted'-tab"] = "Nur Themen an denen ich interessiert bin im 'Noch nicht abgestimmt'-Tab anzeigen";
 ["Show only issues in direct policies in 'Not yet voted'-tab"] = "Nur Themen in direkten Regelwerken im 'Noch nicht abgestimmt-Tab anzeigen";
 ["Any phase (except new)"] = "Alle Phasen (außer Neu)";
