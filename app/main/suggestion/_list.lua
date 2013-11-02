@@ -10,7 +10,7 @@ if true or not show_filter then
 end
 
 local suggestions = suggestions_selector:exec()
-if #suggestions < 1 and (initiative.issue.fully_frozen or initiative.issue.closed) then
+if #suggestions < 1 and (initiative.issue.half_frozen or initiative.revoked or initiative.issue.fully_frozen or initiative.issue.closed) then
   return
 end
 

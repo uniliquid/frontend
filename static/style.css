@@ -325,11 +325,6 @@ form.unit_selector {
 #member_menu {
   margin: 0;
   padding: 0;
-  width: 200px;
-}
-
-#member_menu > li {
-  width: 200px;
 }
 
 #member_menu li a {
@@ -343,9 +338,8 @@ form.unit_selector {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   z-index: 3;
-  width: 200px;
   border-radius: 0 0 8px 8px;
   background: #000;
 }
@@ -409,7 +403,6 @@ form.unit_selector {
   top: 100%;
   left: 0;
   z-index: 3;
-  width: 200px;
   border-radius: 0 0 8px 8px;
   background: #000;
 }

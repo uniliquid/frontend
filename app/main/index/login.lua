@@ -78,3 +78,16 @@ ui.form{
     }
   end
 }
+slot.put('<br style="clear: both;" />')
+ui.container{
+  content = function()
+  ui.link{
+      content = function()
+        ui.image{ static = "icons/16/user_edit.png" }
+        ui.tag{ content = _"Forgot your login or password?" }
+      end,
+      module = 'index',
+      view   = 'reset_password'
+    }
+  end
+}

@@ -220,7 +220,7 @@ config.database = { engine='postgresql', dbname='liquid_feedback' }
 
 -- List of enabled languages, defaults to available languages
 -- ------------------------------------------------------------------------
-config.enabled_languages = { 'de', 'en', 'hu', 'el', 'eo', 'it', 'nl', 'zh-Hans', 'zh-TW' }
+config.enabled_languages = { 'de', 'en' } --, 'hu', 'el', 'eo', 'it', 'nl', 'zh-Hans', 'zh-TW' }
 
 -- Default language, defaults to "en"
 -- ------------------------------------------------------------------------

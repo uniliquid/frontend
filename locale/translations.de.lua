@@ -1,5 +1,6 @@
 #!/usr/bin/env lua
 return {
+["Forgot your login or password?"] = "Login oder Passwort vergessen?";
 ["Hide Details"] = "Details ausblenden";
 ["Show Details"] = "Details anzeigen";
 ["Show only issues i am interested in in 'Not yet voted'-tab"] = "Nur Themen an denen ich interessiert bin im 'Noch nicht abgestimmt'-Tab anzeigen";

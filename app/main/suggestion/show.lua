@@ -38,7 +38,7 @@ end)
 
 execute.view{
   module = "suggestion",
-  view = "show_tab",
+  view = "_suggestion",
   params = {
     suggestion = suggestion
   }

@@ -22,17 +22,6 @@ slot.select('navigation', function()
       view   = 'search'
     }
 
-    if app.session.member_id then
-      ui.link{
-        content = function()
-          ui.image{ static = "icons/16/css.png" }
-          ui.tag{ content = _"Display settings" }
-        end,
-        module = 'member',
-        view = 'settings_display'
-      }
-    end
- 
     if app.session.member == nil then
       ui.link{
         content = function()
@@ -52,7 +41,7 @@ slot.select('navigation', function()
   end
 
   if app.session.member == nil then
-    ui.link{
+--[[    ui.link{
       content = function()
         ui.image{ static = "icons/16/user_add.png" }
         ui.tag{ content = _"Registration" }
@@ -67,7 +56,7 @@ slot.select('navigation', function()
       end,
       module = 'index',
       view   = 'reset_password'
-    }
+    }]]
   end
 
   ui.tag{ 
