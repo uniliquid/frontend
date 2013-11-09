@@ -21,7 +21,7 @@ end
 app.html_title.title = suggestion.name
 app.html_title.subtitle = _("Suggestion ##{id}", { id = suggestion.id })
 
-ui.title(_"Suggestion", suggestion.initiative.issue.area.unit, suggestion.initiative.issue.area, suggestion.initiative.issue, suggestion.initiative)
+ui.title(_("Suggestion ##{id}", { id = suggestion.id }), suggestion.initiative.issue.area.unit, suggestion.initiative.issue.area, suggestion.initiative.issue, suggestion.initiative)
 
 ui.actions(function()
   ui.link{
@@ -43,3 +43,13 @@ execute.view{
     suggestion = suggestion
   }
 }
+
+if app.session.member_id then
+execute.view{
+  module = "suggestion",
+  view = "_opinions",
+  params = {
+    suggestion = suggestion
+  }
+}
+end

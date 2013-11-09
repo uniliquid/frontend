@@ -438,15 +438,6 @@ execute.view{
     draft = initiative.current_draft
   }
 }
-execute.view{
-  module = "suggestion",
-  view = "_list",
-  params = {
-    initiative = initiative,
-    suggestions_selector = initiative:get_reference_selector("suggestions"),
-    tab_id = param.get("tab_id")
-  }
-}
 end }
                     end
                   }

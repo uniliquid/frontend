@@ -1,5 +1,9 @@
 local suggestion = param.get("suggestion", "table")
 
+ui.container{ attr = { class = "heading" }, content = _"Individual opinions of supporters" }
+
+ui.container{ attr = { class = "box suggestion_opinion" }, content = function()
+
 execute.view{
   module = "opinion",
   view = "_list",
@@ -14,4 +18,7 @@ execute.view{
       :add_order_by("direct_interest_snapshot.weight DESC, member.id DESC"),
     initiative = suggestion.initiative
   }
+}
+
+end
 }

@@ -55,6 +55,7 @@ ui.container{ attr = { class = "initiative_head suggestion_head" }, content = fu
 
 end }
 slot.put('<br style="clear: both;" />')
+--ui.container{ attr = { class = "heading" }, content = _"Your opinion to this suggestion" }
 execute.view{
   module = "suggestion",
   view = "_list_element",

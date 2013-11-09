@@ -1,5 +1,11 @@
 #!/usr/bin/env lua
 return {
+["Link menu"] = "Nützliche Links";
+["Suggestions (Hide)"] = "Anregungen (Ausblenden)";
+["Show 1 Suggestion"] = "1 Anregung anzeigen";
+["Show #{count} Suggestions"] = "#{count} Anregungen anzeigen";
+["Individual opinions of supporters"] = "Individuelle Meinungen der Unterstützer";
+["Your opinion to this suggestion"] = "Deine Meinung zu dieser Anregung";
 ["Forgot your login or password?"] = "Login oder Passwort vergessen?";
 ["Hide Details"] = "Details ausblenden";
 ["Show Details"] = "Details anzeigen";

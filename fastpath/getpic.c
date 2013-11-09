@@ -11,8 +11,8 @@
 #define GETPIC_CONNINFO "dbname=liquid_feedback"
 #endif
 
-#ifndef GETPIC_DEFAULT_AVATAR
-#define GETPIC_DEFAULT_AVATAR "/opt/liquid_feedback_frontend/static/avatar.jpg"
+#ifndef GETPIC_DEFAULT_AVATAR_PATH
+#define GETPIC_DEFAULT_AVATAR_PATH "/opt/liquid_feedback_frontend/static/avatars/u"
 #endif
 
 int main(int argc, const char * const *argv) {
@@ -114,13 +114,18 @@ int main(int argc, const char * const *argv) {
     return 1;
   }
   if (PQntuples(dbr) == 0) {
+    char member_id_svg[64];
+    strcpy(member_id_svg, GETPIC_DEFAULT_AVATAR_PATH);
+    strcat(member_id_svg, "1");
+    strcat(member_id_svg, ".jpg");
     struct stat sb;
     PQclear(dbr);
     PQfinish(conn);
-    fputs("Content-Type: image/jpeg\n\n", stdout);
-    if (stat(GETPIC_DEFAULT_AVATAR, &sb)) return 1;
+    fputs("Content-Type: image/jpg\n\n", stdout);
+    if (stat(member_id_svg, &sb)) return 1;
     fprintf(stdout, "Content-Length: %i\n", (int)sb.st_size);
-    execl("/bin/cat", "cat", GETPIC_DEFAULT_AVATAR, NULL);
+    fprintf(stdout, "Content-Info: %s\n", member_id_svg);
+    execl("/bin/cat", "cat", member_id_svg, NULL);
     return 1;
   } else {
     if (PQnfields(dbr) < 0) {

@@ -244,13 +244,15 @@ config.mail_reply_to = "liquidsupport@piratenpartei.at"
 -- Supply custom url for avatar/photo delivery
 -- ------------------------------------------------------------------------
 -- config.fastpath_url_func = nil
-config.fastpath_url_func = function(member_id, image_type)
-  return request.get_absolute_baseurl() .. "fastpath/getpic?" .. tostring(member_id) .. "+" .. tostring(image_type)
-end
+--config.fastpath_url_func = function(member_id, image_type)
+--  return request.get_absolute_baseurl() .. "fastpath/getpic?" .. tostring(member_id) .. "+" .. tostring(image_type)
+--end
 
 -- Local directory for database dumps offered for download
 -- ------------------------------------------------------------------------
 config.download_dir = "/opt/liquid_feedback_dumps/"
+
+config.avatar_dir = "/opt/liquid_feedback_frontend/static/avatars/"
 
 -- Special use terms for database dump download
 -- ------------------------------------------------------------------------
@@ -271,10 +273,6 @@ config.member_image_convert_func = {
   avatar = function(data) return extos.pfilter(data, "convert", "jpeg:-", "-thumbnail",   "48x48", "jpeg:-") end,
   photo =  function(data) return extos.pfilter(data, "convert", "jpeg:-", "-thumbnail", "240x240", "jpeg:-") end
 }
-
-config.fastpath_url_func = function(member_id, image_type)
-  return request.get_absolute_baseurl() .. "fastpath/getpic?" .. tostring(member_id) .. "+" .. tostring(image_type)
-end
 
 -- Display a public message of the day
 -- ------------------------------------------------------------------------

@@ -68,7 +68,7 @@ slot.select('navigation', function()
         content = function()
           ui.link{
             module = "index",
-            view = "menu",
+            view = "linkmenu",
             content = function()
               ui.image{ static = "icons/16/page_white_magnify.png" }
               ui.tag{ content = _"Important Links" }

@@ -9,7 +9,7 @@ end
 app.html_title.title = argument.name
 app.html_title.subtitle = _("Argument ##{id}", { id = argument.id })
 
-ui.title(argument.side == "pro" and _"Argument pro" or _"Argument contra", argument.initiative.issue.area.unit, argument.initiative.issue.area, argument.initiative.issue, argument.initiative)
+ui.title((argument.side == "pro" and _"Argument pro" or _"Argument contra") .. _(" ##{id}", { id = argument.id }), argument.initiative.issue.area.unit, argument.initiative.issue.area, argument.initiative.issue, argument.initiative)
 
 ui.actions(function()
   ui.link{
@@ -28,8 +28,22 @@ util.help("argument.show", _"Argument")
 
 execute.view{
   module = "argument",
-  view = "show_tab",
+  label = argument.side == "pro" and _"Argument pro" or _"Argument contra",
+  view = "_argument",
   params = {
     argument = argument
   }
 }
+
+if app.session.member_id then
+  execute.view{
+    name = "ratings",
+    label = _"Ratings",
+    module = "argument",
+    view = "_ratings",
+    params = {
+      argument = argument
+    }
+  }
+end
+
