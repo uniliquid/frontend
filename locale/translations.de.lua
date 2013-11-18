@@ -1,5 +1,6 @@
 #!/usr/bin/env lua
 return {
+["Abstention (delegation)"] = "Enthaltung (Delegation)";
 ["Link menu"] = "Nützliche Links";
 ["Suggestions (Hide)"] = "Anregungen (Ausblenden)";
 ["Show 1 Suggestion"] = "1 Anregung anzeigen";
