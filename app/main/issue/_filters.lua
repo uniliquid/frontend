@@ -10,16 +10,16 @@ local filters = {}
 
 local filter = { name = "filter" }
 
-local hide_new
+local show_new
 if app.session.member then
-  local setting_key = "liquidfeedback_frontend_hide_new_issues"
+  local setting_key = "liquidfeedback_frontend_show_new_issues"
   local setting = Setting:by_pk(app.session.member.id, setting_key)
-  hide_new = setting and setting.value
+  show_new = setting and setting.value
 end
 
 if state ~= "closed" then
   for i=1,2 do
-  if (i == 2 and hide_new) or (i == 1 and not hide_new) then
+  if (i == 2 and not show_new) or (i == 1 and show_new) then
   filter[#filter+1] = {
     name = "any",
     label = function()

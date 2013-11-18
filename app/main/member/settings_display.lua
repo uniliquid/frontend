@@ -16,7 +16,7 @@ ui.form{
   content = function()
     local hvalue
     if app.session.member then
-      local setting_key = "liquidfeedback_frontend_hide_new_issues"
+      local setting_key = "liquidfeedback_frontend_show_new_issues"
       local setting = Setting:by_pk(app.session.member.id, setting_key)
       hvalue = setting and setting.value
     end
@@ -27,14 +27,14 @@ ui.form{
       ui.tag{
         tag = "input", 
         attr = {
-          id = "hide_new_issues",
+          id = "show_new_issues",
           type = "checkbox", name = "new_issues", value = "default",
           checked = hvalue ~= nil and "checked" or nil
         }
       }
       ui.tag{
-        tag = "label", attr = { ['for'] = "hide_new_issues" },
-        content = _"Hide new issues per default"
+        tag = "label", attr = { ['for'] = "show_new_issues" },
+        content = _"Show new issues per default"
       }
     end }
 

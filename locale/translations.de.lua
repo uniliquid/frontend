@@ -12,7 +12,7 @@ return {
 ["Show only issues i am interested in in 'Not yet voted'-tab"] = "Nur Themen an denen ich interessiert bin im 'Noch nicht abgestimmt'-Tab anzeigen";
 ["Show only issues in direct policies in 'Not yet voted'-tab"] = "Nur Themen in direkten Regelwerken im 'Noch nicht abgestimmt-Tab anzeigen";
 ["Any phase (except new)"] = "Alle Phasen (außer Neu)";
-["Hide new issues per default"] = "Neue Themen per Default ausblenden";
+["Show new issues per default"] = "Neue Themen per Default einblenden";
 ["Important Links"] = "Nützliche Links";
 ["Voting rights log"] = "Protokoll Stimmberechtigung";
 ["Initiative style sheet"] = "Antragsformatvorlage";

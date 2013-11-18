@@ -1,5 +1,5 @@
 
-local setting_keys = {"liquidfeedback_frontend_stylesheet_url","liquidfeedback_frontend_hide_new_issues","liquidfeedback_frontend_show_only_direct","liquidfeedback_frontend_show_only_membership"}
+local setting_keys = {"liquidfeedback_frontend_stylesheet_url","liquidfeedback_frontend_show_new_issues","liquidfeedback_frontend_show_only_direct","liquidfeedback_frontend_show_only_membership"}
 local params = {"stylesheet_url","new_issues","only_direct","only_membership"}
 
 for i, setting_key in ipairs(setting_keys) do
