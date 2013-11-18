@@ -14,6 +14,8 @@ if #suggestions < 1 and (initiative.issue.half_frozen or initiative.revoked or i
   return
 end
 
+local supporter = Supporter:by_pk(initiative.id, app.session.member.id)
+
 ui.container{ attr = { class = "initiative_head" },
   content = function()
      if app.session.member_id
@@ -27,7 +29,8 @@ ui.container{ attr = { class = "initiative_head" },
         image = { attr = { class = "spaceicon" }, static = "icons/16/note_add.png" },
         module = "suggestion",
         view = "new",
-        params = { initiative_id = initiative.id },
+        params = { initiative_id = initiative.id,
+                   degree = supporter and 1 or 2 },
         text = _"New suggestion"
       }
     end
