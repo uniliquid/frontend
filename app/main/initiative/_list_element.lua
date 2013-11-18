@@ -81,7 +81,7 @@ ui.container{ attr = { class = class }, content = function()
                 { color = "#0a5", value = initiative.positive_direct_votes, text = _"Yes (direct)" },
                 { color = "#0b6", value = initiative.positive_votes - initiative.positive_direct_votes, text = _"Yes (delegation)" },
                 { color = "#aaa", value = initiative.issue.direct_voter_count - initiative.negative_direct_votes - initiative.positive_direct_votes, text = _"Abstention" },
-                { color = "#ddd", value = max_value - initiative.negative_votes - initiative.positive_votes - (initiative.issue.direct_voter_count - initiative.negative_direct_votes - initiative.positive_direct_votes), text = _"Abstention (delegation)" },
+                { color = "#bbb", value = max_value - initiative.negative_votes - initiative.positive_votes - (initiative.issue.direct_voter_count - initiative.negative_direct_votes - initiative.positive_direct_votes), text = _"Abstention (delegation)" },
                 { color = "#b55", value = initiative.negative_votes - initiative.negative_direct_votes, text = _"No (delegation)" },
                 { color = "#a00", value = initiative.negative_direct_votes, text = _"No (direct)" }
               }
