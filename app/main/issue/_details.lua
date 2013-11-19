@@ -45,6 +45,9 @@ ui.form{
       ui.field.timestamp{  label = _"Fully frozen at",       name = "fully_frozen" }
     end
     ui.field.text{       label = _"Voting time",           value = format.interval_text(issue.voting_time_text) }
+    if issue.closed then
+      ui.field.timestamp{  label = _"Closed",                name = "closed" }
+    end
   end
 }
 ui.form{

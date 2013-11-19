@@ -465,7 +465,7 @@ if not show_as_head then
   }
 
   -- open arguments in discussion phase
-  if issue.accepted then
+  if issue.half_frozen or issue.fully_frozen or issue.closed then
 
     execute.view{
       module = "argument",

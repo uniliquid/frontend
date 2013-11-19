@@ -7,16 +7,15 @@ if record == nil and image_type == "photo" then
   record = MemberImage:by_pk(param.get_id(), image_type, true)
 end
 
-print('Cache-Control: max-age=300'); -- let the client cache the image for 5 minutes
+print('Cache-Control: max-age=86400'); -- let the client cache the image for 5 minutes
 
 if record == nil then
-  local default_file = ({ avatar = "avatar.jpg", photo = nil })[image_type]
-  if default_file then
-    print('Location: ' .. encode.url{ static = default_file } .. '\n\n')
-  else
-    print('Location: ' .. encode.url{ static = 'icons/16/lightning.png' } .. '\n\n')
-  end
-  exit()
+  record = { data = "", content_type = "image/jpeg" }
+  local default_file = ({ avatar = config.avatar_dir .. "u" .. param.get_id() .. ".jpg", photo = nil })[image_type]
+  local f = io.open(default_file, "rb")
+  record.data = f:read("*all")
+  record.content_type = "image/jpeg"
+  f:close()
 end
 
 assert(record.content_type, "No content-type set for image.")

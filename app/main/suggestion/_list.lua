@@ -10,18 +10,15 @@ if true or not show_filter then
 end
 
 local suggestions = suggestions_selector:exec()
-if #suggestions < 1 and (initiative.issue.fully_frozen or initiative.issue.closed) then
+if #suggestions < 1 and (initiative.issue.half_frozen or initiative.revoked or initiative.issue.fully_frozen or initiative.issue.closed) then
   return
 end
 
+local supporter = Supporter:by_pk(initiative.id, app.session.member.id)
+
 ui.container{ attr = { class = "initiative_head" },
   content = function()
-    ui.anchor{ name = "suggestions", attr = { class = "title anchor" }, content = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/note.png" }
-      slot.put(_"Suggestions")
-    end
-    }
-    if app.session.member_id
+     if app.session.member_id
       and not initiative.issue.half_frozen
       and not initiative.issue.closed
       and not initiative.revoked
@@ -32,31 +29,50 @@ ui.container{ attr = { class = "initiative_head" },
         image = { attr = { class = "spaceicon" }, static = "icons/16/note_add.png" },
         module = "suggestion",
         view = "new",
-        params = { initiative_id = initiative.id },
+        params = { initiative_id = initiative.id,
+                   degree = supporter and 1 or 2 },
         text = _"New suggestion"
       }
     end
 
-    ui.container{ attr = { class = "content" }, content = function()
+    local suggestions = suggestions_selector:exec()
+    local onclick = "";
+    local display1 = "display: block;";
+    local display2 = "display: none;"
+    if #suggestions > 0 then
+      onclick = "return toggleSuggestions();"
+      if not initiative.issue.half_frozen then
+        local tmp = display1;
+        display1 = display2;
+        display2 = tmp;
+      end
+    end
+    ui.anchor{ name = "suggestions", attr = { class = "title anchor", href = "#", onclick = onclick }, content = function()
+      ui.container{ attr = { id = "suggestions1", style = display1 }, content = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/note.png" }
+      if #suggestions < 1 then
+        slot.put(_"No suggestions yet")
+      elseif #suggestions == 1 then
+        slot.put(_"Show 1 Suggestion")
+      else
+        slot.put(_("Show #{count} Suggestions", { count = #suggestions }))
+      end
+      end
+      }
+      ui.container{ attr = { id = "suggestions2", style = display2 }, content = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/note.png" }
+        slot.put(_("Suggestions (Hide)"))
+      end
+      }
+    end
+    }
+    ui.container{ attr = { id = "suggestions_block", class = "content", style = display2 }, content = function()
       ui.paginate{
         selector = suggestions_selector,
         anchor = "suggestions",
         per_page = 20, -- number of suggestions per page
         content = function()
-          local suggestions = suggestions_selector:exec()
-          if #suggestions < 1 then
-            if not initiative.issue.fully_frozen and not initiative.issue.closed then
-              ui.tag{ content = function()
-                    ui.image{ attr = { class = "spaceicon" }, static = "icons/16/note.png" }
-                    slot.put(_"No suggestions yet")
-                    end }
-            else
-              ui.tag{ content = function()
-                    ui.image{ attr = { class = "spaceicon" }, static = "icons/16/note.png" }
-                    slot.put(_"No suggestions")
-                    end }
-            end
-          else
+          if #suggestions > 0 then
             ui.list{
               attr = { style = "table-layout: fixed;" },
               records = suggestions,

@@ -44,9 +44,6 @@ caption, th, td {
   text-align: left;
   font-weight: normal;
 }
-a:focus {
-  outline: 1px solid #89408e;
-}
 /*************************************************************************
  * Some global definitions 
  */
@@ -325,11 +322,6 @@ form.unit_selector {
 #member_menu {
   margin: 0;
   padding: 0;
-  width: 200px;
-}
-
-#member_menu > li {
-  width: 200px;
 }
 
 #member_menu li a {
@@ -343,9 +335,8 @@ form.unit_selector {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   z-index: 3;
-  width: 200px;
   border-radius: 0 0 8px 8px;
   background: #000;
 }
@@ -409,7 +400,6 @@ form.unit_selector {
   top: 100%;
   left: 0;
   z-index: 3;
-  width: 200px;
   border-radius: 0 0 8px 8px;
   background: #000;
 }
@@ -498,10 +488,11 @@ div.notifications {
 .issue .context,
 .initiative_head .title {
   padding: 8px 10px 2px 10px;
+  min-height: 22px;
 }
 .initiative_head .add {
   float: right;
-  padding: 10px 10px 2px 10px;
+  padding: 6px 10px 10px 10px;
 }
 .initiative_head .draft_version {
   font-weight: bold;

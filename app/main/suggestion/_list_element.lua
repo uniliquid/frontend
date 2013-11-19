@@ -58,7 +58,7 @@ ui.container{ attr = { class = "box suggestion_opinion" },
         },
         {
           label = _"My opinion",
-          label_attr = { style = "width: 130px; font-style: italic;" },
+          label_attr = { style = "width: 250px; font-style: italic;" },
           content = function(record)
             local degree
             local opinion

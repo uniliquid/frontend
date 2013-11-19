@@ -55,6 +55,8 @@ ui.container{ attr = { class = "initiative_head suggestion_head" }, content = fu
 
 end }
 
+slot.put('<br style="clear: both;" />'); 
+
 execute.view{
   module = "argument",
   view = "_list_element",

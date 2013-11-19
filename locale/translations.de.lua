@@ -1,11 +1,19 @@
 #!/usr/bin/env lua
 return {
+["Abstention (delegation)"] = "Enthaltung (Delegation)";
+["Link menu"] = "Nützliche Links";
+["Suggestions (Hide)"] = "Anregungen (Ausblenden)";
+["Show 1 Suggestion"] = "1 Anregung anzeigen";
+["Show #{count} Suggestions"] = "#{count} Anregungen anzeigen";
+["Individual opinions of supporters"] = "Individuelle Meinungen der Unterstützer";
+["Your opinion to this suggestion"] = "Deine Meinung zu dieser Anregung";
+["Forgot your login or password?"] = "Login oder Passwort vergessen?";
 ["Hide Details"] = "Details ausblenden";
 ["Show Details"] = "Details anzeigen";
 ["Show only issues i am interested in in 'Not yet voted'-tab"] = "Nur Themen an denen ich interessiert bin im 'Noch nicht abgestimmt'-Tab anzeigen";
 ["Show only issues in direct policies in 'Not yet voted'-tab"] = "Nur Themen in direkten Regelwerken im 'Noch nicht abgestimmt-Tab anzeigen";
 ["Any phase (except new)"] = "Alle Phasen (außer Neu)";
-["Hide new issues per default"] = "Neue Themen per Default ausblenden";
+["Show new issues per default"] = "Neue Themen per Default einblenden";
 ["Important Links"] = "Nützliche Links";
 ["Voting rights log"] = "Protokoll Stimmberechtigung";
 ["Initiative style sheet"] = "Antragsformatvorlage";
@@ -902,7 +910,7 @@ return {
 ["Supported"] = "Unterstützt";
 ["Supporters (before begin of voting)"] = "Unterstützer (zum Abstimmungsbeginn)";
 ["Supporters"] = "Unterstützer";
-["Switch Design"] = "Design wechseln";
+["Display settings"] = "Darstellungsoptionen";
 ["Syntax help"] = "Syntax-Hilfe";
 ["Terms of use"] = "Nutzungsbedingungen";
 ["The code you've entered is expired! Please contact #{support} to get a new one!"] = "Der Code, den du eingegeben hast, ist abgelaufen! Bitte wende dich an #{support}, um einen Neuen zu erhalten!";

@@ -22,17 +22,6 @@ slot.select('navigation', function()
       view   = 'search'
     }
 
-    if app.session.member_id then
-      ui.link{
-        content = function()
-          ui.image{ static = "icons/16/css.png" }
-          ui.tag{ content = _"Switch Design" }
-        end,
-        module = 'member',
-        view = 'settings_css'
-      }
-    end
- 
     if app.session.member == nil then
       ui.link{
         content = function()
@@ -52,7 +41,7 @@ slot.select('navigation', function()
   end
 
   if app.session.member == nil then
-    ui.link{
+--[[    ui.link{
       content = function()
         ui.image{ static = "icons/16/user_add.png" }
         ui.tag{ content = _"Registration" }
@@ -67,7 +56,7 @@ slot.select('navigation', function()
       end,
       module = 'index',
       view   = 'reset_password'
-    }
+    }]]
   end
 
   ui.tag{ 
@@ -79,7 +68,7 @@ slot.select('navigation', function()
         content = function()
           ui.link{
             module = "index",
-            view = "menu",
+            view = "linkmenu",
             content = function()
               ui.image{ static = "icons/16/page_white_magnify.png" }
               ui.tag{ content = _"Important Links" }

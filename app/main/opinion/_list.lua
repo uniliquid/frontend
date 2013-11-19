@@ -1,14 +1,22 @@
 local opinions_selector = param.get("opinions_selector", "table")
 
 ui.list{
+  attr = { style = "table-layout: fixed" },
   records = opinions_selector:exec(),
   columns = {
     {
+      label = nil,
+      content = function(record)
+      end
+    },
+    {
       label = _"Member name",
+      label_attr = { style = "width: 101px;" },
       content = function(arg) return Member.object.ui_field_text(arg.member) end
     },
     {
       label = _"Degree",
+      label_attr = { style = "width: 250px;" },
       content = function(record)
         if record.degree == -2 then
           slot.put(_"must not")
