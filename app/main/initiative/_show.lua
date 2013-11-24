@@ -365,9 +365,17 @@ ui.container{ attr = { class = class }, content = function()
             }
             if not initiative.revoked then
               slot.put(" ")
+              local icon = "icons/16/thumb_up_light_green.png"
+              local text = _"Refresh support to current draft"
+              if supporter:has_critical_opinion() then
+                icon = "icons/16/thumb_up.png"
+                text = _"Refresh potential support to current draft"
+              end
               ui.link{
-                image = { attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" },
-                text   = _"Refresh support to current draft",
+                image = { attr = { class = "spaceicon" }, static = icon },
+                text  =  text,
+                -- image = { attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" },
+                -- text   = _"Refresh support to current draft",
                 module = "initiative",
                 action = "add_support",
                 id     = initiative.id,
@@ -576,13 +584,17 @@ if not show_as_head then
               :add_where("direct_supporter_snapshot.satisfied")
               :add_field("direct_supporter_snapshot.informed", "is_informed")
 
+--    local supp_num = string.gmatch(Member:count_string(members_selector), "%d+")
+--        print(supp_num(0))
+--                print(supp_num(1))
+
     if members_selector:count() > 0 then
       ui.anchor{
         name = "supporters",
         attr = { class = "heading" },
         content = function()
           ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" }
-          slot.put(_"Supporters" .. before_voting  .. Member:count_string(members_selector))
+          slot.put(_"Supporters" .. before_voting .. Member:count_string(members_selector))
         end
       }    
       

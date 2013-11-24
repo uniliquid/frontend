@@ -7,6 +7,7 @@ local stylesheet_url = util.trim(param.get(params[i]))
 local setting = Setting:by_pk(app.session.member.id, setting_key)
 
 if stylesheet_url and #stylesheet_url > 0 then
+  --print(stylesheet_url)
   if not setting then
     setting = Setting:new()
     setting.member_id = app.session.member.id
