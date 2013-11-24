@@ -270,7 +270,7 @@ ui.container{ attr = { class = class }, content = function()
         end
       else
         if initiative.member_info.directly_supported then
-           if initiative.member_info.satisfied then
+          if initiative.member_info.satisfied then
             local label
             if for_member and for_member.id ~= app.session.member_id then
               label = _"This member is supporter of this initiative."
@@ -291,9 +291,33 @@ ui.container{ attr = { class = class }, content = function()
              ui.image{
                attr = { alt = label, title = label },
             static = "icons/16/thumb_up_arrow.png"
-          }
+            }
+          end
+        elseif initiative.member_info.supported then
+          if initiative.member_info.satisfied then
+            local label
+            if for_member and for_member.id ~= app.session.member_id then
+              label = _"This member is supporter of this initiative via delegation."
+            else
+              label = _"You are supporter of this initiative via delegation."
+            end
+            ui.image{
+              attr = { alt = label, title = label },
+              static = "icons/16/thumb_up_light_green_arrow.png"
+            }
+          else
+            local label
+            if for_member and for_member.id ~= app.session.member_id then
+              label = _"This member is potential supporter of this initiative via delegation."
+            else
+              label = _"You are potential supporter of this initiative via delegation."
+            end
+             ui.image{
+               attr = { alt = label, title = label },
+            static = "icons/16/thumb_up_arrow.png"
+            }
+          end
         end
-      end
       end
     end }
     if initiative.member_info.initiated then
