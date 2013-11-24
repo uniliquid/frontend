@@ -1393,6 +1393,28 @@ div.delegations_participation {
   line-height: 100%;
 }
 
+.initiative .interest_vote {
+  width: 35px;  
+  text-align: center;
+}
+
+.initiative .interest_vote a {
+  text-decoration: none;
+}
+
+.initiative .interest_vote a .yes_vote, .initiative .interest_vote a .no_vote, .initiative .interest_vote a .abstention_vote {
+  margin-left: 3px;
+  vertical-align: bottom;
+}
+
+.initiative .interest_vote a .yes_vote {
+  color: #373 !important;  
+}
+
+.initiative .interest_vote a .no_vote {
+    color: #c23 !important;
+} 
+
 .initiative .name {
   line-height: 130%;
   margin-left: 168px;
