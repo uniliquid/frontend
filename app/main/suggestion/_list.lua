@@ -14,8 +14,6 @@ if #suggestions < 1 and (initiative.issue.half_frozen or initiative.revoked or i
   return
 end
 
-local supporter = Supporter:by_pk(initiative.id, app.session.member.id)
-
 ui.container{ attr = { class = "initiative_head" },
   content = function()
      if app.session.member_id
@@ -24,6 +22,7 @@ ui.container{ attr = { class = "initiative_head" },
       and not initiative.revoked
       and app.session.member:has_voting_right_for_unit_id(initiative.issue.area.unit_id)
     then
+      local supporter = Supporter:by_pk(initiative.id, app.session.member.id)
       ui.link{
         attr = { class = "add" },
         image = { attr = { class = "spaceicon" }, static = "icons/16/note_add.png" },
