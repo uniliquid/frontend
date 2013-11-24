@@ -148,9 +148,10 @@ ui.container{ attr = { class = class }, content = function()
         quorum = max_value * quorum,
         quorum_color = "#00F",
         bars = {
-          { color = "#fa0", css = "support", value = (initiative.satisfied_supporter_count or 0), text = _"Supporters" },
-          { color = "#aaa", css = "potential", value = (initiative.supporter_count or 0) - (initiative.satisfied_supporter_count or 0), text = _"Potential supporters"  },
-          { color = "#fff", css = "interested", value = max_value - (initiative.supporter_count or 0), text = _"Interested non-supporters" },
+          { color = "#f80", value = (initiative.satisfied_direct_supporter_count or 0), text = _"Supporters (direct)" },
+          { color = "#fb0", value = (initiative.satisfied_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0), text = _"Supporters (delegation)" },
+          { color = "#aaa", value = (initiative.direct_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0), text = _"Potential supporters (direct)"  },
+          { color = "#bbb", value = (initiative.supporter_count or 0) - (initiative.satisfied_supporter_count or 0) - ((initiative.direct_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0)), text = _"Potential supporters (delegation)"  },
         }
       }
     end
