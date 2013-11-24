@@ -152,6 +152,7 @@ ui.container{ attr = { class = class }, content = function()
           { color = "#fb0", value = (initiative.satisfied_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0), text = _"Supporters (delegation)" },
           { color = "#aaa", value = (initiative.direct_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0), text = _"Potential supporters (direct)"  },
           { color = "#bbb", value = (initiative.supporter_count or 0) - (initiative.satisfied_supporter_count or 0) - ((initiative.direct_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0)), text = _"Potential supporters (delegation)"  },
+          { color = "#fff", value = max_value - (initiative.supporter_count or 0), text = _"Interested non-supporters" },
         }
       }
     end
@@ -217,9 +218,7 @@ ui.container{ attr = { class = class }, content = function()
           end
         elseif initiative.issue.member_info.voted_delegate_member_id then
           local vote = Vote:by_pk(initiative.id, initiative.issue.member_info.voted_delegate_member_id)
-          --print(vote.grade)
           if vote then
-            --print(vote.grade)
             ui.link{
               module = "vote",
               view = "list",
