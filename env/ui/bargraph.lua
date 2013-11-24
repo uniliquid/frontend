@@ -36,6 +36,7 @@ function ui.bargraph(args)
             if dlength > 0 then
               ui.container{
                 attr = {
+                  class = bar.css,
                   style = "width: " .. tostring(dlength_abs) .. "px; background-color: " .. bar.color .. ";",
                 },
                 content = function() slot.put("&nbsp;") end
@@ -60,6 +61,7 @@ function ui.bargraph(args)
           length = length + value_abs
           ui.container{
             attr = {
+              class = bar.css,
               style = "width: " .. tostring(value_abs) .. "px; background-color: " .. bar.color .. ";",
             },
             content = function() slot.put("&nbsp;") end
