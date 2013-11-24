@@ -1,5 +1,6 @@
 #!/usr/bin/env lua
 return {
+["Refresh potential support to current draft"] = "Potentielle Unterstützung auf aktuellen Entwurf aktualisieren";
 ["Abstention (delegation)"] = "Enthaltung (Delegation)";
 ["Link menu"] = "Nützliche Links";
 ["Suggestions (Hide)"] = "Anregungen (Ausblenden)";
