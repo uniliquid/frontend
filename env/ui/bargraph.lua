@@ -2,11 +2,11 @@ function ui.bargraph(args)
   local text = ""
   for i, bar in ipairs(args.bars) do
     if #text > 0 then
-      text = text .. " / "
+      text = text --.. " / "
     end
-    text = text .. tostring(bar.value)
+    --text = text .. tostring(bar.value)
     if bar.text ~= nil then
-      text = text .. " " .. bar.text
+      text = text .. "" .. bar.text
     end
   end
   ui.container{

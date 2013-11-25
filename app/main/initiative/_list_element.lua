@@ -87,8 +87,13 @@ ui.container{ attr = { class = class }, content = function()
               quorum = maj * turnout 
             else 
               quorum = maj * turnout + (1 - turnout)
-              --quorum = maj * turnout
             end
+              local yes_direct = initiative.positive_direct_votes
+              local yes_delegation = initiative.positive_votes - yes_direct
+              local no_direct = initiative.negative_direct_votes
+              local no_delegation = initiative.negative_votes - no_direct
+              local abstention_direct = initiative.issue.direct_voter_count - no_direct - yes_direct
+              local abstention_delegation = max_value - initiative.negative_votes - initiative.positive_votes - abstention_direct
             ui.bargraph{
               title_prefix = _"Votes" .. ": ",
               max_value = max_value,
@@ -96,18 +101,12 @@ ui.container{ attr = { class = class }, content = function()
               quorum = max_value * quorum,
               quorum_color = "#000",
               bars = {
-                { color = "#0a5", css = "yes_direct", value = initiative.positive_direct_votes, text = _"Yes (direct)" },
-                { color = "#0b6", css = "yes_delegation", value = initiative.positive_votes - initiative.positive_direct_votes, text = _"Yes (delegation)" },
-              { color = "#aaa", css = "abstention_direct", value = initiative.issue.direct_voter_count - initiative.negative_direct_votes - initiative.positive_direct_votes, text = _"Abstention" },
-              { color = "#bbb", css = "abstention_delegation", value = max_value - initiative.negative_votes - initiative.positive_votes - (initiative.issue.direct_voter_count - initiative.negative_direct_votes - initiative.positive_direct_votes), text = _"Abstention (delegation)" },
-              { color = "#b55", css = "no_delegation", value = initiative.negative_votes - initiative.negative_direct_votes, text = _"No (delegation)" },
-                { color = "#a00", css = "no_direct", value = initiative.negative_direct_votes, text = _"No (direct)" },
-              -- { color = "#b55", css = "no_delegation", value = initiative.negative_votes - initiative.negative_direct_votes, text = _"No (delegation)" },
-                               
-              -- { color = "#aaa", css = "abstention_direct", value = initiative.issue.direct_voter_count - initiative.negative_direct_votes - initiative.positive_direct_votes, text = _"Abstention" },
-               -- { color = "#bbb", css = "abstention_delegation", value = max_value - initiative.negative_votes - initiative.positive_votes - (initiative.issue.direct_voter_count - initiative.negative_direct_votes - initiative.positive_direct_votes), text = _"Abstention (delegation)" },
-
-
+                { color = "#0a5", value = yes_direct, text = _("Yes: #{num} ", {num = yes_direct}) },
+                { color = "#0b6", value = yes_delegation, text = _("(+#{num} delegation) / ", {num = yes_delegation}) },
+                { color = "#aaa", value = abstention_direct, text = _("Abstention: #{num} ", {num = abstention_direct}) },
+                { color = "#bbb", value = abstention_delegation, text = _("(+#{num} delegation) / ", {num = abstention_delegation}) },
+                { color = "#b55", value = no_delegation, text = _("No: #{num} ", {num = no_direct}) },
+                { color = "#a00", value = no_direct, text = _("(+#{num} delegation) / Majority: ≥#{num_maj} (#{percent_maj}%)", {num = no_delegation, num_maj = math.ceil(turnout * max_value * maj), percent_maj = maj*100}) }
               }
             }
           else
@@ -141,6 +140,10 @@ ui.container{ attr = { class = class }, content = function()
       elseif initiative.issue.policy.issue_quorum_num then
         quorum = initiative.issue.policy.issue_quorum_num / initiative.issue.policy.issue_quorum_den
       end
+      local direct_support = (initiative.satisfied_direct_supporter_count or 0)
+      local delegated_support = (initiative.satisfied_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0)
+      local direct_potential = (initiative.direct_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0)
+      local delegated_potential = (initiative.supporter_count or 0) - (initiative.satisfied_supporter_count or 0) - ((initiative.direct_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0))
       ui.bargraph{
         title_prefix = _"Supporters" .. ": ",
         max_value = max_value,
@@ -148,11 +151,11 @@ ui.container{ attr = { class = class }, content = function()
         quorum = max_value * quorum,
         quorum_color = "#00F",
         bars = {
-          { color = "#f80", value = (initiative.satisfied_direct_supporter_count or 0), text = _"Supporters (direct)" },
-          { color = "#fb0", value = (initiative.satisfied_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0), text = _"Supporters (delegation)" },
-          { color = "#aaa", value = (initiative.direct_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0), text = _"Potential supporters (direct)"  },
-          { color = "#bbb", value = (initiative.supporter_count or 0) - (initiative.satisfied_supporter_count or 0) - ((initiative.direct_supporter_count or 0) - (initiative.satisfied_direct_supporter_count or 0)), text = _"Potential supporters (delegation)"  },
-          { color = "#fff", value = max_value - (initiative.supporter_count or 0), text = _"Interested non-supporters" },
+{ color = "#f90", value = direct_support, text = _("Supporters: #{num} ", {num = direct_support}) },
+{ color = "#fb0", value = delegated_support, text = _("(+#{num} delegation) / ", {num = delegated_support}) },
+{ color = "#aaa", value = direct_potential, text = _("Potential supporters: #{num} ", {num = direct_potential})  },
+{ color = "#bbb", value = delegated_potential, text = _("(+#{num} delegation) / ", {num = delegated_potential})  },
+{ color = "#fff", value = max_value - (initiative.supporter_count or 0), text = _("Interested non-supporters: #{num} / Quorum: ≥#{num_votes} (#{percent_votes}%)", {num = max_value - (initiative.supporter_count or 0), num_votes = math.ceil( quorum * max_value ), percent_votes = quorum * 100}) },
         }
       }
     end
@@ -219,6 +222,8 @@ ui.container{ attr = { class = class }, content = function()
         elseif initiative.issue.member_info.voted_delegate_member_id then
           local vote = Vote:by_pk(initiative.id, initiative.issue.member_info.voted_delegate_member_id)
           if vote then
+            local vote_text = vote.grade
+            if vote.grade > 0 then vote_text = "+"..vote.grade end
             ui.link{
               module = "vote",
               view = "list",
@@ -230,39 +235,39 @@ ui.container{ attr = { class = class }, content = function()
                 local label
                 if vote.grade > 0 then
                   if for_member and for_member.id ~= app.session.member_id then
-                    label = _"This member voted yes via delegation." .. " ("..vote.grade..")"
+                    label = _"This member voted yes via delegation." .. " ("..vote_text..")"
                   else
-                    label = _"You voted yes via delegation.".. " ("..vote.grade..")"
+                    label = _"You voted yes via delegation.".. " ("..vote_text..")"
                   end
                   ui.image{
                     attr = { alt = label, title = label },
                     static = "icons/16/thumb_up_green_arrow.png"
                   }
-                  slot.put("<span class='yes_vote'>"..vote.grade.."</span>")
+                  slot.put("<span class='yes_vote'>"..vote_text.."</span>")
                 elseif vote.grade < 0 then
                   local label
                   if for_member and for_member.id ~= app.session.member_id then
-                    label = _"This member voted no via delegation.".. " ("..vote.grade..")"
+                    label = _"This member voted no via delegation.".. " ("..vote_text..")"
                   else
-                    label = _"You voted no via delegation.".. " ("..vote.grade..")"
+                    label = _"You voted no via delegation.".. " ("..vote_text..")"
                   end
                   ui.image{
                     attr = { alt = label, title = label },
                     static = "icons/16/thumb_down_red_arrow.png"
                   }
-                  slot.put("<span class='no_vote'>"..vote.grade.."</span>")
+                  slot.put("<span class='no_vote'>"..vote_text.."</span>")
                 else
                   local label
                   if for_member and for_member.id ~= app.session.member_id then
-                    label = _"This member abstained via delegation.".. " ("..vote.grade..")"
+                    label = _"This member abstained via delegation.".. " ("..vote_text..")"
                   else
-                    label = _"You abstained via delegation.".. " ("..vote.grade..")"
+                    label = _"You abstained via delegation.".. " ("..vote_text..")"
                   end
                   ui.image{
                     attr = { alt = label, title = label },
                     static = "icons/16/bullet_yellow_arrow.png"
                   }
-                  slot.put("<span class='abstention_vote'>"..vote.grade.."</span>")
+                  slot.put("<span class='abstention_vote'>"..vote_text.."</span>")
                 end
               end
             }
