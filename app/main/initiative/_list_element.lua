@@ -101,28 +101,32 @@ ui.container{ attr = { class = class }, content = function()
               quorum = max_value * quorum,
               quorum_color = "#000",
               bars = {
-                { color = "#0a5", value = yes_direct, text = _("Yes: #{num} ", {num = yes_direct}) },
-                { color = "#0b6", value = yes_delegation, text = _("(+#{num} delegation) / ", {num = yes_delegation}) },
-                { color = "#aaa", value = abstention_direct, text = _("Abstention: #{num} ", {num = abstention_direct}) },
-                { color = "#bbb", value = abstention_delegation, text = _("(+#{num} delegation) / ", {num = abstention_delegation}) },
-                { color = "#b55", value = no_delegation, text = _("No: #{num} ", {num = no_direct}) },
-                { color = "#a00", value = no_direct, text = _("(+#{num} delegation) / Majority: ≥#{num_maj} (#{percent_maj}%)", {num = no_delegation, num_maj = math.ceil(turnout * max_value * maj), percent_maj = maj*100}) }
+                { color = "#0a5", css = "yes_direct", value = yes_direct, text = _("Yes: #{num}", {num = yes_direct}) .. " "},
+                { color = "#0b6", css = "yes_delegation", value = yes_delegation, text = _("(+#{num} delegation)", {num = yes_delegation}) .. " / " },
+                { color = "#aaa", css = "abstention_direct", value = abstention_direct, text = _("Abstention: #{num}", {num = abstention_direct}) .. " " },
+                { color = "#bbb", css = "abstention_delegation", value = abstention_delegation, text = _("(+#{num} delegation)", {num = abstention_delegation}) .. " / " },
+                { color = "#b55", css = "no_delegation", value = no_delegation, text = _("No: #{num}", {num = no_direct}) .. " "},
+                { color = "#a00", css = "no_direct", value = no_direct, text = _("(+#{num} delegation)", {num = no_delegation}) .. " / " .. _("Majority: ≥#{num_maj} (#{percent_maj}%)", {num_maj = math.ceil(turnout * max_value * maj), percent_maj = maj*100}) }
               }
             }
           else
           -- for old initiatives without calculated values for direct voters
+            local yes = initiative.positive_votes
+            local no = initiative.negative_votes
+            local abstention =  max_value - yes - no
           ui.bargraph{
             title_prefix = _"Votes" .. ": ",
           max_value = max_value,
           width = 100,
           bars = {
-            { color = "#0a5", css = "yes_direct_both", value = initiative.positive_votes, text = _"Yes" },
-            { color = "#aaa", css = "abstention_both", value = max_value - initiative.negative_votes - initiative.positive_votes, text = _"Abstentions" },
-            { color = "#a00", css = "no_both", value = initiative.negative_votes, text = _"No" },
+            { color = "#0a5", css = "yes_direct_both", value = yes, text = _("Yes: #{num}", {num = yes}) .. " / " },
+            { color = "#aaa", css = "abstention_both", value = abstention, text = _("Abstention: #{num}", {num = abstention}) .. " / " },
+            { color = "#a00", css = "no_both", value = initiative.negative_votes, text = _("No: #{num}", {num = no}) },
           }
         }
         end
       else
+        -- this should never happen
               ui.bargraph{
                 width = 100,
                 max_value = 1,
@@ -130,7 +134,6 @@ ui.container{ attr = { class = class }, content = function()
                   { color = "#fff",value = 1, css = "", text = _"Not accepted" }
                 }
               }
-         --slot.put("&nbsp;")
       end
     else
       local max_value = initiative.issue.population or 0
@@ -151,11 +154,11 @@ ui.container{ attr = { class = class }, content = function()
         quorum = max_value * quorum,
         quorum_color = "#00F",
         bars = {
-{ color = "#f90", value = direct_support, text = _("Supporters: #{num} ", {num = direct_support}) },
-{ color = "#fb0", value = delegated_support, text = _("(+#{num} delegation) / ", {num = delegated_support}) },
-{ color = "#aaa", value = direct_potential, text = _("Potential supporters: #{num} ", {num = direct_potential})  },
-{ color = "#bbb", value = delegated_potential, text = _("(+#{num} delegation) / ", {num = delegated_potential})  },
-{ color = "#fff", value = max_value - (initiative.supporter_count or 0), text = _("Interested non-supporters: #{num} / Quorum: ≥#{num_votes} (#{percent_votes}%)", {num = max_value - (initiative.supporter_count or 0), num_votes = math.ceil( quorum * max_value ), percent_votes = quorum * 100}) },
+          { color = "#f90", css = "direct_support", value = direct_support, text = _("Supporters: #{num}", {num = direct_support}) .. " " },
+          { color = "#fb0", css = "delegated_support", value = delegated_support, text = _("(+#{num} delegation)", {num = delegated_support}) .. " / " },
+          { color = "#aaa", css = "direct_potential", value = direct_potential, text = _("Potential supporters: #{num}", {num = direct_potential}) .. " " },
+          { color = "#bbb", css = "delegated_potential", value = delegated_potential, text = _("(+#{num} delegation)", {num = delegated_potential}) .. " / " },
+          { color = "#fff", css = "", value = max_value - (initiative.supporter_count or 0), text = _("Interested non-supporters: #{num}", {num = max_value - (initiative.supporter_count or 0)}) .. " / " .. _("Quorum: ≥#{num_votes} (#{percent_votes}%)", { num_votes = math.ceil( quorum * max_value ), percent_votes = quorum * 100}) },
         }
       }
     end
