@@ -295,7 +295,7 @@ ui.container{ attr = { class = class }, content = function()
             end
              ui.image{
                attr = { alt = label, title = label },
-            static = "icons/16/thumb_up_arrow.png"
+            static = "icons/16/thumb_up.png"
             }
           end
         elseif initiative.member_info.supported then
