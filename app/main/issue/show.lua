@@ -29,7 +29,11 @@ end )
 
 if app.session:has_access("all_pseudonymous") then
 
-  ui.container{ attr = { class = "heading" }, content = _"Interested members" }
+  ui.container{ attr = { class = "heading" }, content = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/eye.png" }
+      slot.put(_"Interested members")
+    end
+  }
   
   local interested_members_selector = issue:get_reference_selector("interested_members_snapshot")
     :join("issue", nil, "issue.id = direct_interest_snapshot.issue_id")
