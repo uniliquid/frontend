@@ -518,8 +518,13 @@ if not show_as_head then
           anchor = "voter",
           reset_params = { "voter" },
           {
-            name = "any",
-            label = _"All",
+            name = "yan",
+            label = _"yes/abstention/no",
+            selector_modifier = function(selector) members_selector:add_order_by("vote.grade DESC") end
+          },
+          { 
+            name = "weight",
+            label = _"by weight",
             selector_modifier = function(members_selector) end
           },
           {
@@ -542,30 +547,56 @@ if not show_as_head then
             selector_modifier = function(selector)
               members_selector:add_where("vote.grade < 0")
             end
+          },
+          -- by comment?
+          {
+            name = "abc",
+            label = _"alphabetically",
+            selector_modifier = function(selector) members_selector:add_order_by("lower(member.name), id") end
           }
         }
       }
 
       filters.content = function()
+        execute.view{
+          module = "member",
+          view = "_list",
+          params = {
+            initiative = initiative,
+            for_votes = true,
+            members_selector = members_selector,
+            paginator_name = "voter"
+          }
+        }
+      end
+    
+      ui.container{
+        attr = { class = "voter" },
+        content = function()
+          ui.filters(filters)
+        end
+      }
+
+ --[[     execute.view{
+                module = "member",
+                        view = "_list",
+                                params = {
+                                            initiative = initiative,
+                                                      members_selector = members_selector:add_where("vote.grade = 0"),
+                                                                paginator_name = "qwer"
+                                                                        }
+                                                                              }
+
       execute.view{
         module = "member",
         view = "_list",
         params = {
           initiative = initiative,
-          for_votes = true,
-          members_selector = members_selector,
-          paginator_name = "voter"
+          members_selector = members_selector:add_where("vote.grade < 0"),
+          paginator_name = "asdf"
         }
       }
-    end
-
-    ui.container{
-      attr = { class = "voter" },
-      content = function()
-        ui.filters(filters)
-      end
-    }
-
+--]]--
     end
 
     local before_voting = ""
