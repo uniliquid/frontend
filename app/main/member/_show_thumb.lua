@@ -70,7 +70,7 @@ ui.container{
                 ui.image{
                   attr = { 
                     alt   = _"Voting comment available",
-                    title = _"Voting comment available"
+                    title = _"Voting comment available" .. ":\n" .. member.voter_comment
                   },
                   static = "icons/16/comment.png"
                 }
