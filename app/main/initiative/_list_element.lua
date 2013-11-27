@@ -287,7 +287,7 @@ ui.container{ attr = { class = class }, content = function()
             end
             ui.image{
               attr = { alt = label, title = label },
-              static = "icons/16/thumb_up_light_green.png"
+              static = "icons/16/thumb_up_orange.png"
             }
           else
             local label
@@ -298,7 +298,7 @@ ui.container{ attr = { class = class }, content = function()
             end
              ui.image{
                attr = { alt = label, title = label },
-            static = "icons/16/thumb_up.png"
+            static = "icons/16/thumb_up_grey.png"
             }
           end
         elseif initiative.member_info.supported then
@@ -311,7 +311,7 @@ ui.container{ attr = { class = class }, content = function()
             end
             ui.image{
               attr = { alt = label, title = label },
-              static = "icons/16/thumb_up_light_green_arrow.png"
+              static = "icons/16/thumb_up_orange_arrow.png"
             }
           else
             local label
@@ -322,7 +322,7 @@ ui.container{ attr = { class = class }, content = function()
             end
              ui.image{
                attr = { alt = label, title = label },
-            static = "icons/16/thumb_up_arrow.png"
+            static = "icons/16/thumb_up_grey_arrow.png"
             }
           end
         end

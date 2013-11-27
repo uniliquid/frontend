@@ -365,17 +365,15 @@ ui.container{ attr = { class = class }, content = function()
             }
             if not initiative.revoked then
               slot.put(" ")
-              local icon = "icons/16/thumb_up_light_green.png"
+              local icon = "icons/16/thumb_up_orange.png"
               local text = _"Refresh support to current draft"
               if supporter:has_critical_opinion() then
-                icon = "icons/16/thumb_up.png"
+                icon = "icons/16/thumb_up_grey.png"
                 text = _"Refresh potential support to current draft"
               end
               ui.link{
                 image = { attr = { class = "spaceicon" }, static = icon },
                 text  =  text,
-                -- image = { attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" },
-                -- text   = _"Refresh support to current draft",
                 module = "initiative",
                 action = "add_support",
                 id     = initiative.id,
@@ -593,7 +591,7 @@ if not show_as_head then
         name = "supporters",
         attr = { class = "heading" },
         content = function()
-          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" }
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_orange.png" }
           slot.put(_"Supporters" .. before_voting .. Member:count_string(members_selector))
         end
       }    
@@ -612,7 +610,7 @@ if not show_as_head then
         name = "supporters",
         attr = { class = "heading" },
         content = function()
-          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" }
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_orange.png" }
           slot.put(_"No supporters" .. before_voting)
         end
       }
@@ -632,7 +630,7 @@ if not show_as_head then
         name = "potential_supporters",
         attr = { class = "heading" },
         content = function()
-          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up.png" }
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_grey.png" }
           slot.put(_"Potential supporters" .. before_voting  .. Member:count_string(members_selector))
         end
       }
@@ -651,7 +649,7 @@ if not show_as_head then
         name = "potential_supporters",
         attr = { class = "heading" },
         content = function()
-          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up.png" }
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_grey.png" }
           slot.put(_"No potential supporters" .. before_voting)
         end
       }

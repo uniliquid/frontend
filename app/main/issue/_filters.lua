@@ -372,7 +372,7 @@ if member then
   filter[#filter+1] = {
     name = "supported",
     label = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_orange.png" }
       ui.tag{ content = _"Supported" }
     end,
     selector_modifier = function() end
@@ -380,7 +380,7 @@ if member then
   filter[#filter+1] = {
     name = "potentially_supported",
     label = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_grey.png" }
       ui.tag{ content = _"Potentially supported" }
     end,
     selector_modifier = function() end
