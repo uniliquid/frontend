@@ -173,7 +173,7 @@ ui.container{ attr = { class = class }, content = function()
           local vote = Vote:by_pk(initiative.id, for_member.id)
           if vote then
             local vote_text = vote.grade
-            if vote.grade > 0 then vote_text = "+"..vote.grade end
+            if vote.grade > 0 then vote_text = "+"..vote.grade elseif vote.grade == 0 then vote_text = "±"..vote.grade end
               ui.link{
               module = "vote",
               view = "list",
@@ -226,7 +226,7 @@ ui.container{ attr = { class = class }, content = function()
           local vote = Vote:by_pk(initiative.id, initiative.issue.member_info.voted_delegate_member_id)
           if vote then
             local vote_text = vote.grade
-            if vote.grade > 0 then vote_text = "+"..vote.grade end
+            if vote.grade > 0 then vote_text = "+"..vote.grade elseif vote.grade == 0 then vote_text = "±"..vote.grade end
             ui.link{
               module = "vote",
               view = "list",
