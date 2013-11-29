@@ -54,6 +54,10 @@ if issue.closed then
 elseif not (initiative.issue.half_frozen or initiative.issue.fully_frozen) then
   slot.put_into("error", _"This issue is still in discussion!")
   return false
+elseif (initiative.issue.fully_frozen and not initiative.admitted) then
+  local policy = initiative.issue.policy
+  slot.put_into("error", _("This initiative has not been admitted! It failed the quorum of #{quorum}.", { quorum = format.percentage(policy.initiative_quorum_num / policy.initiative_quorum_den) }))
+  return false
 end
 
 -- positive rating
