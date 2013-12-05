@@ -329,14 +329,14 @@ for i, record in ipairs(delegation_chain) do
       }
     end
   }
-  if (not issue or issue.state ~= 'voting') and record.participation and not record.overridden then
-    ui.container{
-      attr = { class = "delegation_participation" },
-      content = function()
-        slot.put(_"This member is participating, the rest of delegation chain is suspended while discussing")
-      end
-    }
-  end
+--  if (not issue or issue.state ~= 'voting') and record.participation and not record.overridden then
+--    ui.container{
+--      attr = { class = "delegation_participation" },
+--      content = function()
+--        slot.put(_"This member is participating, the rest of delegation chain is suspended while discussing")
+--      end
+--    }
+--  end
   slot.put("<br style='clear: left'/>")
 end
 
