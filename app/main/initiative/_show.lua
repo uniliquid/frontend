@@ -518,14 +518,14 @@ if not show_as_head then
           anchor = "voter",
           reset_params = { "voter" },
           {
-            name = "yan",
-            label = _"yes/abstention/no",
-            selector_modifier = function(selector) members_selector:add_order_by("vote.grade DESC") end
-          },
-          { 
             name = "weight",
             label = _"by weight",
             selector_modifier = function(members_selector) end
+          },
+          {
+            name = "yan",
+            label = _"yes / abstention / no",
+            selector_modifier = function(selector) members_selector:add_order_by("sign(vote.grade) DESC") end
           },
           {
             name = "yes",

@@ -1,5 +1,8 @@
 #!/usr/bin/env lua
 return {
+["by weight"] = "nach Stimmgewicht";
+["yes / abstention / no"] = "Ja / Enthaltung / Nein";
+["alphabetically"] = "alphabetisch";
 ["Refresh potential support to current draft"] = "Potentielle Unterstützung auf aktuellen Entwurf aktualisieren";
 ["Abstention (delegation)"] = "Enthaltung (Delegation)";
 ["Link menu"] = "Nützliche Links";
