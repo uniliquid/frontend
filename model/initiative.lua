@@ -161,7 +161,7 @@ Initiative:add_reference{
     selector:add_field("CASE WHEN issue.fully_frozen ISNULL AND issue.closed ISNULL THEN supporter.member_id NOTNULL ELSE supporter_s.member_id NOTNULL END", "supported")
     selector:add_field({ "CASE WHEN issue.fully_frozen ISNULL AND issue.closed ISNULL THEN delegation_info.own_participation AND supporter.member_id NOTNULL ELSE supporter_s.member_id = ? END", options.member_id }, "directly_supported")
     
-    selector:add_field("CASE WHEN issue.fully_frozen ISNULL AND issue.closed ISNULL THEN supporter.member_id NOTNULL AND NOT EXISTS(SELECT 1 FROM critical_opinion WHERE critical_opinion.initiative_id = initiative.id AND critical_opinion.member_id = delegation_info.participating_member_id) ELSE supporter_s.satisfied NOTNULL END", "satisfied")
+    selector:add_field("CASE WHEN issue.fully_frozen ISNULL AND issue.closed ISNULL THEN supporter.member_id NOTNULL AND NOT EXISTS(SELECT 1 FROM critical_opinion WHERE critical_opinion.initiative_id = initiative.id AND critical_opinion.member_id = delegation_info.participating_member_id) ELSE supporter_s.satisfied END", "satisfied")
 
     
     --selector:add_field("", "informed")
