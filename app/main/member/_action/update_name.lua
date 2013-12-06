@@ -11,14 +11,31 @@ if #name < 3 then
   return false
 end
 
-app.session.member.name = name
+local name_changed = false
+local name_error = false
+local db_error = nil
+local check_member = Member:by_name(name)
+if check_member then
+  if check_member.id ~= app.session.member.id then
+    name_error = true
+  else
+    slot.put_into("notice", _"Your name has not changed")
+    return true
+  end
+end
 
-local db_error = app.session.member:try_save()
+if not name_error then
+  app.session.member.name = name
 
-if db_error then
-  if db_error:is_kind_of("IntegrityConstraintViolation.UniqueViolation") then
-    slot.put_into("error", _"This name is already taken, please choose another one!")
+  db_error = app.session.member:try_save()
+end
+if name_error then
+  slot.put_into("error", _"This name is too similar to the name of someone else, please choose a different one!")
   return false
+elseif db_error then
+  if db_error:is_kind_of("IntegrityConstraintViolation.UniqueViolation") then
+    slot.put_into("error", _"This name is too similar to the name of someone else, please choose a different one!")
+    return false
   end
   db_error:escalate()
 end

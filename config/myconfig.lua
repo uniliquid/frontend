@@ -357,4 +357,6 @@ config.free_timing = {
   end
 }
 
+config.forbid_similar_names = false
+
 execute.config("init")

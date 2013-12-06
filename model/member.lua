@@ -392,8 +392,18 @@ function Member:by_login(login)
 end
 
 function Member:by_name(name)
-  local selector = self:new_selector()
-  selector:add_where{'lower("name") = ?', string.lower(name) }
+  local selector = nil
+  if config.forbid_similar_nicks then
+    selector = self:new_selector()
+      :left_join("(SELECT member_id AS id ,name FROM (SELECT B.*,B.until - A.until AS d FROM member_history A LEFT JOIN member_history B ON A.member_id = B.member_id AND A.until < B.until LEFT JOIN member_history C ON A.member_id = C.member_id AND A.until < C.until AND B.until > C.until LEFT JOIN member M ON A.member_id = M.id AND A.name = M.name WHERE A NOTNULL AND B NOTNULL AND C ISNULL AND M ISNULL ORDER BY B.until) A WHERE d > '2 weeks')", "old_name", "old_name.id = member.id")
+      :add_where{'lower(old_name.name) = ? OR levenshtein(lower(old_name.name),?) <= 1 OR lower(member.name) = ? OR levenshtein(lower(member.name),?) <= 1', string.lower(name), string.lower(name), string.lower(name), string.lower(name) }
+      :add_where{'lower(member.name) = ?', string.lower(name) }
+      :limit(1)
+  else
+    selector = self:new_selector()
+    :add_where{'lower(member.name) = ?', string.lower(name) }
+    :limit(1)
+  end
   selector:optional_object_mode()
   return selector:exec()
 end
