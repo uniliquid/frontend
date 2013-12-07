@@ -548,11 +548,15 @@ if not show_as_head then
               members_selector:add_where("vote.grade < 0")
             end
           },
-          -- by comment?
           {
             name = "abc",
             label = _"alphabetically",
             selector_modifier = function(selector) members_selector:add_order_by("lower(member.name), id") end
+          },
+          {
+            name = "comment",
+            label = _"with comment",
+            selector_modifier = function(selector) members_selector:add_where("length(direct_voter.comment) > 0") end
           }
         }
       }

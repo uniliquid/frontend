@@ -1,5 +1,6 @@
 #!/usr/bin/env lua
 return {
+["with comment"] = "mit Kommentar";
 ["by weight"] = "nach Stimmgewicht";
 ["yes / abstention / no"] = "Ja / Enthaltung / Nein";
 ["alphabetically"] = "alphabetisch";
