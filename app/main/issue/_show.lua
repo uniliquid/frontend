@@ -25,7 +25,6 @@ elseif vote_comment_able then
   vote_link_text = direct_voter and _"Update voting comment"
 end  
 
-
 local class = "issue"
 if issue.is_interested then
   class = class .. " interested"
@@ -117,55 +116,58 @@ ui.container{ attr = { class = class }, content = function()
   }
 
   local links = {}
-  
-  if vote_link_text then
-    links[#links+1] ={
-      content = function()
-        ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_edit.png" }
-        ui.tag{ content = vote_link_text }
-      end,
-      module = "vote",
-      view = "list",
-      params = { issue_id = issue.id }
-    }
-  end
-  
-  if voteable and not direct_voter then
-    if not issue.member_info.non_voter then
+
+  if not for_member or for_member.id == app.session.member_id then
+    
+    if vote_link_text then
       links[#links+1] ={
-        image = { attr = { class = "spaceicon" }, static = "icons/16/email_delete.png" },
-        content = _"Do not vote directly",
+        content = function()
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/email_edit.png" }
+          ui.tag{ content = vote_link_text }
+        end,
         module = "vote",
-        action = "non_voter",
-        params = { issue_id = issue.id },
-        routing = {
-          default = {
-            mode = "redirect",
-            module = request.get_module(),
-            view = request.get_view(),
-            id = param.get_id_cgi(),
-            params = param.get_all_cgi()
+        view = "list",
+        params = { issue_id = issue.id }
+      }
+    end
+    
+    if voteable and not direct_voter then
+      if not issue.member_info.non_voter then
+        links[#links+1] ={
+          image = { attr = { class = "spaceicon" }, static = "icons/16/email_delete.png" },
+          content = _"Do not vote directly",
+          module = "vote",
+          action = "non_voter",
+          params = { issue_id = issue.id },
+          routing = {
+            default = {
+              mode = "redirect",
+              module = request.get_module(),
+              view = request.get_view(),
+              id = param.get_id_cgi(),
+              params = param.get_all_cgi()
+            }
           }
         }
-      }
-    else
-      links[#links+1] = { attr = { class = "action" }, content = _"Do not vote directly", image = { attr = { class = "spaceicon" }, static = "icons/16/email_delete.png" } }
-      links[#links+1] ={
-        in_brackets = true,
-        content = _"Cancel [nullify]",
-        module = "vote",
-        action = "non_voter",
-        params = { issue_id = issue.id, delete = true },
-        routing = {
-          default = {
-            mode = "redirect",
-            module = request.get_module(),
-            view = request.get_view(),
-            id = param.get_id_cgi(),
-            params = param.get_all_cgi()
+      else
+        links[#links+1] = { attr = { class = "action" }, content = _"Do not vote directly", image = { attr = { class = "spaceicon" }, static = "icons/16/email_delete.png" } }
+        links[#links+1] ={
+          in_brackets = true,
+          content = _"Cancel [nullify]",
+          module = "vote",
+          action = "non_voter",
+          params = { issue_id = issue.id, delete = true },
+          routing = {
+            default = {
+              mode = "redirect",
+              module = request.get_module(),
+              view = request.get_view(),
+              id = param.get_id_cgi(),
+              params = param.get_all_cgi()
+            }
           }
         }
-      }
+      end
     end
   end
 
@@ -293,23 +295,25 @@ ui.container{ attr = { class = class }, content = function()
 
   end
     
-  ui.container{ attr = { class = "content actions" }, content = function()
-    for i, link in ipairs(links) do
-      if link.in_brackets then
-        slot.put(" (")
-      elseif i > 1 then
-        slot.put(" &middot; ")
+  if #links > 0 then
+    ui.container{ attr = { class = "content actions" }, content = function()
+      for i, link in ipairs(links) do
+        if link.in_brackets then
+          slot.put(" (")
+        elseif i > 1 then
+          slot.put(" &middot; ")
+        end
+        if link.module or link.external then
+          ui.link(link)
+        else
+          ui.tag(link)
+        end
+        if link.in_brackets then
+          slot.put(")")
+        end
       end
-      if link.module or link.external then
-        ui.link(link)
-      else
-        ui.tag(link)
-      end
-      if link.in_brackets then
-        slot.put(")")
-      end
-    end
-  end }
+    end }
+  end
 
   if not for_listing then
     if issue.state == "canceled_issue_not_accepted" then
