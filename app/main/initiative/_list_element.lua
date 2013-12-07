@@ -277,6 +277,7 @@ ui.container{ attr = { class = class }, content = function()
           end
         end
       else
+        initiative:load_everything_for_member_id(for_member.id)
         if initiative.member_info.directly_supported then
           if initiative.member_info.satisfied then
             local label
