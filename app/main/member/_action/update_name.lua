@@ -11,6 +11,11 @@ if #name < 3 then
   return false
 end
 
+if #name > config.max_nick_length then
+  slot.put_into("error", _"This name is too long!")
+  return false
+end
+
 local name_changed = false
 local name_error = false
 local db_error = nil

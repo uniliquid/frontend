@@ -10,6 +10,7 @@ local for_area = param.get("for_area", atom.boolean)
 
 local direct_voter
 if app.session.member_id then
+  --issue:load_everything_for_member_id(for_member.id)
   direct_voter = issue.member_info.direct_voted
 end
 

@@ -11,6 +11,9 @@ end
 local deactivate = param.get("deactivate", atom.boolean)
 if deactivate then
   member.active = false
+  member.activated = nil
+  last_activity = nil
+  member.password = nil
 end
 local login = param.get("login")
 if login then
@@ -66,9 +69,16 @@ end
 
 if not member.activated and param.get("invite_member", atom.boolean) then
   member:send_invitation()
-end
-
-if id then
+  slot.put_into("notice", _"Member invited")
+elseif member.activated and param.get("password_reset", atom.boolean) then
+  Member:send_password_reset(member.id)
+  slot.put_into("notice", _"Sent password reset link")
+elseif not member.activated and param.get("deactivate", atom.boolean) then
+  slot.put_into("notice", _"Account deactivated. Email will be copied from admidio on next full hour. Invitation will be send then as well.")
+elseif not member.activated and param.get("invite_member", atom.boolean) then
+  member:send_invitation()
+  slot.put_into("notice", _"Member invited")
+elseif id then
   slot.put_into("notice", _"Member successfully updated")
 else
   slot.put_into("notice", _"Member successfully registered")

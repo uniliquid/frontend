@@ -358,5 +358,12 @@ config.free_timing = {
 }
 
 config.forbid_similar_names = false
+config.max_nick_length = 60
+
+config.mv_decryption_url = "https://mitglieder.piratenpartei.at/adm_api/usr.php?user_id="
+config.mv_name = "Admidio"
+
+config.invite_text_file = "/opt/liquid_feedback_frontend/config/invite_mail.txt"
+config.invite_subject = "[Liquid] Einladung zum Liquid der Piratenpartei"
 
 execute.config("init")

@@ -62,6 +62,21 @@ if not config.locked_profile_fields.name and name then
     }
     return false
   end
+  
+  if #name > config.max_nick_length then
+    slot.put_into("error", _"This screen name is too long!")
+    request.redirect{
+      mode   = "redirect",
+      module = "index",
+      view   = "register",
+      params = {
+        code = member.invite_code,
+        notify_email = notify_email,
+        step = 1
+      }
+    }
+    return false
+  end
 
   local check_member = Member:by_name(name)
   if check_member and check_member.id ~= member.id then
