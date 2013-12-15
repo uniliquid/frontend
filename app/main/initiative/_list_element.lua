@@ -186,36 +186,42 @@ ui.container{ attr = { class = class }, content = function()
                   local label
                   if for_member and for_member.id ~= app.session.member_id then
                     label = _"This member voted yes." .. " ("..vote_text..")"
+                    icon = "icons/16/thumb_up_green_member.png"
                   else
                     label = _"You voted yes." .. " ("..vote_text..")"
+                    icon = "icons/16/thumb_up_green.png"
                   end
                   ui.image{
                     attr = { alt = label, title = label},
-                    static = "icons/16/thumb_up_green.png"
+                    static = icon
                   }
                   slot.put("<span class='yes_vote'>"..vote_text.."</span>")
                 elseif vote.grade < 0 then
                   local label
                   if for_member and for_member.id ~= app.session.member_id then
                     label = _"This member voted no." .. " ("..vote_text..")"
+                    icon = "icons/16/thumb_down_red_member.png"
                   else
                     label = _"You voted no." .. " ("..vote_text..")"
+                    icon = "icons/16/thumb_down_red.png"
                   end
                   ui.image{
                     attr = { alt = label, title = label },
-                    static = "icons/16/thumb_down_red.png"
+                    static = icon
                   }
                   slot.put("<span class='no_vote'>"..vote_text.."</span>")
                 else
                   local label
                   if for_member and for_member.id ~= app.session.member_id then
                     label = _"This member abstained." .. " ("..vote_text..")"
+                    icon = "icons/16/bullet_yellow_member.png"
                   else
                     label = _"You abstained." .. " ("..vote_text..")"
+                    icon = "icons/16/bullet_yellow.png"
                   end
                   ui.image{
                     attr = { alt = label, title = label },
-                    static = "icons/16/bullet_yellow.png"
+                    static = icon
                   }
                   slot.put("<span class='abstention_vote'>"..vote_text.."</span>")
                 end
@@ -239,36 +245,42 @@ ui.container{ attr = { class = class }, content = function()
                 if vote.grade > 0 then
                   if for_member and for_member.id ~= app.session.member_id then
                     label = _"This member voted yes via delegation." .. " ("..vote_text..")"
+                    icon = "icons/16/thumb_up_green_arrow_member.png"
                   else
                     label = _"You voted yes via delegation.".. " ("..vote_text..")"
+                    icon = "icons/16/thumb_up_green_arrow.png"
                   end
                   ui.image{
                     attr = { alt = label, title = label },
-                    static = "icons/16/thumb_up_green_arrow.png"
+                    static = icon
                   }
                   slot.put("<span class='yes_vote'>"..vote_text.."</span>")
                 elseif vote.grade < 0 then
                   local label
                   if for_member and for_member.id ~= app.session.member_id then
                     label = _"This member voted no via delegation.".. " ("..vote_text..")"
+                    icon = "icons/16/thumb_down_red_arrow_member.png"
                   else
                     label = _"You voted no via delegation.".. " ("..vote_text..")"
+                    icon = "icons/16/thumb_down_red_arrow.png"
                   end
                   ui.image{
                     attr = { alt = label, title = label },
-                    static = "icons/16/thumb_down_red_arrow.png"
+                    static = icon
                   }
                   slot.put("<span class='no_vote'>"..vote_text.."</span>")
                 else
                   local label
                   if for_member and for_member.id ~= app.session.member_id then
                     label = _"This member abstained via delegation.".. " ("..vote_text..")"
+                    icon = "icons/16/bullet_yellow_arrow_member.png"
                   else
                     label = _"You abstained via delegation.".. " ("..vote_text..")"
+                    icon = "icons/16/bullet_yellow_arrow.png"
                   end
                   ui.image{
                     attr = { alt = label, title = label },
-                    static = "icons/16/bullet_yellow_arrow.png"
+                    static = icon
                   }
                   slot.put("<span class='abstention_vote'>"..vote_text.."</span>")
                 end
@@ -281,25 +293,30 @@ ui.container{ attr = { class = class }, content = function()
         if initiative.member_info.directly_supported then
           if initiative.member_info.satisfied then
             local label
+            local icon
             if for_member and for_member.id ~= app.session.member_id then
               label = _"This member is supporter of this initiative."
+              icon = "icons/16/thumb_up_orange_member.png"
             else
               label = _"You are supporter of this initiative."
+              icon = "icons/16/thumb_up_orange.png"
             end
             ui.image{
               attr = { alt = label, title = label },
-              static = "icons/16/thumb_up_orange.png"
+              static = icon
             }
           else
             local label
             if for_member and for_member.id ~= app.session.member_id then
               label = _"This member is potential supporter of this initiative."
+              icon = "icons/16/thumb_up_grey_member.png"
             else
               label = _"You are potential supporter of this initiative."
+              icon = "icons/16/thumb_up_grey.png"
             end
-             ui.image{
-               attr = { alt = label, title = label },
-            static = "icons/16/thumb_up_grey.png"
+            ui.image{
+              attr = { alt = label, title = label },
+              static = icon
             }
           end
         elseif initiative.member_info.supported then
@@ -307,23 +324,27 @@ ui.container{ attr = { class = class }, content = function()
             local label
             if for_member and for_member.id ~= app.session.member_id then
               label = _"This member is supporter of this initiative via delegation."
+              icon = "icons/16/thumb_up_orange_arrow_member.png"
             else
               label = _"You are supporter of this initiative via delegation."
+              icon = "icons/16/thumb_up_orange_arrow.png"
             end
             ui.image{
               attr = { alt = label, title = label },
-              static = "icons/16/thumb_up_orange_arrow.png"
+              static = icon
             }
           else
             local label
             if for_member and for_member.id ~= app.session.member_id then
               label = _"This member is potential supporter of this initiative via delegation."
+              icon = "icons/16/thumb_up_grey_arrow_member.png"
             else
               label = _"You are potential supporter of this initiative via delegation."
+              icon = "icons/16/thumb_up_grey_arrow.png"
             end
              ui.image{
                attr = { alt = label, title = label },
-            static = "icons/16/thumb_up_grey_arrow.png"
+              static = icon
             }
           end
         end
@@ -334,12 +355,14 @@ ui.container{ attr = { class = class }, content = function()
         local label
         if for_member and for_member.id ~= app.session.member_id then
           label = _"This member is initiator of this initiative."
+          icon = "icons/16/user_edit_member.png"
         else
           label = _"You are initiator of this initiative."
+          icon = "icons/16/user_edit.png"
         end
         ui.image{
           attr = { alt = label, title = label },
-          static = "icons/16/user_edit.png"
+          static = icon
         }
       end }
     end
