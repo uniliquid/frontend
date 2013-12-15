@@ -15,7 +15,13 @@ end
 ui.container{ attr = { class = class }, content = function()
 
   ui.container{ attr = { class = "rank" }, content = function()
-    if initiative.issue.fully_frozen and initiative.issue.closed
+    if initiative.revoked then
+      local label = _"Initiative revoked"
+      ui.image{
+        attr = { alt = label, title = label },
+        static = "icons/16/script_delete.png"
+      }
+    elseif initiative.issue.fully_frozen and initiative.issue.closed
       or initiative.admitted == false then
       ui.form_element(args, {fetch_value = true}, function(args)
         ui.tag{
