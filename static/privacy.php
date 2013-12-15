@@ -60,8 +60,8 @@
 <p>Durch das Anklicken der dieser Datenschutzerklärung zugeordneten und entsprechend gekennzeichneten Checkbox im Zuge deiner Registrierung für die Teilnahme an Liquid erteilst du uns deine Einwilligung in die nachfolgend im Einzelnen beschriebenen Datenerhebungs- und Verarbeitungsvorgänge. Aufgrund der gewünschten Transparenz der Datenanwendung Liquid wird eine vollständige Löschung deiner Daten nicht immer vorgenommen – dem stimmst du unwiderruflich zu!<br/>
 Du kannst deine Einwilligung selbstverständlich jederzeit im Rahmen dieser DSE, insbesondere dem Vorbehalt nach §4.3. widerrufen. Der Widerruf kann schriftlich an die<br/>
 Piratenpartei Österreichs<br/>
-Lange Gasse 1/4<br/>
-1080 Wien<br/>
+Hubertusstraße 21<br/>
+8042 Graz<br/>
 gerichtet werden. </p>
 <p>Es genügt jedoch auch eine E-Mail an die Adresse bgf@piratenpartei.at.</p>
 <p>Wir werten den Widerruf als Wunsch, nicht länger Teilnehmer auf Liquid zu sein, und werden den Teilnehmer-Account daher deaktivieren. Bitte beachte jedoch §4.3 dieser Datenschutzerklärung.</p>

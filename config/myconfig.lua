@@ -4,7 +4,7 @@
 
 -- Information about service provider (HTML)
 -- ------------------------------------------------------------------------
-config.app_service_provider = "Piratenpartei Österreichs<br />Lange Gasse 1/4<br />1080 Wien"
+config.app_service_provider = "Piratenpartei Österreichs<br />Hubertusstraße 21<br />8042 Graz"
 
 -- A rocketwiki formatted text the user has to accept while registering
 -- ------------------------------------------------------------------------
