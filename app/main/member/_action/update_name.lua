@@ -16,6 +16,10 @@ if #name > config.max_nick_length then
   return false
 end
 
+local member = app.session.member
+
+local entries = member:get_reference_selector("history_entries"):add_where("until + '30 days'::interval > NOW()"):add_order_by("id DESC"):exec()
+
 local name_changed = false
 local name_error = false
 local db_error = nil
@@ -27,6 +31,11 @@ if check_member then
     slot.put_into("notice", _"Your name has not changed")
     return true
   end
+end
+
+if #entries >= 2 then
+  slot.put_into("error", _"You already changed your name 2 times in the last 30 days.")
+  return false
 end
 
 if not name_error then
