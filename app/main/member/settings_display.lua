@@ -102,8 +102,8 @@ ui.form{
         tag = "input", 
         attr = {
           id = "css_default",
-          type = "radio", name = "css", value = "default",
-          checked = svalue == nil and "checked" or svalue == config.absolute_base_url .. 'static/style.css' and "checked" or nil
+          type = "radio", name = "stylesheet_url", value = '/static/style.css',
+          checked = svalue == nil and "checked" or svalue == '/static/style.css' and "checked" or nil
         }
       }
       ui.tag{
@@ -119,8 +119,8 @@ ui.form{
         tag = "input", 
         attr = {
           id = "friendly",
-          type = "radio", name = "css", value = "friendly",
-          checked = svalue == config.absolute_base_url .. 'static/friendly.css' and "checked" or nil
+          type = "radio", name = "stylesheet_url", value = "/static/friendly.css",
+          checked = svalue == '/static/friendly.css' and "checked" or nil
         }
       }
       ui.tag{
