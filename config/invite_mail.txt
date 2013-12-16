@@ -22,7 +22,7 @@ Seit 26. Juli 2012 ist die eigene Liquid-Instanz der Piratenpartei Österreichs 
 
 Liquid ist das von uns genutzte Mittel der Liquid Democracy http://piratenpartei.at/liquid-democracy/, einer Mischform aus direkter und repräsentativer Demokratie. In Liquid erarbeiten wir unser Parteiprogramm, es dient als Kanalisation der Meinungsbildung und Beschlussfassung der Piratenpartei.
 
-Dort werden Anträge gestellt (zum Programm, zur Geschäftsordnung, ...) oder Umfragen/Meinungsbilder formuliert und zu diesen Anträgen Anregungen oder Gegenanträge gestellt. Am Ende wird über all jene Vorschläge, die ausreichend viele Unterstützer gefunden haben, abgestimmt.
+Dort werden Anträge gestellt (zum Programm, zur Geschäftsordnung, ...) oder Umfragen/Meinungsbilder formuliert und zu diesen Anträgen Änderungswünsche oder Gegenanträge gestellt. Am Ende wird über all jene Vorschläge, die ausreichend viele Unterstützer gefunden haben, abgestimmt.
 
 Falls du eine ausführlichere Erklärung zu Liquid willst, um es voll nutzen zu können, gibt es mehrere Möglichkeiten:
 * Es gibt ein Video-Tutorial des deutschen Piraten Lars Reineke unter http://larsreineke.de/liquid-feedback-video-tutorials/ – dieses ist zwar leider noch für die alte Oberfläche, aber die prinzipiellen Funktionen sind die gleichen geblieben, nur das Interface ist in der aktuellen Version etwas anders.

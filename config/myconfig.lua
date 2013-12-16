@@ -31,7 +31,7 @@ config.use_terms = "==== Nutzungsbedingungen für die Liquid-Plattform der Pirat
  \
 === §2. Liquid === \
  \
-(1) Liquid ist ein Angebot der Piratenpartei an alle Parteimitglieder, sich im Internet unmittelbar am Meinungsbildungs- und Beschlussprozess innerhalb der Piratenpartei zu beteiligen. Die Teilnehmer können Anträge einbringen, Initiativen beginnen und bereits existierende Anträge und Initiativen unterstützen oder ablehnen, Anregungen geben und vieles mehr. Über die Anträge und Initiativen können die Teilnehmer online abstimmen. Dabei ist es möglich, die eigene Stimme global, themenbereichs- oder themenbezogen zu übertragen (in Liquid „delegieren“ genannt). \
+(1) Liquid ist ein Angebot der Piratenpartei an alle Parteimitglieder, sich im Internet unmittelbar am Meinungsbildungs- und Beschlussprozess innerhalb der Piratenpartei zu beteiligen. Die Teilnehmer können Anträge einbringen, Initiativen beginnen und bereits existierende Anträge und Initiativen unterstützen oder ablehnen, Änderungswünsche geben und vieles mehr. Über die Anträge und Initiativen können die Teilnehmer online abstimmen. Dabei ist es möglich, die eigene Stimme global, themenbereichs- oder themenbezogen zu übertragen (in Liquid „delegieren“ genannt). \
  \
 (2) Die Details zu den Nutzungsmöglichkeiten auf Liquid werden euch auf der Website im Zusammenhang mit den jeweiligen Funktionen erläutert. Jeder Teilnehmer erklärt sich damit einverstanden, die jeweils gültigen Funktionsweisen von Liquid in eigener Verantwortung und auf eigene Gefahr zu überprüfen und anzuwenden. \
  \
