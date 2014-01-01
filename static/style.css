@@ -721,10 +721,38 @@ a.delegation_info:focus {
   border: 2px solid #89408e;
 }
 
+.member_image_container {
+  display:inline-block;
+  vertical-align:middle;
+  border-radius: 8px;
+  margin-right: 0.5em;
+}
 
-.member_list .member_image_avatar {
+.member_image_center {
+  display:table-cell;
+  vertical-align: middle;
+  border-radius: 8px;
+}
+
+.delegation_info .member_image_container,
+.delegation_info .member_image_center {
+   height:24px;width:24px;
+}
+
+img.member_image {
+  display:block;
+  margin:0 auto;
+  float:none;
+}
+
+.member_list .member_image_container {
   float: left;
   margin-right: 0.5em;
+}
+
+.member_list .member_image_container,
+.member_list .member_image_center {
+  height:48px;width:48px;
 }
 
 .micro_avatar {
@@ -733,7 +761,6 @@ a.delegation_info:focus {
   border-radius: 4px;
   vertical-align: middle;
 }
-
 
 .member_image_photo {
   border-radius: 8px;
@@ -1520,8 +1547,7 @@ th.opinion {
 }
 
 .member_list .member_image_avatar {
-  float: left;
-  margin-right: 0.5em;
+  margin: 0 auto;
 }
 
 .member_list .member_thumb,

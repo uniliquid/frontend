@@ -55,7 +55,15 @@ body {
   color: #fff !important;
   background: #666 !important;
 }
-
+#link_menu {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+#link_menu ul,
+#link_menu li li a {
+  background: #ddd;
+}
 .topbar .slot_navigation {
   min-height: 34px;
   float: left;
@@ -564,7 +572,7 @@ form.vertical input[type="submit"] + input[type="submit"],
 
 .member_thumb {
   padding: 0 !important;
-  border-radius: 28px !important;
+  border-radius: 24px !important;
   height: 56px !important;
   margin-right: 7px !important;
   margin-bottom: 7px !important;
@@ -576,8 +584,11 @@ form.vertical input[type="submit"] + input[type="submit"],
   border-radius: 28px !important;
   padding: 4px 0 0 5px !important;
 }
-.member_thumb a .member_image {
-  border-radius: 28px !important;
+.member_thumb a .member_image_container {
+  border-radius: 24px !important;
+  overflow: hidden;
+  box-shadow:1px 1px 5px 1px rgba(0, 0, 0, 0.4);
+  background-color:white;
 }
 .member_thumb .member_name {
   left: 58px !important;
@@ -707,6 +718,15 @@ form.vertical input[type="submit"] {
     z-index:1;
     overflow:hidden; /*if you want to crop the image*/
 }
+
+.help_visible {
+  margin: 0;
+  border: 0;
+  border-left: 0.5em solid #FFE900;
+  border-right: 0.5em solid #FFE900;  
+  border-radius: 0;
+}
+
 .help:before{
     z-index:-1;
     position:absolute;
