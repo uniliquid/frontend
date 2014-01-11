@@ -1,5 +1,34 @@
 local code = util.trim(param.get("code"))
 
+local step = param.get("step", atom.integer)
+
+if app.session.member and step == 4 then
+  for i, checkbox in ipairs(config.use_terms_checkboxes) do
+    local accepted = param.get("use_terms_checkbox_" .. checkbox.name, atom.boolean)
+    if not accepted then
+      slot.put_into("error", checkbox.not_accepted_error)
+      return false
+    end
+  end  
+  
+  member = app.session.member
+  local now = db:query("SELECT now() AS now", "object").now
+
+  for i, checkbox in ipairs(config.use_terms_checkboxes) do
+    local accepted = param.get("use_terms_checkbox_" .. checkbox.name, atom.boolean)
+    member:set_setting("use_terms_checkbox_" .. checkbox.name, "accepted at " .. tostring(now))
+  end
+
+  member:save()
+
+  request.redirect{
+    mode   = "redirect",
+    module = "index",
+    view   = "index",
+  }
+  return
+end
+
 local member = Member:new_selector()
   :add_where{ "invite_code = ?", code }
   :add_where{ "activated ISNULL" }
@@ -166,8 +195,6 @@ if member.name and not member.login then
   return false
 end
 
-local step = param.get("step", atom.integer)
-
 if step > 2 then
 
   for i, checkbox in ipairs(config.use_terms_checkboxes) do
@@ -235,14 +262,46 @@ if step > 2 then
   member.activated = 'now'
   member.active = true
   member.last_activity = 'now'
+  member.last_login = "now"
+  if member.lang == nil then
+    member.lang = app.session.lang
+  else
+    app.session.lang = member.lang
+  end
   member:save()
 
-  slot.put_into("notice", _"You've successfully registered and you can login now with your login and password!")
+  app.session.member = member
+  app.session:save()
+
+  local units = Unit:new_selector():add_where("active"):add_order_by("name"):exec()
+  
+  if member then
+    units:load_delegation_info_once_for_member_id(member.id)
+  end
+
+  for i, unit in ipairs(units) do
+    if member:has_voting_right_for_unit_id(unit.id) then
+      local areas_selector = Area:new_selector()
+        :reset_fields()
+        :add_field("area.id", nil, { "grouped" })
+        :add_where{ "area.unit_id = ?", unit.id }
+        :add_where{ "area.active" }
+        :add_where{ "area.name NOT LIKE '%Sandkasten%'" }
+      for i, area in ipairs(areas_selector:exec()) do
+        membership = Membership:new()
+        membership.area_id    = area.id
+        membership.member_id  = member.id
+        membership:save()
+      end
+    end
+  end
+
+  slot.put_into("notice", _"You've successfully registered!")
 
   request.redirect{
     mode   = "redirect",
     module = "index",
-    view   = "login",
+    view   = "index",
   }
 end
   

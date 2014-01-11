@@ -2,6 +2,15 @@ local module = request.get_module()
 local view   = request.get_view()
 local action = request.get_action()
 
+if app.session.member and module ~= 'admin' and (module ~= 'index' or (action ~= 'register' and view ~= 'register' and view ~= 'login' and action ~= 'login' and view ~= 'logout' and action ~= 'logout')) then
+  local use_terms_acc = Setting:by_pk(app.session.member.id, "use_terms_checkbox_terms_of_use_v1")
+  local use_terms_extra_acc = Setting:by_pk(app.session.member.id, "use_terms_checkbox_extra_terms_of_use_v1")
+  if not use_terms_acc or not use_terms_extra_acc then
+    request.redirect{ module = "index", view = "register", params = { step = 4 } }
+    return
+  end
+end
+
 local auth_needed = not (
   module == 'index'
   and (

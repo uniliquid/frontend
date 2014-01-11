@@ -26,6 +26,7 @@ tabs[#tabs+1] = {
   view = "_list",
   params = {
     for_state = "open",
+    filter_interest = "area",
     issues_selector = Issue:new_selector()
       :add_where("issue.closed ISNULL")
       :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()")
@@ -40,6 +41,7 @@ tabs[#tabs+1] = {
   view = "_list",
   params = {
     for_state = "closed",
+    filter_interest = "area",
     issues_selector = Issue:new_selector()
       :add_where("issue.closed NOTNULL")
       :add_order_by("issue.closed DESC")
@@ -53,7 +55,9 @@ tabs[#tabs+1] = {
   label = _"Latest events",
   module = "event",
   view = "_list",
-  params = { }
+  params = {
+    filter_interest = "area",
+    }
 }
 
 

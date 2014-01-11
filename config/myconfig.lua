@@ -12,7 +12,7 @@ config.use_terms = "==== Nutzungsbedingungen für die Liquid-Plattform der Pirat
 === Inhaltsverzeichnis === \
 # Geltungsbereich \
 # Liquid \
-# Registrierung für Liquid \
+# Registrierung und Teilnahme im Liquid \
 # Zugangsdaten \
 # Inhalte der Mitglieder und Nutzungsrechte \
 # Generelle Regeln für die Nutzung von Liquid \
@@ -23,6 +23,7 @@ config.use_terms = "==== Nutzungsbedingungen für die Liquid-Plattform der Pirat
 # Datenschutz \
 # Änderungen der Allgemeinen Nutzungsbedingungen \
 # Rechtswahl \
+# Liste der Änderungen \
 === §1. Geltungsbereich === \
  \
 (1) Die nachfolgenden Nutzungsbedingungen in der jeweils letzten Fassung gelten für die Nutzung der Liquid-Plattform (im Folgenden als „Liquid“ bezeichnet) der Piratenpartei Österreichs (im Folgenden als die „Piratenpartei“ oder „wir“ bezeichnet) durch Mitglieder und Dritte (im Folgenden auch als die „Teilnehmer“ oder „du“/„ihr“/„euch“ bezeichnet) und alle von uns in diesem Verhältnis angebotenen und erbrachten Leistungen. \
@@ -37,11 +38,11 @@ config.use_terms = "==== Nutzungsbedingungen für die Liquid-Plattform der Pirat
  \
 (3) Die aktuelle Satzungs- und Geschäftsordnungslage der Piratenpartei Österreichs gilt vorrangig und bestimmt die innerparteiliche Behandlung jeglicher Liquid-Anträge und -Resultate. Nur vorsorglich weisen wir darauf hin, dass Initiativen und Anträge, die die mehrheitliche Zustimmung der abstimmenden Teilnehmer gefunden haben, grundsätzlich keinen Anspruch auf Annahme und Umsetzung durch die Piratenpartei haben. Sieht die Satzung und die Geschäftsordnung eine direkte Umsetzung von Liquid-Beschlüssen vor, so trifft dies nur auf Anträge mit Regelwerken zu, in denen eine direkte Umsetzung vorgesehen ist, und nur, sofern diese in keinem unpassenden Themenbereich eingereicht wurden und jegliche in Satzung und Geschäftsordnung festgelegten weiteren Anforderungen an den Antrag und die Abstimmung erfüllt werden. Die Nutzung von Liquid ist selbstverständlich nicht Voraussetzung für die Ausübung der Rechte als Parteimitglied. \
  \
-=== §3. Registrierung für Liquid === \
+=== §3. Registrierung und Teilnahme im Liquid === \
  \
 (1) Um Teilnehmer bei Liquid zu werden, musst du Mitglied der Piratenpartei sein und dich auf der Plattform registrieren. \
  \
-(2) Bei der Wahl deines Teilnehmernamens wie auch deines Anmeldenamens im Rahmen des Registrierungsprozesses darfst du keine Namen oder verwechslungsfähige Aliase von dritten Personen angeben. \
+(2) Bei der Wahl deines Teilnehmernamens wie auch deines Anmeldenamens darfst du keine Namen oder verwechslungsfähige (aktuelle oder ehemalige) Aliase von dritten Personen angeben. Im Zweifelsfall entscheidet die AG Liquid in einer nachvollziehbaren Abstimmung, ob es sich ihrer Ansicht nach um einen verwechslungsfähigen Namen handelt. \
  \
 (3) Die im Zuge der Registrierung erfragte E-Mail-Adresse muss erreichbar sein und dir gehören. Wir schicken dir zum Zwecke der Verifizierung der E-Mail-Adresse eine Bestätigungs-E-Mail, die einen von dir anzuwählenden Bestätigungslink und hilfsweise einen Link zu einer gesonderten Website zusammen mit einem dort einzugebenden Code enthält. Du bist verpflichtet, uns jede Änderung der von dir für die Verwendung innerhalb von Liquid bestimmten E-Mail-Adresse anzuzeigen. \
  \
@@ -148,7 +149,7 @@ Wir haften grundsätzlich nach den gesetzlichen Bestimmungen. Zwei Einschränkun
  \
 === §9. Verstöße gegen die Allgemeinen Nutzungsbedingungen, Beitragsrückstand, Entzug des Stimmrechts in der Partei === \
  \
-(1) Wir behalten uns vor, nach diesen Nutzungsbedingungen unzulässige Inhalte zu löschen, verbotene Aktionen zu unterbinden/rückgängig zu machen sowie die Teilnehmer nach Verstößen gegen diese Nutzungsbedingungen (zum Beispiel durch Weitergabe der Zugangsdaten) zu verwarnen und/oder ihre Teilnehmer-Accounts zeitweilig oder permanent zu sperren, um sie zur Einhaltung ihrer Verpflichtungen anzuhalten. Verwarnungen und Sperrungen werden dem betreffenden Teilnehmer in Textform mitgeteilt. Zudem kann eine außerordentliche Kündigung der Nutzungsvereinbarung ausgesprochen werden, wenn die Fortführung der Nutzungsvereinbarung für die Piratenpartei unzumutbar ist. Nach einem solchen Fall ist eine erneute Registrierung nur mit einem neuen Einladungsschlüssel und nach eingehender Prüfung durch uns zulässig. \
+(1) Wir behalten uns vor, nach diesen Nutzungsbedingungen unzulässige Inhalte zu löschen, verbotene Aktionen zu unterbinden/rückgängig zu machen sowie die Teilnehmer nach Verstößen gegen diese Nutzungsbedingungen (zum Beispiel durch Weitergabe der Zugangsdaten) zu verwarnen und/oder ihre Teilnehmer-Accounts zeitweilig oder permanent zu sperren, um sie zur Einhaltung ihrer Verpflichtungen anzuhalten. Verwarnungen und Sperrungen werden dem betreffenden Teilnehmer in Textform mitgeteilt. Zudem kann eine außerordentliche Kündigung der Nutzungsvereinbarung in Absprache mit dem Schiedsgericht ausgesprochen werden, wenn die Fortführung der Nutzungsvereinbarung für die Piratenpartei unzumutbar ist. Nach einem solchen Fall ist eine erneute Registrierung nur mit einem neuen Einladungsschlüssel und nach eingehender Prüfung durch uns zulässig. \
  \
 (2) Wir behalten uns vor, den Teilnehmer-Account bis zur Zahlung zu sperren, wenn ein registrierter Teilnehmer mit einem fälligen Mitgliederbeitrag in Verzug ist. \
  \
@@ -176,7 +177,12 @@ Wie behalten uns vor, diese Allgemeinen Nutzungsbedingungen jederzeit zu ändern
  \
 Auf das Vertragsverhältnis zwischen uns und dir sowie auf diese Allgemeinen Nutzungsbedingungen einschließlich deren Auslegung findet ausschließlich das Recht der Republik Österreich Anwendung. Die Anwendung des internationalen Privatrechts ist ausgeschlossen. \
  \
-//Stand: Juli 2012//"
+=== §14. Liste der Änderungen === \
+ \
+- 09.01.2014 \
+-- §3 Überschrift, §3 (2) und §9 (1) gemäß [https://wiki.piratenpartei.at/wiki/Bundesgesch%C3%A4ftsf%C3%BChrung/Protokolle/2014-01-08#Antrag:_Liquid_Nutzungsbestimmungen_.C3.84nderung Beschluss] geändert. \
+ \
+//Stand: Jänner 2014//"
 
 -- Absolute base url of application
 -- ------------------------------------------------------------------------

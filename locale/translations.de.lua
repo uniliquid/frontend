@@ -1,5 +1,7 @@
 #!/usr/bin/env lua
 return {
+["Confirm"] = "Bestätigen";
+["Accept new Terms of use"] = "Änderung der Nutzungsbedingungen akzeptieren";
 ["with comment"] = "mit Kommentar";
 ["by weight"] = "nach Stimmgewicht";
 ["yes / abstention / no"] = "Ja / Enthaltung / Nein";
@@ -1176,7 +1178,7 @@ return {
 ["You were potential supporter."] = "Du bist potentieller Unterstützer.";
 ["You were supporter"] = "Du bist Unterstützer";
 ["You were supporter."] = "Du bist Unterstützer.";
-["You've successfully registered and you can login now with your login and password!"] = "Du hast dich erfolgreich registriert und kannst dich jetzt mit deinen Login und Passwort einloggen!";
+["You've successfully registered!"] = "Du hast dich erfolgreich registriert!";
 ["Your argument has been added."] = "Dein Argument wurde hinzugefügt.";
 ["Your contact list is empty. To add members to this list of trustees, you have to add them to your contacts first."] = "Deine Kontakte-Liste ist leer. Um Mitglieder zu dieser Liste von Bevollmächtigten hinzuzufügen, musst du sie erst in deine Kontakte aufnehmen.";
 ["Your email address has been changed, please check for confirmation email with activation link!"] = "Deine E-Mail-Adresse wurde geändert, du hast eine Bestätigungs-E-Mail mit Aktivierungslink erhalten.";

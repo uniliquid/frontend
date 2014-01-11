@@ -18,7 +18,7 @@ ui.form{
   },
   content = function()
 
-    if not code then
+    if step ~= 4 and not code then
       ui.title(_"Registration (step 1 of 3: Invite code)")
       ui.actions(function()
         ui.link{
@@ -52,7 +52,7 @@ ui.form{
         :optional_object_mode()
         :exec()
 
-      if not member.notify_email and not notify_email or not member.name and not name or not member.login and not login or step == 1 then
+      if step ~= 4 and (not member.notify_email and not notify_email or not member.name and not name or not member.login and not login or step == 1) then
         ui.title(_"Registration (step 2 of 3: Personal information)")
         ui.field.hidden{ name = "step", value = 2 }
         ui.actions(function()
@@ -119,7 +119,7 @@ ui.form{
         ui.submit{
           text = _'Proceed with registration'
         }
-      else
+      elseif step ~= 4 then
 
         ui.field.hidden{ name = "step", value = "3" }
         ui.title(_"Registration (step 3 of 3: Terms of use and password)")
@@ -214,6 +214,52 @@ ui.form{
         }
         ui.submit{
           text = _'Activate account'
+        }
+      else
+        local member = app.session.member
+        ui.field.hidden{ name = "step", value = "4" }
+        ui.title(_"Accept new Terms of use")
+        ui.container{
+          attr = { class = "wiki use_terms" },
+          content = function()
+            if config.use_terms_html then
+              slot.put(config.use_terms_html)
+            else
+              slot.put(format.wiki_text(config.use_terms))
+            end
+          end
+        }
+        
+        for i, checkbox in ipairs(config.use_terms_checkboxes) do
+          slot.put("<br />")
+          ui.tag{
+            tag = "div",
+            content = function()
+              ui.tag{
+                tag = "input",
+                attr = {
+                  type = "checkbox",
+                  id = "use_terms_checkbox_" .. checkbox.name,
+                  name = "use_terms_checkbox_" .. checkbox.name,
+                  value = "1",
+                  style = "float: left;",
+                  checked = param.get("use_terms_checkbox_" .. checkbox.name, atom.boolean) and "checked" or nil
+                }
+              }
+              slot.put("&nbsp;")
+              ui.tag{
+                tag = "label",
+                attr = { ['for'] = "use_terms_checkbox_" .. checkbox.name },
+                content = function() slot.put(checkbox.html) end
+              }
+            end
+          }
+        end
+
+        slot.put("<br />")
+
+        ui.submit{
+          text = _'Confirm'
         }
       end
     end
