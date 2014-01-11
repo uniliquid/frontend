@@ -54,6 +54,8 @@ ui.form{
     ui.field.text{     label = _"Notification email", name = "notify_email" }
     if member and member.activated then
       ui.field.text{     label = _"Screen name",        name = "name" }
+      ui.field.boolean{  label = _"Delete avatar",      name = "avatar_delete" }
+      ui.field.boolean{  label = _"Delete photo",      name = "photo_delete" }
       ui.field.text{     label = _"Login name",        name = "login" }
     end
     ui.field.boolean{  label = _"Admin?",       name = "admin" }

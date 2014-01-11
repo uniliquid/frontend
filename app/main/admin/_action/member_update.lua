@@ -32,6 +32,36 @@ if identification then
 end
 member.identification = identification
 
+local avatar_delete = param.get("avatar_delete", atom.boolean)
+if avatar_delete then
+  local member_id = id
+  local image_type = "avatar"
+  local member_image = MemberImage:by_pk(member_id, image_type, false)
+  local member_image_scaled = MemberImage:by_pk(member_id, image_type, true)
+
+  if member_image then
+    member_image:destroy()
+  end
+  if member_image_scaled then
+    member_image_scaled:destroy()
+  end
+end
+
+local photo_delete = param.get("photo_delete", atom.boolean)
+if photo_delete then
+  local member_id = id
+  local image_type = "photo"
+  local member_image = MemberImage:by_pk(member_id, image_type, false)
+  local member_image_scaled = MemberImage:by_pk(member_id, image_type, true)
+
+  if member_image then
+    member_image:destroy()
+  end
+  if member_image_scaled then
+    member_image_scaled:destroy()
+  end
+end
+
 local err = member:try_save()
 
 if err then
