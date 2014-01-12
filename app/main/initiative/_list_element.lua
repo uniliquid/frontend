@@ -356,6 +356,7 @@ ui.container{ attr = { class = class }, content = function()
         end
       end
     end }
+    initiative:load_everything_for_member_id(for_member.id)
     if initiative.member_info.initiated then
       ui.container{ attr = { class = "interest" }, content = function()
         local label
