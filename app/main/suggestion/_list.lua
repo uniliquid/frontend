@@ -81,15 +81,20 @@ ui.container{ attr = { class = "initiative_head" },
                   content = function(record)
                     if record.minus2_unfulfilled_count then
                       local max_value = record.initiative.supporter_count
+                      local must = record.plus2_unfulfilled_count + record.plus2_fulfilled_count
+                      local should = record.plus1_unfulfilled_count + record.plus1_fulfilled_count
+                      local shouldnot = record.minus1_unfulfilled_count + record.minus1_fulfilled_count
+                      local mustnot = record.minus2_unfulfilled_count + record.minus2_fulfilled_count
+                      local neutral = max_value - must - should - shouldnot - mustnot 
                       ui.bargraph{
                         max_value = max_value,
                         width = 100,
                         bars = {
-                          { color = "#0a0", value = record.plus2_unfulfilled_count + record.plus2_fulfilled_count, text = _"must" },
-                          { color = "#8f8", value = record.plus1_unfulfilled_count + record.plus1_fulfilled_count, text = _"should" },
-                          { color = "#eee", value = max_value - record.minus2_unfulfilled_count - record.minus1_unfulfilled_count - record.minus2_fulfilled_count - record.minus1_fulfilled_count - record.plus1_unfulfilled_count - record.plus2_unfulfilled_count - record.plus1_fulfilled_count - record.plus2_fulfilled_count, text = _"neutral" },
-                          { color = "#f88", value = record.minus1_unfulfilled_count + record.minus1_fulfilled_count, text = _"should not" },
-                          { color = "#a00", value = record.minus2_unfulfilled_count + record.minus2_fulfilled_count, text = _"must not" },
+                          { color = "#0a0", value = must, text =  tostring(must) .. " " .. _"must" .. " / " },
+                          { color = "#8f8", value = should, text = tostring(should) .. " " .. _"should" .. " / " },
+                          { color = "#eee", value = neutral, text = tostring(neutral) .. " " .. _"neutral" .. " / " },
+                          { color = "#f88", value = shouldnot, text = tostring(shouldnot) .. " " .. _"should not" .. " / " },
+                          { color = "#a00", value = mustnot, text = tostring(mustnot) .. " " .. _"must not" },
                         }
                       }
                     end
