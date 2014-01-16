@@ -726,6 +726,7 @@ a.delegation_info:focus {
   vertical-align:middle;
   border-radius: 8px;
   margin-right: 0.5em;
+  float:left;
 }
 
 .member_image_center {
@@ -734,9 +735,17 @@ a.delegation_info:focus {
   border-radius: 8px;
 }
 
+.member_image_container,
+.member_image_center {
+  height:48px;
+  width:48px;
+}
+
 .delegation_info .member_image_container,
 .delegation_info .member_image_center {
-   height:24px;width:24px;
+  height:24px;
+  width:24px;
+  float: none;
 }
 
 img.member_image {
@@ -746,13 +755,7 @@ img.member_image {
 }
 
 .member_list .member_image_container {
-  float: left;
   margin-right: 0.5em;
-}
-
-.member_list .member_image_container,
-.member_list .member_image_center {
-  height:48px;width:48px;
 }
 
 .micro_avatar {
