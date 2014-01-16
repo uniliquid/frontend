@@ -710,14 +710,17 @@ a.delegation_info:focus {
   background-color: #ddd;
 }
 
-.delegation_info .micro_avatar {
+.delegation_info .member_image_container.micro_avatar {
   border: none;
   margin: 2px;
   box-shadow: 1px 1px 2px #000;
 }
 
-.delegation_info .micro_avatar.highlighted {
+.delegation_info .member_image_container.micro_avatar.highlighted {
   margin: 0;
+}
+
+.delegation_info .member_image_container.micro_avatar.highlighted {
   border: 2px solid #89408e;
 }
 
@@ -741,11 +744,13 @@ a.delegation_info:focus {
   width:48px;
 }
 
-.delegation_info .member_image_container,
-.delegation_info .member_image_center {
+.member_image_container.micro_avatar,
+.member_image_center.micro_avatar {
+  border-radius: 4px;
   height:24px;
   width:24px;
   float: none;
+  background: transparent;
 }
 
 img.member_image {
@@ -758,7 +763,7 @@ img.member_image {
   margin-right: 0.5em;
 }
 
-.micro_avatar {
+.member_image_avatar.micro_avatar {
   max-height: 24px;
   max-width: 24px;
   border-radius: 4px;
@@ -1543,8 +1548,7 @@ th.opinion {
 .member_image_avatar {
   border-radius: 7px;
 }
-.micro_avatar {
-  height: 24px;
+.member_image_avatar.micro_avatar {
   border-radius: 4px;
   vertical-align: middle;
 }
