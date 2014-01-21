@@ -22,11 +22,29 @@ ui.paginate{
           {
             label = _"Name",
             content = function(record)
+              slot.put(" ")
+              if app.session:has_access("all_pseudonymous") then
+              ui.link{
+                content = function ()
+                execute.view{
+                  module = "member_image",
+                  view = "_show",
+                  params = {
+                    member = record.other_member,
+                    image_type = "avatar",
+                    show_dummy = true,
+                    class = "micro_avatar",
+                    popup_text = text
+                  }
+                }
+                end,
+                module = "member", view = "show", id = record.other_member_id
+              }
+              slot.put(" ")
+              end
               ui.link{
                 text = record.other_member.name,
-                module = "member",
-                view = "show",
-                id = record.other_member_id
+                module = "member", view = "show", id = record.other_member_id
               }
             end
           },
