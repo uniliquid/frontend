@@ -69,6 +69,16 @@ Issue:add_reference{
   back_ref      = 'issue',
   default_order = '"member_id"'
 }
+--[[
+Issue:add_reference{
+  mode          = '1m',
+  to            = "DelegatingVoter",
+  this_key      = 'id',
+  that_key      = 'issue_id',
+  ref           = 'delegating_voters',
+  back_ref      = 'issue',
+  default_order = '"member_id"'
+}]]--
 
 Issue:add_reference{
   mode          = '1m',
@@ -131,6 +141,17 @@ Issue:add_reference{
   connected_by_this_key = 'issue_id',
   connected_by_that_key = 'member_id',
   ref                   = 'direct_voters'
+}
+
+Issue:add_reference{
+  mode                  = 'mm',
+  to                    = "Member",
+  this_key              = 'id',
+  that_key              = 'id',
+  connected_by_table    = 'delegating_voter',
+  connected_by_this_key = 'issue_id',
+  connected_by_that_key = 'member_id',
+  ref                   = 'delegating_voters'
 }
 
 Issue:add_reference{

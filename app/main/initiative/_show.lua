@@ -502,14 +502,27 @@ if not show_as_head then
   if app.session:has_access("all_pseudonymous") then
     if initiative.issue.fully_frozen and initiative.issue.closed then
       local members_selector = initiative.issue:get_reference_selector("direct_voters")
-            :left_join("vote", nil, { "vote.initiative_id = ? AND vote.member_id = member.id", initiative.id })
-            :add_field("direct_voter.weight as voter_weight")
-            :add_field("direct_voter.weight AS weight")
-            :add_field("coalesce(vote.grade, 0) as grade")
-            :add_field("direct_voter.comment as voter_comment")
-            :left_join("initiative", nil, "initiative.id = vote.initiative_id")
-            :left_join("issue", nil, "issue.id = initiative.issue_id")
-      
+        :left_join("vote", nil, { "vote.initiative_id = ? AND vote.member_id = member.id", initiative.id })
+        :add_field("direct_voter.weight as voter_weight")
+        :add_field("direct_voter.weight AS weight")
+        :add_field("coalesce(vote.grade, 0) as grade")
+        :add_field("direct_voter.comment as voter_comment")
+        :left_join("initiative", nil, "initiative.id = vote.initiative_id")
+        :left_join("issue", nil, "issue.id = initiative.issue_id")
+
+      local delegiating_voter = param.get("delegating_voter", "table")
+      local delegator_selector = delegating_voter 
+    
+      initiative.issue:get_reference_selector("delegating_voters")
+    --[[    :left_join("delegating_voter")
+      --  :left_join("vote", nil, { "vote.initiative_id = ? AND vote.member_id = member.id", initiative.id })
+      ]]--  :add_field("delegating_voter.weight as voter_weight")
+        :add_field("delegating_voter.weight AS weight")
+        :add_field("coalesce(vote.grade, 0) as grade")
+        :add_field("delegating_voters.comment as voter_comment")
+        :left_join("initiative", nil, "initiative.id = vote.initiative_id")
+        :left_join("issue", nil, "issue.id = initiative.issue_id")
+--]]--
       ui.anchor{ name = "voter", attr = { class = "heading" }, content = _"Voters" .. Member:count_string(members_selector) }
 
       local filters = {
@@ -557,7 +570,13 @@ if not show_as_head then
             name = "comment",
             label = _"with comment",
             selector_modifier = function(selector) members_selector:add_where("length(direct_voter.comment) > 0") end
-          }
+          },
+          ----[[
+          { 
+            name = "all", 
+            label = _"all voters",
+            selector_modifier = function(delegator_selector) end
+          },--]]--
         }
       }
 

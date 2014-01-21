@@ -45,7 +45,7 @@ ui.container{
       attr = { class = "flags" },
       content = function()
 
-        if not member.active then
+        if not member.active or member.locked then
           local text = _"inactive"
           ui.tag{ content = text }
           ui.image{

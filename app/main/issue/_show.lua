@@ -38,7 +38,7 @@ ui.container{ attr = { class = class }, content = function()
   execute.view{ module = "delegation", view = "_info", params = { issue = issue, member = for_member } }
 
   if for_listing then
-    ui.container{ attr = { class = "content", style = "float: right; margin-right: 100px; margin-bottom: -100%" }, content = function()
+    ui.container{ attr = { class = "content", style = "float: right;" }, content = function()
       if not for_area then
         if not for_unit then
       ui.link{

@@ -73,7 +73,9 @@ tabs[#tabs+1] = {
 
 local outgoing_delegations_selector = member:get_reference_selector("outgoing_delegations")
   :left_join("issue", "_member_showtab_issue", "_member_showtab_issue.id = delegation.issue_id")
+  :left_join("member", "trustee", "trustee.id = delegation.trustee_id")
   :add_where("_member_showtab_issue.closed ISNULL")
+  :add_order_by("trustee.active AND NOT trustee.locked DESC, delegation.trustee_id ASC")
 tabs[#tabs+1] = {
   name = "outgoing_delegations",
   label = _"Outgoing delegations" .. " (" .. tostring(outgoing_delegations_selector:count()) .. ")",
@@ -85,7 +87,9 @@ tabs[#tabs+1] = {
 
 local incoming_delegations_selector = member:get_reference_selector("incoming_delegations")
   :left_join("issue", "_member_showtab_issue", "_member_showtab_issue.id = delegation.issue_id")
+  :left_join("member", "truster", "truster.id = delegation.truster_id")
   :add_where("_member_showtab_issue.closed ISNULL")
+  :add_order_by("truster.active AND NOT truster.locked DESC, delegation.truster_id ASC")
 tabs[#tabs+1] = {
   name = "incoming_delegations",
   label = _"Incoming delegations" .. " (" .. tostring(incoming_delegations_selector:count()) .. ")",
