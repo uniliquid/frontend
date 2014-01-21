@@ -19,10 +19,10 @@ if config.fastpath_url_func then
   }
 else
   ui.container{
-    attr = { class = "member_image_container", style="display:inline-block;" },
+    attr = { class = "member_image_container " .. class, style="display:inline-block;" },
     content = function()
       ui.container{
-        attr = { class = "member_image_center", style="display:table-cell;" },
+        attr = { class = "member_image_center" .. class, style="display:table-cell;" },
         content = function()
           ui.image{
             attr = { title = popup_text, class = "member_image member_image_" .. image_type .. class },
