@@ -95,8 +95,15 @@ if not delegation then
   delegation = Delegation:by_pk(app.session.member.id, unit_id)
 end
 
+local all_members = Member:build_selector{
+  voting_right_for_unit_id = voting_right_unit_id,
+  active = true,
+  locked = false,
+  order = "name"
+}:exec()
+
 local contact_members = Member:build_selector{
---  is_contact_of_member_id = app.session.member_id,
+  is_contact_of_member_id = app.session.member_id,
   voting_right_for_unit_id = voting_right_unit_id,
   active = true,
   locked = false,
@@ -245,7 +252,13 @@ ui.form{
         records[#records+1] = record
       end
     end
-
+    -- add all members
+    if #all_members > 0 then
+      records[#records+1] = {id="_", name= "--- " .. _"All members" .. " ---"}
+      for i, record in ipairs(all_members) do
+        records[#records+1] = record
+      end
+    end
     disabled_records = {}
     disabled_records["_"] = true
     disabled_records[app.session.member_id] = true
