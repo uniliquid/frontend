@@ -124,7 +124,6 @@ Member:add_reference{
   that_key      = 'truster_id',
   ref           = 'outgoing_delegations',
   back_ref      = 'truster',
-  default_order = '"id"'
 }
 
 Member:add_reference{
@@ -134,7 +133,6 @@ Member:add_reference{
   that_key      = 'trustee_id',
   ref           = 'incoming_delegations',
   back_ref      = 'trustee',
-  default_order = '"id"'
 }
 
 Member:add_reference{
@@ -563,6 +561,8 @@ end
 function Member.object:ui_field_text(args)
   args = args or {}
   if app.session:has_access("authors_pseudonymous") then
+    
+    --[[
     -- ugly workaround for getting html into a replaced string and to the user
     ui.container{label = args.label, label_attr={class="ui_field_label"}, content = function()
         slot.put(string.format('<span><a href="%s">%s</a></span>',
@@ -574,8 +574,66 @@ function Member.object:ui_field_text(args)
                                                 encode.html(self.name)))
       end
     }
+    ]]--
+
+    ui.link{
+      text = self.name,
+      module = "member", view = "show", id = self.id
+    }
+
   else
     ui.field.text{ label = args.label,      value = _"[not displayed public]" }
+  end
+end
+
+function Member.object:ui_field_avatar_name(args)
+  args = args or {}
+  if app.session:has_access("all_pseudonymous") then
+    ui.link{
+      content = function ()
+        execute.view{
+          module = "member_image",
+          view = "_show",
+          params = {
+            member = self,
+            image_type = "avatar",
+            show_dummy = true,
+            class = "micro_avatar",
+            popup_text = text
+          }
+        }
+      end,
+      module = "member", view = "show", id =self.id
+    }
+    slot.put(" ")
+  end
+  ui.link{
+    text = self.name,
+    module = "member", view = "show", id = self.id
+  }
+end
+
+
+function Member.object:ui_field_avatar(args)
+  args = args or {}
+  if app.session:has_access("all_pseudonymous") then
+    ui.link{
+      content = function ()
+        execute.view{
+          module = "member_image",
+          view = "_show",
+          params = {
+            member = self,
+            image_type = "avatar",
+            show_dummy = true,
+            class = "micro_avatar",
+            popup_text = text
+          }
+        }
+      end,
+      module = "member", view = "show", id =self.id
+    }
+    slot.put(" ")
   end
 end
 

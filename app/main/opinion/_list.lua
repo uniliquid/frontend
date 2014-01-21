@@ -12,7 +12,12 @@ ui.list{
     {
       label = _"Member name",
       label_attr = { style = "width: 101px;" },
-      content = function(arg) return Member.object.ui_field_text(arg.member) end
+      content = function(arg) return Member.object.ui_field_avatar_name(arg.member) end
+    },
+    {
+      label = nil,
+      content = function(record)
+      end
     },
     {
       label = _"Degree",
