@@ -55,6 +55,7 @@ Area:add_reference{
   connected_by_table    = 'allowed_policy',
   connected_by_this_key = 'area_id',
   connected_by_that_key = 'policy_id',
+  default_order         = 'policy.name',
   ref                   = 'allowed_policies'
 }
 

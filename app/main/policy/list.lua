@@ -3,7 +3,7 @@ ui.title(_"Policies")
 util.help("policy.list", _"Policies")
 local policies = Policy:new_selector()
   :add_where("active")
-  :add_order_by("index")
+  :add_order_by("name")
   :exec()
 
 ui.list{

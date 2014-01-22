@@ -1,5 +1,6 @@
 #!/usr/bin/env lua
 return {
+["email alias"] = "E-Mail Alias";
 ["Confirm"] = "Bestätigen";
 ["Accept new Terms of use"] = "Änderung der Nutzungsbedingungen akzeptieren";
 ["with comment"] = "mit Kommentar";

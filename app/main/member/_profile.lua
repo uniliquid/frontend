@@ -44,16 +44,19 @@ ui.form{
     end
     if include_private_data and member.login then
       ui.field.text{    label = _"Login name", name = "login" }
-      ui.field.text{    label = _"Notification email", name = "notify_email" }
+      ui.field.text{ rawreadonly = true, label = _"Notification email", name = "notify_email", content = function() slot.put('<a href="mailto:' .. member.notify_email '">' .. member.notify_email .. '</a>') end }
     end
     
     if member.realname and #member.realname > 0 then
       ui.field.text{ label = _"Real name", name = "realname" }
     end
     if member.email and #member.email > 0 then
-      ui.field.text{ label = _"email", name = "email" }
+      ui.field.text{ rawreadonly = true, label = _"email", name = "email", content = function() slot.put('<a href="mailto:' .. member.email .. '">' .. member.email .. '</a>') end }
     end
-    if member.active and not member.locked and member.notify_email and #member.notify_email > 0 then
+    if member.notify_email and #member.notify_email > 0 then
+     if config.mail_aliases and member.name:match("^[A-Za-z][A-Za-z0-9%.%%%+%-]*$") then
+      ui.field.text{ rawreadonly = true, label = _"email alias", name = "emailalias", content = function() slot.put('<a href="mailto:' .. member.name .. '@' .. config.hostname .. '">' .. member.name .. '@' .. config.hostname .. '</a>') end }
+     else
       ui.container{
         content = function()
           ui.tag{
@@ -83,6 +86,7 @@ ui.form{
           }
         end
       }
+     end
     end
     if member.xmpp_address and #member.xmpp_address > 0 then
       ui.field.text{ label = _"xmpp", name = "xmpp_address" }
