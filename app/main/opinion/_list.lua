@@ -15,10 +15,20 @@ ui.list{
       content = function(arg) return Member.object.ui_field_avatar_name(arg.member) end
     },
     {
+      label = _"Incoming delegations",
+      content = function(record)
+        if record.weight > 1 then
+          slot.put("+" .. record.weight-1)
+        end
+      end
+    },
+    --[[
+    {
       label = nil,
       content = function(record)
       end
     },
+    --]]--
     {
       label = _"Degree",
       label_attr = { style = "width: 250px;" },
@@ -41,6 +51,23 @@ ui.list{
           slot.put(_"Yes")
         else
           slot.put(_"No")
+        end
+      end
+    },
+    {
+      label = _"happiness",
+      content = function(record)
+        if record then
+          if (record.fulfilled and record.degree > 0) or (not record.fulfilled and record.degree < 0) then
+            local title = _"satisfied"
+            ui.image{ attr = { alt = title, title = title }, static = "icons/emoticon_happy.png" }
+          elseif record.degree == 1 or record.degree == -1 then
+            local title = _"a bit unsatisfied"
+            ui.image{ attr = { alt = title, title = title }, static = "icons/emoticon_unhappy.png" }
+          else
+            local title = _"more unsatisfied"
+            ui.image{ attr = { alt = title, title = title }, static = "icons/emoticon_unhappy_red.png" }
+          end
         end
       end
     },
