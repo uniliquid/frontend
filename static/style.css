@@ -739,8 +739,13 @@ a.delegation_info:focus {
 
 .member_image_container,
 .member_image_center {
-  height:48px;
-  width:48px;
+  height: 48px;
+  width: 48px;
+}
+
+.member_statement .member_image_container {
+  height: auto;
+  width: auto;
 }
 
 .member_image_container.micro_avatar,
