@@ -48,6 +48,17 @@ if app.session:has_access("all_pseudonymous") then
       members_selector = interested_members_selector
     }
   }
+if config.use_lfbot_reddit_buffer then
+  local exists = db:query("SELECT 1 FROM reddit_map WHERE lqfb = " .. issue.id, "opt_object")
+  local test = db:query("SELECT 1 FROM reddit_map WHERE timestamp < NOW() - '30 minutes'::interval AND lqfb = " .. issue.id, "opt_object")
+  if not exists or test then
+      os.execute("/opt/liquid_feedback_core/reddit_check " .. issue.id)
+  end
+  test = db:query("SELECT buffer FROM reddit_map WHERE lqfb = " .. issue.id, "opt_object")
+  if test then
+    slot.put(test.buffer)
+  end
+end
 
  ui.link{ name = "details_link1", attr = { id = "details_link1", class = "heading", onclick = "return toggleDetails();" }, content = function()
   ui.image{ attr = { class = "spaceicon" }, static = "icons/16/table.png" }

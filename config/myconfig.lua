@@ -296,6 +296,8 @@ end
 --   return config.absolute_base_url .. "r?" .. tostring(issue.id)
 --end
 
+config.use_lfbot_reddit_buffer = true
+
 -- Integration of Etherpad, disabled by default
 -- ------------------------------------------------------------------------
 --config.etherpad = {

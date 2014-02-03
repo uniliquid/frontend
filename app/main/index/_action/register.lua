@@ -288,10 +288,13 @@ if step > 2 then
         :add_where{ "area.active" }
         :add_where{ "area.name NOT LIKE '%Sandkasten%'" }
       for i, area in ipairs(areas_selector:exec()) do
-        membership = Membership:new()
-        membership.area_id    = area.id
-        membership.member_id  = member.id
-        membership:save()
+        membership = Membership:by_pk(area.id,member.id)
+        if membership == nil then
+          membership = Membership:new()
+          membership.area_id    = area.id
+          membership.member_id  = member.id
+          membership:save()
+        end
       end
     end
   end
