@@ -71,6 +71,8 @@ ui.tag{
   end
 }
 slot.put("<br />")
+if member.activated then
 ui.container{
   content = _("This member account has been created at #{created}", { created = format.timestamp(member.activated)})
 }
+end

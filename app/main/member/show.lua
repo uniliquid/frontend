@@ -1,7 +1,7 @@
 local member = Member:by_id(param.get_id())
 
-if not member or not member.activated then
-  error("access denied")
+if not member or (not member.activated and not member.last_login) then
+  error("no such member")
 end
 
 app.html_title.title = member.name

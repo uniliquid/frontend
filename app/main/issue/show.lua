@@ -52,7 +52,7 @@ if config.use_lfbot_reddit_buffer then
   local exists = db:query("SELECT 1 FROM reddit_map WHERE lqfb = " .. issue.id, "opt_object")
   local test = db:query("SELECT 1 FROM reddit_map WHERE timestamp < NOW() - '30 minutes'::interval AND lqfb = " .. issue.id, "opt_object")
   if not exists or test then
-      os.execute("/opt/liquid_feedback_core/reddit_check " .. issue.id)
+    os.execute("/opt/liquid_feedback_core/reddit_check " .. issue.id)
   end
   test = db:query("SELECT buffer FROM reddit_map WHERE lqfb = " .. issue.id, "opt_object")
   if test then

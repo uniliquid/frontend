@@ -292,9 +292,9 @@ end
 
 -- Automatic issue related reddit URL
 -- ------------------------------------------------------------------------
---config.issue_reddit_url_func = function(issue)
---   return config.absolute_base_url .. "r?" .. tostring(issue.id)
---end
+config.issue_reddit_url_func = function(issue)
+   return config.absolute_base_url .. "r?" .. tostring(issue.id)
+end
 
 config.use_lfbot_reddit_buffer = true
 

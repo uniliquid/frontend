@@ -56,6 +56,9 @@ end
 if member then
   member.last_login = "now"
   member.last_activity = "now"
+  if member.activated == nil and member.password ~= nil then
+    member.activated = "now"
+  end
   member.active = true
   if member.lang == nil then
     member.lang = app.session.lang
