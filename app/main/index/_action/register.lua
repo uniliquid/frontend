@@ -287,6 +287,7 @@ if step > 2 then
 
   app.session.member = member
   app.session:save()
+if not config.default_privilege_after_verification then
   if config.default_privilege_for_unit > 0 then
     privilege = Privilege:new()
     privilege.unit_id = config.default_privilege_for_unit
@@ -317,7 +318,7 @@ if step > 2 then
       end
     end
   end
-
+end
   slot.put_into("notice", _"You've successfully registered!")
 
   request.redirect{

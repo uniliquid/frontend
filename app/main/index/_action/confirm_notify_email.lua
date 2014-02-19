@@ -13,6 +13,38 @@ if member then
   member.notify_email_secret_expiry = nil
   member.notify_email_lock_expiry   = nil
   member:save()
+
+if not config.default_privilege_after_verification then
+  if config.default_privilege_for_unit > 0 then
+    privilege = Privilege:new()
+    privilege.unit_id = config.default_privilege_for_unit
+    privilege.member_id = member.id
+    privilege.voting_right = true
+    privilege:save()
+  end
+  
+  local units = Unit:new_selector():add_where("active"):add_order_by("name"):exec()
+  
+  if member then
+    units:load_delegation_info_once_for_member_id(member.id)
+  end
+  for i, unit in ipairs(units) do
+    if member:has_voting_right_for_unit_id(unit.id) then
+      local areas_selector = Area:new_selector()
+      :reset_fields()
+      :add_field("area.id", nil, { "grouped" })
+      :add_where{ "area.unit_id = ?", unit.id }
+      :add_where{ "area.active" }
+      :add_where{ "area.name NOT LIKE '%Sandkasten%'" }
+      for i, area in ipairs(areas_selector:exec()) do
+        membership = Membership:new()
+        membership.area_id    = area.id
+        membership.member_id  = member.id
+        membership:save()
+      end
+    end
+  end
+end
   slot.put_into("notice", _"Email address is confirmed now")
 else
   slot.put_into("error", _"Confirmation code invalid!")
