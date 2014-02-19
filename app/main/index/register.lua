@@ -301,7 +301,6 @@ ui.form{
         }
       end
     end
-  end
 }
 
 
