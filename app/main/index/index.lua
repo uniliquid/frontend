@@ -32,12 +32,11 @@ local tabs = {
 }
 
 tabs[#tabs+1] = {
-  name = "areas",
+  name = "units",
   label = _"Overview",
   icon = "icons/16/world.png",
-  module = "index",
-  view = "_member_home",
-  params = { member = app.session.member }
+  module = "unit",
+  view = "_list",
 }
 
 tabs[#tabs+1] = {
@@ -48,7 +47,6 @@ tabs[#tabs+1] = {
   view = "_list",
   params = {
     for_state = "open",
-    filter_interest = "area",
     issues_selector = Issue:new_selector()
       :add_where("issue.closed ISNULL")
       :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()")
@@ -63,7 +61,6 @@ tabs[#tabs+1] = {
   view = "_list",
   params = {
     for_state = "closed",
-    filter_interest = "area",
     issues_selector = Issue:new_selector()
       :add_where("issue.closed NOTNULL")
       :add_order_by("issue.closed DESC")
@@ -79,7 +76,6 @@ tabs[#tabs+1] = {
   view = "_list",
   params = {
     global = true,
-    filter_interest = "area",
     }
 }
 

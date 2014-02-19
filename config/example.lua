@@ -218,8 +218,43 @@ if member == nil then
   member:save()
 end
 
-config.default_privilege_for_unit = 0
-
 config.register_without_invite_code = true
 
+config.email_requirement_text = "Deine E-Mail-Adresse muss eine @student.tugraz.at Adresse sein."
+config.email_require_host = "@student.tugraz.at"
+config.default_privilege_after_verification = true
+config.default_privilege_for_unit = 1
+
+config.organizational_unit_title = _"Organisationen"
+config.internal_posts_title = "Studienrichtung"
+
 config.enable_help_per_default = true
+
+config.linkmenu = {
+--  {
+--    text = _"Voting rights log",
+--    external = "/static/hourly.php"
+--  },
+--  {
+--    text = _"Initiative style sheet",
+--    external = "https://wiki.piratenpartei.at/wiki/AG:Liquid/Antragsformatvorlage"
+--  },
+  {
+    text = "Regelwerke",
+    external = "/policy/list.html"
+  },
+--  {
+--    text = _"Accreditation",
+--    external = "https://wiki.piratenpartei.at/wiki/AG:Liquid/Akkreditierungsbefugte"
+--  }
+--  {
+--    text = _"FAQ",
+--    external = "https://wiki.piratenpartei.at/wiki/AG:Liquid/FAQ"
+--  }
+--  {
+--    text = _"Tutorial",
+--    external = "https://wiki.piratenpartei.at/wiki/AG:Liquid/Tutorial"
+--  }
+}
+
+
