@@ -97,7 +97,6 @@ end
     end
   }
 
-end
 end)
 
 slot.select('navigation_right', function()
