@@ -17,7 +17,7 @@ config.app_service_provider = "Snake Oil<br/>10000 Berlin<br/>Germany"
 config.use_terms = "=== Terms of Use ==="
 
 -- Privacy Terms (HTML)
-config.privacy_terms = "<h1>Datenschutzerklärung für das UniLiquid</h1>"
+config.privacy_terms = "<h1>Datenschutzerklärung für das Liquid</h1>"
   
 -- Absolute base url of application
 -- ------------------------------------------------------------------------
@@ -217,5 +217,7 @@ if member == nil then
   member.last_activity = 'now'
   member:save()
 end
+
+config.default_privilege_for_unit = 0
 
 config.register_without_invite_code = true

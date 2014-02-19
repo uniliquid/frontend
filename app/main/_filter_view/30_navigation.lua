@@ -16,6 +16,15 @@ if config.landing_page then
     module = 'index',
     view   = 'index'
   }
+else
+  ui.link{
+    content = function()
+      ui.image{ static = "favicon.ico" }
+      ui.tag{ attr = { class = "logo" }, content = config.instance_name }
+    end,
+    module = 'index',
+    view   = 'index'
+  }
 end
   
   if app.session:has_access("anonymous") then

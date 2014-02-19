@@ -8,6 +8,7 @@ end
 local notify_email = param.get("notify_email")
 local name = param.get("name")
 local login = param.get("login")
+local member = nil
 
 ui.form{
   attr = { class = "vertical" },
@@ -49,7 +50,6 @@ ui.form{
       }
 
     else
-      local member = nil
       if config.register_without_invite_code then
         member = Member:new()
       else
@@ -59,6 +59,7 @@ ui.form{
           :optional_object_mode()
           :exec()
       end
+    end
 
       if step ~= 4 and (not member.notify_email and not notify_email or not member.name and not name or not member.login and not login or step == 1) then
         if config.register_without_invite_code then
@@ -152,8 +153,8 @@ ui.form{
         ui.submit{
           text = _'Proceed with registration'
         }
-      else
-        local member = Member:new()
+      else if step ~= 4 then
+        member = Member:new()
         ui.field.hidden{ name = "step", value = "3" }
         if config.register_without_invite_code then
           ui.title(_"Registration (step 2 of 2: Terms of use and password)")
@@ -253,7 +254,7 @@ ui.form{
           text = _'Activate account'
         }
       else
-        local member = app.session.member
+        member = app.session.member
         ui.field.hidden{ name = "step", value = "4" }
         ui.title(_"Accept new Terms of use")
         ui.container{
