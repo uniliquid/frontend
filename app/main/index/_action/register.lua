@@ -289,11 +289,17 @@ if step > 2 then
   app.session:save()
 if not config.default_privilege_after_verification then
   if config.default_privilege_for_unit > 0 then
-    privilege = Privilege:new()
-    privilege.unit_id = config.default_privilege_for_unit
-    privilege.member_id = member.id
-    privilege.voting_right = true
-    privilege:save()
+    local privilege = Privilege:by_pk(unit_id, member.id)
+    if privilege and not privilege.voting_right then
+      privilege.voting_right = true
+      privilege:save()
+    elseif not privilege then
+      privilege = Privilege:new()
+      privilege.unit_id = unit_id
+      privilege.member_id = member.id
+      privilege.voting_right = true
+      privilege:save()
+    end
   end
 
   local units = Unit:new_selector():add_where("active"):add_order_by("name"):exec()
@@ -311,10 +317,13 @@ if not config.default_privilege_after_verification then
         :add_where{ "area.active" }
         :add_where{ "area.name NOT LIKE '%Sandkasten%'" }
       for i, area in ipairs(areas_selector:exec()) do
-        membership = Membership:new()
-        membership.area_id    = area.id
-        membership.member_id  = member.id
-        membership:save()
+        local membership = Membership:by_pk(area.id, member.id)
+        if not membership then
+          membership = Membership:new()
+          membership.area_id    = area.id
+          membership.member_id  = member.id
+          membership:save()
+        end
       end
     end
   end
