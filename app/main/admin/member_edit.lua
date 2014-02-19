@@ -50,7 +50,9 @@ ui.form{
     end
 
     ui.field.text{     label = _"Identification", name = "identification" }
-    ui.container{ content = function() ui.tag{ tag = "label", attr = { class = "ui_field_label" }, content = _"Show in " .. config.mv_name } ui.tag{ tag = "span", attr = {}, content = function() ui.link { text = _"Show in " .. config.mv_name, external = config.mv_decryption_url .. member.identification:gsub("+","-"):gsub("/","_"):gsub("=","$") } end } end }
+    if config.mv_connection then
+      ui.container{ content = function() ui.tag{ tag = "label", attr = { class = "ui_field_label" }, content = _"Show in " .. config.mv_name } ui.tag{ tag = "span", attr = {}, content = function() ui.link { text = _"Show in " .. config.mv_name, external = config.mv_decryption_url .. member.identification:gsub("+","-"):gsub("/","_"):gsub("=","$") } end } end }
+    end
     ui.field.text{     label = _"Notification email", name = "notify_email" }
     if member and member.activated then
       ui.field.text{     label = _"Screen name",        name = "name" }
