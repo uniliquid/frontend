@@ -55,7 +55,7 @@ end
 local notify_email = param.get("notify_email")
 
 if not config.locked_profile_fields.notify_email and notify_email then
-  local success = false
+  local success = true
   if #notify_email < 5 then
     slot.put_into("error", _"Email address too short!")
     success = false
