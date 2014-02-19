@@ -20,4 +20,4 @@ if app.html_title.subtitle then
   html_title = html_title .. app.html_title.subtitle .. " - "
 end
 
-slot.put_into("html_title", encode.html(html_title) .. _"Liquid" .. " - " .. config.instance_name)
+slot.put_into("html_title", encode.html(html_title) .. config.instance_name)
