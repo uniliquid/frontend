@@ -2,6 +2,7 @@ local member = param.get("member", "table")
 local for_member = param.get("for_member", atom.boolean)
 local filter_unit = param.get_all_cgi()["filter_unit"] or "my_areas"
 
+
 if not for_member then
 
   ui.container{ attr = { class = "ui_filter" }, content = function()
