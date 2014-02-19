@@ -27,6 +27,16 @@ if not email:match('^[^@%s]+@[^@%s]+$') then
   return false
 end
 
+if #notify_email < 5 then
+  slot.put_into("error", _"Email address too short!")
+  return false
+end
+
+if config.email_require_host ~= nil and notify_email:sub(-string.len(config.email_require_host)) ~= config.email_require_host then
+  slot.put_into("error", _"Email address is invalid! " .. config.email_requirement_text)
+  return false
+end
+
 local success = app.session.member:set_notify_email(email)
 
 if not success then
