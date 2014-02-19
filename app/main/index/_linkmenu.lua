@@ -12,7 +12,7 @@ ui.tag{ tag = "ul", content = function()
   for i, link in ipairs(config.linkmenu) do
     ui.tag{ tag = "li", content = function()
       ui.link{
-        text = link.text
+        text = link.text,
         external = link.external
       }
     end }
