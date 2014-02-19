@@ -9,54 +9,14 @@ ui.tag{ tag = "ul", content = function()
       }
     end }
   end
+  for i, link in ipairs(config.linkmenu) do
     ui.tag{ tag = "li", content = function()
-
       ui.link{
-        text = _"Voting rights log",
-        external = "/static/hourly.php"
+        text = link.text
+        external = link.external
       }
-      
     end }
-    ui.tag{ tag = "li", content = function()
-
-      ui.link{
-        text = _"Initiative style sheet",
-        external = "https://wiki.piratenpartei.at/wiki/AG:Liquid/Antragsformatvorlage"
-      }
-      
-    end }
-    ui.tag{ tag = "li", content = function()
-
-      ui.link{
-        text = _"Policies",
-        external = "/policy/list.html"
-      }
-      
-    end }
-    ui.tag{ tag = "li", content = function()
-
-      ui.link{
-        text = _"Accreditation",
-        external = "https://wiki.piratenpartei.at/wiki/AG:Liquid/Akkreditierungsbefugte"
-      }
-      
-    end }
-    ui.tag{ tag = "li", content = function()
-
-      ui.link{
-        text = _"FAQ",
-        external = "https://wiki.piratenpartei.at/wiki/AG:Liquid/FAQ"
-      }
-      
-    end }
-    ui.tag{ tag = "li", content = function()
-
-      ui.link{
-        text = _"Tutorial",
-        external = "https://wiki.piratenpartei.at/wiki/AG:Liquid/Tutorial"
-      }
-      
-    end }
+  end
 
 end }
 

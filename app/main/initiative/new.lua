@@ -35,8 +35,6 @@ if policy_id then
 end
 
 if issue_id then
-  ui.title(_"Add alternative initiative to issue")
-else
   ui.title(_"Create new issue")
 end
 
