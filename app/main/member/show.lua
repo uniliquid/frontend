@@ -136,6 +136,15 @@ slot.select("head", function()
           }
         }
       end
+      if app.session.member.admin then
+        slot.put(" &middot; ")
+        ui.link{
+          text    = _"Show in Admin Interface",
+          module  = "admin",
+          view  = "member_edit",
+          id      = member.id,
+        }
+      end
     end
   end }
 end)

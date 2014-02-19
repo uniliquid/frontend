@@ -1,3 +1,4 @@
+if config.voting_rights_management then
 local id = app.session.member_id
 local for_unit = param.get("for_unit", atom.integer)
 
@@ -241,3 +242,4 @@ end
 
 slot.put_into("error", _"You recently tried to get voting rights for this unit. Please try again later.")
 return false
+end

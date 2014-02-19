@@ -33,12 +33,14 @@ ui.form{
         texts[#texts+1] = _"possibly instable result caused by multistage majority"
       end
       if #texts == 0 then
-      texts[#texts+1] = _"none"
+        texts[#texts+1] = _"none"
       end
+      for i,text in ipairs(texts) do
       ui.field.text{
-        label = _"Other failures",
-        value = table.concat(texts, ", ")
+        label = i == 1 and _"Other failures" or _"and",
+        value = text
       }
+      end
       ui.field.boolean{ label = _"Eligible as winner", value = initiative.eligible }
     end
   end

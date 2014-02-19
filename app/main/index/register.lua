@@ -1,7 +1,10 @@
 execute.view{ module = "index", view = "_lang_chooser" }
 
 local step = param.get("step", atom.integer)
-local code = "123"
+local code = param.get("code")
+if config.register_without_invite_code then
+  code = "123"
+end
 local notify_email = param.get("notify_email")
 local name = param.get("name")
 local login = param.get("login")
@@ -18,7 +21,7 @@ ui.form{
   },
   content = function()
 
-    if not code then
+    if step ~= 4 and not code then
       ui.title(_"Registration (step 1 of 3: Invite code)")
       ui.actions(function()
         ui.link{
@@ -46,17 +49,26 @@ ui.form{
       }
 
     else
---      local member = Member:new_selector()
---        :add_where{ "invite_code = ?", code }
---        :add_where{ "activated ISNULL" }
---        :optional_object_mode()
---        :exec()
+      local member = nil
+      if config.register_without_invite_code then
+        member = Member:new()
+      else
+        member = Member:new_selector()
+          :add_where{ "invite_code = ?", code }
+          :add_where{ "activated ISNULL" }
+          :optional_object_mode()
+          :exec()
+      end
 
-      if not notify_email or not name or not login or step == 1 then
-        ui.title(_"Registration (step 1 of 2: Personal information)")
+      if step ~= 4 and (not member.notify_email and not notify_email or not member.name and not name or not member.login and not login or step == 1) then
+        if config.register_without_invite_code then
+          ui.title(_"Registration (step 1 of 2: Personal information)")
+        else
+          ui.title(_"Registration (step 2 of 3: Personal information)")
+        end
         ui.field.hidden{ name = "step", value = 2 }
         ui.actions(function()
-        if not step == 2 then
+         if config.register_without_invite_code and not step == 2 then
           ui.link{
             content = function()
                 slot.put(_"One step back")
@@ -68,7 +80,7 @@ ui.form{
             }
           }
           slot.put(" &middot; ")
-          end
+         end
           ui.link{
             content = function()
                 slot.put(_"Cancel registration")
@@ -78,26 +90,35 @@ ui.form{
           }
         end)
 
-        --ui.tag{
-        --  tag = "p",
-        --  content = _"This invite key is connected with the following information:"
-        --}
+       if not config.register_without_invite_code then
+        ui.tag{
+          tag = "p",
+          content = _"This invite key is connected with the following information:"
+        }
+       end
         
-        --execute.view{ module = "member", view = "_profile", params = { member = member, include_private_data = true } }
+       if not config.register_without_invite_code then
+        execute.view{ module = "member", view = "_profile", params = { member = member, include_private_data = true } }
+       end
 
         if not config.locked_profile_fields.notify_email then
           ui.tag{
             tag = "p",
             content = _"Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."
           }
-          ui.tag{
-            tag = "p",
-            content = _"This email address does not necessarily have to be a student email address."
-          }
+          if config.email_requirement_text ~= nil then
+            ui.tag{
+              tag = "p",
+              content = config.email_requirement_text
+            }
+          end
+          if config.register_without_invite_code then
+            member.notify_email = param.get("notify_email")
+          end
           ui.field.text{
             label     = _'Email address',
             name      = 'notify_email',
-            value     = param.get("notify_email")-- or member.notify_email
+            value     = param.get("notify_email") or member.notify_email
           }
         end
         if not config.locked_profile_fields.name then
@@ -105,10 +126,13 @@ ui.form{
             tag = "p",
             content = _"Please choose a name. This name will be PUBLICLY shown to others to identify you. We recommend using a pseudonym."
           }
+          if config.register_without_invite_code then
+            member.name = param.get("name")
+          end
           ui.field.text{
             label     = _'Screen name',
             name      = 'name',
-            value     = param.get("name")-- or member.name
+            value     = param.get("name") or member and member.name
           }
         end
         if not config.locked_profile_fields.login then
@@ -116,6 +140,9 @@ ui.form{
             tag = "p",
             content = _"Please choose a login name. This name will not be shown to others and is used only by you to login into the system. Anyway - we recommend using a pseudonym, so that you do not tell us your real name - we prefer not knowing your real name. The login name is case sensitive."
           }
+          if config.register_without_invite_code then
+            member.login = param.get("login")
+          end
           ui.field.text{
             label     = _'Login name',
             name      = 'login',
@@ -128,7 +155,11 @@ ui.form{
       else
         local member = Member:new()
         ui.field.hidden{ name = "step", value = "3" }
-        ui.title(_"Registration (step 2 of 2: Terms of use and password)")
+        if config.register_without_invite_code then
+          ui.title(_"Registration (step 2 of 2: Terms of use and password)")
+        else
+          ui.title(_"Registration (step 3 of 3: Terms of use and password)")
+        end
         ui.actions(function()
           ui.link{
             content = function()
@@ -220,6 +251,52 @@ ui.form{
         }
         ui.submit{
           text = _'Activate account'
+        }
+      else
+        local member = app.session.member
+        ui.field.hidden{ name = "step", value = "4" }
+        ui.title(_"Accept new Terms of use")
+        ui.container{
+          attr = { class = "wiki use_terms" },
+          content = function()
+            if config.use_terms_html then
+              slot.put(config.use_terms_html)
+            else
+              slot.put(format.wiki_text(config.use_terms))
+            end
+          end
+        }
+        
+        for i, checkbox in ipairs(config.use_terms_checkboxes) do
+          slot.put("<br />")
+          ui.tag{
+            tag = "div",
+            content = function()
+              ui.tag{
+                tag = "input",
+                attr = {
+                  type = "checkbox",
+                  id = "use_terms_checkbox_" .. checkbox.name,
+                  name = "use_terms_checkbox_" .. checkbox.name,
+                  value = "1",
+                  style = "float: left;",
+                  checked = param.get("use_terms_checkbox_" .. checkbox.name, atom.boolean) and "checked" or nil
+                }
+              }
+              slot.put("&nbsp;")
+              ui.tag{
+                tag = "label",
+                attr = { ['for'] = "use_terms_checkbox_" .. checkbox.name },
+                content = function() slot.put(checkbox.html) end
+              }
+            end
+          }
+        end
+
+        slot.put("<br />")
+
+        ui.submit{
+          text = _'Confirm'
         }
       end
     end

@@ -6,6 +6,10 @@ if not initiative then
 end
 
 execute.view{
+  module = "index", view = "_quicklinks"
+}
+
+execute.view{
   module = "initiative", view = "_show", params = {
     initiative = initiative
   }

@@ -40,7 +40,6 @@ argument.author_id         = app.session.member.id
 argument.name              = name
 argument.formatting_engine = formatting_engine
 param.update(argument, "content", "initiative_id")
-argument:save()
 
 -- TODO important m1 selectors returning result _SET_!
 local issue = argument.initiative:get_reference_selector("issue"):for_share():single_object_mode():exec()
@@ -51,7 +50,17 @@ if issue.closed then
 --elseif issue.fully_frozen then
 --  slot.put_into("error", _"Voting for this issue has already begun!")
 --  return false
+elseif not (initiative.issue.half_frozen or initiative.issue.fully_frozen) then
+  slot.put_into("error", _"This issue is still in discussion!")
+  return false
+elseif (initiative.issue.fully_frozen and not initiative.admitted) then
+  local policy = initiative.issue.policy
+  slot.put_into("error", _("This initiative has not been admitted! It failed the quorum of #{quorum}.", { quorum = format.percentage(policy.initiative_quorum_num / policy.initiative_quorum_den) }))
+  return false
 end
+
+-- only save if passed the above conditions
+argument:save()
 
 -- positive rating
 local rating = Rating:new()

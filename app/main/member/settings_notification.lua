@@ -102,6 +102,29 @@ ui.form{
     end }
 
     slot.put("<br />")
+   
+   if config.notify_satzung_direkt then
+    ui.container{ content = function()
+      ui.tag{
+        tag = "input",
+        attr = {
+          id = "notify_level_s",
+          type = "checkbox", name = "notify_level_s", value = "39",
+          checked = notify_level_s and "checked" or nil
+        }
+      }
+      ui.tag{
+        tag = "label", attr = { ['for'] = "notify_level_s" },
+        content = function()
+          slot.put("Unabhängig davon möchte ich per E-Mail über ")
+          ui.tag{ tag = "b", content = "Satzungsänderungen" }
+          slot.put(" informiert werden.")
+        end
+      }
+    end }
+    
+    slot.put("<br />")
+   end
 
     ui.container{ content = function()
       ui.tag{

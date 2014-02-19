@@ -12,7 +12,7 @@ end
 
 ui.title(_"Member list")
 
-ui.actions(function()
+--[[ui.actions(function()
   ui.link{
     attr = { class = { "admin_only" } },
     text = _"Register new member",
@@ -29,7 +29,7 @@ ui.actions(function()
       page             = param.get("page", atom.integer)
     }
   }
-end)
+end)]]
 
 
 ui.form{
@@ -98,13 +98,44 @@ ui.form{
 
   end
 }
+local admin = nil
+if search_admin == 1 then
+  admin = true
+elseif search_admin == 2 then
+  admin = false
+end
+local locked = nil
+if search_locked == 1 then
+  locked = true
+elseif search_locked == 2 then
+  locked = false
+end
+local active = nil
+if search_active == 1 then
+  active = true
+elseif search_active == 2 then
+  active = false
+end
 local members_selector = Member:build_selector{
   admin_search = search,
-  admin_search_admin     = search_admin,
-  admin_search_activated = search_activated,
-  admin_search_locked    = search_locked,
-  admin_search_active    = search_active
+  admin     = admin,
+  locked    = locked,
+  active    = active
 }
+local activated = nil
+if search_activated == 1 then
+  members_selector:add_where("activated NOTNULL")
+elseif search_activated == 2 then
+  members_selector:add_where("activated ISNULL")
+end
+local params_tpl = {
+  search           = search,
+  search_admin     = search_admin,
+  search_activated = search_activated,
+  search_locked    = search_locked,
+  search_active    = search_active
+}
+
 if desc then
   members_selector:add_order_by(order .. " DESC")
 else
@@ -115,15 +146,6 @@ ui.tag{
   tag = "p",
   content = _("#{count} members found:", { count = members_selector:count() })
 }
-
-local params_tpl = {
-  search           = search,
-  search_admin     = search_admin,
-  search_activated = search_activated,
-  search_locked    = search_locked,
-  search_active    = search_active
-}
-
 ui.paginate{
   selector = members_selector,
   per_page = 30,

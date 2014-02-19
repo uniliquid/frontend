@@ -11,6 +11,9 @@ end
 local deactivate = param.get("deactivate", atom.boolean)
 if deactivate then
   member.active = false
+  member.activated = nil
+  last_activity = nil
+  member.password = nil
 end
 local login = param.get("login")
 if login then
@@ -29,20 +32,53 @@ if identification then
 end
 if id then
   member.identification = identification
-  local matn_p = param.get("matn")
-  if string.len(matn_p) == 7 then
-    local matn = Rights:by_pk(id, "matn")
-    if not matn then
-      matn = Rights:new()
-      matn.member_id = id
-      matn.key = "matn"
-      matn.value = param.get("matn")
-    else
-      matn.value = param.get("matn")
+  if config.use_matn then
+    local matn_p = param.get("matn")
+    if string.len(matn_p) == 7 then
+      local matn = Rights:by_pk(id, "matn")
+      if not matn then
+        matn = Rights:new()
+        matn.member_id = id
+        matn.key = "matn"
+        matn.value = param.get("matn")
+      else
+        matn.value = param.get("matn")
+      end
+      matn:save()
     end
-    matn:save()
   end
 end
+
+local avatar_delete = param.get("avatar_delete", atom.boolean)
+if avatar_delete then
+  local member_id = id
+  local image_type = "avatar"
+  local member_image = MemberImage:by_pk(member_id, image_type, false)
+  local member_image_scaled = MemberImage:by_pk(member_id, image_type, true)
+
+  if member_image then
+    member_image:destroy()
+  end
+  if member_image_scaled then
+    member_image_scaled:destroy()
+  end
+end
+
+local photo_delete = param.get("photo_delete", atom.boolean)
+if photo_delete then
+  local member_id = id
+  local image_type = "photo"
+  local member_image = MemberImage:by_pk(member_id, image_type, false)
+  local member_image_scaled = MemberImage:by_pk(member_id, image_type, true)
+
+  if member_image then
+    member_image:destroy()
+  end
+  if member_image_scaled then
+    member_image_scaled:destroy()
+  end
+end
+
 local err = member:try_save()
 
 if err then
@@ -80,9 +116,16 @@ end
 
 if not member.activated and param.get("invite_member", atom.boolean) then
   member:send_invitation()
-end
-
-if id then
+  slot.put_into("notice", _"Member invited")
+elseif member.activated and param.get("password_reset", atom.boolean) then
+  Member:send_password_reset(member.id)
+  slot.put_into("notice", _"Sent password reset link")
+elseif not member.activated and param.get("deactivate", atom.boolean) then
+  slot.put_into("notice", _"Account deactivated. Email will be copied from admidio on next full hour. Invitation will be send then as well.")
+elseif not member.activated and param.get("invite_member", atom.boolean) then
+  member:send_invitation()
+  slot.put_into("notice", _"Member invited")
+elseif id then
   slot.put_into("notice", _"Member successfully updated")
 else
   slot.put_into("notice", _"Member successfully registered")

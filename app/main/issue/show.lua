@@ -13,6 +13,10 @@ if not app.html_title.title then
 	app.html_title.title = _("Issue ##{id}", { id = issue.id })
 end
 
+execute.view{
+  module = "index", view = "_quicklinks"
+}
+
 slot.select("head", function()
   execute.view{ module = "area", view = "_head", params = { area = issue.area, show_links = true } }
 end)
@@ -25,7 +29,11 @@ end )
 
 if app.session:has_access("all_pseudonymous") then
 
-  ui.container{ attr = { class = "heading" }, content = _"Interested members" }
+  ui.container{ attr = { class = "heading" }, content = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/eye.png" }
+      slot.put(_"Interested members")
+    end
+  }
   
   local interested_members_selector = issue:get_reference_selector("interested_members_snapshot")
     :join("issue", nil, "issue.id = direct_interest_snapshot.issue_id")
@@ -41,19 +49,28 @@ if app.session:has_access("all_pseudonymous") then
     }
   }
 
-  ui.container{ attr = { class = "heading" }, content = _"Details" }
-  
+ ui.link{ name = "details_link1", attr = { id = "details_link1", class = "heading", onclick = "return toggleDetails();" }, content = function()
+  ui.image{ attr = { class = "spaceicon" }, static = "icons/16/table.png" }
+  slot.put(_"Show Details")
+end,
+  external = "#"
+}
+ui.link{ name = "details_link2", attr = { id = "details_link2", class = "heading", onclick = "return toggleDetails();", style = "display: none;" }, content = function()
+  ui.image{ attr = { class = "spaceicon" }, static = "icons/16/table.png" }
+  slot.put(_"Hide Details")
+end,
+  external = "#"
+}
+ui.container{ attr = { id = "details", style = "display: none;", class = "initiative_head" },
+content = function()
   execute.view{
     module = "issue",
     view = "_details",
     params = { issue = issue }
   }
-  
 end
+}
 
-if issue.snapshot then
-  slot.put("<br />")
-  ui.field.timestamp{ label = _"Last snapshot:", value = issue.snapshot }
 end
 
 if config.absolute_base_short_url then

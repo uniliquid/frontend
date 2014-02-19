@@ -10,12 +10,41 @@ local filters = {}
 
 local filter = { name = "filter" }
 
+local show_new
+if app.session.member then
+  local setting_key = "liquidfeedback_frontend_show_new_issues"
+  local setting = Setting:by_pk(app.session.member.id, setting_key)
+  show_new = setting and setting.value
+end
+
 if state ~= "closed" then
+  for i=1,2 do
+  if (i == 2 and not show_new) or (i == 1 and show_new) then
   filter[#filter+1] = {
     name = "any",
-    label = _"Any phase",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/application_form_add.png" }
+      ui.tag{ content = _"Any phase" }
+    end,
     selector_modifier = function(selector) end
   }
+  else
+  filter[#filter+1] = {
+    name = "not_new",
+    label = function()
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/application_form_delete.png" }
+      ui.tag{ content = _"Any phase (except new)" }
+    end,
+    selector_modifier = function(selector)
+      if for_events then
+        selector:add_where("event.state != 'admission'")
+      else
+        selector:add_where("issue.accepted NOTNULL OR issue.closed NOTNULL")
+      end
+    end
+  }
+  end
+  end
 end
 
 if not state then
@@ -189,7 +218,7 @@ end
 
 filters[#filters+1] = filter
 
---[[if member then
+if member then
   local filter = {
     name = "filter_policy",
   }
@@ -235,12 +264,12 @@ filters[#filters+1] = filter
   }
 
   filters[#filters+1] = filter
-end]]
+end
 
 if member then
-  --local filter_policy = param.get_all_cgi()["filter_policy"]
+  local filter_policy = param.get_all_cgi()["filter_policy"]
 
-  --if filter_policy == "selection" then
+  if filter_policy == "selection" then
   local filter = {
     name = "filter_policy_sel",
   }
@@ -252,12 +281,6 @@ if member then
   end
 
   policies = policies:exec()
-
-  filter[#filter+1] = {
-    name = "any",
-    label = _"Alle Regelwerke",
-    selector_modifier = function(selector)  end
-  }
 
   for i, policy in ipairs(policies) do
     filter[#filter+1] = {
@@ -271,7 +294,7 @@ if member then
 
   filters[#filters+1] = filter
 
-  --end
+  end
 end
 
 if member then
@@ -349,7 +372,7 @@ if member then
   filter[#filter+1] = {
     name = "supported",
     label = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_orange.png" }
       ui.tag{ content = _"Supported" }
     end,
     selector_modifier = function() end
@@ -357,7 +380,7 @@ if member then
   filter[#filter+1] = {
     name = "potentially_supported",
     label = function()
-      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up.png" }
+      ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_grey.png" }
       ui.tag{ content = _"Potentially supported" }
     end,
     selector_modifier = function() end
@@ -397,7 +420,7 @@ if app.session.member then
         label = _"Direct and by delegation",
         selector_modifier = function(selector)
           add_default_joins(selector)
-          selector:add_where("CASE WHEN issue.fully_frozen ISNULL AND issue.closed ISNULL THEN filter_interest.member_id NOTNULL ELSE filter_interest_s.member_id NOTNULL END OR filter_d_interest_s.member_id NOTNULL")
+          --selector:add_where("CASE WHEN issue.fully_frozen ISNULL AND issue.closed ISNULL THEN filter_interest.member_id NOTNULL ELSE filter_interest_s.member_id NOTNULL END OR filter_d_interest_s.member_id NOTNULL")
           if filter_interest == "supported" then
             selector:add_where({ 
               "CASE WHEN issue.fully_frozen ISNULL AND issue.closed ISNULL THEN " ..
@@ -460,7 +483,7 @@ if app.session.member then
         end,
         selector_modifier = function(selector)
           add_default_joins(selector)
-          selector:add_where("filter_d_interest_s.member_id NOTNULL AND filter_interest.member_id ISNULL")
+          --selector:add_where("filter_d_interest_s.member_id NOTNULL AND filter_interest.member_id ISNULL")
 
           if filter_interest == "supported" then
             selector:add_where({ 

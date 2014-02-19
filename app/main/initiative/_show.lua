@@ -365,9 +365,15 @@ ui.container{ attr = { class = class }, content = function()
             }
             if not initiative.revoked then
               slot.put(" ")
+              local icon = "icons/16/thumb_up_orange.png"
+              local text = _"Refresh support to current draft"
+              if supporter:has_critical_opinion() then
+                icon = "icons/16/thumb_up_grey.png"
+                text = _"Refresh potential support to current draft"
+              end
               ui.link{
-                image = { attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" },
-                text   = _"Refresh support to current draft",
+                image = { attr = { class = "spaceicon" }, static = icon },
+                text  =  text,
                 module = "initiative",
                 action = "add_support",
                 id     = initiative.id,
@@ -465,7 +471,7 @@ if not show_as_head then
   }
 
   -- open arguments in discussion phase
-  if issue.accepted then
+  if issue.half_frozen or issue.fully_frozen or issue.closed then
 
     execute.view{
       module = "argument",
@@ -496,14 +502,27 @@ if not show_as_head then
   if app.session:has_access("all_pseudonymous") then
     if initiative.issue.fully_frozen and initiative.issue.closed then
       local members_selector = initiative.issue:get_reference_selector("direct_voters")
-            :left_join("vote", nil, { "vote.initiative_id = ? AND vote.member_id = member.id", initiative.id })
-            :add_field("direct_voter.weight as voter_weight")
-            :add_field("direct_voter.weight AS weight")
-            :add_field("coalesce(vote.grade, 0) as grade")
-            :add_field("direct_voter.comment as voter_comment")
-            :left_join("initiative", nil, "initiative.id = vote.initiative_id")
-            :left_join("issue", nil, "issue.id = initiative.issue_id")
-      
+        :left_join("vote", nil, { "vote.initiative_id = ? AND vote.member_id = member.id", initiative.id })
+        :add_field("direct_voter.weight as voter_weight")
+        :add_field("direct_voter.weight AS weight")
+        :add_field("coalesce(vote.grade, 0) as grade")
+        :add_field("direct_voter.comment as voter_comment")
+        :left_join("initiative", nil, "initiative.id = vote.initiative_id")
+        :left_join("issue", nil, "issue.id = initiative.issue_id")
+
+      local delegiating_voter = param.get("delegating_voter", "table")
+      local delegator_selector = delegating_voter 
+    
+      initiative.issue:get_reference_selector("delegating_voters")
+    --[[    :left_join("delegating_voter")
+      --  :left_join("vote", nil, { "vote.initiative_id = ? AND vote.member_id = member.id", initiative.id })
+      ]]--  :add_field("delegating_voter.weight as voter_weight")
+        :add_field("delegating_voter.weight AS weight")
+        :add_field("coalesce(vote.grade, 0) as grade")
+        :add_field("delegating_voters.comment as voter_comment")
+        :left_join("initiative", nil, "initiative.id = vote.initiative_id")
+        :left_join("issue", nil, "issue.id = initiative.issue_id")
+--]]--
       ui.anchor{ name = "voter", attr = { class = "heading" }, content = _"Voters" .. Member:count_string(members_selector) }
 
       local filters = {
@@ -512,9 +531,14 @@ if not show_as_head then
           anchor = "voter",
           reset_params = { "voter" },
           {
-            name = "any",
-            label = _"All",
+            name = "weight",
+            label = _"by weight",
             selector_modifier = function(members_selector) end
+          },
+          {
+            name = "yan",
+            label = _"yes / abstention / no",
+            selector_modifier = function(selector) members_selector:add_order_by("sign(vote.grade) DESC") end
           },
           {
             name = "yes",
@@ -536,30 +560,66 @@ if not show_as_head then
             selector_modifier = function(selector)
               members_selector:add_where("vote.grade < 0")
             end
-          }
+          },
+          {
+            name = "abc",
+            label = _"alphabetically",
+            selector_modifier = function(selector) members_selector:add_order_by("lower(member.name), id") end
+          },
+          {
+            name = "comment",
+            label = _"with comment",
+            selector_modifier = function(selector) members_selector:add_where("length(direct_voter.comment) > 0") end
+          },
+          ----[[
+          { 
+            name = "all", 
+            label = _"all voters",
+            selector_modifier = function(delegator_selector) end
+          },--]]--
         }
       }
 
       filters.content = function()
+        execute.view{
+          module = "member",
+          view = "_list",
+          params = {
+            initiative = initiative,
+            for_votes = true,
+            members_selector = members_selector,
+            paginator_name = "voter"
+          }
+        }
+      end
+    
+      ui.container{
+        attr = { class = "voter" },
+        content = function()
+          ui.filters(filters)
+        end
+      }
+
+ --[[     execute.view{
+                module = "member",
+                        view = "_list",
+                                params = {
+                                            initiative = initiative,
+                                                      members_selector = members_selector:add_where("vote.grade = 0"),
+                                                                paginator_name = "qwer"
+                                                                        }
+                                                                              }
+
       execute.view{
         module = "member",
         view = "_list",
         params = {
           initiative = initiative,
-          for_votes = true,
-          members_selector = members_selector,
-          paginator_name = "voter"
+          members_selector = members_selector:add_where("vote.grade < 0"),
+          paginator_name = "asdf"
         }
       }
-    end
-
-    ui.container{
-      attr = { class = "voter" },
-      content = function()
-        ui.filters(filters)
-      end
-    }
-
+--]]--
     end
 
     local before_voting = ""
@@ -576,13 +636,17 @@ if not show_as_head then
               :add_where("direct_supporter_snapshot.satisfied")
               :add_field("direct_supporter_snapshot.informed", "is_informed")
 
+--    local supp_num = string.gmatch(Member:count_string(members_selector), "%d+")
+--        print(supp_num(0))
+--                print(supp_num(1))
+
     if members_selector:count() > 0 then
       ui.anchor{
         name = "supporters",
         attr = { class = "heading" },
         content = function()
-          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" }
-          slot.put(_"Supporters" .. before_voting  .. Member:count_string(members_selector))
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_orange.png" }
+          slot.put(_"Supporters" .. before_voting .. Member:count_string(members_selector))
         end
       }    
       
@@ -600,7 +664,7 @@ if not show_as_head then
         name = "supporters",
         attr = { class = "heading" },
         content = function()
-          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_light_green.png" }
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_orange.png" }
           slot.put(_"No supporters" .. before_voting)
         end
       }
@@ -620,7 +684,7 @@ if not show_as_head then
         name = "potential_supporters",
         attr = { class = "heading" },
         content = function()
-          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up.png" }
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_grey.png" }
           slot.put(_"Potential supporters" .. before_voting  .. Member:count_string(members_selector))
         end
       }
@@ -639,7 +703,7 @@ if not show_as_head then
         name = "potential_supporters",
         attr = { class = "heading" },
         content = function()
-          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up.png" }
+          ui.image{ attr = { class = "spaceicon" }, static = "icons/16/thumb_up_grey.png" }
           slot.put(_"No potential supporters" .. before_voting)
         end
       }
@@ -647,6 +711,20 @@ if not show_as_head then
     end
     
     -- initiative details
+ ui.link{ name = "details_link1", attr = { id = "details_link1", class = "heading", onclick = "return toggleDetails();" }, content = function()
+  ui.image{ attr = { class = "spaceicon" }, static = "icons/16/table.png" }
+  slot.put(_"Show Details")
+end,
+  external = "#"
+}
+ui.link{ name = "details_link2", attr = { id = "details_link2", class = "heading", onclick = "return toggleDetails();", style = "display: none;" }, content = function()
+  ui.image{ attr = { class = "spaceicon" }, static = "icons/16/table.png" }
+  slot.put(_"Hide Details")
+end,
+  external = "#"
+}
+ui.container{ attr = { id = "details", style = "display: none;", class = "initiative_head" },
+content = function()
     execute.view {
       module = "initiative",
       view = "_details",
@@ -655,6 +733,8 @@ if not show_as_head then
         members_selector = members_selector
       }
     }
+end
+}
 
     slot.put('<div class="clearfix"></div>')
 

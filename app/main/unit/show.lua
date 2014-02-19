@@ -7,6 +7,10 @@ if not unit then
   return
 end
 
+execute.view{
+  module = "index", view = "_quicklinks"
+}
+
 slot.select("head", function()
   execute.view{ module = "unit", view = "_head", params = { unit = unit, show_content = true, show_links = true, member = app.session.member } }
 end)

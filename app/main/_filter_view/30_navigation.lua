@@ -1,11 +1,12 @@
 slot.select('navigation', function()
 
+if config.landing_page then
   ui.link{
     content = function()
       ui.image{ static = "favicon.ico" }
-      ui.tag{ attr = { class = "logo" }, content = "UniLiquid" }
+      ui.tag{ attr = { class = "logo" }, content = config.instance_name }
     end,
-    external = "http://uniliquid.at"
+    external = "/"
   }
   ui.link{
     content = function()
@@ -15,6 +16,7 @@ slot.select('navigation', function()
     module = 'index',
     view   = 'index'
   }
+end
   
   if app.session:has_access("anonymous") then
 
@@ -27,14 +29,6 @@ slot.select('navigation', function()
       view   = 'search'
     }
 
---[[    if app.session.member_id then
-      ui.link{
-        content = _"Switch Design",
-        module = 'member',
-        view = 'settings_css'
-      }
-    end]]
- 
     if app.session.member == nil then
       ui.link{
         content = function()
@@ -49,7 +43,7 @@ slot.select('navigation', function()
           redirect_id = param.get_id()
         }
       }
-    else
+    else if config.voting_rights_management then
       ui.link{
         content = function()
           ui.image{ static = "icons/16/pencil.png" }
@@ -62,7 +56,7 @@ slot.select('navigation', function()
     
   end
 
-  if app.session.member == nil then
+  if app.session.member == nil and config.register_without_invite_code then
     ui.link{
       content = function()
         ui.image{ static = "icons/16/user_add.png" }
@@ -80,15 +74,36 @@ slot.select('navigation', function()
       view   = 'reset_password'
     }
   end
-end)
 
+  ui.tag{ 
+    tag = "ul",
+    attr = { id = "link_menu" },
+    content = function()
+    ui.tag{ 
+        tag = "li",
+        content = function()
+          ui.link{
+            module = "index",
+            view = "linkmenu",
+            content = function()
+              ui.image{ static = "icons/16/page_white_magnify.png" }
+              ui.tag{ content = _"Important Links" }
+            end
+          }
+          execute.view{ module = "index", view = "_linkmenu" }
+        end
+      }
+    end
+  }
+
+end)
 
 slot.select('navigation_right', function()
   ui.tag{ 
     tag = "ul",
     attr = { id = "member_menu" },
     content = function()
-      ui.tag{ 
+    ui.tag{ 
         tag = "li",
         content = function()
           ui.link{

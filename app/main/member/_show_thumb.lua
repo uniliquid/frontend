@@ -45,7 +45,7 @@ ui.container{
       attr = { class = "flags" },
       content = function()
 
-        if not member.active then
+        if not member.active or member.locked then
           local text = _"inactive"
           ui.tag{ content = text }
           ui.image{
@@ -70,7 +70,7 @@ ui.container{
                 ui.image{
                   attr = { 
                     alt   = _"Voting comment available",
-                    title = _"Voting comment available"
+                    title = _"Voting comment available" .. ":\n" .. member.voter_comment
                   },
                   static = "icons/16/comment.png"
                 }

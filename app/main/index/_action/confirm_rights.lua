@@ -1,3 +1,4 @@
+if config.voting_rights_management then
 local secret = param.get("secret", atom.secret)
 local id = app.session.member_id
 local for_unit = param.get("for_unit", atom.integer)
@@ -138,4 +139,5 @@ end
 else
   slot.put_into("error", _"Confirmation code invalid!")
   return false
+end
 end

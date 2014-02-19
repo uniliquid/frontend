@@ -16,8 +16,8 @@ ui.form{
     }
   },
   content = function()
-    ui.field.text{ label = _"Organizations", name = "organizational_unit", readonly = config.locked_profile_fields.organizational_unit }
-    ui.field.text{ label = _"Fields of study", name = "internal_posts", readonly = config.locked_profile_fields.internal_posts }
+    ui.field.text{ label = config.organizational_unit_title, name = "organizational_unit", readonly = config.locked_profile_fields.organizational_unit }
+    ui.field.text{ label = config.internal_posts_title, name = "internal_posts", readonly = config.locked_profile_fields.internal_posts }
     ui.field.text{ label = _"Real name", name = "realname", readonly = config.locked_profile_fields.realname }
     ui.field.text{ label = _"Birthday" .. " YYYY-MM-DD ", name = "birthday", attr = { id = "profile_birthday" }, readonly = config.locked_profile_fields.birthday }
     ui.script{ static = "gregor.js/gregor.js" }

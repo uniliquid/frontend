@@ -39,17 +39,8 @@ ui.form{
     default = {
       mode = "redirect",
       modules = "admin",
-      view = "member_list",
-      params = {
-        search           = param.get("search"),
-        search_admin     = param.get("search_admin",     atom.integer),
-        search_activated = param.get("search_activated", atom.integer),
-        search_locked    = param.get("search_locked",    atom.integer),
-        search_active    = param.get("search_active",    atom.integer),
-        order            = param.get("order"),
-        desc             = param.get("desc", atom.integer),
-        page             = param.get("page", atom.integer)
-      }
+      view = "member_edit",
+      id = member and member.id
     }
   },
   content = function()
@@ -59,15 +50,31 @@ ui.form{
     end
 
     ui.field.text{     label = _"Identification", name = "identification" }
+    ui.container{ content = function() ui.tag{ tag = "label", attr = { class = "ui_field_label" }, content = _"Show in " .. config.mv_name } ui.tag{ tag = "span", attr = {}, content = function() ui.link { text = _"Show in " .. config.mv_name, external = config.mv_decryption_url .. member.identification:gsub("+","-"):gsub("/","_"):gsub("=","$") } end } end }
     ui.field.text{     label = _"Notification email", name = "notify_email" }
     if member and member.activated then
       ui.field.text{     label = _"Screen name",        name = "name" }
+      ui.field.boolean{  label = _"Delete avatar",      name = "avatar_delete" }
+      ui.field.boolean{  label = _"Delete photo",      name = "photo_delete" }
       ui.field.text{     label = _"Login name",        name = "login" }
     end
     ui.field.boolean{  label = _"Admin?",       name = "admin" }
-    local matn = Rights:by_pk(member.id, "matn")
-    if not matn then
-      ui.field.text{     label = _"Matriculation number", name = "matn", value = "" }
+    if config.use_matn then
+      local matn = Rights:by_pk(member.id, "matn")
+      if not matn then
+        ui.field.text{     label = _"Matriculation number", name = "matn", value = "" }
+      end
+    end
+    if member then
+      ui.field.text{ label = _"Account created", value = member.created }
+    end
+
+    if member then
+      ui.field.text{ label = _"Account activated", value = member.activated }
+    end
+
+    if member then
+      ui.field.text{ label = _"Account last login", value = member.last_login }
     end
 
     slot.put("<br />")
@@ -85,8 +92,16 @@ ui.form{
       ui.field.boolean{  label = _"Send invite?",       name = "invite_member" }
     end
     
+    if not member or member.activated then
+      ui.field.boolean{  label = _"Send password reset link?",       name = "password_reset" }
+    end
+    
     if member and member.activated then
       ui.field.boolean{  label = _"Lock member?",       name = "locked" }
+    end
+    
+    if member and member.activated then
+      ui.field.boolean{  label = _"Deactivate account?",       name = "deactivate" }
     end
     
     ui.field.boolean{ 

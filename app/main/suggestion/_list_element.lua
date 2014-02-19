@@ -42,15 +42,21 @@ ui.container{ attr = { class = "box suggestion_opinion" },
           content = function(record)
             if record.minus2_unfulfilled_count then
               local max_value = record.initiative.supporter_count
+              local max_value = record.initiative.supporter_count
+              local must = record.plus2_unfulfilled_count + record.plus2_fulfilled_count
+              local should = record.plus1_unfulfilled_count + record.plus1_fulfilled_count
+              local shouldnot = record.minus1_unfulfilled_count + record.minus1_fulfilled_count
+              local mustnot = record.minus2_unfulfilled_count + record.minus2_fulfilled_count
+              local neutral = max_value - must - should - shouldnot - mustnot
               ui.bargraph{
                 max_value = max_value,
                 width = 100,
                 bars = {
-                  { color = "#0a0", value = record.plus2_unfulfilled_count + record.plus2_fulfilled_count },
-                  { color = "#8f8", value = record.plus1_unfulfilled_count + record.plus1_fulfilled_count },
-                  { color = "#eee", value = max_value - record.minus2_unfulfilled_count - record.minus1_unfulfilled_count - record.minus2_fulfilled_count - record.minus1_fulfilled_count - record.plus1_unfulfilled_count - record.plus2_unfulfilled_count - record.plus1_fulfilled_count - record.plus2_fulfilled_count},
-                  { color = "#f88", value = record.minus1_unfulfilled_count + record.minus1_fulfilled_count },
-                  { color = "#a00", value = record.minus2_unfulfilled_count + record.minus2_fulfilled_count },
+                  { color = "#0a0", value = must, text =  tostring(must) .. " " .. _"must" .. " / " },
+                  { color = "#8f8", value = should, text = tostring(should) .. " " .. _"should" .. " / " },
+                  { color = "#eee", value = neutral, text = tostring(neutral) .. " " .. _"neutral" .. " / " },
+                  { color = "#f88", value = shouldnot, text = tostring(shouldnot) .. " " .. _"should not" .. " / " },
+                  { color = "#a00", value = mustnot, text = tostring(mustnot) .. " " .. _"must not" },
                 }
               }
             end
@@ -58,7 +64,7 @@ ui.container{ attr = { class = "box suggestion_opinion" },
         },
         {
           label = _"My opinion",
-          label_attr = { style = "width: 130px; font-style: italic;" },
+          label_attr = { style = "width: 250px; font-style: italic;" },
           content = function(record)
             local degree
             local opinion
@@ -179,15 +185,16 @@ ui.container{ attr = { class = "box suggestion_opinion" },
           content = function(record)
             if record.minus2_unfulfilled_count then
               local max_value = record.initiative.supporter_count
+              local neutral_unfullfilled = max_value - record.minus2_unfulfilled_count - record.minus1_unfulfilled_count - record.plus1_unfulfilled_count- record.plus2_unfulfilled_count
               ui.bargraph{
                 max_value = max_value,
                 width = 100,
                 bars = {
-                  { color = "#0a0", value = record.plus2_unfulfilled_count },
-                  { color = "#8f8", value =record.plus1_unfulfilled_count },
-                  { color = "#eee", value = max_value -record.minus2_unfulfilled_count - record.minus1_unfulfilled_count - record.plus1_unfulfilled_count- record.plus2_unfulfilled_count },
-                  { color = "#f88", value = record.minus1_unfulfilled_count },
-                  { color = "#a00", value = record.minus2_unfulfilled_count }
+                  { color = "#0a0", value = record.plus2_unfulfilled_count, text = tostring(record.plus2_unfulfilled_count) .. " " .. _"must" .. " " .. _"and" .. " " .. _"not implemented" .. " / " },
+                  { color = "#8f8", value = record.plus1_unfulfilled_count, text = tostring(record.plus1_unfulfilled_count) .. " " .. _"should" .. " " .. _"and" .. " " .. _"not implemented" .. " / " },
+                  { color = "#eee", value = neutral_unfullfilled, text = tostring(neutral_unfullfilled) .. " " .. _"neutral" .. " / " },
+                  { color = "#f88", value = record.minus1_unfulfilled_count, text = tostring(record.minus1_unfulfilled_count) .. " " .. _"should not" .. " " .. _"and" .. " " .. _"implemented" .. " / " },
+                  { color = "#a00", value = record.minus2_unfulfilled_count, text = tostring(record.minus2_unfulfilled_count) .. " " .. _"must not" .. " " .. _"and" .. " " .. _"implemented" }
                 }
               }
             end
@@ -199,15 +206,16 @@ ui.container{ attr = { class = "box suggestion_opinion" },
           content = function(record)
             if record.minus2_fulfilled_count then
               local max_value = record.initiative.supporter_count
+              local neutral_fulfilled = max_value - record.minus2_fulfilled_count - record.minus1_fulfilled_count - record.plus1_fulfilled_count - record.plus2_fulfilled_count
               ui.bargraph{
                 max_value = max_value,
                 width = 100,
                 bars = {
-                  { color = "#0a0", value = record.plus2_fulfilled_count },
-                  { color = "#8f8", value = record.plus1_fulfilled_count },
-                  { color = "#eee", value = max_value - record.minus2_fulfilled_count - record.minus1_fulfilled_count - record.plus1_fulfilled_count - record.plus2_fulfilled_count},
-                  { color = "#f88",value = record.minus1_fulfilled_count },
-                  { color = "#a00", value = record.minus2_fulfilled_count }
+                  { color = "#0a0", value = record.plus2_fulfilled_count, text = tostring(record.plus2_fulfilled_count) .. " " .. _"must" .. " " .. _"and" .. " " .. _"not implemented" .. " / " },
+                  { color = "#8f8", value = record.plus1_fulfilled_count, text = tostring(record.plus1_fulfilled_count) .. " " .. _"should" .. " " .. _"and" .. " " .. _"not implemented" .. " / " },
+                  { color = "#eee", value = neutral_fulfilled, text = tostring(neutral_fulfilled) .. " " .. _"neutral" .. " / " },                
+                  { color = "#f88", value = record.minus1_fulfilled_count, text = tostring(record.minus1_fulfilled_count) .. " " .. _"should not" .. " " .. _"and" .. " " .. _"implemented" .. " / " },
+                  { color = "#a00", value = record.minus2_fulfilled_count, text = tostring(record.minus2_fulfilled_count) .. " " .. _"must not" .. " " .. _"and" .. " " .. _"implemented" }
                 }
               }
             end

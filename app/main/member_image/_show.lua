@@ -18,14 +18,24 @@ if config.fastpath_url_func then
     external = config.fastpath_url_func(member_id, image_type)
   }
 else
-  ui.image{
-    attr = { title = popup_text, class = "member_image member_image_" .. image_type .. class },
-    module = "member_image",
-    view = "show",
-    extension = "jpg",
-    id = member_id,
-    params = {
-      image_type = image_type
-    }
+  ui.container{
+    attr = { class = "member_image_container " .. class, style="display:inline-block;" },
+    content = function()
+      ui.container{
+        attr = { class = "member_image_center" .. class, style="display:table-cell;" },
+        content = function()
+          ui.image{
+            attr = { title = popup_text, class = "member_image member_image_" .. image_type .. class },
+            module = "member_image",
+            view = "show",
+            extension = "jpg",
+            id = member_id,
+            params = {
+              image_type = image_type
+            }
+          }
+        end
+      }
+    end
   }
 end

@@ -50,7 +50,7 @@ if not for_member then
 
 end
 
-local units = Unit:new_selector():add_where("active"):add_order_by("id = 2, name"):exec()
+local units = Unit:new_selector():add_where("active"):add_order_by("name"):exec()
 
 if member then
   units:load_delegation_info_once_for_member_id(member.id)

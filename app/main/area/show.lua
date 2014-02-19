@@ -10,6 +10,10 @@ app.html_title.subtitle = _("Area")
 
 util.help("area.show")
 
+execute.view{
+  module = "index", view = "_quicklinks"
+}
+
 slot.select("head", function()
   execute.view{ module = "area", view = "_head", params = { area = area, show_content = true, show_links = true, member = app.session.member } }
 end)

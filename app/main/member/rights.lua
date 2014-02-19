@@ -1,3 +1,4 @@
+if config.voting_rights_management then
 local id = app.session.member_id
 local for_unit = param.get("for_unit", atom.integer)
 local revoke = param.get("revoke", atom.boolean)
@@ -215,4 +216,4 @@ if not all_units and not rest then
     params = { for_unit = for_unit, rest = true }
   }
 end
-
+end

@@ -1,3 +1,4 @@
+if config.voting_rights_management then
 slot.put_into("title", _"Email address confirmation")
 
 ui.form{
@@ -32,3 +33,4 @@ ui.form{
     ui.submit{ text = _"Confirm" }
   end
 }
+end

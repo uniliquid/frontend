@@ -2,6 +2,7 @@ ui.title(_"Settings")
 
 local pages = {}
 
+pages[#pages+1] = { view = "settings_display", text = _"Display settings" }
 if not config.locked_profile_fields.name then
   pages[#pages+1] = { view = "settings_name",           text = _"Change your screen name" }
 end
@@ -13,7 +14,6 @@ if not config.locked_profile_fields.notify_email then
   pages[#pages+1] = { view = "settings_email",          text = _"Change your notification email address" }
 end
 pages[#pages+1] = { view = "settings_notification", text = _"Notification settings" }
-pages[#pages+1] = { view = "settings_css", text = _"Stylesheet settings" }
 pages[#pages+1] = { view = "developer_settings",      text = _"Developer settings" }
 
 if config.download_dir then

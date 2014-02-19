@@ -1,13 +1,46 @@
 local code = util.trim(param.get("code"))
 
-local member = Member:new()
--- Member:new_selector()
---  :add_where{ "invite_code = ?", code }
---  :add_where{ "activated ISNULL" }
---  :add_where{ "NOT locked" }
---  :optional_object_mode()
---  :for_update()
---  :exec()
+local step = param.get("step", atom.integer)
+
+if app.session.member and step == 4 then
+  for i, checkbox in ipairs(config.use_terms_checkboxes) do
+    local accepted = param.get("use_terms_checkbox_" .. checkbox.name, atom.boolean)
+    if not accepted then
+      slot.put_into("error", checkbox.not_accepted_error)
+      return false
+    end
+  end  
+  
+  member = app.session.member
+  local now = db:query("SELECT now() AS now", "object").now
+
+  for i, checkbox in ipairs(config.use_terms_checkboxes) do
+    local accepted = param.get("use_terms_checkbox_" .. checkbox.name, atom.boolean)
+    member:set_setting("use_terms_checkbox_" .. checkbox.name, "accepted at " .. tostring(now))
+  end
+
+  member:save()
+
+  request.redirect{
+    mode   = "redirect",
+    module = "index",
+    view   = "index",
+  }
+  return
+end
+
+local member = nil
+if config.register_without_invite_code then
+  member = Member:new()
+else
+  member = Member:new_selector()
+    :add_where{ "invite_code = ?", code }
+    :add_where{ "activated ISNULL" }
+    :add_where{ "NOT locked" }
+    :optional_object_mode()
+    :for_update()
+    :exec()
+end
   
 if not member then
   slot.put_into("error", _"The code you've entered is invalid")
@@ -51,6 +84,21 @@ if not config.locked_profile_fields.name and name then
 
   if #name < 3 then
     slot.put_into("error", _"This screen name is too short!")
+    request.redirect{
+      mode   = "redirect",
+      module = "index",
+      view   = "register",
+      params = {
+        code = member.invite_code,
+        notify_email = notify_email,
+        step = 1
+      }
+    }
+    return false
+  end
+  
+  if #name > config.max_nick_length then
+    slot.put_into("error", _"This screen name is too long!")
     request.redirect{
       mode   = "redirect",
       module = "index",
@@ -152,8 +200,6 @@ if member.name and not member.login then
   return false
 end
 
-local step = param.get("step", atom.integer)
-
 if step > 2 then
 
   for i, checkbox in ipairs(config.use_terms_checkboxes) do
@@ -221,25 +267,53 @@ if step > 2 then
   member.activated = 'now'
   member.active = true
   member.last_activity = 'now'
+  member.last_login = "now"
+  if member.lang == nil then
+    member.lang = app.session.lang
+  else
+    app.session.lang = member.lang
+  end
   member:save()
 
-  privilege = Privilege:new()
-  privilege.unit_id = 2
-  privilege.member_id = member.id
-  privilege.voting_right = true
-  privilege:save()
+  app.session.member = member
+  app.session:save()
+  if config.default_privilege_for_unit > 0 then
+    privilege = Privilege:new()
+    privilege.unit_id = config.default_privilege_for_unit
+    privilege.member_id = member.id
+    privilege.voting_right = true
+    privilege:save()
+  end
 
-  membership = Membership:new()
-  membership.area_id    = 4
-  membership.member_id  = member.id
-  membership:save()
+  local units = Unit:new_selector():add_where("active"):add_order_by("name"):exec()
+  
+  if member then
+    units:load_delegation_info_once_for_member_id(member.id)
+  end
 
-  slot.put_into("notice", _"You've successfully registered and you can login now with your login and password!")
+  for i, unit in ipairs(units) do
+    if member:has_voting_right_for_unit_id(unit.id) then
+      local areas_selector = Area:new_selector()
+        :reset_fields()
+        :add_field("area.id", nil, { "grouped" })
+        :add_where{ "area.unit_id = ?", unit.id }
+        :add_where{ "area.active" }
+        :add_where{ "area.name NOT LIKE '%Sandkasten%'" }
+      for i, area in ipairs(areas_selector:exec()) do
+        membership = Membership:new()
+        membership.area_id    = area.id
+        membership.member_id  = member.id
+        membership:save()
+      end
+    end
+  end
+
+  slot.put_into("notice", _"You've successfully registered!")
 
   request.redirect{
     mode   = "redirect",
     module = "index",
-    view   = "login",
+    view   = "index",
   }
 end
   

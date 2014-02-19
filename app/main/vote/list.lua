@@ -150,7 +150,26 @@ for i = 1, max_grade do
   end
 end
 
+--[[
+-- voting delegations
+local members_selector = Member:new_selector()
+:join("delegating_voter", nil, "delegating_voter.member_id = member.id")
+:add_where{ "delegating_voter.issue_id = ?", issue.id }
+:add_where{ "delegating_voter.delegate_member_ids[1] = ?", member.id }
+:add_field("delegating_voter.weight", "voter_weight")
+:join("issue", nil, "issue.id = delegating_voter.issue_id")
 
+execute.view{
+  module = "member",
+  view = "_list",
+  params = {
+    members_selector = members_selector,
+    initiative = initiative,
+    trustee = member,
+    for_votes = true
+  }
+}
+--]]--
 
 if not readonly then
   util.help("vote.list", _"Voting")
@@ -184,7 +203,10 @@ ui.script{
     )
   end
 }
-
+ui.tag { content = function()
+  ui.tag{ tag = "h2", content = _"This is preferential voting. Drag the initiatives into an order which expresses your preferences." }
+end
+}
 ui.form{
   record = direct_voter,
   attr = {
@@ -433,15 +455,6 @@ execute.view{
   view = "_show",
   params = {
     draft = initiative.current_draft
-  }
-}
-execute.view{
-  module = "suggestion",
-  view = "_list",
-  params = {
-    initiative = initiative,
-    suggestions_selector = initiative:get_reference_selector("suggestions"),
-    tab_id = param.get("tab_id")
   }
 }
 end }
