@@ -52,7 +52,7 @@ end
           redirect_id = param.get_id()
         }
       }
-    else if config.voting_rights_management then
+    elseif config.voting_rights_management then
       ui.link{
         content = function()
           ui.image{ static = "icons/16/pencil.png" }
