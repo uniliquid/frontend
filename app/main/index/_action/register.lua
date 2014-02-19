@@ -275,6 +275,9 @@ if step > 2 then
   member.active = true
   member.last_activity = 'now'
   member.last_login = "now"
+  if config.register_without_invite_code and member.identification == nil then
+    member.identification = member.notify_email
+  end
   if member.lang == nil then
     member.lang = app.session.lang
   else
