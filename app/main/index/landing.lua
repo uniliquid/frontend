@@ -148,7 +148,8 @@ slot.put([[
     });
 });
 </script>
-]]
+]])
+
 slot.put(config.landing_page_content_html)
 
 local issues = db:query("SELECT COUNT(*) AS count FROM issue", "object").count
