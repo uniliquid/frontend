@@ -1,5 +1,6 @@
 #!/usr/bin/env lua
 return {
+["Email address is invalid! "] = "E-Mail-Adresse ist ungültig! ";
 ["email alias"] = "E-Mail Alias";
 ["Confirm"] = "Bestätigen";
 ["Accept new Terms of use"] = "Änderung der Nutzungsbedingungen akzeptieren";
