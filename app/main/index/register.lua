@@ -153,7 +153,7 @@ ui.form{
         ui.submit{
           text = _'Proceed with registration'
         }
-      else if step ~= 4 then
+      elseif step ~= 4 then
         member = Member:new()
         ui.field.hidden{ name = "step", value = "3" }
         if config.register_without_invite_code then
