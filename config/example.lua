@@ -230,6 +230,8 @@ config.internal_posts_title = "Studienrichtung"
 
 config.enable_help_per_default = true
 
+config.landing_page = true
+
 config.linkmenu = {
 --  {
 --    text = _"Voting rights log",
@@ -257,4 +259,54 @@ config.linkmenu = {
 --  }
 }
 
+config.landing_page_content_html = [[
+
+    <div class="ui_tabs"><div class="ui_tabs"><div class="area_list"><div class="area">
+      <div id="box" class="area_head">
+<div class="title">
+        <br />
+        <h1 style="font-size: 300%;"><center>
+          ]] .. config.instance_name .. [[
+        </center></h1>
+      </div>
+      <div class="content"></div>
+</div>
+      <div class="content">
+        <p align="center">
+          <a href="/index/index.html">Mitmachen</a>
+          &nbsp; &middot;  &nbsp;
+          <a href="/index/index.html?tab=open&filter_policy=any&filter_voting=not_voted&filter=frozen&filter_interest=unit">Abstimmen</a>
+       <p/>
+      </div>
+</div>
+</div>
+</div>
+        <br style="clear: both;" />
+<div class="initiative_head">
+<div class="title">
+        <h2>Über das ]] .. config.instance_name .. [[</h2>
+</div>
+<div class="content">
+<p>Das ]] .. config.instance_name .. [[ bietet den Studierenden an der TU Graz die Möglichkeit, Ideen in die HTU einzubringen und Entscheidungen mitzugestalten. </p>
+<p>Die Kontrolle, ob jemand wirklich studiert, erfolgt über die universitätsspezifische E-Mail-Adresse. Durch die Nutzung von Pseudonymen kann das System gegenüber den anderen Teilnehmern anonym genutzt werden. Die gleichzeitige Öffentlichkeit der Abstimmergebnisse garantiert Transparenz und Nachvollziehbarkeit beim Ergebnis.</p>
+<p>Die E-Mail-Adressen unterliegen größtem Datenschutz und werden nicht weitergegeben, sondern lediglich zur Kontaktaufnahme mit dir und auf diesem Wege auch zur Verifikation deines Studierendenstatus verwendet.</p>
+<p>Die verwendete Software ist eine Weiterentwicklung von <a href="http://liquidfeedback.org/">LiquidFeedback</a>. Eine kurze Videoanleitung zum Gebrauch findest du <a href="https://www.youtube.com/watch?v=WVa2Txtqe1g">hier auf YouTube</a>.</p>
+<p>]] .. config.instance_name .. [[ ist erst seit Kurzem online und wird ständig weiterentwickelt werden. Es dauert sicher eine Weile, bis die volle Funktionalität gegeben ist und genügend Studierende teilnehmen.</p>
+<p><a href="/index/register.html">Registriere dich</a>, teste die Software, überzeuge dich von den Möglichkeiten der digitalen Partizipation.</p>
+      </div>
+</div>
+<div class="initiative_head">
+<div class="title">
+        <h2>Und so funktionierts</h2>
+</div>
+<div class="content">
+<ol>
+<li>Melde dich unter dem Tab <a href="/index/register.html">Registrierung</a> mit deiner <code>student.tugraz.at</code>-E-Mail-Adresse und einem Pseudonym an.</li>
+<li>Sobald du deine E-Mail-Adresse bestätigt hast (E-Mails checken), erhältst du Stimmrecht im ]] .. config.instance_name .. [[.</li>
+<li>Nun kannst du Anträge erstellen, kommentieren und verbessern oder Alternativanträge einbringen – und natürlich darüber abstimmen!</li>
+</ol>
+</div></div></div>
+]]
+
+execute.config("init")
 
