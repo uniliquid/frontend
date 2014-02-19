@@ -1,4 +1,4 @@
-app.html_title.title = _"UniLiquid"
+if config.landing_page then
 
 slot.put([[
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../static/flot/excanvas.min.js"></script><![endif]-->
@@ -159,4 +159,5 @@ local arguments = db:query("SELECT COUNT(*) AS count FROM argument", "object").c
 local members = db:query("SELECT COUNT(*) AS count FROM member", "object").count
 --local active = db:query("SELECT COUNT(*) AS count FROM member WHERE active", "object").count
 
-slot.put('<div class="content">\n       Themen:&nbsp;<b>' .. issues .. '</b> &nbsp; &middot; &nbsp; Initiativen:&nbsp;<b>' .. initiatives .. '</b> &nbsp; &middot; &nbsp; Anregungen: &nbsp;<b>' .. suggestions .. '</b> &nbsp; &middot; &nbsp; Argumente: &nbsp;<b>' .. arguments .. '</b> &nbsp; &middot; &nbsp; Mitglieder:&nbsp;<b>' .. members .. '</b>');-- &nbsp; &middot; &nbsp; Aktive:&nbsp;<b>69</b>');
+slot.put('<div class="initiative_head"><div class="title">        <h2>Statistik</h2>        </div><div class="content">\n       Themen:&nbsp;<b>' .. issues .. '</b> &nbsp; &middot; &nbsp; Initiativen:&nbsp;<b>' .. initiatives .. '</b> &nbsp; &middot; &nbsp; Anregungen: &nbsp;<b>' .. suggestions .. '</b> &nbsp; &middot; &nbsp; Argumente: &nbsp;<b>' .. arguments .. '</b> &nbsp; &middot; &nbsp; Mitglieder:&nbsp;<b>' .. members .. '</b><div id="grafik" style="width:400px; height:100px; margin-left:auto; margin-right:auto; margin-top:10px;"></div><div id="choices" style="display: none;"></div></div>');-- &nbsp; &middot; &nbsp; Aktive:&nbsp;<b>69</b>');
+end
