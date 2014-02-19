@@ -65,14 +65,6 @@ end
       module = 'index',
       view   = 'register'
     }
-    ui.link{
-      content = function()
-        ui.image{ static = "icons/16/user_edit.png" }
-        ui.tag{ content = _"Reset password" }
-      end,
-      module = 'index',
-      view   = 'reset_password'
-    }
   end
 
   ui.tag{ 
