@@ -148,47 +148,8 @@ slot.put([[
     });
 });
 </script>
-
-    <div class="ui_tabs"><div class="ui_tabs"><div class="area_list"><div class="area">
-      <div id="box" class="area_head">
-<div class="title">
-        <br />
-        <h1 style="font-size: 300%;"><center>
-          UniLiquid
-        </center></h1>
-      </div>
-      <div class="content"></div>
-</div>
-      <div class="content">
-        <p align="center">
-          <a href="/liquid/">Mitmachen</a>
-          &nbsp; &middot;  &nbsp;
-          <a href="/liquid/index/index.html?tab=open&filter=frozen&filter_voting=not_voted">Abstimmen</a>
-       <p/>
-      </div>
-</div>
-</div>
-</div>
-        <br style="clear: both;" />
-<div class="initiative_head">
-<div class="title">
-        <h2>Über das UniLiquid</h2>
-</div>
-<div class="content">
-<p>UniLiquid bietet den Studierenden auf Österreichs Universitäten die Möglichkeit, auch nach der Wahl ihre Ideen einzubringen, mitzugestalten und mitzubestimmen. </p>
-<p>UniLiquid ist ein kostenloses und fraktionsübergreifendes Service für alle Studierenden auf der einen Seite und Mandatare in Studienvertretungen, Universitätsvertretungen und der Bundesvertretung auf der anderen Seite, um Meinungsbilder von Studierenden in Entscheidungsprozesse einzubinden.</p>
-<p>Die Kontrolle, ob jemand wirklich studiert, erfolgt über die universitätsspezifischen E-Mail-Adressen. Durch die Nutzung von Pseudonymen kann das System anonym genutzt werden. Die gleichzeitige Öffentlichkeit der Abstimmergebnisse garantiert Transparenz beim Ergebnis.</p>
-<p>UniLiquid wird von den Unipiraten Österreich betrieben. Die Matrikelnummern und E-Mail-Adressen unterliegen größtem Datenschutz und werden weder weitergegeben noch von uns ausgewertet, sondern lediglich zur Kontaktaufnahme mit dir und damit zur Verifikation deines Studierendenstatus verwendet.</p>
-<p>Die verwendete Software ist eine Weiterentwicklung von <a href="http://liquidfeedback.org/">LiquidFeedback</a>. Eine kurze Videoanleitung zum Gebrauch findest du <a href="https://www.youtube.com/watch?v=WVa2Txtqe1g">hier auf YouTube</a>.</p>
-<p>UniLiquid ist erst seit Kurzem online und wird ständig weiterentwickelt werden. Es dauert sicher eine Weile, bis die volle Funktionalität gegeben ist und genügend Studierende teilnehmen.</p>
-<p><a href="http://uniliquid.at/liquid/index/register.html">Registriere dich</a>, teste die Software, überzeuge dich von den Möglichkeiten der digitalen Partizipation und ermögliche so echte Mitbestimmung in deiner Studierendenvertretung.</p>
-      </div>
-</div>
-<div class="initiative_head">
-<div class="title">
-        <h2>Statistik</h2>
-</div>
-]]);
+]]
+slot.put(config.landing_page_content_html)
 
 local issues = db:query("SELECT COUNT(*) AS count FROM issue", "object").count
 local initiatives = db:query("SELECT COUNT(*) AS count FROM initiative", "object").count
@@ -198,41 +159,3 @@ local members = db:query("SELECT COUNT(*) AS count FROM member", "object").count
 --local active = db:query("SELECT COUNT(*) AS count FROM member WHERE active", "object").count
 
 slot.put('<div class="content">\n       Themen:&nbsp;<b>' .. issues .. '</b> &nbsp; &middot; &nbsp; Initiativen:&nbsp;<b>' .. initiatives .. '</b> &nbsp; &middot; &nbsp; Anregungen: &nbsp;<b>' .. suggestions .. '</b> &nbsp; &middot; &nbsp; Argumente: &nbsp;<b>' .. arguments .. '</b> &nbsp; &middot; &nbsp; Mitglieder:&nbsp;<b>' .. members .. '</b>');-- &nbsp; &middot; &nbsp; Aktive:&nbsp;<b>69</b>');
-slot.put([[
-<div id="grafik" style="width:400px; height:100px; margin-left:auto;
-margin-right:auto; margin-top:10px;"></div>
-<div id="choices" style="display: none;"></div>
-</div>
-</div>
-<div class="initiative_head">
-<div class="title">
-<h2>Hinweise & Neuigkeiten</h2>
-</div>
-        <ul>
-          <li><b>28.05.2013</b> Umstellung auf SSL</li>
-          <li><b>13.05.2013</b> Freischaltung einiger weiterer Universitäten. Insgesamt sind jetzt 16 Universitäten freigeschaltet. Sollte deine fehlen kontaktiere einfach den Support.</li>
-          <li><b>13.05.2013:</b> Freischaltung der Themenbereiche und Einführung <a href="http://uniliquid.at/liquid/policy/list.html">verschiedener Regelwerke</a>. Für weitere Regelwerks- oder Themenbereichsänderungen wurde das Regelwerk <a href="http://uniliquid.at/liquid/policy/show/4.html">Änderung von Themenbereichen und Regelwerken</a> eingeführt.</li>
-          <li><b>12.05.2013:</b> Freischaltung BOKU Wien, MedUni Wien, TU Wien, Uni Linz, Uni Wien</li>
-          <li><b>11.05.2013:</b> Start der Seite</li>
-        </ul>
-      </div>
-</div>
-<div class="initiative_head">
-<div class="title">
-        <h2>Und so funktionierts</h2>
-</div>
-<div class="content">
-<ol>
-<li>Melde dich unter dem Tab <a href="http://uniliquid.at/liquid/index/register.html">Registrierung</a> mit einer beliebigen E-Mail und Pseudonym an.</li>
-<li>Sobald du deine Registrierung bestätigt hast (E-Mails checken), kannst du dein Wahlrecht für deine Uni anfordern. Geh dazu zum Tab <a href="http://uniliquid.at/liquid/member/rights.html">Mein Stimmrecht</a>, wähle deine Universität aus. Je nach Universität werden wir dich nach deiner Matrikelnummer oder deiner Studierenden-E-Mail-Adresse fragen. Gib diese dann ein, wir senden dir dann eine E-Mail, in der ein Bestätigungslink enthalten ist.</li>
-<li>Nun kannst du für deine Uni Anträge erstellen, kommentieren und verbessern oder Alternativanträge einbringen – und natürlich darüber abstimmen!</li>
-</ol>
-<h3>Hintergrund</h3>
-<ol>
-<li>Unter <a href="http://uniliquid.at/schulze.pdf">uniliquid.at/schulze.pdf</a> findest du eine genaue Beschreibung wie das Schulzeverfahren in Liquid zum Einsatz kommt.</li>
-</ol>
-</div>
-        <center><p>
-          <a href="mailto:support@uniliquid.at">Support via E-Mail</a>
-        </p></center>
-]])
