@@ -269,3 +269,35 @@ function partialMultiLoad(
     }
   );
 }
+function toggleDetails(e)
+{
+  if (document.getElementById('details').style.display == 'none')
+  {
+    document.getElementById('details').style.display = 'block';
+    document.getElementById('details_link1').style.display = 'none';
+    document.getElementById('details_link2').style.display = 'block';
+  }
+  else
+  {
+    document.getElementById('details').style.display = 'none';
+    document.getElementById('details_link1').style.display = 'block';
+    document.getElementById('details_link2').style.display = 'none';
+  }
+  return false;
+}
+function toggleSuggestions(e)
+{
+  if (document.getElementById('suggestions_block').style.display == 'none')
+  {
+    document.getElementById('suggestions_block').style.display = 'block';
+    document.getElementById('suggestions1').style.display = 'none';
+    document.getElementById('suggestions2').style.display = 'block';
+  }
+  else
+  {
+    document.getElementById('suggestions_block').style.display = 'none';
+    document.getElementById('suggestions1').style.display = 'block';
+    document.getElementById('suggestions2').style.display = 'none';
+  }
+  return false;
+}

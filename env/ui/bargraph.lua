@@ -1,10 +1,9 @@
 function ui.bargraph(args)
   local text = ""
   for i, bar in ipairs(args.bars) do
-    if #text > 0 then
-      text = text .. " / "
+    if bar.text ~= nil then
+      text = text .. "" .. bar.text
     end
-    text = text .. tostring(bar.value)
   end
   ui.container{
     attr = {
@@ -28,11 +27,12 @@ function ui.bargraph(args)
           local value = bar.value * args.width / args.max_value
           if quorum and quorum < length + value then
             local dlength = math.max(quorum - length - 1, 0)
-            local dlength_abs = math.floor(dlength)
+            local dlength_abs = math.ceil(dlength)
             local rest = rest + dlength - dlength_abs
             if dlength > 0 then
               ui.container{
                 attr = {
+                  class = bar.css,
                   style = "width: " .. tostring(dlength_abs) .. "px; background-color: " .. bar.color .. ";",
                 },
                 content = function() slot.put("&nbsp;") end
@@ -49,14 +49,15 @@ function ui.bargraph(args)
             value = value - dlength
             quorum = nil
           end
-          local value_abs = math.floor(value)
+          local value_abs = math.ceil(value)
           rest = rest + value - value_abs
           if i == last_visiable_bar then
-            value_abs = value_abs + rest
+            value_abs = value_abs + math.ceil(rest)
           end
           length = length + value_abs
           ui.container{
             attr = {
+              class = bar.css,
               style = "width: " .. tostring(value_abs) .. "px; background-color: " .. bar.color .. ";",
             },
             content = function() slot.put("&nbsp;") end
