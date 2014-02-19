@@ -27,7 +27,6 @@ function Policy:build_selector(args)
   if args.active ~= nil then
     selector:add_where{ "active = ?", args.active }
   end
-  selector:add_order_by("index")
   return selector
 end
 

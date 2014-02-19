@@ -69,6 +69,16 @@ Issue:add_reference{
   back_ref      = 'issue',
   default_order = '"member_id"'
 }
+--[[
+Issue:add_reference{
+  mode          = '1m',
+  to            = "DelegatingVoter",
+  this_key      = 'id',
+  that_key      = 'issue_id',
+  ref           = 'delegating_voters',
+  back_ref      = 'issue',
+  default_order = '"member_id"'
+}]]--
 
 Issue:add_reference{
   mode          = '1m',
@@ -134,6 +144,17 @@ Issue:add_reference{
 }
 
 Issue:add_reference{
+  mode                  = 'mm',
+  to                    = "Member",
+  this_key              = 'id',
+  that_key              = 'id',
+  connected_by_table    = 'delegating_voter',
+  connected_by_this_key = 'issue_id',
+  connected_by_that_key = 'member_id',
+  ref                   = 'delegating_voters'
+}
+
+Issue:add_reference{
   mode               = "11",
   to                 = mondelefant.class_prototype,
   this_key           = "id",
@@ -170,6 +191,8 @@ Issue:add_reference{
     selector:add_field("direct_voter.member_id NOTNULL", "direct_voted")
     selector:left_join("non_voter", nil, { "non_voter.issue_id = issue.id AND non_voter.member_id = ?", options.member_id })
     selector:add_field("non_voter.member_id NOTNULL", "non_voter")
+    selector:left_join("delegating_voter", nil, { "delegating_voter.issue_id = issue.id AND delegating_voter.member_id = ?", options.member_id })
+    selector:add_field("delegating_voter.delegate_member_ids[array_length(delegating_voter.delegate_member_ids,1)]", "voted_delegate_member_id")
     return selector
   end
 }

@@ -124,7 +124,6 @@ Member:add_reference{
   that_key      = 'truster_id',
   ref           = 'outgoing_delegations',
   back_ref      = 'truster',
-  default_order = '"id"'
 }
 
 Member:add_reference{
@@ -134,7 +133,6 @@ Member:add_reference{
   that_key      = 'trustee_id',
   ref           = 'incoming_delegations',
   back_ref      = 'trustee',
-  default_order = '"id"'
 }
 
 Member:add_reference{
@@ -373,7 +371,7 @@ end
 
 function Member:by_login_and_password(login, password)
   local selector = self:new_selector()
-  selector:add_where{'"login" = ?', login }
+  selector:add_where{'lower("login") = ?', string.lower(login) }
   selector:add_where('NOT "locked"')
   selector:optional_object_mode()
   local member = selector:exec()
@@ -386,14 +384,24 @@ end
 
 function Member:by_login(login)
   local selector = self:new_selector()
-  selector:add_where{'"login" = ?', login }
+  selector:add_where{'lower("login") = ?', string.lower(login) }
   selector:optional_object_mode()
   return selector:exec()
 end
 
 function Member:by_name(name)
-  local selector = self:new_selector()
-  selector:add_where{'"name" = ?', name }
+  local selector = nil
+  if config.forbid_similar_nicks then
+    selector = self:new_selector()
+      :left_join("(SELECT member_id AS id ,name FROM (SELECT B.*,B.until - A.until AS d FROM member_history A LEFT JOIN member_history B ON A.member_id = B.member_id AND A.until < B.until LEFT JOIN member_history C ON A.member_id = C.member_id AND A.until < C.until AND B.until > C.until LEFT JOIN member M ON A.member_id = M.id AND A.name = M.name WHERE A NOTNULL AND B NOTNULL AND C ISNULL AND M ISNULL ORDER BY B.until) A WHERE d > '2 weeks')", "old_name", "old_name.id = member.id")
+      :add_where{'unifyName(old_name.name) = unifyName(?) OR levenshtein(unifyName(old_name.name),unifyName(?)) <= 1 OR unifyName(member.name) = unifyName(?) OR levenshtein(unifyName(member.name),unifyName(?)) <= 1', name, name, name, name }
+      :add_where{'unifyName(member.name) = unifyName(?)', string.lower(name) }
+      :limit(1)
+  else
+    selector = self:new_selector()
+    :add_where{'lower(member.name) = ?', string.lower(name) }
+    :limit(1)
+  end
   selector:optional_object_mode()
   return selector:exec()
 end
@@ -410,6 +418,8 @@ end
 
 function Member.object:send_invitation(template_file, subject)
   trace.disable()
+  template_file = config.invite_text_file
+  subject = config.invite_subject
   self.invite_code = multirand.string( 24, "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" )
   if config.invite_code_expiry then
     self.invite_code_expiry = db:query("SELECT now() + '" .. config.invite_code_expiry .. "'::interval as expiry", "object").expiry
@@ -579,6 +589,8 @@ end
 function Member.object:ui_field_text(args)
   args = args or {}
   if app.session:has_access("authors_pseudonymous") then
+    
+    --[[
     -- ugly workaround for getting html into a replaced string and to the user
     ui.container{label = args.label, label_attr={class="ui_field_label"}, content = function()
         slot.put(string.format('<span><a href="%s">%s</a></span>',
@@ -590,8 +602,66 @@ function Member.object:ui_field_text(args)
                                                 encode.html(self.name)))
       end
     }
+    ]]--
+
+    ui.link{
+      text = self.name,
+      module = "member", view = "show", id = self.id
+    }
+
   else
     ui.field.text{ label = args.label,      value = _"[not displayed public]" }
+  end
+end
+
+function Member.object:ui_field_avatar_name(args)
+  args = args or {}
+  if app.session:has_access("all_pseudonymous") then
+    ui.link{
+      content = function ()
+        execute.view{
+          module = "member_image",
+          view = "_show",
+          params = {
+            member = self,
+            image_type = "avatar",
+            show_dummy = true,
+            class = "micro_avatar",
+            popup_text = text
+          }
+        }
+      end,
+      module = "member", view = "show", id =self.id
+    }
+    slot.put(" ")
+  end
+  ui.link{
+    text = self.name,
+    module = "member", view = "show", id = self.id
+  }
+end
+
+
+function Member.object:ui_field_avatar(args)
+  args = args or {}
+  if app.session:has_access("all_pseudonymous") then
+    ui.link{
+      content = function ()
+        execute.view{
+          module = "member_image",
+          view = "_show",
+          params = {
+            member = self,
+            image_type = "avatar",
+            show_dummy = true,
+            class = "micro_avatar",
+            popup_text = text
+          }
+        }
+      end,
+      module = "member", view = "show", id =self.id
+    }
+    slot.put(" ")
   end
 end
 

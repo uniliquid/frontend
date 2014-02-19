@@ -67,7 +67,7 @@ end
 function Event.object:send_notification()
   local members_to_notify = Member:new_selector()
     :join("event_seen_by_member", nil, { "event_seen_by_member.seen_by_member_id = member.id AND event_seen_by_member.id = ?", self.id } )
-    :join("privilege", "nil", "privilege.member_id = member.id")
+    :join("privilege", nil, "privilege.member_id = member.id")
     :add_where({"privilege.unit_id = ? AND privilege.voting_right", self.issue.area.unit.id })
     :add_where("member.activated NOTNULL AND member.notify_email NOTNULL AND member.locked = FALSE")
     -- SAFETY FIRST, NEVER send notifications for events more then 3 days in past or future
@@ -247,6 +247,76 @@ function Event.object:send_notification()
     )
   end
 
+ if config.enable_forum_scripts then
+  local url
+  local subject
+  local body = ""
+  local to_forum = false
+  local to_elgg = true
+  local to_reddit = true
+
+  locale.do_with(
+    { lang = config.default_lang or 'en' },
+    function()
+      if self.event_name == 'Neues Thema' or self.event_name == 'Neue Initiative' or ((self.event_name == 'Thema hat die nächste Phase erreicht' and (self.state_name == 'Eingefroren' or self.state_name == 'Abstimmung' or self.state_name == 'Abgeschlossen (mit Gewinner)' and self.state_name == 'Abgeschlossen (ohne Gewinner)')) and (self.issue.policy.name:find('zur Mitgliederversammlung') or self.issue.policy.name:find('direkt'))) then
+        to_forum = true
+      end
+      body = body .. self.issue.area.unit.name .. ": " .. self.issue.area.name .. "\n" .. self.issue.policy.name .. ": <a href=\"" ..  request.get_absolute_baseurl() .. "issue/show/" .. self.issue_id .. ".html\">Thema " .. self.issue_id .. "</a>\n"
+      body = body .. _("[event mail]     Event: #{event}", { event = self.event_name or _("New argument")}) .. "\n"
+      body = body .. _("[event mail]     Phase: #{phase}", { phase = self.state_name })
+      if not self.issue.closed and self.issue.state_time_left then
+        body = body .. " (" .. format.interval_text(self.issue.state_time_left, { mode = "time_left" }) .. ")"
+      end
+      body = body .. "\n"
+
+      if self.argument_id then
+        local argument = Argument:by_id(self.argument_id)
+        subject = _("#{name}", { name = argument.name })
+        url = request.get_absolute_baseurl() .. "argument/show/"   .. self.argument_id   .. ".html"
+      elseif self.suggestion_id then
+        subject = _("#{name}", { name = self.suggestion.name })
+        url = request.get_absolute_baseurl() .. "suggestion/show/" .. self.suggestion_id .. ".html"
+      elseif self.initiative_id then
+        subject = _("#{name}", { name = self.initiative.name })
+        url = request.get_absolute_baseurl() .. "initiative/show/" .. self.initiative_id .. ".html"
+      else
+        subject = _("#{name}", { name = self.issue.policy.name })
+        url = request.get_absolute_baseurl() .. "issue/show/" .. self.issue_id .. ".html"
+      end
+
+      if self.initiative_id then
+        local initiative = Initiative:by_id(self.initiative_id)
+        body = body .. "<b> <a href=\"" .. request.get_absolute_baseurl() .. "initiative/show/" .. initiative.id .. ".html\">i" .. initiative.id .. ": " .. initiative.name .. "</a> </b>\n"
+      end
+
+      if self.argument_id then
+        local argument = Argument:by_id(self.argument_id)
+        body = "<b>" .. (argument.side == "pro" and _("New argument pro") or _("New argument contra")) .. ": <a href=\"" .. request.get_absolute_baseurl() .. "argument/show/" .. self.argument_id .. ".html\">" .. argument.name .. "</a> </b>\n[quote]" .. argument:get_content("html") .. "[/quote]"
+      elseif self.suggestion_id then
+        local suggestion = Suggestion:by_id(self.suggestion_id)
+        body = "<b>" .. _("New suggestion") .. ": <a href=\"" .. request.get_absolute_baseurl() .. "suggestion/show/" .. suggestion.id .. ".html\">" .. suggestion.name .. "</a> </b>\n[quote]" .. suggestion:get_content("html") .. "[/quote]"
+      elseif self.initiative_id then
+        local initiative = Initiative:by_id(self.initiative_id)
+        body = body .. "[quote]" .. initiative.current_draft:get_content("html") .. "[/quote]\n"
+      end
+
+      local body = "" .. self.issue.area.id .. "\n" .. self.issue_id .. "\n" .. subject .. "\n" .. body
+      local file = io.open("/tmp/lqfb_notification.txt", "w")
+      file:write(body)
+      file:close()
+
+      if to_forum then
+        os.execute("/opt/liquid_feedback_core/lf_forum_post")
+      end
+      if to_elgg then
+        os.execute("/opt/liquid_feedback_core/lf_elgg_post")
+      end
+      if to_reddit then
+        os.execute("/opt/liquid_feedback_core/lf_reddit_post")
+      end
+    end
+  )
+ end
 end
 
 function Event:send_next_notification()
