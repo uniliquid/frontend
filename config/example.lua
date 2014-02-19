@@ -221,3 +221,5 @@ end
 config.default_privilege_for_unit = 0
 
 config.register_without_invite_code = true
+
+config.enable_help_per_default = true
