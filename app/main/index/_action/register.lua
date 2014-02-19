@@ -289,13 +289,13 @@ if step > 2 then
   app.session:save()
 if not config.default_privilege_after_verification then
   if config.default_privilege_for_unit > 0 then
-    local privilege = Privilege:by_pk(unit_id, member.id)
+    local privilege = Privilege:by_pk(config.default_privilege_for_unit, member.id)
     if privilege and not privilege.voting_right then
       privilege.voting_right = true
       privilege:save()
     elseif not privilege then
       privilege = Privilege:new()
-      privilege.unit_id = unit_id
+      privilege.unit_id = config.default_privilege_for_unit
       privilege.member_id = member.id
       privilege.voting_right = true
       privilege:save()
