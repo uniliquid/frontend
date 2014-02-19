@@ -14,7 +14,7 @@ if member then
   member.notify_email_lock_expiry   = nil
   member:save()
 
-if not config.default_privilege_after_verification then
+if config.default_privilege_after_verification then
   if config.default_privilege_for_unit > 0 then
     local privilege = Privilege:by_pk(unit_id, member.id)
     if privilege and not privilege.voting_right then
