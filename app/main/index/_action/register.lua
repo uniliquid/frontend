@@ -59,7 +59,7 @@ if not config.locked_profile_fields.notify_email and notify_email then
   if #notify_email < 5 then
     slot.put_into("error", _"Email address too short!")
     success = false
-  elseif config.email_require_host and not notify_email:sub(-config.email_require_host:len()) == config.email_require_host then
+  elseif config.email_require_host ~= nil and notify_email:sub(-string.len(config.email_require_host)) ~= config.email_require_host then
     slot.put_into("error", _"Email address is invalid! " .. config.email_requirement_text)
     success = false
   end
