@@ -59,7 +59,7 @@ if app.session:has_access("all_pseudonymous") then
   if module == "member_image" and view == "show"
    or module == "vote" and view == "show_incoming"
    or module == "interest" and view == "show_incoming"
-   or module == "supporter" and view == "show_incoming" 
+   or module == "supporter" and view == "show_incoming"
    or module == "issue" and view == "ballots"
    or module == "vote" and view == "list" then
     auth_needed = false
@@ -67,7 +67,8 @@ if app.session:has_access("all_pseudonymous") then
 end
 
 if app.session:has_access("everything") then
-  if module == "member" and (view == "show" or view == "history") then
+  if module == "member" and (view == "show" or view == "history")
+   or module == "issue" and view == "ballots" then
     auth_needed = false
   end
 end

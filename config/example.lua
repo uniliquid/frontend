@@ -4,7 +4,7 @@
 
 -- Name of this instance, defaults to name of config file
 -- ------------------------------------------------------------------------
-config.instance_name = "Instance name"
+config.instance_name = "Liquid · Instance name"
 
 
 -- Information about service provider (HTML)
@@ -16,6 +16,12 @@ config.app_service_provider = "Snake Oil<br/>10000 Berlin<br/>Germany"
 -- ------------------------------------------------------------------------
 config.use_terms = "=== Terms of Use ==="
 
+-- Privacy Terms (HTML)
+config.privacy_terms = "<h1>Datenschutzerklärung für das UniLiquid</h1>"
+  
+-- Absolute base url of application
+-- ------------------------------------------------------------------------
+config.absolute_base_url = "http://localhost/"
 
 -- Checkbox(es) the user has to accept while registering
 -- ------------------------------------------------------------------------
@@ -25,22 +31,16 @@ config.use_terms_checkboxes = {
     html = "I accept the terms of use.",
     not_accepted_error = "You have to accept the terms of use to be able to register."
   },
---  {
---    name = "extra_terms_of_use_v1",
---    html = "I accept the extra terms of use.",
---    not_accepted_error = "You have to accept the extra terms of use to be able to register."
---  }
+  {
+    name = "extra_terms_of_use_v1",
+    html = "Ich akzeptiere die <a href=\"" .. config.absolute_base_url .. "index/privacy.html\">Datenschutzerklärung</a>.",
+    not_accepted_error = "Um dich zu registrieren, musst du die <a href=\"" .. config.absolute_base_url .. "index/privacy.html\">Datenschutzerklärung</a> akzeptieren."
+  }
 }
-
-  
--- Absolute base url of application
--- ------------------------------------------------------------------------
-config.absolute_base_url = "http://example.com/"
-
 
 -- Connection information for the Liquid database
 -- ------------------------------------------------------------------------
-config.database = { engine='postgresql', dbname='liquid_feedback' }
+config.database = { engine='postgresql', dbname='uniliquid' }
 
 
 -- Location of the rocketwiki binaries
@@ -50,27 +50,6 @@ config.formatting_engine_executeables = {
   compat = "/opt/rocketwiki-lqfb/rocketwiki-lqfb-compat"
 }
 
-
--- Public access level
--- ------------------------------------------------------------------------
--- Available options:
--- "none" 
---     -> Closed user group, no public access at all
---        (except login/registration/password reset)
--- "anonymous"
---     -> Shows only initiative/suggestions texts and aggregated
---        supporter/voter counts
--- "authors_pseudonymous" 
---     -> Like anonymous, but shows screen names of authors
--- "all_pseudonymous" 
---     -> Show everything a member can see, except profile pages
--- "everything"
---     -> Show everything a member can see, including profile pages
--- ------------------------------------------------------------------------
-config.public_access = "none"
-
-
-
 -- ========================================================================
 -- OPTIONAL
 -- Remove leading -- to use a option
@@ -78,76 +57,74 @@ config.public_access = "none"
 
 -- List of enabled languages, defaults to available languages
 -- ------------------------------------------------------------------------
--- config.enabled_languages = { 'en', 'de', 'eo', 'el', 'hu', 'it', 'nl', 'zh-Hans', 'zh-TW' }
+config.enabled_languages = { 'de', 'en' } --, 'hu', 'el', 'eo', 'it', 'nl', 'zh-Hans', 'zh-TW' }
 
 -- Default language, defaults to "en"
 -- ------------------------------------------------------------------------
--- config.default_lang = "en"
+config.default_lang = "de"
 
 -- after how long is a user considered inactive and the trustee will see warning,
 -- notation is according to postgresql intervals, default: no warning at all
 -- ------------------------------------------------------------------------
--- config.delegation_warning_time = '6 months'
+config.delegation_warning_time = '5 months'
 
--- Invite code expiry
--- after how long is an invite code can't be used anymore
--- notation is according to postgresql intervals
--- Default: no expiry
+-- Prefix of all automatic mails, defaults to "[Liquid] "
 -- ------------------------------------------------------------------------
--- config.invite_code_expiry = '1 month'
-
--- Prefix of all automatic mails, defaults to "[Pirate Feedback] "
--- ------------------------------------------------------------------------
--- config.mail_subject_prefix = "[Liquid] "
+config.mail_subject_prefix = "[Liquid] "
 
 -- Sender of all automatic mails, defaults to system defaults
 -- ------------------------------------------------------------------------
--- config.mail_envelope_from = "liquidfeedback@example.com"
--- config.mail_from = { name = "Liquid", address = "liquidfeedback@example.com" }
--- config.mail_reply_to = { name = "Support", address = "support@example.com" }
-
--- Configuration of password hashing algorithm (defaults to "crypt_sha512")
--- ------------------------------------------------------------------------
--- config.password_hash_algorithm = "crypt_sha512"
--- config.password_hash_algorithm = "crypt_sha256"
--- config.password_hash_algorithm = "crypt_md5"
-
--- Number of rounds for crypt_sha* algorithms, minimum and maximum
--- (defaults to minimum 10000 and maximum 20000)
--- ------------------------------------------------------------------------
--- config.password_hash_min_rounds = 10000
--- config.password_hash_max_rounds = 20000
-
+config.mail_noreply = "noreply@localhost"
+config.mail_envelope_from = "liquidsupport@localhost"
+config.mail_from = { name = "Liquid", address = "liquidsupport@localhost" }
+config.mail_reply_to = "liquidsupport@localhost"
 
 -- Supply custom url for avatar/photo delivery
 -- ------------------------------------------------------------------------
 -- config.fastpath_url_func = nil
+--config.fastpath_url_func = function(member_id, image_type)
+--  return request.get_absolute_baseurl() .. "fastpath/getpic?" .. tostring(member_id) .. "+" .. tostring(image_type)
+--end
 
 -- Local directory for database dumps offered for download
 -- ------------------------------------------------------------------------
--- config.download_dir = nil
+config.download_dir = "/opt/uniliquid_dumps/"
+
+config.avatar_dir = "/opt/uniliquid_frontend/static/avatars/"
 
 -- Special use terms for database dump download
 -- ------------------------------------------------------------------------
--- config.download_use_terms = "=== Download use terms ===\n"
+config.download_use_terms = "==== Nutzungsbedingungen Downloads ===="
+
+-- Set public access level
+-- Available options: false, "anonymous", "pseudonym", "full"
+-- Defaults to "full"
+-- ------------------------------------------------------------------------
+config.public_access = "anonymous"
 
 -- Use custom image conversion, defaults to ImageMagick's convert
 -- ------------------------------------------------------------------------
 --config.member_image_content_type = "image/jpeg"
---config.member_image_convert_func = {
---  avatar = function(data) return extos.pfilter(data, "convert", "jpeg:-", "-thumbnail",   "48x48", "jpeg:-") end,
---  photo =  function(data) return extos.pfilter(data, "convert", "jpeg:-", "-thumbnail", "240x240", "jpeg:-") end
---}
+config.member_image_convert_func = {
+  avatar = function(data) return extos.pfilter(data, "convert", "jpeg:-", "-thumbnail",   "48x48", "jpeg:-") end,
+  photo =  function(data) return extos.pfilter(data, "convert", "jpeg:-", "-thumbnail", "240x240", "jpeg:-") end
+}
 
 -- Display a public message of the day
 -- ------------------------------------------------------------------------
--- config.motd_public = "===Message of the day===\nThe MOTD is formatted with rocket wiki"
+--config.motd_public = 'MOTD'
 
 -- Automatic issue related discussion URL
 -- ------------------------------------------------------------------------
--- config.issue_discussion_url_func = function(issue)
---   return "http://example.com/discussion/issue_" .. tostring(issue.id)
--- end
+--config.issue_discussion_url_func = function(issue)
+--   return config.absolute_base_url .. "f?" .. tostring(issue.id)
+--end
+
+-- Automatic issue related reddit URL
+-- ------------------------------------------------------------------------
+--config.issue_reddit_url_func = function(issue)
+--   return config.absolute_base_url .. "r?" .. tostring(issue.id)
+--end
 
 -- Integration of Etherpad, disabled by default
 -- ------------------------------------------------------------------------
@@ -159,55 +136,12 @@ config.public_access = "none"
 --  cookie_path = "/"
 --}
 
--- Free timings
--- ------------------------------------------------------------------------
--- This example expects a date string entered in the free timing field
--- by the user creating a poll, interpreting it as target date for then
--- poll and splits the remaining time at the ratio of 4:1:2
--- Please note, polling policies never have an admission phase
--- The available_func is optional, if not set any target date is allowed
-
-config.free_timing = {
-  calculate_func = function(policy, timing_string)
-    function interval_by_seconds(secs)
-      local secs_per_day = 60 * 60 * 24
-      local days
-      days = math.floor(secs / secs_per_day)
-      secs = secs - days * secs_per_day
-      return days .. " days " .. secs .. " seconds"
-    end
-    local target_date = parse.date(timing_string, atom.date)
-    if not target_date then
-      return false
-    end
-    local target_timestamp = target_date.midday
-    local now = atom.timestamp:get_current()
-    trace.debug(target_timestamp, now)
-    local duration = target_timestamp - now
-    if duration < 0 then
-      return false
-    end
-    return {
-      discussion = interval_by_seconds(duration / 7 * 4),
-      verification = interval_by_seconds(duration / 7 * 1),
-      voting = interval_by_seconds(duration / 7 * 2)
-    }
-  end,
-  available_func = function(policy)
-    return { 
-      { name = "End of 2013", id = '2013-12-31' },
-      { name = "End of 2014", id = '2014-12-31' },
-      { name = "End of 2015", id = '2015-12-31' }
-    }
-  end
-}
-
 -- WebMCP accelerator
 -- uncomment the following two lines to use C implementations of chosen
 -- functions and to disable garbage collection during the request, to
 -- increase speed:
 -- ------------------------------------------------------------------------
--- require 'webmcp_accelerator'
+require 'webmcp_accelerator'
 -- if cgi then collectgarbage("stop") end
 
 -- Trace debug
@@ -215,20 +149,73 @@ config.free_timing = {
 -- ------------------------------------------------------------------------
 -- config.enable_debug_trace = true
 
--- Registration without invite code (for demonstration purposes)
--- uncomment the following line to allow registration without an invite code
--- ------------------------------------------------------------------------
--- config.register_without_invite_code = true
-
--- Member import:
--- Maximum number of members which should be deactivated in one run
--- helps to avoid deactivating members by accident
--- Default: no limit
--- ------------------------------------------------------------------------
--- config.deactivate_max_members = 50
+config.footer_html = ""
 
 -- ========================================================================
 -- Do main initialisation (DO NOT REMOVE FOLLOWING SECTION)
 -- ========================================================================
+--config.free_timing = {
+--  calculate_func = function(policy, timing_string)
+--    function interval_by_seconds(secs)
+--      local days = math.floor(secs / 86400)
+--      secs = secs - days * 86400
+--      return days .. " days " .. secs .. " seconds"
+--    end
+--    local year, month, day, hour = string.match(timing_string, "^%s*([0-9]+)%-([0-9]+)%-([0-9]+)% ([0-9]+)%:00:00s*$")
+--    local target_date = os.time{year=tonumber(year), month=tonumber(month), day=tonumber(day), hour=tonumber(hour)}
+--    if not target_date then
+--      return false
+--    end
+--    local now = os.time(os.date("*t"))
+--    local duration = target_date - now
+--    if duration < 0 then
+--      return false
+--    end
+--    return {
+--      admission = interval_by_seconds(3600),
+--      discussion = interval_by_seconds(3600),
+--      verification = interval_by_seconds(3600),
+--      voting = interval_by_seconds(duration-7200)
+--    }
+--  end,
+--  available_func = function(policy)
+--    local policies = {}
+--    local time = os.time(os.date("*t"))
+--    for i = 0, 30 do
+--      for j = 0,23 do
+--        local now = os.date("*t",time)
+--        policies[i*24+j] = { name = now.day .. "." .. now.month .. "." .. now.year .. " -- " .. now.hour .. " Uhr", id = now.year .. "-" .. now.month .. "-" .. now.day .. " " .. now.hour .. ":00:00" }
+--        time = time + 3600
+--      end
+--    end
+--    return policies
+--  end
+--}
+
+config.forbid_similar_names = false
+config.max_nick_length = 60
+
+config.mv_connection = false
+--config.mv_decryption_url = "https://admidio_url/adm_api/usr.php?user_id="
+--config.mv_name = "Admidio"
+
+config.invite_text_file = "/opt/uniliquid_frontend/config/invite_mail.txt"
+config.invite_subject = "[Liquid] Einladung ins Liquid"
 
 execute.config("init")
+
+-- comment this out when going productive
+local member = Member:by_id(1)
+if member == nil then
+  member = Member:new()
+  member.login = 'admin'
+  member.name = 'admin'
+  member.admin = true
+  member:set_password('admin')
+  member.activated = 'now'
+  member.active = true
+  member.last_activity = 'now'
+  member:save()
+end
+
+config.register_without_invite_code = true

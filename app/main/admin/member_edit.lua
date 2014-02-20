@@ -59,7 +59,12 @@ ui.form{
       ui.field.text{     label = _"Login name",        name = "login" }
     end
     ui.field.boolean{  label = _"Admin?",       name = "admin" }
-    
+    if config.use_matn then
+      local matn = Rights:by_pk(member.id, "matn")
+      if not matn then
+        ui.field.text{     label = _"Matriculation number", name = "matn", value = "" }
+      end
+    end
     if member then
       ui.field.text{ label = _"Account created", value = member.created }
     end

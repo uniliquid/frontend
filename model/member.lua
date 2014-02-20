@@ -458,6 +458,34 @@ function Member.object:send_invitation(template_file, subject)
   return success
 end
 
+function Member.object:send_mail_verification(notify_email, secret, for_unit)
+  trace.disable()
+  local content = slot.use_temporary(function()
+      slot.put(_"Hello " .. self.name .. ",\n\n")
+      slot.put(_"Someone, probably you, entered your mail address at ")
+      slot.put(request.get_absolute_baseurl())
+      slot.put(_" in order to get voting rights.\n\n")
+      slot.put(_"Please confirm your email address by clicking the following link:\n\n")
+      slot.put(request.get_absolute_baseurl() .. "index/confirm_rights.html?secret=" .. secret .. "&for_unit=" .. for_unit .. "\n\n")
+      slot.put(_"If this link is not working, please open following url in your web browser:\n\n")
+      slot.put(request.get_absolute_baseurl() .. "index/confirm_rights.html\n\n")
+      slot.put(_"On that page please enter the confirmation code:\n\n")
+      slot.put(secret .. "\n\n")
+      slot.put(_"and for unit\n\n")
+      slot.put(for_unit .. "\n\n")
+    end)
+  local success = net.send_mail{
+    envelope_from = config.mail_envelope_from,
+    from          = config.mail_from,
+    reply_to      = config.mail_reply_to,
+    to            = notify_email,
+    subject       = config.mail_subject_prefix .. _"Email confirmation request",
+    content_type  = "text/plain; charset=UTF-8",
+    content       = content
+  }
+  return success
+end
+
 function Member.object:set_notify_email(notify_email)
   trace.disable()
   local expiry = db:query("SELECT now() + '7 days'::interval as expiry", "object").expiry

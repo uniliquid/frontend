@@ -129,10 +129,10 @@ ui.form{
       ui.field.text{ label = _"Birthday", name = "birthday" }
     end
     if member.organizational_unit and #member.organizational_unit > 0 then
-      ui.field.text{ label = _"Organizational unit", name = "organizational_unit" }
+      ui.field.text{ label = config.organizational_unit_title, name = "organizational_unit" }
     end
     if member.internal_posts and #member.internal_posts > 0 then
-      ui.field.text{ label = _"Internal posts", name = "internal_posts" }
+      ui.field.text{ label = config.internal_posts_title, name = "internal_posts" }
     end
     if member.external_memberships and #member.external_memberships > 0 then
       ui.field.text{ label = _"Memberships", name = "external_memberships", multiline = true }

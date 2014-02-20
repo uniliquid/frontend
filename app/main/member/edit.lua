@@ -16,8 +16,8 @@ ui.form{
     }
   },
   content = function()
-    ui.field.text{ label = _"Organizational unit", name = "organizational_unit", readonly = config.locked_profile_fields.organizational_unit }
-    ui.field.text{ label = _"Internal posts", name = "internal_posts", readonly = config.locked_profile_fields.internal_posts }
+    ui.field.text{ label = config.organizational_unit_title, name = "organizational_unit", readonly = config.locked_profile_fields.organizational_unit }
+    ui.field.text{ label = config.internal_posts_title, name = "internal_posts", readonly = config.locked_profile_fields.internal_posts }
     ui.field.text{ label = _"Real name", name = "realname", readonly = config.locked_profile_fields.realname }
     ui.field.text{ label = _"Birthday" .. " YYYY-MM-DD ", name = "birthday", attr = { id = "profile_birthday" }, readonly = config.locked_profile_fields.birthday }
     ui.script{ static = "gregor.js/gregor.js" }
@@ -29,8 +29,8 @@ ui.form{
     ui.field.text{ label = _"Phone", name = "phone", readonly = config.locked_profile_fields.phone }
     ui.field.text{ label = _"Mobile phone", name = "mobile_phone", readonly = config.locked_profile_fields.mobile_phone }
     ui.field.text{ label = _"Profession", name = "profession", readonly = config.locked_profile_fields.profession }
-    ui.field.text{ label = _"External memberships", name = "external_memberships", multiline = true, readonly = config.locked_profile_fields.external_memberships }
-    ui.field.text{ label = _"External posts", name = "external_posts", multiline = true, readonly = config.locked_profile_fields.external_posts }
+    --ui.field.text{ label = _"External memberships", name = "external_memberships", multiline = true, readonly = config.locked_profile_fields.external_memberships }
+    --ui.field.text{ label = _"External posts", name = "external_posts", multiline = true, readonly = config.locked_profile_fields.external_posts }
 
     ui.wikitextarea("statement", _"Statement")
     
