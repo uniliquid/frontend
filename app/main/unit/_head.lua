@@ -9,7 +9,7 @@ if app.session.member_id then
 end
 
 local style = ""
-if unit.name == 'Sandkasten/Spielwiese' then
+if unit.name == 'Sandkasten/Spielwiese' or unit.name == 'Sandkasten' or unit.name == 'Spielwiese' then
   style = "background: linear-gradient(rgb(147, 147, 147), rgb(85, 85, 85)) repeat scroll 0% 0% rgb(102, 102, 102)";
 end
 

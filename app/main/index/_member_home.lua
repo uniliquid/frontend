@@ -57,7 +57,7 @@ if member then
 end
 
 for i, unit in ipairs(units) do
-  if member:has_voting_right_for_unit_id(unit.id) then
+  if member and member:has_voting_right_for_unit_id(unit.id) then
    
     local areas_selector = Area:new_selector()
       :reset_fields()

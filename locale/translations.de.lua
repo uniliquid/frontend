@@ -489,7 +489,7 @@ return {
 ["Interested"] = "Interessiert";
 ["Internal posts"] = "Interne Ämter";
 ["Interval format:"] = "Intervall-Format";
-["Invalid login name or password!"] = "Login oder Passwort ungültig!<br /><br />Klicke bitte auf „<a href=\"https://liquid.piratenpartei.at/index/reset_password.html\">Login/Passwort vergessen</a>“, falls du deinen Login oder dein Passwort vergessen hast. Du kannst dir dort deinen Login sowie einen Code zum Setzen eines neuen Passworts per E-Mail zusenden lassen.";
+["Invalid login name or password!"] = "Login oder Passwort ungültig!<br /><br />Klicke bitte auf „<a href=\"/index/reset_password.html\">Login/Passwort vergessen</a>“, falls du deinen Login oder dein Passwort vergessen hast. Du kannst dir dort deinen Login sowie einen Code zum Setzen eines neuen Passworts per E-Mail zusenden lassen.";
 ["Invalid login name or password!"] = "Login oder Passwort ungültig";
 ["Invalid query"] = "Ungültige Anfrage";
 ["Invitation has been refused"] = "Einladung wurde widerrufen";
@@ -754,10 +754,10 @@ return {
 ["Phases"] = "Phasen";
 ["Phone"] = "Telefon";
 ["Photo"] = "Foto";
-["Please choose a login name. This name will not be shown to others and is used only by you to login into the system. Anyway - we recommend using a pseudonym. The login name is case sensitive."] = "Bitte wähle einen Login. Dieser wird anderen nicht gezeigt und nur von dir zum Login verwendet. Wir empfehlen dennoch die Nutzung eines Pseudonyms. Groß- und Kleinschreibung wird berücksichtigt.";
+["Please choose a login name. This name will not be shown to others and is used only by you to login into the system. Anyway - we recommend using a pseudonym, so that you do not tell us your real name - we prefer not knowing your real name. The login name is case sensitive."] = "Bitte wähle einen Login. Dieser wird anderen nicht gezeigt und nur von dir zum Login verwendet. Wir empfehlen dennoch die Nutzung eines Pseudonyms, damit du uns deinen Realnamen nicht nennst - uns ist lieber wir kennen ihn nicht. Groß- und Kleinschreibung wird berücksichtigt.";
 ["Please choose a member!"] = "Bitte wähle ein Mitglied!";
 ["Please choose a member"] = "Bitte wähle ein Mitglied";
-["Please choose a name. This name will be shown to others to identify you. We recommend using a pseudonym."] = "Bitte wähle einen Namen. Dieser wird anderen angezeigt um Dich zu identifizieren. Wir empfehlen die Nutzung eines Pseudonyms.";
+["Please choose a name. This name will be PUBLICLY shown to others to identify you. We recommend using a pseudonym."] = "Bitte wähle einen Namen. Dieser wird anderen ÖFFENTLICH angezeigt um Dich zu identifizieren. Wir empfehlen die Nutzung eines Pseudonyms.";
 ["Please choose a password and enter it twice. The password is case sensitive and has to be at least 8 characters long."] = "Bitte wähle ein Passwort und gib es zweimal ein. Groß- und Kleinschreibung wird berücksichtigt. Das Passwort muss mindestens 8 Zeichen lang sein.";
 ["Please choose a password and enter it twice. The password is case sensitive."] = "Bitte wähle ein Passwort und gib es zweimal ein. Groß- und Kleinschreibung wird berücksichtigt.";
 ["Please choose a policy!"] = "Bitte wähle ein Regelwerk!";
@@ -771,10 +771,11 @@ return {
 ["Please confirm your email address!"] = "Bitte bestätige deine E-Mail-Adresse";
 ["Please confirm your email address"] = "Bitte bestätige Deine E-Mail-Adresse";
 ["Please enter the email reset code you have received:"] = "Bitte gib den Rücksetzcode ein, den du erhalten hast:";
-["Please enter the invite code you've received."] = "In unserem Liquid sind derzeit nur Mitglieder der Piratenpartei Österreichs stimmberechtigt, die ihren Mitgliedsbeitrag (€12/Jahr) bezahlt haben und von einem befugten Vertreter der Partei <a href=\"http://wiki.piratenpartei.at/wiki/AG:Liquid/Akkreditierungsbefugte\">akkreditiert</a> wurden.<br /><br /><a href=\"https://mitglieder.piratenpartei.at/adm_program/modules/profile/profile_new.php?new_user=2\">Hier kannst du <b>Mitglied werden</b></a>.<br /><br />Bei Fragen zur Anmeldung wende dich bitte an die <a href=\"mailto:liquidsupport@piratenpartei.at\">Arbeitsgruppe Liquid</a>.<br /><br />Bitte gib hier den Einladungscode ein, den du erhalten hast:";
+["Please enter the invite code you've received."] = "Bitte gib den Einladungscode ein, den du erhalten hast.";
 ["Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."] = "Bitte gib Deine E-Mail-Adresse ein. Diese Adresse wird für automatische Benachrichtigungen (wenn Du diese anforderst) sowie zum Zurücksetzen des Passworts verwendet. Diese Adresse wird nicht veröffentlicht. Nach Abschluss der Registrierung wirst Du eine E-Mail mit einem Link zum Bestätigen der Adresse erhalten.";
 ["Please enter your login name! You will receive an email with a link to reset your password. Note that your login name might be distinct from your screen name!"] = "Bitte gib deinen Login ein! Du wirst eine E-Mail mit einem Link zum Zurücksetzen des Passworts erhalten. Beachte, dass sich dein Login möglicherweise von deinem Pseudonym unterscheidet!";
 ["Please enter your login name. You will receive an email with a link to reset your password."] = "Bitte gib Deinen Login oder deine E-Mail-Adresse ein. Du wirst eine E-Mail mit deinem Pseudonym und einem Link zum Zurücksetzen des Passworts erhalten.";
+["Please enter your new password twice."] = "Bitte gib Dein neues Passwort zweimal ein:";
 ["Please enter your new password twice:"] = "Bitte gib dein neues Passwort zweimal ein:";
 ["Please select your preferred notification level!"] = "Bitte wähle das gewünschte Benachrichtigungslevel!";
 ["Please select your preferred notification level"] = "Bitte wähle das gewünschte Benachrichtigungslevel";
@@ -814,6 +815,8 @@ return {
 ["Registration (step 1 of 3: Invite code)"] = "Registrierung (Schritt 1 von 3: Einladungscode)";
 ["Registration (step 2 of 3: Personal information)"] = "Registrierung (Schritt 2 von 3: Persönliche Daten)";
 ["Registration (step 3 of 3: Terms of use and password)"] = "Registrierung (Schritt 3 von 3: Nutzungsbedingungen und Passwort)";
+["Registration (step 1 of 2: Personal information)"] = "Registrierung (Schritt 1 von 2: Persönliche Daten)";
+["Registration (step 2 of 2: Terms of use and password)"] = "Registrierung (Schritt 2 von 2: Nutzungsbedingungen und Passwort)";
 ["Registration"] = "Registrierung";
 ["Rejected"] = "Abgelehnt";
 ["Remaining contacts"] = "restliche Kontakte";
@@ -843,7 +846,7 @@ return {
 ["Saved as contact"] = "Als Kontakt gespeichert";
 ["Saved contacts"] = "Gespeicherte Kontakte";
 ["Schulze rank"] = "Schulze-Rang";
-["Screen name"] = "Pseudonym";
+["Screen name"] = "Öffentliches Pseudonym";
 ["Search / Filter"] = "Suchen / Filtern";
 ["Search context"] = "Suchkontext";
 ["Search for issues"] = "Nach Themen suchen";
@@ -1122,7 +1125,7 @@ return {
 ["You are invited to #{count} initiative(s)"] = "Du bist zu #{count} Initiativen als Initiator eingeladen";
 ["You are invited to #{count} initiatives."] = "Du bist zu #{count} Initiativen als Initiator eingeladen.";
 ["You are invited to become initiator of this initiative."] = "Du bist eingeladen Initiator dieser Initiative zu werden.";
-["You are invited to Liquid. To register please click the following link:\n\n"] = "Du bist zu Liquid eingeladen. Bitte klicke auf den folgenden Link, um dich zu registrieren:\n\n";
+["You are invited to Liquid. To register please click the following link:\n\n"] = "Du bist ins Liquid eingeladen. Bitte klicke auf den folgenden Link, um dich zu registrieren:\n\n";
 ["You are invited to one initiative."] = "Du bist zu einer Initiative eingeladen.";
 ["You are member"] = "Du bist Mitglied";
 ["You are member."] = "Du bist Mitglied.";

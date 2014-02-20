@@ -13,7 +13,7 @@ if not param.get("hide_unit", atom.boolean) then
 end
 
 local style = ""
-if area.name == 'Sandkasten/Spielwiese' then
+if area.name == 'Sandkasten/Spielwiese' or area.name == 'Sandkasten' or area.name == 'Spielwiese' then
   style = "background: linear-gradient(rgb(227, 227, 227), rgb(198, 198, 198)) repeat scroll 0% 0% rgb(204, 204, 204)"
 end
 

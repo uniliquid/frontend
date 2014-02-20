@@ -6,7 +6,7 @@ ui.container{ attr = { class = "area" }, content = function()
   execute.view{ module = "area", view = "_head", params = { area = area, hide_unit = true, show_content = true, member = member } }
   
   local style = ""
-  if area.name == 'Sandkasten/Spielwiese' then
+  if area.name == 'Sandkasten/Spielwiese' or area.name == 'Sandkasten' or area.name == 'Spielwiese' then
     style = "background: linear-gradient(rgb(251, 251, 251), rgb(237, 237, 237)) repeat scroll 0% 0% rgb(237, 237, 237);"
   end
 

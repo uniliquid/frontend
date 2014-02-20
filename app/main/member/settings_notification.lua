@@ -102,7 +102,8 @@ ui.form{
     end }
 
     slot.put("<br />")
-
+   
+   if config.notify_satzung_direkt then
     ui.container{ content = function()
       ui.tag{
         tag = "input",
@@ -123,6 +124,7 @@ ui.form{
     end }
     
     slot.put("<br />")
+   end
 
     ui.container{ content = function()
       ui.tag{

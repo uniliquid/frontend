@@ -6,3 +6,5 @@ locale
 static/icons/*
 fastpath/getpic
 static/avatars/*
+config/myconfig.lua
+config/invite_mail.txt

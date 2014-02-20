@@ -29,13 +29,18 @@ if app.session.member and step == 4 then
   return
 end
 
-local member = Member:new_selector()
-  :add_where{ "invite_code = ?", code }
-  :add_where{ "activated ISNULL" }
-  :add_where{ "NOT locked" }
-  :optional_object_mode()
-  :for_update()
-  :exec()
+local member = nil
+if config.register_without_invite_code then
+  member = Member:new()
+else
+  member = Member:new_selector()
+    :add_where{ "invite_code = ?", code }
+    :add_where{ "activated ISNULL" }
+    :add_where{ "NOT locked" }
+    :optional_object_mode()
+    :for_update()
+    :exec()
+end
   
 if not member then
   slot.put_into("error", _"The code you've entered is invalid")
@@ -272,6 +277,13 @@ if step > 2 then
 
   app.session.member = member
   app.session:save()
+  if config.default_privilege_for_unit > 0 then
+    privilege = Privilege:new()
+    privilege.unit_id = config.default_privilege_for_unit
+    privilege.member_id = member.id
+    privilege.voting_right = true
+    privilege:save()
+  end
 
   local units = Unit:new_selector():add_where("active"):add_order_by("name"):exec()
   

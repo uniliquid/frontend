@@ -247,6 +247,7 @@ function Event.object:send_notification()
     )
   end
 
+ if config.enable_forum_scripts then
   local url
   local subject
   local body = ""
@@ -315,6 +316,7 @@ function Event.object:send_notification()
       end
     end
   )
+ end
 end
 
 function Event:send_next_notification()

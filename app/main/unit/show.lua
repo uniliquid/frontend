@@ -68,15 +68,6 @@ tabs[#tabs+1] = {
 }
 
 tabs[#tabs+1] = {
-  name = "timeline",
-  icon = "icons/16/time.png",
-  label = _"Latest events",
-  module = "event",
-  view = "_list",
-  params = { for_unit = unit }
-}
-
-tabs[#tabs+1] = {
   name = "open",
   icon = "icons/16/email_open.png",
   label = _"Open issues",
@@ -97,6 +88,15 @@ tabs[#tabs+1] = {
     for_state = "closed",
     issues_selector = closed_issues_selector, for_unit = true
   }
+}
+
+tabs[#tabs+1] = {
+  name = "timeline",
+  icon = "icons/16/time.png",
+  label = _"Latest events",
+  module = "event",
+  view = "_list",
+  params = { for_unit = unit }
 }
 
 if app.session:has_access("all_pseudonymous") then

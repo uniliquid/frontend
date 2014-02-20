@@ -60,7 +60,7 @@ tabs[#tabs+1] = {
     }
 }
 
-
+if config.enable_general_assembly_mode then
 tabs[#tabs+1] = {
   icon = "icons/16/map.png",
   name = "bgv",
@@ -77,6 +77,7 @@ tabs[#tabs+1] = {
 
   }
 }
+end
 
 tabs[#tabs+1] = {
   name = "members",

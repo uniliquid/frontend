@@ -1,15 +1,22 @@
 slot.select('navigation', function()
 
+if config.landing_page then
   ui.link{
     content = function()
       ui.image{ static = "favicon.ico" }
-      ui.tag{ attr = { class = "logo" }, content = _"Liquid" }
-      slot.put(" &middot; ")
-      ui.tag{ content = config.instance_name }
+      ui.tag{ attr = { class = "logo" }, content = config.instance_name }
+    end,
+    external = "/"
+  }
+  ui.link{
+    content = function()
+      ui.image{ static = "icons/16/world.png" }
+      ui.tag{ content = _"Overview" }
     end,
     module = 'index',
     view   = 'index'
   }
+end
   
   if app.session:has_access("anonymous") then
 
@@ -36,12 +43,21 @@ slot.select('navigation', function()
           redirect_id = param.get_id()
         }
       }
+    else if config.voting_rights_management then
+      ui.link{
+        content = function()
+          ui.image{ static = "icons/16/pencil.png" }
+          ui.tag{ content = _"My voting rights" }
+        end,
+        module = 'member',
+        view   = 'rights'
+      }
     end
     
   end
 
-  if app.session.member == nil then
---[[    ui.link{
+  if app.session.member == nil and config.register_without_invite_code then
+    ui.link{
       content = function()
         ui.image{ static = "icons/16/user_add.png" }
         ui.tag{ content = _"Registration" }
@@ -56,7 +72,7 @@ slot.select('navigation', function()
       end,
       module = 'index',
       view   = 'reset_password'
-    }]]
+    }
   end
 
   ui.tag{ 
@@ -80,6 +96,7 @@ slot.select('navigation', function()
     end
   }
 
+end
 end)
 
 slot.select('navigation_right', function()
