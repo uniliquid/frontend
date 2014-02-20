@@ -297,6 +297,7 @@ config.issue_reddit_url_func = function(issue)
 end
 
 config.use_lfbot_reddit_buffer = true
+config.reddit_refresh_interval = "5 minutes"
 
 -- Integration of Etherpad, disabled by default
 -- ------------------------------------------------------------------------

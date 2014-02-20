@@ -9,7 +9,7 @@ local per_page = 25
 local event_selector = Event:new_selector()
   :add_order_by("event.id DESC")
   :limit(per_page + 1)
-  :join("issue", nil, "issue.id = event.issue_id")
+  :left_join("issue", nil, "issue.id = event.issue_id")
   :add_field("now()::date - event.occurrence::date", "time_ago")
   
 if event_max_id then
@@ -19,7 +19,7 @@ end
 if for_member then
   event_selector:add_where{ "event.member_id = ?", for_member.id }
 elseif for_unit then
-  event_selector:join("area", nil, "area.id = issue.area_id")
+  event_selector:left_join("area", nil, "area.id = issue.area_id")
   event_selector:add_where{ "area.unit_id = ?", for_unit.id }
 elseif for_area then
   event_selector:add_where{ "issue.area_id = ?", for_area.id }

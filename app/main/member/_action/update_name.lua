@@ -18,7 +18,8 @@ end
 
 local member = app.session.member
 
-local entries = member:get_reference_selector("history_entries"):add_where("until + '30 days'::interval > NOW()"):add_order_by("id DESC"):exec()
+--local entries = member:get_reference_selector("history_entries"):add_where("until + '30 days'::interval > NOW()"):add_order_by("id DESC"):exec()
+local entries = db:query({ "SELECT DISTINCT name FROM member_history WHERE member_id = ? AND until + '30 days'::interval > NOW() GROUP BY name;", member.id }, "opt_object")
 
 local name_changed = false
 local name_error = false
@@ -33,7 +34,7 @@ if check_member then
   end
 end
 
-if #entries >= 2 then
+if entries ~= nil and #entries >= 2 then
   slot.put_into("error", _"You already changed your name 2 times in the last 30 days.")
   return false
 end

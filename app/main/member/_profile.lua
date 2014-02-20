@@ -1,3 +1,4 @@
+local md5 = require "md5"
 local member = param.get("member", "table")
 
 local include_private_data = param.get("include_private_data", atom.boolean)
@@ -38,7 +39,9 @@ ui.form{
 
       end
     }
-    
+    if not member.locked then
+      ui.field.text{ label = _"Identification", name = "identification", value = md5.sumhexa(member.identification) }
+    end
     if member.name then
       ui.field.text{ label = _"Screen name", name = "name" }
     end
