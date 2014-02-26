@@ -63,7 +63,7 @@ ui.form{
         :exec()
     end
 
-      if step ~= 4 and (not member.notify_email and not notify_email or not member.name and not name or not member.login and not login or step == 1) then
+      if step ~= 4 and ((not member or not member.notify_email) and not notify_email or (not member or not member.name) and not name or (not member or not member.login and not login) or step == 1) then
         if config.register_without_invite_code then
           ui.title(_"Registration (step 1 of 2: Personal information)")
         else
