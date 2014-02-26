@@ -115,7 +115,7 @@ ui.form{
               content = config.email_requirement_text
             }
           end
-          if config.register_without_invite_code then
+          if config.register_without_invite_code and member.notify_email then
             member.notify_email = param.get("notify_email")
           end
           ui.field.text{
