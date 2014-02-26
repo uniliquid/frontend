@@ -51,11 +51,9 @@ ui.form{
       ui.submit{
         text = _'Proceed with registration'
       }
-    end
-    if step ~= 4 and not code and config.register_without_invite_code then
+    elseif step ~= 4 and config.register_without_invite_code then
       member = Member:new()
-    end
-    if step ~= 4 and code and not config.register_without_invite_code then
+    elseif step ~= 4 and not config.register_without_invite_code then
       member = Member:new_selector()
         :add_where{ "invite_code = ?", code }
         :add_where{ "activated ISNULL" }
@@ -115,7 +113,7 @@ ui.form{
               content = config.email_requirement_text
             }
           end
-          if config.register_without_invite_code and member.notify_email then
+          if config.register_without_invite_code then
             member.notify_email = param.get("notify_email")
           end
           ui.field.text{
