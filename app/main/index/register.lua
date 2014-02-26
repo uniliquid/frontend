@@ -25,6 +25,19 @@ ui.form{
   },
   content = function()
 
+    if step ~= 4 and config.register_without_invite_code then
+      member = Member:new()
+    elseif step ~= 4 and code and not config.register_without_invite_code then
+      member = Member:new_selector()
+        :add_where{ "invite_code = ?", code }
+        :add_where{ "activated ISNULL" }
+        :optional_object_mode()
+        :exec()
+      if not member then
+        slot.put_into("error", _"The code you've entered is invalid")
+        code = nil
+      end
+    end
     if step ~= 4 and not code then
       ui.title(_"Registration (step 1 of 3: Invite code)")
       ui.actions(function()
@@ -51,14 +64,6 @@ ui.form{
       ui.submit{
         text = _'Proceed with registration'
       }
-    elseif step ~= 4 and config.register_without_invite_code then
-      member = Member:new()
-    elseif step ~= 4 and not config.register_without_invite_code then
-      member = Member:new_selector()
-        :add_where{ "invite_code = ?", code }
-        :add_where{ "activated ISNULL" }
-        :optional_object_mode()
-        :exec()
     end
 
     if member then
