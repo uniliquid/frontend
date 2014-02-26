@@ -12,7 +12,7 @@ return {
 ["Abstention (delegation)"] = "Enthaltung (Delegation)";
 ["Link menu"] = "Nützliche Links";
 ["Suggestions (Hide)"] = "Änderungswünsche (Ausblenden)";
-["Show 1 Suggestion"] = "1 Änderungswusch anzeigen";
+["Show 1 Suggestion"] = "1 Änderungswunsch anzeigen";
 ["Show #{count} Suggestions"] = "#{count} Änderungswünsche anzeigen";
 ["Individual opinions of supporters"] = "Individuelle Meinungen der Unterstützer";
 ["Your opinion to this suggestion"] = "Deine Meinung zu diesem Änderungswunsch";

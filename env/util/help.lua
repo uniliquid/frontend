@@ -4,7 +4,7 @@ function util.help(id, title)
   end
   local setting_key = "liquidfeedback_frontend_hidden_help_" .. id
   local setting = Setting:by_pk(app.session.member.id, setting_key)
-  if (not setting and config.enable_help_per_default) or (setting and not config.enable_help_per_default) then
+  if ((not setting or setting.value ~= "hidden") and config.enable_help_per_default) or (setting and setting.value == "show" and not config.enable_help_per_default) then
     ui.container{
       attr = { class = "help help_visible" },
       content = function()

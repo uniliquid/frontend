@@ -34,7 +34,8 @@ end
 local function print_delegation_info()
   local participant_occured = false
   
-  if info.own_participation or info.first_trustee_id then
+  if member then
+  --if info.own_participation or info.first_trustee_id then
     
     local class = "micro_avatar"
     if info.own_participation then
@@ -174,8 +175,8 @@ local function print_delegation_info()
   end
 end
 
-
-if info.own_participation or info.first_trustee_id then
+if member and ((unit and member:has_voting_right_for_unit_id(unit_id)) or (area and member:has_voting_right_for_unit_id(area.unit_id)) or (issue and member:has_voting_right_for_unit_id(issue.area.unit_id))) then
+--if info.own_participation or info.first_trustee_id then
   if app.session.member_id == member.id then
     ui.link{
       module = "delegation", view = "show", params = {

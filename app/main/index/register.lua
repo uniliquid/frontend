@@ -2,6 +2,9 @@ execute.view{ module = "index", view = "_lang_chooser" }
 
 local step = param.get("step", atom.integer)
 local code = param.get("code")
+if code == nil then
+  code = param.get("invite")
+end
 if config.register_without_invite_code then
   code = "123"
 end
@@ -48,17 +51,16 @@ ui.form{
       ui.submit{
         text = _'Proceed with registration'
       }
-
-    else
-      if config.register_without_invite_code then
-        member = Member:new()
-      else
-        member = Member:new_selector()
-          :add_where{ "invite_code = ?", code }
-          :add_where{ "activated ISNULL" }
-          :optional_object_mode()
-          :exec()
-      end
+    end
+    if step ~= 4 and not code and config.register_without_invite_code then
+      member = Member:new()
+    end
+    if step ~= 4 and code and not config.register_without_invite_code then
+      member = Member:new_selector()
+        :add_where{ "invite_code = ?", code }
+        :add_where{ "activated ISNULL" }
+        :optional_object_mode()
+        :exec()
     end
 
       if step ~= 4 and (not member.notify_email and not notify_email or not member.name and not name or not member.login and not login or step == 1) then
