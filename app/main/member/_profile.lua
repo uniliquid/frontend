@@ -10,6 +10,7 @@ if not member then
   end
 end
 
+if member then
 ui.form{
   attr = { class = "member_statement member vertical" },
   record = member,
@@ -164,3 +165,4 @@ ui.form{
 }
 
 slot.put("<br />")
+end

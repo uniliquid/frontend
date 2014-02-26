@@ -40,7 +40,7 @@ ui.form{
       ui.tag{
         tag = "p",
         content = function()
-	  slot.put(_"Please enter the invite code you've received.")
+          slot.put(_"Please enter the invite code you've received.")
         end
       }
       ui.field.text{
@@ -61,6 +61,7 @@ ui.form{
         :exec()
     end
 
+    if member then
       if step ~= 4 and ((not member or not member.notify_email) and not notify_email or (not member or not member.name) and not name or (not member or not member.login and not login) or step == 1) then
         if config.register_without_invite_code then
           ui.title(_"Registration (step 1 of 2: Personal information)")
@@ -119,7 +120,7 @@ ui.form{
           ui.field.text{
             label     = _'Email address',
             name      = 'notify_email',
-            value     = param.get("notify_email") or member.notify_email
+            value     = param.get("notify_email") or member and member.notify_email or ""
           }
         end
         if not config.locked_profile_fields.name then
@@ -301,6 +302,7 @@ ui.form{
         }
       end
     end
+  end
 }
 
 
