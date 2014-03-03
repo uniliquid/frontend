@@ -40,9 +40,9 @@ ui.container{ attr = { class = "unit_head", style = style }, content = function(
           ui.tag{ content = _"You have voting privileges for this unit" }
           slot.put(" &middot; ")
           if unit.delegation_info.first_trustee_id == nil then
-            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/house_go.png" }, text = _"Delegate unit", module = "delegation", view = "show", params = { unit_id = unit.id } }
+            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/house_go.png" }, text = _"Delegate unit", module = "delegation", view = "show", params = { unit_id = unit.id, member_id = member.id } }
           else
-            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/house_go.png" }, text = _"Change unit delegation", module = "delegation", view = "show", params = { unit_id = unit.id } }
+            ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/house_go.png" }, text = _"Change unit delegation", module = "delegation", view = "show", params = { unit_id = unit.id, member_id = member.id } }
           end
         else
           ui.tag{ content = _"Member has voting privileges for this unit" }

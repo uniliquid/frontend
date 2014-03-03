@@ -16,6 +16,7 @@ local info
 local delegation_text
 
 if unit then
+  unit:load_delegation_info_once_for_member_id(member.id)
   info = unit.delegation_info
   delegation_text = _"Delegate unit"
 end
@@ -27,6 +28,7 @@ if area then
 end
 
 if issue then
+  issue:load("member_info", { member_id = member.id })
   info = issue.member_info
   delegation_text = _"Delegate issue"
 end
@@ -50,7 +52,7 @@ local function print_delegation_info()
 
   end
 
-  if not (issue and issue.state == "voting" and info.own_participation) then
+  if not (issue and issue.state == "voting" and info.own_participation) and info.first_trustee_id ~= member.id then
     
     if info.first_trustee_id then
     
@@ -177,22 +179,23 @@ end
 
 if member and ((unit and member:has_voting_right_for_unit_id(unit_id)) or (area and member:has_voting_right_for_unit_id(area.unit_id)) or (issue and member:has_voting_right_for_unit_id(issue.area.unit_id))) then
 --if info.own_participation or info.first_trustee_id then
-  if app.session.member_id == member.id then
+  --if app.session.member_id == member.id then
     ui.link{
       module = "delegation", view = "show", params = {
         unit_id = unit_id,
         area_id = area_id,
-        issue_id = issue_id
+        issue_id = issue_id,
+        member_id = member.id
       },
       attr = { class = "delegation_info" }, content = function()
         print_delegation_info()
       end
     }
-  else
-    ui.container{
-      attr = { class = "delegation_info" }, content = function()
-        print_delegation_info()
-      end
-    }
-  end
+  --else
+  --  ui.container{
+  --    attr = { class = "delegation_info" }, content = function()
+  --      print_delegation_info()
+  --    end
+  --  }
+  --end
 end

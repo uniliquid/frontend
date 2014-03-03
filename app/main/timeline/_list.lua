@@ -113,7 +113,8 @@ else
                     initiatives_selector = initiatives_selector,
                     per_page = initiatives_per_page,
                     no_sort = true,
-                    limit = initiatives_per_page
+                    limit = initiatives_per_page,
+                    member = timeline.member
                   }
                 }
               elseif initiative then
@@ -124,7 +125,8 @@ else
                     issue = initiative.issue,
                     initiatives_selector = Initiative:new_selector():add_where{ "initiative.id = ?", initiative.id },
                     per_page = initiatives_per_page,
-                    no_sort = true
+                    no_sort = true,
+                    member = timeline.member
                   }
                 }
               end
@@ -133,7 +135,8 @@ else
                   module = "suggestion",
                   view = "show",
                   id = timeline.suggestion.id,
-                  content = timeline.suggestion.name
+                  content = timeline.suggestion.name,
+                  member = timeline.member
                 }
               end
             end

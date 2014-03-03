@@ -244,9 +244,9 @@ ui.container{ attr = { class = class }, content = function()
 
       if not issue.closed and app.session.member:has_voting_right_for_unit_id(issue.area.unit_id) then
         if issue.member_info.own_delegation_scope ~= "issue" then
-          links[#links+1] = { text = _"Delegate issue", module = "delegation", view = "show", params = { issue_id = issue.id, initiative_id = for_initiative_id }, image = { attr = { class = "spaceicon" }, static = "icons/16/page_white_go.png" } }
+          links[#links+1] = { text = _"Delegate issue", module = "delegation", view = "show", params = { issue_id = issue.id, initiative_id = for_initiative_id, member_id = app.session.member.id }, image = { attr = { class = "spaceicon" }, static = "icons/16/page_white_go.png" } }
         else
-          links[#links+1] = { text = _"Change issue delegation", module = "delegation", view = "show", params = { issue_id = issue.id, initiative_id = for_initiative_id }, image = { attr = { class = "spaceicon" }, static = "icons/16/page_white_go.png" } }
+          links[#links+1] = { text = _"Change issue delegation", module = "delegation", view = "show", params = { issue_id = issue.id, initiative_id = for_initiative_id, member_id = app.session.member.id }, image = { attr = { class = "spaceicon" }, static = "icons/16/page_white_go.png" } }
         end
       end
     end

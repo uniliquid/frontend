@@ -62,7 +62,8 @@ ui.form{
     if member.notify_email and #member.notify_email > 0 then
      if config.mail_aliases and member.name ~= nil and member.name:match("^[A-Za-z][A-Za-z0-9%.%%%+%-]*$") then
       ui.field.text{ readonly = true, rawreadonly = true, label = _"email alias", name = "emailalias", content = function() slot.put('<a href="mailto:' .. member.name .. '@' .. config.hostname .. '">' .. member.name .. '@' .. config.hostname .. '</a>') end }
-     elseif member.active and not member.locked then
+     end
+     if member.name and not member.locked then
       ui.container{
         content = function()
           ui.tag{

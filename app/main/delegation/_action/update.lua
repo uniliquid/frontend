@@ -18,7 +18,7 @@ local preview = param.get("preview")
 
 if preview == "1" then
   request.redirect{ module = "delegation", view = "show", params = {
-    unit_id = unit_id, area_id = area_id, issue_id = issue_id, initiative_id = initiative_id, preview_trustee_id = trustee_id
+    unit_id = unit_id, area_id = area_id, issue_id = issue_id, initiative_id = initiative_id, preview_trustee_id = trustee_id, member_id = truster_id
   } }
   return
 end

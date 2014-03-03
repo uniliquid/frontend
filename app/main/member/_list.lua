@@ -1,5 +1,4 @@
 local members_selector = param.get("members_selector", "table")
-members_selector:add_where("member.activated NOTNULL")
 
 local initiative = param.get("initiative", "table")
 local issue = param.get("issue", "table")

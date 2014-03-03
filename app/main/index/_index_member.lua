@@ -85,7 +85,7 @@ tabs[#tabs+1] = {
   label = _"Members",
   module = 'member',
   view   = '_list',
-  params = { members_selector = Member:new_selector():add_where("active") }
+  params = { members_selector = Member:new_selector():add_where("member.name NOTNULL AND NOT member.locked") }
 }
 
 if not param.get("tab") then

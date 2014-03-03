@@ -22,10 +22,10 @@ end }
 
 if events == "personal" then
   execute.view{
-    module = "event", view = "_list"
+    module = "event", view = "_list", params = { for_member = member }
   }
 elseif events == "global" then
   execute.view{
-    module = "event", view = "_list", params = { global = true } 
+    module = "event", view = "_list", params = { global = true, for_member = member } 
   }
 end
