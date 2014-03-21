@@ -11,7 +11,7 @@ end
 local notify_email = param.get("notify_email")
 local name = param.get("name")
 local login = param.get("login")
-local member = nil
+local member = app.session.member
 
 ui.form{
   attr = { class = "vertical" },
@@ -105,7 +105,7 @@ ui.form{
        end
         
        if not config.register_without_invite_code then
-        execute.view{ module = "member", view = "_profile", params = { member = member, include_private_data = true } }
+        execute.view{ module = "member", view = "_profile", params = { member = member, include_private_data = true, no_mail_form = true } }
        end
 
         if not config.locked_profile_fields.notify_email then
@@ -207,7 +207,7 @@ ui.form{
         member.login = login or member.login
         
         execute.view{ module = "member", view = "_profile", params = {
-          member = member, include_private_data = true
+          member = member, include_private_data = true, no_mail_form = true
         } }
         
         for i, checkbox in ipairs(config.use_terms_checkboxes) do

@@ -262,12 +262,24 @@ ui.container{ attr = { class = class }, content = function()
     end
 
     if config.issue_reddit_url_func then
+      local number = "0"
+      if config.use_lfbot_reddit_buffer then
+        local exists = db:query("SELECT 1 FROM reddit_map WHERE lqfb = " .. issue.id, "opt_object")
+        local test = db:query("SELECT 1 FROM reddit_map WHERE timestamp < NOW() - '" .. config.reddit_refresh_interval .. "'::interval AND lqfb = " .. issue.id, "opt_object")
+        if not exists or test then
+          os.execute("/opt/liquid_feedback_core/reddit_check " .. issue.id)
+        end
+        test = db:query("SELECT substring(buffer from '(\\\\d+) Diskussionsbeitr') AS number FROM reddit_map WHERE lqfb = " .. issue.id, "opt_object")
+        if test ~= nil and test.number ~= nil then
+          number = test.number
+        end
+      end
       local url = config.issue_reddit_url_func(issue)
       links[#links+1] = {
         image = { attr = { class = "spaceicon" }, static = "icons/16/comments.png" },
         attr = { target = "_blank" },
         external = url,
-        content = _"Reddit-discussion on issue"
+        content = number == "0" and _"Reddit-Discussion" or number == "1" and _("Reddit-Discussion (1 post)") or _("Reddit-Discussion (#{number} posts)", { number = number })
       }
     end
 

@@ -2,6 +2,7 @@ local md5 = require "md5"
 local member = param.get("member", "table")
 
 local include_private_data = param.get("include_private_data", atom.boolean)
+local no_mail_form = param.get("no_mail_form", atom.boolean)
 
 if not member then
   local member_id = param.get("member_id", atom.integer)
@@ -63,7 +64,7 @@ ui.form{
      if config.mail_aliases and member.name ~= nil and member.name:match("^[A-Za-z][A-Za-z0-9%.%%%+%-]*$") then
       ui.field.text{ readonly = true, rawreadonly = true, label = _"email alias", name = "emailalias", content = function() slot.put('<a href="mailto:' .. member.name .. '@' .. config.hostname .. '">' .. member.name .. '@' .. config.hostname .. '</a>') end }
      end
-     if member.name and not member.locked then
+     if not no_mail_form and member.name and not member.locked then
       ui.container{
         content = function()
           ui.tag{

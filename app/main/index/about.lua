@@ -23,7 +23,7 @@ slot.put("<br />")
 
 
 ui.field.text{ attr = { style = "font-weight: bold;" }, value = _('More information can be found at: ') }
-slot.put('<a href="https://wiki.piratenpartei.at/wiki/Liquid">https://wiki.piratenpartei.at/wiki/Liquid</a>')
+slot.put('<a href="https://github.com/uniliquid">https://github.com/uniliquid</a>')
 slot.put("<br />")
 
 slot.put("<br />")

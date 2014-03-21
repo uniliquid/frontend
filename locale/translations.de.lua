@@ -1,5 +1,7 @@
 #!/usr/bin/env lua
 return {
+["Reddit-Discussion (#{number} posts)"] = "Reddit-Diskussion (#{number} Beiträge)";
+["Reddit-Discussion (1 post)"] = "Reddit-Diskussion (1 Beitrag)";
 ["Email address is invalid! "] = "E-Mail-Adresse ist ungültig! ";
 ["email alias"] = "E-Mail Alias";
 ["Confirm"] = "Bestätigen";
@@ -121,6 +123,7 @@ return {
 ["Abstention [many entries]"] = "Enthaltung";
 ["Abstention [single entry]"] = "Enthaltung";
 ["Abstention"] = "Enthaltung";
+["Abstention:"] = "Enthaltung:";
 ["Accept invitation"] = "Einladung annehmen";
 ["Accepted at"] = "Angenommen am/um";
 ["Accepted"] = "Angenommen";

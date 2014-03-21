@@ -626,6 +626,7 @@ div.notifications {
   background: -o-linear-gradient(#cdf, #abe);
   background: linear-gradient(#cdf, #abe);
   background-color: #abf;
+  overflow: hidden;
 }
 
 .area_list .area > .content,
