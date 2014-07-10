@@ -1,6 +1,8 @@
 local initiative = Initiative:new_selector():add_where{ "id = ?", param.get_id()}:single_object_mode():exec()
 local auto_support = param.get("auto_support", atom.boolean)
 
+local draft_id = param.get("draft_id", atom.integer)
+
 -- TODO important m1 selectors returning result _SET_!
 local issue = initiative:get_reference_selector("issue"):for_share():single_object_mode():exec()
 
@@ -37,6 +39,13 @@ local last_draft = Draft:new_selector()
   :limit(1)
   :single_object_mode()
   :exec()
+  
+if draft_id and draft_id ~= last_draft.id then
+  slot.select("error", function()
+    ui.tag{ content = _"The initiative draft has been updated again in the meanwhile, support not updated!" }
+  end)
+  return false
+end
 
 if not supporter then
   supporter = Supporter:new()
@@ -47,12 +56,11 @@ if not supporter then
     supporter.auto_support = auto_support
   end
   supporter:save()
---  slot.put_into("notice", _"Your support has been added to this initiative")
 elseif supporter.draft_id ~= last_draft.id then
   supporter.draft_id = last_draft.id
   supporter:save()
---  slot.put_into("notice", _"Your support has been updated to the latest draft")
+  slot.put_into("notice", _"Your support has been updated to the latest draft")
 else
---  slot.put_into("notice", _"You are already supporting the latest draft")
+  slot.put_into("notice", _"You are already supporting the latest draft")
 end
 

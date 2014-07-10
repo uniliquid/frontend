@@ -1,10 +1,10 @@
-slot.put_into("title", _"Unit list")
+ui.title(_"Unit list")
 
-util.help("unit.list", _"Unit list")
+ui.section( function()
+  ui.sectionRow( function()
+    execute.view{ module = "unit", view = "_list" }
+  end)
+end )
 
-slot.put("<br />")
 
-execute.view{ module = "unit", view = "_list" }
-
-slot.put("<br />")
 

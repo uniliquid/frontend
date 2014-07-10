@@ -2,19 +2,14 @@ local unit_id = config.single_unit_id or param.get_id()
 
 local unit = Unit:by_id(unit_id)
 
-slot.select("head", function()
-  execute.view{ module = "unit", view = "_head", params = { unit = unit, show_content = true, member = app.session.member } }
-end)
-
-if config.single_unit_id and not app.session.member_id and config.motd_public then
-  local help_text = config.motd_public
-  ui.container{
-    attr = { class = "wiki motd" },
-    content = function()
-      slot.put(format.wiki_text(help_text))
-    end
-  }
+if not unit then
+  execute.view { module = "index", view = "404" }
+  request.set_status("404 Not Found")
+  return
 end
+
+
+unit:load_delegation_info_once_for_member_id(app.session.member_id)
 
 local areas_selector = Area:build_selector{ active = true, unit_id = unit_id }
 areas_selector:add_order_by("member_weight DESC")
@@ -43,49 +38,38 @@ local closed_issues_selector = Issue:new_selector()
   :add_where("issue.closed NOTNULL")
   :add_order_by("issue.closed DESC")
 
-local tabs = {
-  module = "unit",
-  view = "show",
-  id = unit.id
-}
+  
 
-tabs[#tabs+1] = {
-  name = "areas",
-  label = _"Areas",
-  module = "area",
-  view = "_list",
-  params = { areas_selector = areas_selector, member = app.session.member }
-}
+execute.view { module = "unit", view = "_head", params = { unit = unit } }
 
-tabs[#tabs+1] = {
-  name = "timeline",
-  label = _"Latest events",
-  module = "event",
-  view = "_list",
-  params = { for_unit = unit }
-}
 
-tabs[#tabs+1] = {
-  name = "open",
-  label = _"Open issues",
-  module = "issue",
-  view = "_list",
-  params = {
-    for_state = "open",
-    issues_selector = open_issues_selector, for_unit = true
-  }
-}
-tabs[#tabs+1] = {
-  name = "closed",
-  label = _"Closed issues",
-  module = "issue",
-  view = "_list",
-  params = {
-    for_state = "closed",
-    issues_selector = closed_issues_selector, for_unit = true
+execute.view { 
+  module = "unit", view = "_sidebar", params = { 
+    unit = unit
   }
 }
 
+execute.view { 
+  module = "unit", view = "_sidebar_whatcanido", params = { 
+    unit = unit
+  }
+}
+
+execute.view { 
+  module = "unit", view = "_sidebar_members", params = { 
+    unit = unit
+  }
+}
+
+execute.view {
+  module = "issue",
+  view = "_list2",
+  params = { for_unit = unit, head = function ()
+    ui.heading { attr = { class = "left" }, level = 1, content = unit.name }
+  end }
+}
+
+--[[
 if app.session:has_access("all_pseudonymous") then
   tabs[#tabs+1] = {
     name = "eligible_voters",
@@ -105,3 +89,5 @@ if app.session:has_access("all_pseudonymous") then
 end
 
 ui.tabs(tabs)
+
+--]]

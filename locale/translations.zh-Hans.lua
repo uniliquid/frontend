@@ -33,6 +33,7 @@ return {
 ["API keys"] = "API-码";
 ["Abandon global delegation for this area"] = "停止此领域中的全面委任";
 ["Abandon unit and area delegations for this issue"] = "停止此议题的单位及领域委任";
+["Abandon unit delegation"] = false;
 ["Abandon unit delegation for this area"] = "停止此领域的单位委任";
 ["About site"] = "关于本站";
 ["Abstention"] = "弃权";
@@ -97,8 +98,10 @@ return {
 ["Can't remove last initiator"] = "无法移除最末位发起者";
 ["Can't send confirmation email"] = "无法寄送确认电邮";
 ["Cancel"] = "取消";
-["Cancel [nullify]"] = "取消 [nullify]";
-["Cancel password reset"] = "取消密码重设";
+["Cancel [nullify]"] = "取消";
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = "取消婉拒邀请";
 ["Cancel registration"] = "取消注册";
 ["Canceled"] = "已取消";
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = "已取消 (在验证期撤销)";
 ["Canceled (issue not accepted)"] = "已取消 (议题不被接受)";
 ["Canceled (no initiative admitted)"] = "已取消 (无提案被递交)";
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = "更改领域的委任";
 ["Change email"] = "更改电邮地址";
 ["Change email address"] = "更改电邮地址";
@@ -122,6 +126,8 @@ return {
 ["Change your notification email address"] = "更改您的通知用电邮地址";
 ["Change your password"] = "更改您的密码";
 ["Change your screen name"] = "更改您的使用者代号";
+["Check delegations"] = false;
+["Check your delegations!"] = false;
 ["Choose initiator"] = "选择发起者";
 ["Choose member"] = "选择成员";
 ["Closed"] = "结案";
@@ -137,7 +143,6 @@ return {
 ["Confirmed address"] = "已确认电邮地址";
 ["Contacts"] = "通讯录";
 ["Content"] = "內容";
-["Counting of votes"] = "统计票数";
 ["Counting starts soon"] = "计票即将开始";
 ["Create / edit area"] = "新增 / 编辑领域";
 ["Create / edit policy"] = "新增 / 编辑规则";
@@ -148,8 +153,10 @@ return {
 ["Create new unit"] = "新增新的单位";
 ["Created at"] = "新增于";
 ["Current name"] = "目前代号";
+["Current phase is already closed."] = false;
 ["Current status"] = "目前状态";
 ["Current trustee"] = "目前受托人";
+["Current unit and area delegations need confirmation"] = false;
 ["Current votings in areas you are member of and issues you are interested in:"] = "目前在您的领域或您所关心的议题中正进行的表决：";
 ["Currently no API key is set."] = "目前並无 API-码被设置.";
 ["Currently required"] = "目前所需人数";
@@ -221,10 +228,13 @@ return {
 ["Everything"] = "全部";
 ["External memberships"] = "外部成员";
 ["External posts"] = "外部职位";
+["Finish delegation check"] = false;
 ["Finish voting"] = "完成投票";
 ["Finished"] = "已结束";
 ["Finished (with winner)"] = "已结束 (有获选者)";
 ["Finished (without winner)"] = "已结束 (无获选者)";
+["Forgot login name?"] = false;
+["Forgot password?"] = false;
 ["Free timing"] = "自定期限";
 ["Friday"] = "周五";
 ["Frozen"] = "底定期";
@@ -235,6 +245,7 @@ return {
 ["Half frozen at"] = "半底定于";
 ["Hello\n\n"] = "您好\n\n";
 ["Hello "] = "您好 ";
+["Hello,\n\n"] = false;
 ["Help #{id}"] = "说明文件 #{id}";
 ["Help for: #{text}"] = "#{text} 的说明文件";
 ["Hide"] = "隐藏";
@@ -295,6 +306,7 @@ return {
 ["Invited"] = "已被邀请";
 ["Issue"] = "议题";
 ["Issue ##{id}"] = "议题 ##{id}";
+["Issue ID"] = false;
 ["Issue accepted"] = "议题被接受";
 ["Issue canceled"] = "议题被取消";
 ["Issue delegation"] = "议题委任";
@@ -302,6 +314,7 @@ return {
 ["Issue finished"] = "议题已结束";
 ["Issue finished without voting"] = "议题未经表决而结束";
 ["Issue frozen"] = "议题已底定";
+["Issue has been canceled"] = false;
 ["Issue pad"] = "议题讨论版";
 ["Issue quorum"] = "议题法定门槛";
 ["Issue quorum denumerator"] = "议题法定门槛分母";
@@ -320,6 +333,8 @@ return {
 ["Locked?"] = "被封锁？";
 ["Login"] = "登入";
 ["Login name"] = "帐号";
+["Login name request"] = false;
+["Login-Name: "] = false;
 ["Logout"] = "登出";
 ["Logout successful"] = "成功登出";
 ["Manage filter"] = "管理筛选条件";
@@ -444,9 +459,11 @@ return {
 ["Please choose two versions of the draft to compare"] = "请选择兩个版本的草案以比较。";
 ["Please confirm your email address"] = "请确认您的电邮地址";
 ["Please confirm your email address by clicking the following link:\n\n"] = "请点击下列连结以确认您的电邮地址：\n\n";
+["Please decide for each delegation to confirm or to revoke it!"] = false;
 ["Please enter the email reset code you have received:"] = "请输入您所收到的电邮重设码：";
 ["Please enter the invite code you've received."] = "请输入您所收到的邀请码";
 ["Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."] = "请输入您的电邮地址。此地址将为您申请密码重设时自动通知的收件信箱。此电邮地址将不被公开。在注册完成后您将收到一封电邮內含认证此信箱的连结。";
+["Please enter your email address. You will receive an email with your login name."] = false;
 ["Please enter your login name. You will receive an email with a link to reset your password."] = "请输入您的帐号。您将收到一封附有重设密码连结的电子邮件。";
 ["Please enter your new password twice."] = "请输入您的新密码兩次：";
 ["Please select your preferred notification level"] = "请选择所偏好的通知等级";
@@ -466,6 +483,7 @@ return {
 ["Proceed with registration"] = "继续注册";
 ["Profession"] = "职業";
 ["Profile"] = "个人简介";
+["Public administrative notice:"] = false;
 ["Publish"] = "公开";
 ["Published"] = "已公开";
 ["Quorum"] = "法定门槛";
@@ -484,11 +502,11 @@ return {
 ["Remove initiator from initiative"] = "自提案移除发起者";
 ["Rendered"] = "已格式化";
 ["Repeat new password"] = "重复新密码";
+["Request email with login name"] = false;
 ["Request password reset link"] = "申请重设密码的连结";
 ["Resend activation email to '#{email}'"] = "重寄启用电邮至 '#{email}'";
 ["Reset code"] = "重设码";
 ["Reset code is invalid!"] = "重设码无效";
-["Reset link has been send for this member"] = "重设码已寄给该成员";
 ["Reset password"] = "重设密码";
 ["Revoke initiative"] = "撤销提案";
 ["Revoked at"] = "撤销于";
@@ -577,6 +595,8 @@ return {
 ["This initiative is already revoked"] = "此提案已撤销";
 ["This initiative is revoked"] = "此提案被撤销";
 ["This invite key is connected with the following information:"] = "此邀请码与下列资讯连结：";
+["This issue has been canceled by administrative intervention."] = false;
+["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = "此议题因未达 #{quorum} 的法定门槛而被取消。";
 ["This issue is already closed."] = "此议题已结案。";
 ["This issue is already frozen."] = "此议题已底定。";
@@ -701,6 +721,7 @@ return {
 ["Your password has been updated successfully"] = "密码更改成功";
 ["Your rating has been deleted"] = "您的评比已刪除";
 ["Your rating has been updated"] = "您的评比已更新";
+["Your request has been processed."] = false;
 ["Your suggestion has been added"] = "您的建议已加入";
 ["Your support has been added to this initiative"] = "您的支持已被加上此提案";
 ["Your support has been removed from this initiative"] = "您的支持已自此提案被移除";
@@ -720,6 +741,7 @@ return {
 ["[not displayed public]"] = "[不公开显示]";
 ["a bit unsatisfied"] = "略不满意";
 ["abandoned"] = "被停用";
+["action"] = false;
 ["activated"] = "被启用";
 ["and #{count} more initiatives"] = "之外 #{count} 个提案";
 ["and one more initiative"] = "之外一个提案";
@@ -727,6 +749,7 @@ return {
 ["at least #{count} approvals"] = "至少 #{count} 票肯定";
 ["at least #{count} approvals or abstentions"] = "至少 #{count} 票肯定或弃权";
 ["change discussion URL"] = "更改讨论网址";
+["confirm"] = false;
 ["day [interval ago]"] = false;
 ["day [interval time left]"] = false;
 ["day [interval]"] = false;
@@ -734,6 +757,7 @@ return {
 ["days [interval time left]"] = false;
 ["days [interval]"] = false;
 ["deactivated"] = "停用";
+["delegated to"] = false;
 ["delegates to"] = "委任给";
 ["delete<br /><br />"] = "刪除<br /><br />";
 ["disabled"] = "停用";
@@ -761,11 +785,14 @@ return {
 ["possibly instable result caused by multistage majority"] = "因多阶段多数可能导致不稳定结果";
 ["prohibit potentially instable results caused by multistage majorities"] = "防止因多阶段多数导致潜在不稳定结果";
 ["reverse beat path to status quo (including ties)"] = "循环性优先顺序导至现状 (包括平手)";
+["revoke"] = false;
 ["satisfied"] = "满意";
 ["should"] = "应当";
 ["should not"] = "不应";
+["the following login is connected to this email address:\n\n"] = false;
 ["to reset your password please click on the following link:\n\n"] = "欲重设您的密码请点击下列连结：\n\n";
 ["unit"] = "单位";
+["unit / area"] = false;
 ["until"] = "直到";
 ["variable"] = "不固定";
 ["with winner"] = "有获选者";

@@ -6,6 +6,10 @@ local opinion = Opinion:by_pk(member_id, suggestion_id)
 
 local suggestion = Suggestion:by_id(suggestion_id)
 
+local degree = param.get("degree", atom.number)
+local fulfilled = param.get("fulfilled", atom.boolean)
+
+
 if not suggestion then
   slot.put_into("error", _"This suggestion has been meanwhile deleted")
   return false
@@ -28,16 +32,13 @@ then
   return false
 end
 
-if param.get("delete") then
+if degree == 0 then
   if opinion then
     opinion:destroy()
   end
   --slot.put_into("notice", _"Your rating has been deleted")
   return
 end
-
-local degree = param.get("degree", atom.number)
-local fulfilled = param.get("fulfilled", atom.boolean)
 
 if degree ~= 0 and not app.session.member:has_voting_right_for_unit_id(suggestion.initiative.issue.area.unit_id) then
   error("access denied")

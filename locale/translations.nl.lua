@@ -33,6 +33,7 @@ return {
 ["API keys"] = "API-keys";
 ["Abandon global delegation for this area"] = "Geef globale delegatie voor dit themagebied op";
 ["Abandon unit and area delegations for this issue"] = "Geef dossier en themagebied delegaties voor dit onderwerp op";
+["Abandon unit delegation"] = false;
 ["Abandon unit delegation for this area"] = "Geef dossier delegatie voor dit themagebied op";
 ["About site"] = "Over website";
 ["Abstention"] = "Onthouding";
@@ -98,7 +99,9 @@ return {
 ["Can't send confirmation email"] = "De bevestigingsemail kan niet verzonden worden.";
 ["Cancel"] = "Afbreken";
 ["Cancel [nullify]"] = false;
-["Cancel password reset"] = "Wachtwoord reset afbreken";
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = "Uitnodiging weigeren afbreken";
 ["Cancel registration"] = "Registratie afbreken";
 ["Canceled"] = "Afgebroken";
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = "Afgebroken (tijdens de verificatie, wegens terugtrekking)";
 ["Canceled (issue not accepted)"] = "Afgebroken (onderwerp niet geaccepteerd)";
 ["Canceled (no initiative admitted)"] = "Afgebroken (geen initiatiefvoorstel is toegelaten)";
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = "Verander delegatie themagebied";
 ["Change email"] = "Verander het emailadres";
 ["Change email address"] = "Verander het emailadres";
@@ -122,6 +126,8 @@ return {
 ["Change your notification email address"] = "Verander het notificatie emailadres";
 ["Change your password"] = "Verander uw wachtwoord";
 ["Change your screen name"] = "Verander uw schermnaam";
+["Check delegations"] = false;
+["Check your delegations!"] = false;
 ["Choose initiator"] = "Kies een initiatiefnemer";
 ["Choose member"] = "Kies een deelnemer";
 ["Closed"] = "Gesloten";
@@ -137,7 +143,6 @@ return {
 ["Confirmed address"] = "Bevestigings emiladres";
 ["Contacts"] = "Contacten";
 ["Content"] = "Inhoud";
-["Counting of votes"] = "Tellen stemmen";
 ["Counting starts soon"] = "Het tellen van de stemmen begint spoedig";
 ["Create / edit area"] = "Themagebied creëren / aanpassen";
 ["Create / edit policy"] = "Procedure creëren / aanpassen";
@@ -148,8 +153,10 @@ return {
 ["Create new unit"] = "Nieuwe dossier creëren";
 ["Created at"] = "Gecreëerd op";
 ["Current name"] = "Huidige naam";
+["Current phase is already closed."] = false;
 ["Current status"] = "Huidige status";
 ["Current trustee"] = "De huidige gedelegeerde";
+["Current unit and area delegations need confirmation"] = false;
 ["Current votings in areas you are member of and issues you are interested in:"] = "Huidige stemmingen in themagebieden waar u lid van bent en onderwerpen waarin u geïnteresseerd bent:";
 ["Currently no API key is set."] = "Op dit moment is geen API key bekend.";
 ["Currently required"] = "Op dit moment nodig";
@@ -221,10 +228,13 @@ return {
 ["Everything"] = "Alles";
 ["External memberships"] = "Externe lidmaatschappen";
 ["External posts"] = "Externe posts";
+["Finish delegation check"] = false;
 ["Finish voting"] = "Stemming afgesloten";
 ["Finished"] = "Afgesloten";
 ["Finished (with winner)"] = "Afgesloten (met winnaar)";
 ["Finished (without winner)"] = "Afgesloten (zonder winnaar)";
+["Forgot login name?"] = false;
+["Forgot password?"] = false;
 ["Free timing"] = false;
 ["Friday"] = "Vrijdag";
 ["Frozen"] = "Bevroren";
@@ -235,6 +245,7 @@ return {
 ["Half frozen at"] = "Half bevroren op";
 ["Hello\n\n"] = "Hallo\n\n";
 ["Hello "] = "Hallo ";
+["Hello,\n\n"] = false;
 ["Help #{id}"] = "Help #{id}";
 ["Help for: #{text}"] = "Hulp voor: #{text}";
 ["Hide"] = "Verbergen";
@@ -295,6 +306,7 @@ return {
 ["Invited"] = "Uitgenodigd";
 ["Issue"] = "Onderwerp";
 ["Issue ##{id}"] = "Onderwerp ##{id}";
+["Issue ID"] = false;
 ["Issue accepted"] = "Onderwerp geaccpeteerd";
 ["Issue canceled"] = "Onderwerp afgebroken";
 ["Issue delegation"] = "Onderwerp-delegatie";
@@ -302,6 +314,7 @@ return {
 ["Issue finished"] = "Onderwerp afgesloten";
 ["Issue finished without voting"] = "Onderwerp zonder stemming afgesloten";
 ["Issue frozen"] = "Onderwerp bevroren";
+["Issue has been canceled"] = false;
 ["Issue pad"] = "Pad voor een onderwerp";
 ["Issue quorum"] = "Quorum onderwerp";
 ["Issue quorum denumerator"] = "Onderwerp quorum noemer";
@@ -320,6 +333,8 @@ return {
 ["Locked?"] = "Gesloten?";
 ["Login"] = "Login";
 ["Login name"] = "Login naam";
+["Login name request"] = false;
+["Login-Name: "] = false;
 ["Logout"] = "Logout";
 ["Logout successful"] = "Succesvol afgemeld";
 ["Manage filter"] = "Beheer filter";
@@ -444,9 +459,11 @@ return {
 ["Please choose two versions of the draft to compare"] = "Kiest alstublieft 2 verschillende versies van het ontwerp om te kunnen vergelijken.";
 ["Please confirm your email address"] = "Bevestig uw email adres";
 ["Please confirm your email address by clicking the following link:\n\n"] = "Bevestigd uw emailadres door op deze link te klikken:\n\n";
+["Please decide for each delegation to confirm or to revoke it!"] = false;
 ["Please enter the email reset code you have received:"] = "Vul de emailreset code in die u heeft ontvangen:";
 ["Please enter the invite code you've received."] = "Vul de uitnodigingscode in die u heeft ontvangen.";
 ["Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."] = "Vult u alstublieft uw emailadres in. Dit adres zal gebruikt worden voor automatische notificaties (wanneer u deze wilt ontvangen) en wanneer u uw wachtwoord kwijt bent. Dit adres zal niet gepubliseerd worden. Na registratie ontvangt u een email met een bevestigingslink.";
+["Please enter your email address. You will receive an email with your login name."] = false;
 ["Please enter your login name. You will receive an email with a link to reset your password."] = "Vul aub uw login naam in. U ontvangt een e-mail met een link om uw wachtwoord opnieuw in te stellen";
 ["Please enter your new password twice."] = "Vult u alstublieft 2 maal uw nieuwe wachtwoord in.:";
 ["Please select your preferred notification level"] = "Selecteer de gewenste kennisgeving niveau";
@@ -466,6 +483,7 @@ return {
 ["Proceed with registration"] = "Ga verder met registratie";
 ["Profession"] = "Beroep";
 ["Profile"] = "Profiel";
+["Public administrative notice:"] = false;
 ["Publish"] = "Publiceer";
 ["Published"] = "Gepubliceerd";
 ["Quorum"] = "Quorum";
@@ -484,11 +502,11 @@ return {
 ["Remove initiator from initiative"] = "Verwijder initiatiefnemer van initiatief";
 ["Rendered"] = "Geformatteerd";
 ["Repeat new password"] = "Herhaal het nieuwe wachtwoord";
+["Request email with login name"] = false;
 ["Request password reset link"] = "Verzoek om een wachtwoord rest link";
 ["Resend activation email to '#{email}'"] = "Verstuur de activatie code voor email '#{email}' opnieuw";
 ["Reset code"] = "Resetcode";
 ["Reset code is invalid!"] = "Resetcode is fout";
-["Reset link has been send for this member"] = "De reset link is naar deze deelnemer gestuurd";
 ["Reset password"] = "Reset wachtwoord";
 ["Revoke initiative"] = "Herroepen initiatief";
 ["Revoked at"] = "Herroepen omdat";
@@ -577,6 +595,8 @@ return {
 ["This initiative is already revoked"] = "Dit initiatief is al teruggetrokken";
 ["This initiative is revoked"] = "Dit initiatief is teruggetrokken";
 ["This invite key is connected with the following information:"] = "Deze uitnodigingscode is gekoppeld aan de volgende informatie:";
+["This issue has been canceled by administrative intervention."] = false;
+["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = "Dit onderwerp is geannuleerd, het heeft het quorum #{quorum} niet gehaald.";
 ["This issue is already closed."] = "Dit onderwerp is al afgesloten.";
 ["This issue is already frozen."] = "Dit onderwerp is al bevroren";
@@ -701,6 +721,7 @@ return {
 ["Your password has been updated successfully"] = "Uw wachtwoord is succesvol gewijzigd";
 ["Your rating has been deleted"] = "Uw beoordeling is verwijderd";
 ["Your rating has been updated"] = "Uw beoordeling is bijgewerkt";
+["Your request has been processed."] = false;
 ["Your suggestion has been added"] = "Uw suggestie is toegevoegd";
 ["Your support has been added to this initiative"] = "Uw steun is toegevoegd aan dit initiatief";
 ["Your support has been removed from this initiative"] = "Uw steun is verwijderd uit dit initiatief";
@@ -720,6 +741,7 @@ return {
 ["[not displayed public]"] = "[niet publiekelijk weergegeven]";
 ["a bit unsatisfied"] = "een beetje onbevredigend";
 ["abandoned"] = "verlaten";
+["action"] = false;
 ["activated"] = "geactiveerd";
 ["and #{count} more initiatives"] = "en #{count} verdere initiatieven";
 ["and one more initiative"] = "en nog één ander initiatief";
@@ -727,6 +749,7 @@ return {
 ["at least #{count} approvals"] = "minsten #{count} goedkeuringen";
 ["at least #{count} approvals or abstentions"] = "minstens #{count} goedkeuringen of onthoudingen";
 ["change discussion URL"] = "discussie URL veranderd";
+["confirm"] = false;
 ["day [interval ago]"] = false;
 ["day [interval time left]"] = false;
 ["day [interval]"] = false;
@@ -734,6 +757,7 @@ return {
 ["days [interval time left]"] = false;
 ["days [interval]"] = false;
 ["deactivated"] = "gedeactiveerd";
+["delegated to"] = false;
 ["delegates to"] = "gelegeerd aan";
 ["delete<br /><br />"] = "delete<br /><br />";
 ["disabled"] = "uitgeschakeld";
@@ -761,11 +785,14 @@ return {
 ["possibly instable result caused by multistage majority"] = "Mogelijke instabiele resultaten als gevolg van multi-level meerderheden";
 ["prohibit potentially instable results caused by multistage majorities"] = "Instabiele resultaten als gevolg van multi-level meerderheden verbieden";
 ["reverse beat path to status quo (including ties)"] = "achteruitweg naar de status quo (inclusief allianties)";
+["revoke"] = false;
 ["satisfied"] = "tevreden";
 ["should"] = "mag";
 ["should not"] = "mag niet";
+["the following login is connected to this email address:\n\n"] = false;
 ["to reset your password please click on the following link:\n\n"] = "om uw wachtwoord opnieuw in te stellen klikt u op de volgende link an:\n\n";
 ["unit"] = "dossier";
+["unit / area"] = false;
 ["until"] = "tot";
 ["variable"] = false;
 ["with winner"] = "met winnaar";

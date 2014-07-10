@@ -1,13 +1,20 @@
 local old_draft_id = param.get("old_draft_id", atom.integer)
 local new_draft_id = param.get("new_draft_id", atom.integer)
+local initiative_id = param.get("initiative_id", atom.number)
 
-if not old_draft_id or not new_draft_id then
-  slot.put( _"Please choose two versions of the draft to compare")
-  return
-end
-
-if old_draft_id == new_draft_id then
-  slot.put( _"Please choose two different versions of the draft to compare")
+if not old_draft_id 
+  or not new_draft_id 
+  or old_draft_id == new_draft_id
+then
+  slot.reset_all()
+  slot.select("error", function()
+    ui.tag{ content = _"Please choose two different versions of the draft to compare" }
+  end )
+  request.redirect{
+    module = "draft", view = "list", params = {
+      initiative_id = initiative_id
+    }
+  }
   return
 end
 
@@ -20,40 +27,46 @@ end
 local old_draft = Draft:by_id(old_draft_id)
 local new_draft = Draft:by_id(new_draft_id)
 
-execute.view{
-  module = "draft",
-  view = "_head",
-  params = { draft = new_draft}
+local initiative = new_draft.initiative
+
+if app.session.member then
+  initiative:load_everything_for_member_id(app.session.member_id)
+  initiative.issue:load_everything_for_member_id(app.session.member_id)
+end
+
+
+execute.view{ module = "issue", view = "_sidebar_state", params = {
+  initiative = initiative
+} }
+
+execute.view { 
+  module = "issue", view = "_sidebar_issue", 
+  params = {
+    issue = initiative.issue,
+    highlight_initiative_id = initiative.id
+  }
 }
 
-ui.title(_"Diff")
+execute.view {
+  module = "issue", view = "_sidebar_whatcanido",
+  params = { initiative = initiative }
+}
 
-if app.session.member_id and not new_draft.initiative.revoked then
-  local supporter = Supporter:new_selector():add_where{"member_id = ?", app.session.member_id}:count()
-  if supporter then
-    ui.container{
-      attr = { class = "draft_updated_info" },
-      content = function()
-        slot.put(_"The draft of this initiative has been updated!")
-        slot.put(" ")
-        ui.link{
-          text   = _"Refresh support to current draft",
-          module = "initiative",
-          action = "add_support",
-          id     = new_draft.initiative.id,
-          routing = {
-            default = {
-              mode = "redirect",
-              module = "initiative",
-              view = "show",
-              id = new_draft.initiative.id
-            }
-          }
-        }
-      end
-    }
-  end
-end
+execute.view { 
+  module = "issue", view = "_sidebar_members", params = {
+    issue = initiative.issue, initiative = initiative
+  }
+}
+
+
+
+execute.view {
+  module = "issue", view = "_head", params = {
+    issue = initiative.issue
+  }
+}
+
+
 
 local old_draft_content = string.gsub(string.gsub(old_draft.content, "\n", " ###ENTER###\n"), " ", "\n")
 local new_draft_content = string.gsub(string.gsub(new_draft.content, "\n", " ###ENTER###\n"), " ", "\n")
@@ -111,17 +124,87 @@ local function process_line(line)
   end
 end
 
-if not status then
-  ui.field.text{ value = _"The drafts do not differ" }
-else
-  ui.container{
-    tag = "div",
-    attr = { class = "diff" },
-    content = function()
-      output = output:gsub("[^\n\r]+", function(line)
-        process_line(line)
-      end)
-    end
-  }
-end 
+ui.section( function()
+  ui.sectionHead( function()
+    ui.link{
+      module = "initiative", view = "show", id = initiative.id,
+      content = function ()
+        ui.heading { 
+          level = 1,
+          content = initiative.display_name
+        }
+      end
+    }
+    ui.heading{ level = 2, content = _("Comparision of revisions #{id1} and #{id2}", {
+      id1 = old_draft.id,
+      id2 = new_draft.id 
+    } ) }
+  end )
 
+  if app.session.member_id and not new_draft.initiative.revoked then
+    local supporter = app.session.member:get_reference_selector("supporters")
+      :add_where{ "initiative_id = ?", new_draft.initiative_id }
+      :optional_object_mode()
+      :exec()
+    if supporter and supporter.draft_id ~= new_draft.id then
+      ui.sectionRow("draft_updated_info", function()
+        ui.container{ 
+          attr = { class = "info" },
+          content = _"The draft of this initiative has been updated!"
+        }
+        slot.put(" ")
+        ui.link{
+          text   = _"refresh my support",
+          module = "initiative",
+          action = "add_support",
+          id     = new_draft.initiative.id,
+          params = { draft_id = new_draft.id },
+          routing = {
+            default = {
+              mode = "redirect",
+              module = "initiative",
+              view = "show",
+              id = new_draft.initiative.id
+            }
+          }
+        }
+
+        slot.put(" &middot; ")
+         
+        ui.link{
+          text   = _"remove my support",
+          module = "initiative",
+          action = "remove_support",
+          id     = new_draft.initiative.id,
+          routing = {
+            default = {
+              mode = "redirect",
+              module = "initiative",
+              view = "show",
+              id = new_draft.initiative.id
+            }
+          }
+        }        
+        
+      end )
+    end
+  end
+
+  ui.sectionRow( function()
+
+    if not status then
+      ui.field.text{ value = _"The drafts do not differ" }
+    else
+      ui.container{
+        tag = "div",
+        attr = { class = "diff" },
+        content = function()
+          output = output:gsub("[^\n\r]+", function(line)
+            process_line(line)
+          end)
+        end
+      }
+    end 
+
+  end )
+end )

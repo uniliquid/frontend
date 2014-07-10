@@ -142,23 +142,29 @@ Issue:add_reference{
     if #ids == 0 then
       return sub_selector:empty_list_mode()
     end
-    sub_selector:from("issue")
-    sub_selector:add_field("issue.id", "issue_id")
-    sub_selector:add_field{ '(delegation_info(?, null, null, issue.id, ?)).*', options.member_id, options.trustee_id }
-    sub_selector:add_where{ 'issue.id IN ($)', ids }
+    sub_selector:from ( "issue" )
+    sub_selector:add_field ( "issue.id", "issue_id" )
+    sub_selector:add_field { '(delegation_info(?, null, null, issue.id, ?)).*', options.member_id, options.trustee_id }
+    sub_selector:add_where { 'issue.id IN ($)', ids }
 
     local selector = Issue:get_db_conn():new_selector()
-    selector:add_from("issue")
-    selector:join(sub_selector, "delegation_info", "delegation_info.issue_id = issue.id")
-    selector:left_join("member", "first_trustee", "first_trustee.id = delegation_info.first_trustee_id")
-    selector:left_join("member", "other_trustee", "other_trustee.id = delegation_info.other_trustee_id")
-    selector:add_field("delegation_info.*")
-    selector:add_field("first_trustee.name", "first_trustee_name")
-    selector:add_field("other_trustee.name", "other_trustee_name")
-    selector:left_join("direct_voter", nil, { "direct_voter.issue_id = issue.id AND direct_voter.member_id = ?", options.member_id })
-    selector:add_field("direct_voter.member_id NOTNULL", "direct_voted")
-    selector:left_join("non_voter", nil, { "non_voter.issue_id = issue.id AND non_voter.member_id = ?", options.member_id })
-    selector:add_field("non_voter.member_id NOTNULL", "non_voter")
+    selector:add_from ( "issue" )
+    selector:join(sub_selector, "delegation_info", "delegation_info.issue_id = issue.id" )
+    selector:left_join ( "member", "first_trustee", "first_trustee.id = delegation_info.first_trustee_id" )
+    selector:left_join ( "member", "other_trustee", "other_trustee.id = delegation_info.other_trustee_id" )
+    selector:add_field ( "delegation_info.*" )
+    selector:add_field ( "first_trustee.name", "first_trustee_name" )
+    selector:add_field ( "other_trustee.name", "other_trustee_name" )
+    selector:left_join ( "direct_voter", nil, { "direct_voter.issue_id = issue.id AND direct_voter.member_id = ?", options.member_id })
+    selector:add_field ( "direct_voter.member_id NOTNULL", "direct_voted")
+    selector:left_join ( "non_voter", nil, { "non_voter.issue_id = issue.id AND non_voter.member_id = ?", options.member_id })
+    selector:add_field ( "non_voter.member_id NOTNULL", "non_voter" )
+    selector:left_join ( "direct_interest_snapshot", nil, { [[
+      direct_interest_snapshot.issue_id = issue.id AND 
+      direct_interest_snapshot.event = issue.latest_snapshot_event AND 
+      direct_interest_snapshot.member_id = ?
+    ]], options.member_id }) 
+    selector:add_field ( "direct_interest_snapshot.weight", "weight" )
     return selector
   end
 }
@@ -189,18 +195,19 @@ end
 
 function Issue:get_state_name_for_state(value)
   local state_name_table = {
-    admission = _"New",
+    admission = _"Admission",
     discussion = _"Discussion",
-    verification = _"Frozen",
+    verification = _"Verification",
     voting = _"Voting",
-    canceled_revoked_before_accepted = _"Canceled (before accepted due to revocation)",
-    canceled_issue_not_accepted = _"Canceled (issue not accepted)",
-    canceled_after_revocation_during_discussion = _"Canceled (during discussion due to revocation)",
-    canceled_after_revocation_during_verification = _"Canceled (during verification due to revocation)",
+    canceled_revoked_before_accepted = _"Revoked (during admission)",
+    canceled_issue_not_accepted = _"Failed 1st quorum",
+    canceled_after_revocation_during_discussion = _"Revoked (during discussion)",
+    canceled_after_revocation_during_verification = _"Revoked (during verification)",
+    canceled_by_admin = _"Canceled by administrative intervention",
     calculation = _"Calculation",
-    canceled_no_initiative_admitted = _"Canceled (no initiative admitted)",
-    finished_without_winner = _"Finished (without winner)",
-    finished_with_winner = _"Finished (with winner)"
+    canceled_no_initiative_admitted = _"All initiatives failed 2nd quorum",
+    finished_without_winner = _"Disapproved",
+    finished_with_winner = _"Finished with winner",
   }
   return state_name_table[value] or value or ''
 end
@@ -232,6 +239,7 @@ function Issue:get_search_selector(search_string)
     :add_group_by('"issue"."discussion_time"')
     :add_group_by('"issue"."verification_time"')
     :add_group_by('"issue"."voting_time"')
+    :add_group_by('"issue"."admin_notice"')
     --:set_distinct()
 end
 
@@ -272,4 +280,18 @@ end
 
 function Issue.object_get:etherpad_url()
   return config.etherpad.base_url .. "p/" .. config.etherpad.group_id .. "$Issue" .. self.id
+end
+
+function Issue.object_get:name()
+  return self.policy.name .. " #" .. self.id
+end
+
+function Issue.object_get:state_time_text()
+  if self.closed then
+    return _("#{closed_ago} ago", { closed_ago = self.closed_ago })
+  elseif string.sub(self.state_time_left, 1, 2) ~= "-" then
+    return _("ends soon", { state_time_left = self.state_time_left })
+  else
+    return _("ends in #{state_time_left}", { state_time_left = self.state_time_left })
+  end
 end

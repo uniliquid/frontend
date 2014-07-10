@@ -3,17 +3,21 @@ if cancel then return end
 
 local issue = Issue:new_selector():add_where{ "id = ?", param.get("issue_id", atom.integer) }:for_share():single_object_mode():exec()
 
-local preview = param.get("preview") and true or false
+local preview = (param.get("preview") or param.get("edit")) and true or false
 
 if not app.session.member:has_voting_right_for_unit_id(issue.area.unit_id) then
   error("access denied")
 end
 
-local update_comment = param.get("update_comment") == "1" and true or false
+local update_comment = param.get("update_comment") and true or false
 
 if issue.state ~= "voting" and not issue.closed then
   slot.put_into("error", _"Voting has not started yet.")
   return false
+end
+
+if (issue.phase_finished or issue.closed) and preview then
+  return
 end
 
 if issue.phase_finished or issue.closed and not update_comment then
@@ -66,7 +70,22 @@ if not move_down and not move_up then
       end
     end
     
-    local formatting_engine = param.get("formatting_engine")
+    local formatting_engine
+    if config.enforce_formatting_engine then
+      formatting_engine = config.enforce_formatting_engine
+    else
+      formatting_engine = param.get("formatting_engine")
+      local formatting_engine_valid = false
+      for i, fe in ipairs(config.formatting_engines) do
+        if formatting_engine == fe.id then
+          formatting_engine_valid = true
+        end
+      end
+      if not formatting_engine_valid then
+        error("invalid formatting engine!")
+      end
+    end
+
     local comment = param.get("comment")
 
     if comment ~= direct_voter.comment then

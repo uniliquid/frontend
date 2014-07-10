@@ -39,7 +39,7 @@ if not secret then
     }
   end
 
-  slot.put_into("notice", _"Reset link has been send for this member")
+  slot.put_into("notice", _"Your request has been processed.")
 
 else
   local member = Member:new_selector()

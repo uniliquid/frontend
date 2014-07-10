@@ -1,6 +1,6 @@
 ui.tag{ tag = "ul", content = function()
 
-  if app.session.member_id then
+  if app.session.member_id and not app.session.needs_delegation_check then
     ui.tag{ tag = "li", content = function()
 
       ui.link{
@@ -55,7 +55,9 @@ ui.tag{ tag = "ul", content = function()
       }
 
     end }
-    
+  end
+  
+  if app.session.member_id then
     ui.tag{ tag = "li", content = function()
 
       ui.link{

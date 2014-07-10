@@ -70,4 +70,25 @@ function Delegation:selector_for_broken(member_id)
     :add_where{"delegation.truster_id = ?", member_id}
     :add_where{"member.active = 'f' OR (member.last_activity IS NULL OR age(member.last_activity) > ?::interval)", config.delegation_warning_time }
 end
+
+function Delegation:delegations_to_check_for_member_id(member_id, for_update)
+
+  Member:new_selector():add_where({ "id = ?", member_id }):for_update():exec()
   
+  local selector =  Delegation:new_selector()
+    :add_field("member.name", "member_name")
+    :add_field("unit.name", "unit_name")
+    :add_field("area.name", "area_name")
+    :left_join("area", nil, "area.active AND area.id = delegation.area_id")
+    :join("unit", nil, "unit.active AND (unit.id = delegation.unit_id OR unit.id = area.unit_id)")
+    :left_join("member", nil, "member.id = delegation.trustee_id")
+    :add_where({ "delegation.truster_id = ?", member_id })
+    :add_order_by("unit.name, area.name NULLS FIRST")
+    
+  if for_update then
+    selector:for_update_of("delegation")
+  end
+    
+  return selector:exec()
+  
+end 

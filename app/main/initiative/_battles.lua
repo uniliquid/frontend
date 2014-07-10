@@ -19,6 +19,7 @@ local number_of_initiatives = Initiative:new_selector()
   :count()
 
 if number_of_initiatives > 1 then
+  ui.heading { level = 1, content = _"Preference comparison" }
   ui.list{
     records = battled_initiatives,
     columns = {

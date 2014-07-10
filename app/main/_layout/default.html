@@ -1,67 +1,276 @@
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width" />
-    <title> <!-- WEBMCP SLOTNODIV html_title --></title>
-    <link rel="stylesheet" type="text/css" media="screen" href="__BASEURL__/static/trace.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="__BASEURL__/static/gregor.js/gregor.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="<!-- WEBMCP SLOTNODIV stylesheet_url -->" />
-    <!-- WEBMCP SLOTNODIV html_head -->
-    <script type="text/javascript">jsFail = true;</script>
-    <![if !IE]>
-      <script type="text/javascript">jsFail = false;</script>
-    <![endif]>
-    <script type="text/javascript" src="__BASEURL__/static/js/jsprotect.js"></script>
-    <script type="text/javascript" src="__BASEURL__/static/js/partialload.js"></script>
-    <script type="text/javascript">var ui_tabs_active = {};</script>
-  </head>
-  <body>
-    <div class="topbar">
-      <div class="topbar_content">
-        <div class="navigation" id="navigation">
-          <!-- WEBMCP SLOT navigation -->
-        </div>
-        <div class="navigation_right" id="navigation_right">
-          <!-- WEBMCP SLOT navigation_right -->
-        </div>
-        <div class="help_hidden" id="help_hidden">
-          <!-- WEBMCP SLOT help_hidden -->
-        </div>
-        <br style="clear: both;" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title><!-- WEBMCP SLOTNODIV html_title --></title>
+  <link rel="stylesheet" type="text/css" media="screen" href="__BASEURL__/static/gregor.js/gregor.css" />
+  <link rel="stylesheet" type="text/css" href="__BASEURL__/static/lf3.css" />
+  <!-- WEBMCP SLOTNODIV html_head -->
+  <script src="__BASEURL__/static/js/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript">jsFail = true;</script>
+  <![if !IE]>
+    <script type="text/javascript">jsFail = false;</script>
+  <![endif]>
+  <script type="text/javascript" src="__BASEURL__/static/js/jsprotect.js"></script>
+  <script type="text/javascript" src="__BASEURL__/static/js/partialload.js"></script>
+  <script type="text/javascript">var ui_tabs_active = {};</script>
+</head>
+<body style="">
+<div class="head_outer">
+  <div class="head">
+    <div class="nav">
+      <!--WEBMCP SLOTNODIV navigation -->
+      <!--WEBMCP SLOTNODIV navigation_right -->
+      <!--WEBMCP SLOTNODIV notification -->
+    </div>
+
+    <a class="logo" href="__BASEURL__/">
+      <span class="liquid">Liquid</span><span class="feedback">Feedback</span>
+      <span class="instanceName"><!-- WEBMCP SLOTNODIV instance_name --></span>
+    </a>
+
+    
+  </div>
+</div>
+
+<div class="page">
+  <div class="layout_notice" id="layout_notice" onclick="document.getElementById('layout_notice').style.display='none';">
+    <!-- WEBMCP SLOT notice -->
+  </div>
+  
+  <div class="layout_warning" id="layout_warning" onclick="document.getElementById('layout_warning').style.display='none';">
+    <!-- WEBMCP SLOT warning -->
+  </div>
+  
+  <div class="layout_error" id="layout_error" onclick="document.getElementById('layout_error').style.display='none';">
+    <!-- WEBMCP SLOT error -->
+  </div>
+
+  <div class="layout_motd" id="layout_motd" onclick="document.getElementById('layout_motd').style.display='none';">
+    <!-- WEBMCP SLOT motd -->
+  </div>
+
+  <div class="title_outer">
+    <!-- WEBMCP SLOT title -->
+  </div>
+  
+  <!-- WEBMCP SLOT tabs -->
+
+  <!-- WEBMCP SLOTNODIV actions -->
+  
+  <div id="swiper_tabs" class="swiper_tabs" style="display: none;">
+<!--    <div><a id="tab-0" href="#" onclick="slider.to(0); return false;"><img src="__BASEURL__/static/icons/16/chart_organisation.png" /></a></div>-->
+    <div><a id="tab-0" href="#" onclick="slider.to(0); return false;"><img src="__BASEURL__/static/icons/16/text_list_bullets.png" width="32" height="32" /></a></div>
+    <div><a id="tab-1" href="#" onclick="slider.to(1); return false;"><img src="__BASEURL__/static/icons/48/info.png" width="32" height="32" /></a></div>
+    <div><a id="tab-2" href="#" onclick="slider.to(2); return false;"><img src="__BASEURL__/static/icons/16/group.png" width="32" height="32" /></a></div>
+  </div>
+  
+  <div id="swiper_info"><!-- WEBMCP SLOTNODIV swiper_info --></div>
+  <div id="swiper" class="swiper" style="position: absolute; width: 100%;">
+    <div id="swiper_wrap" class="swiper_wrap">
+    </div>
+  </div>
+  
+  <div class="content">
+    <div class="sidebar">
+      <!-- WEBMCP SLOTNODIV sidebar -->
+    </div>
+
+    <div class="main_outer">
+      <!-- WEBMCP SLOTNODIV slideshow -->
+      <div class="main">
+        <!-- WEBMCP SLOTNODIV default -->
+        <!-- WEBMCP SLOTNODIV extra -->
       </div>
     </div>
-    <div class="page">
-      <div class="page_head" id="head">
-        <!-- WEBMCP SLOT head -->
-      </div>
-      <div class="layout_notice" id="layout_notice" onclick="document.getElementById('layout_notice').style.display='none';">
-        <!-- WEBMCP SLOT notice -->
-      </div>
-      <div class="layout_warning" id="layout_warning" onclick="document.getElementById('layout_warning').style.display='none';">
-        <!-- WEBMCP SLOT warning -->
-      </div>
-      <div class="layout_error" id="layout_error" onclick="document.getElementById('layout_error').style.display='none';">
-        <!-- WEBMCP SLOT error -->
-      </div>
-      <div class="main" id="default">
-        <!-- WEBMCP SLOT default -->
-      </div>
-      <br style="clear: both;" />
-    </div>
-    <div class="footer" id="footer">
-      <!-- WEBMCP SLOT footer -->
-    </div>
-    <!-- WEBMCP SLOT trace_button -->
+  </div>
+  <br style="clear: both;" />
+  <div class="footer">
+    <!-- WEBMCP SLOTNODIV footer -->
+  </div>
+</div>
+
+  <div id="trace">
+    <!-- WEBMCP SLOTNODIV trace_button -->
     <div id="trace_content" style="display: none;">
       <tt id="system_error"><!-- WEBMCP SLOT system_error --></tt>
-      <div id="trace">&nbsp;</div><hr />
+      <h1>System trace (for computer programmers purposes)</h1>
+      <br />
       <!-- WEBMCP SLOT trace -->
       <div class="trace_close" onclick="document.getElementById('trace_show').style.display='block';document.getElementById('trace_content').style.display='none';">
         close
       </div>
     </div>
-    <script type="text/javascript">
-    <!-- WEBMCP SLOTNODIV custom_script -->
-    </script>
-  </body>
+  </div>
+  <script>
+    $(".trace_view > .trace_list").hide();
+    $(".trace_head").click(function() {
+      var el = this.nextSibling
+      if (el) $(el).toggle();
+    });
+  </script>
+  
+  <!-- WEBMCP SLOTNODIV script -->
+  
+  <script>
+  
+    var slider;
+  
+    function initSlider () {
+    
+      var els = [
+        $( '.main, .extra' ),
+        $( '.tab-notification, .tab-whatcanido' ),
+        $( '.tab-members' )
+      ];
+      
+      var sidebarFound = false;
+      for ( i = 1; i < els.length; i++) {
+        if (els[i].length > 0) sidebarFound = true;
+      }
+      
+      if (sidebarFound) $("#swiper_tabs").show();
+
+      var elsCount = 3;
+      
+      var slidePos;
+
+      function slideTo ( pos ) {
+        if ( typeof ( slidePos ) != "undefined" ) {
+          els[ slidePos ].hide();
+          $ ( "#tab-" + slidePos ).removeClass ( "active" );
+        }
+        slidePos = pos;
+        els[ slidePos ].show();
+        $ ( "#tab-" + slidePos ).addClass ( "active" );
+        if (pos == 1) {
+          $("#swiper_info").hide();
+        }
+      }
+      
+      function slideNext () {
+        var pos = slidePos + 1;
+        if ( pos > elsCount - 1 ) {
+          pos = elsCount - 1;
+        } else {
+          $( "#swiper").css("left", "400px");
+          $( "#swiper").animate({ "left": "0px" }, 200);
+        }
+        slideTo ( pos );
+      }
+      
+      function slidePrev () {
+        var pos = slidePos - 1;
+        if ( pos < 0 ) {
+          pos = 0;
+        } else {
+          $( "#swiper").css("left", "-400px");
+          $( "#swiper").animate({ "left": "0px" }, 200);
+        }
+        slideTo ( pos );
+      }
+      
+      function exit() {
+        for ( i = 0; i < els.length; i++) {
+          els[i].show();
+        }
+        $( ".main_outer" ).append ( $( ".main" ).detach() );
+        $( ".extra_outer" ).append ( $( ".extra" ).detach() );
+        $( ".sidebar" ).append ( $(els[1]).detach() );
+        $( ".sidebar" ).append ( $(els[2]).detach() );
+        $( ".page" ).append ( $('.footer') );
+        $( "body" ).append ( $('#trace') );
+
+      }
+      
+      var touchStartX;
+      var touchStartY;
+      var isScrolling;
+      
+      function touchDown ( e ) {
+        touchStartX = e.originalEvent.touches[0].pageX;
+        touchStartY = e.originalEvent.touches[0].pageY;
+        isScrolling = undefined;
+      }
+      
+      function touchMove ( e ) {
+        var diffX = touchStartX - e.originalEvent.changedTouches[0].pageX;
+        var diffY = touchStartY - e.originalEvent.changedTouches[0].pageY;
+        if ( typeof( isScrolling ) == 'undefined' ) {
+          isScrolling = Math.abs ( diffY ) > Math.abs ( diffX );
+        }
+        if ( ! isScrolling ) {
+          $( "#swiper").css("left", -diffX + "px");
+          e.preventDefault();
+        }
+      }
+      
+      function touchUp ( e ) {
+        var diffX = touchStartX - e.originalEvent.changedTouches[0].pageX;
+        var diffY = touchStartY - e.originalEvent.changedTouches[0].pageY;
+        
+        if ( isScrolling ) {
+          // vertical scrolling
+          return;
+        }
+        
+        if ( Math.abs ( diffX ) < 100 ) {
+          // go back not enough
+          $( "#swiper").animate({
+            "left": "0px",
+          }, 200);
+          return;
+        }
+        var direction = diffX < 0 ? "right" : "left";
+
+        if ( direction == "left" ) {
+          slideNext();
+        } else {
+          slidePrev();
+        }
+      }
+
+      for ( i = 0; i < els.length; i++) {
+        var el = els[i].detach();
+        el.hide();
+        $('#swiper_wrap').append ( el ) ;
+      }
+      
+      $('#swiper_wrap').append ( $('.footer') );
+      $('#swiper_wrap').append ( $('#trace') );
+      slideTo ( 0 );
+      
+      if ( 'ontouchstart' in document.documentElement ) {
+        $( "body" ).on( "touchstart", touchDown );
+        $( "body" ).on( "touchmove", touchMove );
+        $( "body" ).on( "touchend",   touchUp );
+      }
+      
+      return {
+        to: slideTo,
+        exit: exit
+      }
+      
+    }
+    
+    function resizeHandler() {
+      if ( $(window).width() < 768 ) {
+        if ( typeof ( slider ) == "undefined" ) {
+          slider = initSlider();
+        }
+      } else {
+        if ( typeof ( slider ) != "undefined" ) {
+          slider.exit();
+          slider = undefined;
+        }
+      }
+      
+    }
+    
+    $( window ).resize( resizeHandler );
+    resizeHandler();
+    
+  </script>
+
+</body>
 </html>

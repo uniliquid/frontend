@@ -2,6 +2,13 @@ local area = Area:by_id(param.get_id()) or Area:new()
 
 param.update(area, "unit_id", "name", "description", "active")
 
+if #area.name < 1 then
+  slot.select("error", function()
+    ui.tag{ content = _"Please choose an area name" }
+  end)
+  return false
+end
+
 area:save()
 
 param.update_relationship{

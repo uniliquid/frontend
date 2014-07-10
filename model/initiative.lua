@@ -10,6 +10,14 @@ Initiative:add_reference{
 }
 
 Initiative:add_reference{
+  mode          = 'm1',
+  to            = "Member",
+  this_key      = 'revoked_by_member_id',
+  that_key      = 'id',
+  ref           = 'revoked_by_member',
+}
+
+Initiative:add_reference{
   mode          = '1m',
   to            = "Draft",
   this_key      = 'id',
@@ -26,6 +34,7 @@ Initiative:add_reference{
   that_key      = 'initiative_id',
   ref           = 'suggestions',
   back_ref      = 'initiative',
+  default_order = '"proportional_order" NULLS LAST, id'
 }
 
 Initiative:add_reference{
@@ -223,6 +232,61 @@ function Initiative:selector_for_updated_drafts(member_id)
     :add_where("initiative.revoked ISNULL")
 end
 
+function Initiative:getSpecialSelector( args )
+  local selector = Initiative:new_selector()
+  selector:join( "issue", nil, "issue.id = initiative.issue_id" )
+  selector:join( "area", nil, "area.id = issue.area_id" )
+  if args.area_id then
+    selector:add_where{ "area.id = ?", args.area_id }
+  elseif args.unit_id then
+    selector:add_where{ "area.unit_id = ?", args.unit_id }
+  end
+  selector:limit( 1 )
+  selector:optional_object_mode()
+  return selector
+end
+
+function Initiative:getLastWinner( args )
+  local selector = Initiative:getSpecialSelector( args )
+  selector:add_where( "issue.state = 'finished_with_winner'" )
+  selector:add_order_by( "issue.closed DESC, id DESC" )
+  return selector:exec()
+end
+
+function Initiative:getLastLoser( args )
+  local selector = Initiative:getSpecialSelector( args )
+  selector:add_where( "issue.state = 'finished_without_winner'" )
+  selector:add_order_by( "issue.closed DESC, id DESC" )
+  return selector:exec()
+end
+
+function Initiative:getNextEndingVoting( args )
+  local selector = Initiative:getSpecialSelector( args )
+  selector:add_where( "issue.state = 'voting'" )
+  selector:add_order_by( "issue.fully_frozen + issue.verification_time DESC, id DESC" )
+  return selector:exec()
+end
+
+function Initiative:getNextEndingVerification( args )
+  local selector = Initiative:getSpecialSelector( args )
+  selector:add_where( "issue.state = 'verification'" )
+  selector:add_order_by( "issue.half_frozen + issue.verification_time DESC, id DESC" )
+  return selector:exec()
+end
+
+function Initiative:getNextEndingDiscussion( args )
+  local selector = Initiative:getSpecialSelector( args )
+  selector:add_where( "issue.state = 'discussion'" )
+  selector:add_order_by( "issue.accepted + issue.discussion_time DESC, id DESC" )
+  return selector:exec()
+end
+
+function Initiative:getBestInAdmission( args )
+  local selector = Initiative:getSpecialSelector( args )
+  selector:add_where( "issue.state = 'admission'" )
+  selector:add_order_by( "issue.created + issue.admission_time DESC, id DESC" )
+  return selector:exec()
+end
 
 function Initiative.object_get:current_draft()
   return Draft:new_selector()
@@ -240,6 +304,10 @@ function Initiative.object_get:shortened_name()
   return name
 end
 
+function Initiative.object_get:display_name()
+  return "i" .. self.id .. ": " .. self.name
+end
+
 function Initiative.object_get:initiator_names()
   local members = Member:new_selector()
     :join("initiator", nil, "initiator.member_id = member.id")
@@ -254,3 +322,8 @@ function Initiative.object_get:initiator_names()
   return member_names
 end
 
+function Initiative.object_get:potential_supporter_count()
+  if self.supporter_count and self.satisfied_supporter_count then
+    return self.supporter_count - self.satisfied_supporter_count
+  end
+end

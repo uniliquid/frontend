@@ -124,7 +124,7 @@ Member:add_reference{
   that_key      = 'truster_id',
   ref           = 'outgoing_delegations',
   back_ref      = 'truster',
-  default_order = '"id"'
+--  default_order = '"id"'
 }
 
 Member:add_reference{
@@ -134,7 +134,7 @@ Member:add_reference{
   that_key      = 'trustee_id',
   ref           = 'incoming_delegations',
   back_ref      = 'trustee',
-  default_order = '"id"'
+--  default_order = '"id"'
 }
 
 Member:add_reference{
@@ -373,6 +373,7 @@ end
 
 function Member:by_login_and_password(login, password)
   local selector = self:new_selector()
+  selector:add_field({ "now() > COALESCE(last_delegation_check, activated) + ?::interval", config.check_delegations_interval_hard }, "needs_delegation_check_hard")
   selector:add_where{'"login" = ?', login }
   selector:add_where('NOT "locked"')
   selector:optional_object_mode()

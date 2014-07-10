@@ -49,14 +49,30 @@ function do_etherpad_auth(member)
     name = "sessionID",
     value = etherpad_sesion_id
   }
-
 end
-
 
 if member then
   member.last_login = "now"
-  member.last_activity = "now"
-  member.active = true
+  
+  local delegations = Delegation:delegations_to_check_for_member_id(member.id)
+  
+  if config.check_delegations_interval_hard 
+      and member.needs_delegation_check_hard
+      and #delegations > 0 then
+        
+    app.session.needs_delegation_check = true
+    
+  else
+    
+    if #delegations == 0 then
+      member.last_delegation_check = "now"
+    end
+    
+    member.last_activity = "now"
+    member.active = true
+    
+  end
+  
   if member.lang == nil then
     member.lang = app.session.lang
   else
@@ -74,6 +90,18 @@ if member then
   if config.etherpad then
     do_etherpad_auth(member)
   end
+  slot.select("script", function()
+    ui.script{ script = [[
+      $('#swiper_info').addClass('active');
+    ]] }
+  end)
+  slot.select("swiper_info", function()
+    ui.tag { content = _"select tabs" }
+    slot.put(" &uparrow; ")
+    ui.tag { content = _"or swipe" }
+    slot.put(" &leftarrow;<br />")
+    ui.tag { content = _"to show more info and learn what you can do" }
+  end )
 else
   slot.select("error", function()
     ui.tag{ content = _'Invalid login name or password!' }

@@ -1,93 +1,86 @@
-slot.select('navigation', function()
+slot.select ( 'instance_name', function ()
+  slot.put ( encode.html ( config.instance_name ) )
+end)
 
-  ui.link{
-    content = function()
-      ui.tag{ attr = { class = "logo_liquidfeedback" }, content = _"LiquidFeedback" }
-      slot.put(" &middot; ")
-      ui.tag{ content = config.instance_name }
-    end,
-    module = 'index',
-    view   = 'index'
-  }
   
-  if app.session:has_access("anonymous") then
+slot.select ( 'navigation_right', function ()
 
-    ui.link{
-      content = _"Search",
-      module = 'index',
-      view   = 'search'
-    }
+  if app.session:has_access ("anonymous") and not (app.session.needs_delegation_check) then
   
-    if app.session.member == nil then
-      ui.link{
-        text   = _"Login",
-        module = 'index',
-        view   = 'login',
-        params = {
-          redirect_module = request.get_module(),
-          redirect_view = request.get_view(),
-          redirect_id = param.get_id()
+    ui.form {
+      attr = { class = "inline search" },
+      method = "get",
+      module = "index", view   = "search",
+      content = function ()
+        
+        ui.field.text {
+          attr = { placeholder = "search" },
+          name = "q"
         }
-      }
-    end
+        
+      end 
+    }
+
+    ui.link {
+      attr = { class = "searchLink" },
+      module = "index", view = "search", content = function ()
+        ui.image { static = "icons/16/magnifier.png" }
+      end
+    }
     
   end
-
+  
   if app.session.member == nil then
-    ui.link{
+    
+    slot.put ( " " )
+    
+    ui.link {
+      text   = _"Login",
+      module = 'index',
+      view   = 'login',
+      params = {
+        redirect_module = request.get_module(),
+        redirect_view = request.get_view(),
+        redirect_id = param.get_id()
+      }
+    }
+    
+    slot.put ( " " )
+    
+    ui.link {
       text   = _"Registration",
       module = 'index',
       view   = 'register'
     }
-    ui.link{
-      text   = _"Reset password",
-      module = 'index',
-      view   = 'reset_password'
-    }
+
   end
+  
+  
+  if app.session.member then
+  
+    slot.put ( " " )
+    
+    ui.tag { attr = { id = "member_menu" }, content = function()
+      util.micro_avatar(app.session.member)
+    end }
+    
+  end -- if app.session.member
+    
 end)
 
-
-slot.select('navigation_right', function()
-  ui.tag{ 
-    tag = "ul",
-    attr = { id = "member_menu" },
-    content = function()
-      ui.tag{ 
-        tag = "li",
-        content = function()
-          ui.link{
-            module = "index",
-            view = "menu",
-            content = function()
-              if app.session.member_id then
-                execute.view{
-                  module = "member_image",
-                  view = "_show",
-                  params = {
-                    member = app.session.member,
-                    image_type = "avatar",
-                    show_dummy = true,
-                    class = "micro_avatar",
-                  }
-                }
-                ui.tag{ content = app.session.member.name }
-              else
-                ui.tag{ content = _"Select language" }
-              end
-            end
-          }
-          execute.view{ module = "index", view = "_menu" }
-        end
-      }
-    end
+-- show notifications about things the user should take care of
+if app.session.member then
+  execute.view{
+    module = "index", view = "_sidebar_notifications", params = {
+      mode = "link"
+    }
   }
-end)
+end
 
-slot.select("footer", function()
+slot.select ("footer", function ()
   if app.session.member_id and app.session.member.admin then
-    ui.link{
-      text   = _"Admin",
+    ui.link {
+      text   = _"System settings",
       module = 'admin',
       view   = 'index'
     }
@@ -107,8 +100,6 @@ slot.select("footer", function()
     }
   end
   slot.put(" &middot; ")
-  ui.tag{ content = _"This site is using" }
-  slot.put(" ")
   ui.link{
     text   = _"LiquidFeedback",
     external = "http://www.public-software-group.org/liquid_feedback"

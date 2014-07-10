@@ -10,11 +10,25 @@ local members_selector = Member:new_selector()
   :add_field{ "delegating_interest_snapshot.weight" }
 
 execute.view{
-  module = "member",
-  view = "_list",
-  params = { 
-    members_selector = members_selector,
-    issue = issue,
-    trustee = member
+  module = "issue", view = "_head", params = {
+    issue = issue
   }
 }
+  
+ui.section( function()
+    
+  ui.sectionHead( function()
+    ui.heading{ level = 1, content = _("Incoming delegations for '#{member}'", { member = member.name }) }
+  end)
+
+  execute.view{
+    module = "member",
+    view = "_list",
+    params = { 
+      members_selector = members_selector,
+      issue = issue,
+      trustee = member
+    }
+  }
+
+end )

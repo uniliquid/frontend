@@ -3,7 +3,7 @@
 -- (except when you really know what you are doing!)
 -- ========================================================================
 
-config.app_version = "2.2.1"
+config.app_version = "3.0.0"
 
 if not config.password_hash_algorithm then
   config.password_hash_algorithm = "crypt_sha512"
@@ -18,7 +18,7 @@ if not config.password_hash_max_rounds then
 end
 
 if config.enabled_languages == nil then
-  config.enabled_languages = { 'en', 'de', 'eo', 'el', 'hu', 'it', 'nl', 'zh-Hans', 'zh-TW' }
+  config.enabled_languages = { 'en', 'de' } --, 'eo', 'el', 'hu', 'it', 'nl', 'zh-Hans', 'zh-TW' }
 end
 
 if config.default_lang == nil then
@@ -42,6 +42,10 @@ end
 
 if config.locked_profile_fields == nil then
   config.locked_profile_fields = {}
+end
+
+if config.check_delegations_default == nil then
+  config.check_delegations_default = "confirm"
 end
 
 if not config.database then

@@ -1,26 +1,55 @@
 local initiative = Initiative:by_id(param.get("initiative_id"))
 
-slot.put_into("title", _"Invite an initiator to initiative")
+local member = app.session.member
+if member then
+  initiative:load_everything_for_member_id(member.id)
+  initiative.issue:load_everything_for_member_id(member.id)
+end
 
-slot.select("actions", function()
-  ui.link{
-    content = function()
-        ui.image{ static = "icons/16/cancel.png" }
-        slot.put(_"Cancel")
-    end,
-    module = "initiative",
-    view = "show",
-    id = initiative.id,
-    params = {
-      tab = "initiators"
-    }
+
+local records = {
+  {
+    id = "-1",
+    name = _"Choose member"
   }
-end)
+}
+local contact_members = app.session.member:get_reference_selector("saved_members"):add_order_by("name"):exec()
+for i, record in ipairs(contact_members) do
+  records[#records+1] = record
+end
 
-util.help("initiative.add_initiator", _"Invite an initiator to initiative")
+execute.view {
+  module = "issue", view = "_head", params = {
+    issue = initiative.issue,
+    member = app.session.member
+  }
+}
+
+execute.view{ module = "issue", view = "_sidebar_state", params = {
+  initiative = initiative
+} }
+
+execute.view { 
+  module = "issue", view = "_sidebar_issue", 
+  params = {
+    issue = initiative.issue,
+    highlight_initiative_id = initiative.id
+  }
+}
+
+execute.view {
+  module = "issue", view = "_sidebar_whatcanido",
+  params = { initiative = initiative }
+}
+
+execute.view { 
+  module = "issue", view = "_sidebar_members", params = {
+    issue = initiative.issue, initiative = initiative
+  }
+}
 
 ui.form{
-  attr = { class = "vertical" },
+  attr = { class = "wide section" },
   module = "initiative",
   action = "add_initiator",
   params = {
@@ -38,23 +67,50 @@ ui.form{
     }
   },
   content = function()
-    local records = {
-      {
-        id = "-1",
-        name = _"Choose member"
+
+    ui.sectionHead( function()
+      ui.link{
+        module = "initiative", view = "show", id = initiative.id,
+        content = function ()
+          ui.heading { 
+            level = 1,
+            content = initiative.display_name
+          }
+        end
       }
-    }
-    local contact_members = app.session.member:get_reference_selector("saved_members"):add_order_by("name"):exec()
-    for i, record in ipairs(contact_members) do
-      records[#records+1] = record
-    end
-    ui.field.select{
-      label = _"Member",
-      name = "member_id",
-      foreign_records = records,
-      foreign_id = "id",
-      foreign_name = "name"
-    }
-    ui.submit{ text = _"Save" }
+      ui.heading { level = 2, content = _"Invite an initiator to initiative" }
+    end )
+
+    ui.sectionRow( function()
+      ui.heading { level = 2, content = _"Choose a member to invite" }
+      ui.field.select{
+        name = "member_id",
+        foreign_records = records,
+        foreign_id = "id",
+        foreign_name = "name"
+      }
+      ui.container{ content = _"You can choose only members which you have been saved as contact before." }
+      slot.put("<br />")
+      ui.tag{
+        tag = "input",
+        attr = {
+          type = "submit",
+          class = "btn btn-default",
+          value = _"Invite member"
+        },
+        content = ""
+      }
+      slot.put("<br />")
+      slot.put("<br />")
+      ui.link{
+        content = _"Cancel",
+        module = "initiative",
+        view = "show",
+        id = initiative.id,
+        params = {
+          tab = "initiators"
+        }
+      }
+    end )
   end
 }

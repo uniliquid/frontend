@@ -1,22 +1,58 @@
-ui.title(_"Change your password")
+ui.titleMember(_"Password")
 
-util.help("member.settings.password", _"Change password")
+execute.view {
+  module = "member", view = "_sidebar_whatcanido", params = {
+    member = app.session.member
+  }
+}
 
 ui.form{
-  attr = { class = "vertical" },
+  attr = { class = "wide" },
   module = "member",
   action = "update_password",
   routing = {
     ok = {
       mode = "redirect",
-      module = "index",
-      view = "index"
+      module = "member",
+      view = "show",
+      id = app.session.member_id
     }
   },
   content = function()
-    ui.field.password{ label = _"Old password", name = "old_password" }
-    ui.field.password{ label = _"New password", name = "new_password1" }
-    ui.field.password{ label = _"Repeat new password", name = "new_password2" }
-    ui.submit{ value = _"Change password" }
+    ui.section( function()
+      ui.sectionHead( function()
+        ui.heading { level = 1, content = _"Password" }
+      end )
+
+      ui.sectionRow( function()
+        ui.heading { level = 2, content = _"Enter your current password:" }
+        ui.field.password{ name = "old_password" }
+
+        slot.put("<br />")
+        
+        ui.heading { level = 2, content = _"Enter a new password:" }
+        ui.field.password{ name = "new_password1" }
+
+        ui.heading { level = 2, content = _"Enter your new password again please:" }
+        ui.field.password{ name = "new_password2" }
+
+        slot.put("<br />")
+        
+        ui.tag{
+          tag = "input",
+          attr = {
+            type = "submit",
+            class = "btn btn-default",
+            value = _"Save"
+          },
+          content = ""
+        }
+        slot.put("<br /><br /><br />")
+        ui.link {
+          module = "member", view = "show", id = app.session.member_id, 
+          content = _"Cancel"
+        }
+      end )
+    end )
   end
 }

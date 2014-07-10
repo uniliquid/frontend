@@ -64,6 +64,16 @@ body, th, td {
   margin: 0;
 }
 
+table.striped tr:nth-child(even) td {
+  background-color: #ddd;
+}
+table.striped td, table.striped label {
+  vertical-align: middle;
+}
+table.striped label {
+  vertical-align: top;
+}
+
 .page,
 .topbar_content {
   max-width: 1130px;
@@ -123,6 +133,14 @@ h2 {
 
 .inline {
   display: inline;
+}
+
+input[type=submit] {
+  border-radius: 4px;
+}
+
+.btn-default {
+  
 }
 
 /*************************************************************************
@@ -483,6 +501,11 @@ div.notifications {
   margin-right: 8px;
 }
 
+table .unit_link,
+table .area_link {
+    margin-top: 1px;
+}
+
 .unit_link {
   background-color: #44a;
   color: #fff;
@@ -660,7 +683,14 @@ a.delegation_info:focus {
 .ui_paginate_select a {
   padding: 0.5em;
   border-radius: 4px;
+  line-height: 250%;
+  background: #eee;
 }
+
+.ui_paginate_select a.active {
+  background: #444;
+}
+
 
 /*************************************************************************
  * ui.bargraph
@@ -789,6 +819,11 @@ div.notifications {
   display: inline;
   margin-bottom: 0;
 }
+
+.vertical .actions {
+  margin-left: 33%;
+}
+
 
 #voting_form input[type=submit],
 .login input[type=submit],

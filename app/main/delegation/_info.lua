@@ -8,6 +8,8 @@ local unit  = param.get("unit", "table")
 local area  = param.get("area", "table")
 local issue = param.get("issue", "table")
 
+local for_title = param.get("for_title", "boolean")
+
 local unit_id  = unit  and unit.id  or nil
 local area_id  = area  and area.id  or nil
 local issue_id = issue and issue.id or nil
@@ -21,7 +23,6 @@ if unit then
 end
 
 if area then
-  area:load_delegation_info_once_for_member_id(member.id)
   info = area.delegation_info
   delegation_text = _"Delegate area"
 end
@@ -31,24 +32,13 @@ if issue then
   delegation_text = _"Delegate issue"
 end
 
+if not info then
+  --return
+end
+
 local function print_delegation_info()
-  local participant_occured = false
+  local participant_occured = info.own_participation
   
-  if info.own_participation or info.first_trustee_id then
-    
-    local class = "micro_avatar"
-    if info.own_participation then
-      participant_occured = true
-      class = class .. " highlighted"
-    end
-    
-    execute.view{ module = "member_image", view = "_show", params = {
-      member = member, class = class, popup_text = member.name,
-      image_type = "avatar", show_dummy = true,
-    } }
-
-  end
-
   if not (issue and issue.state == "voting" and info.own_participation) then
     
     if info.first_trustee_id then
@@ -154,10 +144,15 @@ local function print_delegation_info()
           static = "delegation_arrow_24_horizontal.png"
         }
 
-        execute.view{ module = "member_image", view = "_show", params = {
-          member_id = info.first_trustee_id, class = "micro_avatar", popup_text = info.first_trustee_name,
-          image_type = "avatar", show_dummy = true,
-        } }
+        execute.view{
+          module = "member_image", view = "_show", params = {
+            member_id = info.first_trustee_id, 
+            class = "micro_avatar", 
+            popup_text = info.first_trustee_name,
+            image_type = "avatar",
+            show_dummy = true,
+          }
+        }
       end
     
         
@@ -174,24 +169,94 @@ local function print_delegation_info()
   end
 end
 
+if not param.get("no_star", "boolean") then
+  
+  if info.own_participation then
+    if issue and issue.fully_frozen then
+      ui.link{
+        attr = { class = "right" },
+        module = "vote", view = "list", params = {
+          issue_id = issue.id
+        },
+        content = function ()
+          ui.tag { content = _"you voted" }
+        end
+      }
+    else
+      if issue then
+        local text = _"you are interested"
+        ui.image { attr = { class = "star", title = text, alt = text }, static = "icons/48/eye.png" }
+        if not issue.closed and info.own_participation and info.weight and info.weight > 1 then
+          ui.link { 
+            attr = { class = "right" }, content = "+" .. (info.weight - 1),
+            module = "delegation", view = "show_incoming", params = { 
+              issue_id = issue.id, member_id = member.id
+            }
+          }
+        end
+      else
+        local text = _"you are subscribed"
+        ui.image { attr = { class = "icon24 star", title = text, alt = text }, static = "icons/48/star.png" }
+      end
+      if not for_title then
+        slot.put("<br />")
+      else
+        slot.put(" ")
+      end
+    end
+  end
+end
+
 
 if info.own_participation or info.first_trustee_id then
+  local class = "delegation_info"
+  if info.own_participation then
+    class = class .. " suspended"
+  end
+
+  local voting_member_id
+  local voting_member_name
+  if issue and issue.fully_frozen and issue.closed then
+    if issue.member_info.first_trustee_participation then
+      voting_member_id = issue.member_info.first_trustee_id
+      voting_member_name = issue.member_info.first_trustee_name
+    elseif issue.member_info.other_trustee_participation then
+      voting_member_id = issue.member_info.other_trustee_id
+      voting_member_name = issue.member_info.other_trustee_name
+    end
+  end
+  
   if app.session.member_id == member.id then
-    ui.link{
-      module = "delegation", view = "show", params = {
-        unit_id = unit_id,
-        area_id = area_id,
-        issue_id = issue_id
-      },
-      attr = { class = "delegation_info" }, content = function()
-        print_delegation_info()
-      end
-    }
+
+    if voting_member_id  then
+      ui.link{
+        module = "vote", view = "list", params = {
+          issue_id = issue.id,
+          member_id = voting_member_id
+        },
+        attr = { class = class }, content = function()
+          print_delegation_info()
+        end
+      }
+    
+    else
+      ui.link{
+        module = "delegation", view = "show", params = {
+          unit_id = unit_id,
+          area_id = area_id,
+          issue_id = issue_id
+        },
+        attr = { class = class }, content = function()
+          print_delegation_info()
+        end
+      }
+    end
   else
     ui.container{
-      attr = { class = "delegation_info" }, content = function()
+      attr = { class = class }, content = function()
         print_delegation_info()
       end
     }
   end
 end
+

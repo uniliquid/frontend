@@ -5,14 +5,15 @@ local action = request.get_action()
 local auth_needed = not (
   module == 'index'
   and (
-       view   == "index"
-    or view   == "login"
+view   == "login"
     or action == "login"
     or view   == "register"
     or action == "register"
     or view   == "about"
     or view   == "reset_password"
     or action == "reset_password"
+    or view   == "send_login"
+    or action == "send_login"
     or view   == "confirm_notify_email"
     or action == "confirm_notify_email"
     or view   == "menu"
@@ -24,16 +25,17 @@ local auth_needed = not (
 if app.session:has_access("anonymous") then
 
   if
-    module == "area" and view == "show"
+    module == "index" and view == "index"
+    or module == "area" and view == "show"
     or module == "unit" and view == "show"
     or module == "policy" and view == "show"
     or module == "policy" and view == "list"
     or module == "issue" and view == "show"
     or module == "initiative" and view == "show"
+    or module == "initiative" and view == "history"
     or module == "suggestion" and view == "show"
     or module == "draft" and view == "diff"
     or module == "draft" and view == "show"
-    or module == "draft" and view == "list"
     or module == "index" and view == "search"
     or module == "index" and view == "usage_terms"
   then
@@ -42,11 +44,16 @@ if app.session:has_access("anonymous") then
 
 end
 
+if app.session:has_access("authors_pseudonymous") then
+  if module == "member_image" and view == "show" then
+    auth_needed = false
+  end
+end
+
 if app.session:has_access("all_pseudonymous") then
-  if module == "member_image" and view == "show"
-   or module == "vote" and view == "show_incoming"
+  if module == "vote" and view == "show_incoming"
+   or module == "member" and view == "list"
    or module == "interest" and view == "show_incoming"
-   or module == "supporter" and view == "show_incoming" 
    or module == "vote" and view == "list" then
     auth_needed = false
   end
@@ -89,6 +96,19 @@ elseif auth_needed and app.session.member.locked then
   trace.debug("Member locked.")
   request.redirect{ module = 'index', view = 'login' }
 else
+  if config.check_delegations_interval_hard and app.session.member_id and app.session.needs_delegation_check 
+    and not (module == "admin" or (module == "index" and (
+      view == "check_delegations" 
+      or action == "check_delegations" 
+      or action == "logout"
+      or view == "about"
+      or view == "usage_terms"
+      or action == "set_lang")
+    ))
+    and not (module == "member_image" and view == "show") then
+    request.redirect{ module = 'index', view = 'check_delegations' }
+    return
+  end
   if auth_needed then
     trace.debug("Authentication accepted.")
   else

@@ -73,23 +73,32 @@ local name = param.get("name")
 local name = util.trim(name)
 
 if #name < 3 then
-  slot.put_into("error", _"This name is really too short!")
+  slot.put_into("error", _"Please enter a meaningful title for your initiative!")
   return false
 end
 
-local formatting_engine = param.get("formatting_engine")
+if #name > 140 then
+  slot.put_into("error", _"This title is too long!")
+  return false
+end
 
-local formatting_engine_valid = false
-for fe, dummy in pairs(config.formatting_engine_executeables) do
-  if formatting_engine == fe then
-    formatting_engine_valid = true
+local formatting_engine
+if config.enforce_formatting_engine then
+  formatting_engine = config.enforce_formatting_engine
+else
+  formatting_engine = param.get("formatting_engine")
+  local formatting_engine_valid = false
+  for i, fe in ipairs(config.formatting_engines) do
+    if formatting_engine == fe.id then
+      formatting_engine_valid = true
+    end
+  end
+  if not formatting_engine_valid then
+    error("invalid formatting engine!")
   end
 end
-if not formatting_engine_valid then
-  error("invalid formatting engine!")
-end
 
-if param.get("preview") then
+if param.get("preview") or param.get("edit") then
   return
 end
 
@@ -155,7 +164,6 @@ if param.get("polling", atom.boolean) and app.session.member:has_polling_right_f
 end
 initiative.issue_id = issue.id
 initiative.name = name
-param.update(initiative, "discussion_url")
 initiative:save()
 
 local draft = Draft:new()

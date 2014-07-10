@@ -33,6 +33,7 @@ return {
 ["API keys"] = "API-kulcs";
 ["Abandon global delegation for this area"] = "Globális delegálás mellõzése ennél a témakörnél";
 ["Abandon unit and area delegations for this issue"] = "Egység- és témakör-delegációk mellõzése ennél a témánál";
+["Abandon unit delegation"] = false;
 ["Abandon unit delegation for this area"] = "Egységdelegáció mellõzése ennél a témánál";
 ["About site"] = "Impresszum";
 ["Abstention"] = "Tartózkodás";
@@ -98,7 +99,9 @@ return {
 ["Can't send confirmation email"] = "Nem lehet elküldeni a megerõsítõ emailt";
 ["Cancel"] = "Megszakítás";
 ["Cancel [nullify]"] = false;
-["Cancel password reset"] = "Jelszóvisszaállítás megszakítása";
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = "Meghívás elutasításának megszakítása";
 ["Cancel registration"] = "Regisztrálás megszakítása";
 ["Canceled"] = "Megszakítva";
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = "Megszakítva (ellenõrzés közben, visszavonás miatt)";
 ["Canceled (issue not accepted)"] = "Megszakítva (el nem fogadott téma)";
 ["Canceled (no initiative admitted)"] = "Megszakítva (nem engedélyezett kezdeményezés)";
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = "Témakör-delegáció módosítása";
 ["Change email"] = "Email-cím módosítása";
 ["Change email address"] = "Email-cím módosítása";
@@ -122,6 +126,8 @@ return {
 ["Change your notification email address"] = "Értesítési email-címed módosítása";
 ["Change your password"] = "Jelszavad módosítása";
 ["Change your screen name"] = "Screen-neved módosítása";
+["Check delegations"] = false;
+["Check your delegations!"] = false;
 ["Choose initiator"] = "Kezdeményezõ kiválasztása";
 ["Choose member"] = "Tag kiválasztása";
 ["Closed"] = "Zárva";
@@ -137,7 +143,6 @@ return {
 ["Confirmed address"] = "Megerõsített cím";
 ["Contacts"] = "Kapcsolatok";
 ["Content"] = "Tartalom";
-["Counting of votes"] = "Szavazatszámlálás";
 ["Counting starts soon"] = "Rövidesen indul a szavazatszámlálás";
 ["Create / edit area"] = "Témakör létrehozása / módosítása";
 ["Create / edit policy"] = "Irányelv létrehozása / módosítása";
@@ -148,8 +153,10 @@ return {
 ["Create new unit"] = "Új egység létrehozása";
 ["Created at"] = "Létrehozás idõpontja:";
 ["Current name"] = "Jelenlegi név";
+["Current phase is already closed."] = false;
 ["Current status"] = "Jelenlegi állapot";
 ["Current trustee"] = false;
+["Current unit and area delegations need confirmation"] = false;
 ["Current votings in areas you are member of and issues you are interested in:"] = "Jelenleg folyamatban lévõ szavazások a téma- és az érdeklõdési köreidben:";
 ["Currently no API key is set."] = "Jelenleg nincs API-kulcs beállítva.";
 ["Currently required"] = "Jelenleg szükséges";
@@ -221,10 +228,13 @@ return {
 ["Everything"] = false;
 ["External memberships"] = "Külsõ tagságok";
 ["External posts"] = "Külsõ tisztségek";
+["Finish delegation check"] = false;
 ["Finish voting"] = "Szavazás lezárása";
 ["Finished"] = "Lezárva";
 ["Finished (with winner)"] = "Lezárva (nyertessel)";
 ["Finished (without winner)"] = "Lezárva (nyertes nélkül)";
+["Forgot login name?"] = false;
+["Forgot password?"] = false;
 ["Free timing"] = false;
 ["Friday"] = "Péntek";
 ["Frozen"] = "Befagyasztva";
@@ -235,6 +245,7 @@ return {
 ["Half frozen at"] = "Félig befagyasztva ekkor:";
 ["Hello\n\n"] = "Helló\n\n";
 ["Hello "] = "Helló ";
+["Hello,\n\n"] = false;
 ["Help #{id}"] = "Súgó: #{id}";
 ["Help for: #{text}"] = "Súgó: #{text}";
 ["Hide"] = "Elrejtés";
@@ -295,6 +306,7 @@ return {
 ["Invited"] = "Meghívva";
 ["Issue"] = "Téma";
 ["Issue ##{id}"] = "Téma: ##{id}";
+["Issue ID"] = false;
 ["Issue accepted"] = "Téma elfogadva";
 ["Issue canceled"] = "Téma megszakítva";
 ["Issue delegation"] = "Témadelegáció";
@@ -302,6 +314,7 @@ return {
 ["Issue finished"] = "Téma lezárva";
 ["Issue finished without voting"] = "Téma szavazás nélkül lezárva";
 ["Issue frozen"] = "Téma befagyasztva";
+["Issue has been canceled"] = false;
 ["Issue pad"] = "Téma padje";
 ["Issue quorum"] = "Téma-határozatképesség";
 ["Issue quorum denumerator"] = "Téma-határozatképesség-nevezõ";
@@ -320,6 +333,8 @@ return {
 ["Locked?"] = "Zárva?";
 ["Login"] = "Bejelentkezés";
 ["Login name"] = "Bejelentkezési név";
+["Login name request"] = false;
+["Login-Name: "] = false;
 ["Logout"] = "Kijelentkezés";
 ["Logout successful"] = "Sikeres kijelentkezés";
 ["Manage filter"] = "Szûrõk módosítása";
@@ -444,9 +459,11 @@ return {
 ["Please choose two versions of the draft to compare"] = "Válaszd ki a vázlat két, összehasonlítandó változatát";
 ["Please confirm your email address"] = false;
 ["Please confirm your email address by clicking the following link:\n\n"] = "A következõ linkre kattintva erõsítheted meg az email-címedet:";
+["Please decide for each delegation to confirm or to revoke it!"] = false;
 ["Please enter the email reset code you have received:"] = "Írd be a visszaállítási kódodat:";
 ["Please enter the invite code you've received."] = "Írd be a meghívókódodat.";
 ["Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."] = "Írd be az email-címedet. Ide kapod majd az automatikus értesítõket (ha kérsz ilyeneket), és a jelszavad esetleges elvesztése esetén is szükség lesz rá. Ez a címed nem lesz közzétéve. A regisztrációt követõen ide kapod majd a megerõsítõ linket tartalmazó mailt is.";
+["Please enter your email address. You will receive an email with your login name."] = false;
 ["Please enter your login name. You will receive an email with a link to reset your password."] = "Írd be a bejelentkezési nevedet - majd mailben kapni fogsz egy linket a jelszavad visszaáálításához.";
 ["Please enter your new password twice."] = "Írd be kétszer az új jelszavadat:";
 ["Please select your preferred notification level"] = false;
@@ -466,6 +483,7 @@ return {
 ["Proceed with registration"] = false;
 ["Profession"] = "Foglalkozás";
 ["Profile"] = "Profil";
+["Public administrative notice:"] = false;
 ["Publish"] = "Közzététel";
 ["Published"] = "Közzétéve";
 ["Quorum"] = "Határozatképesség";
@@ -484,11 +502,11 @@ return {
 ["Remove initiator from initiative"] = "Kezdeményezõ eltávolítása a kezdeményezésbõl";
 ["Rendered"] = "Formattálva";
 ["Repeat new password"] = "Új jelszó újra";
+["Request email with login name"] = false;
 ["Request password reset link"] = "Jelszó-visszaállítási link kérelmezése";
 ["Resend activation email to '#{email}'"] = "Aktivációs email újbóli elküldése a '#{email}' címre";
 ["Reset code"] = "Visszaállító kód";
 ["Reset code is invalid!"] = "Érvénytelen visszaállító kód!";
-["Reset link has been send for this member"] = "Visszaállító link elküldve";
 ["Reset password"] = "Jelszó visszaállítása";
 ["Revoke initiative"] = "Kezdeményezés visszavonása";
 ["Revoked at"] = "Visszavonás idõpontja:";
@@ -577,6 +595,8 @@ return {
 ["This initiative is already revoked"] = "Ezt a kezdeményezést már visszavonták";
 ["This initiative is revoked"] = "Ezt a kezdeményezést visszavonták";
 ["This invite key is connected with the following information:"] = "Ehhez a meghívókulcshoz a következõ adatok kapcsolódnak:";
+["This issue has been canceled by administrative intervention."] = false;
+["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = "Téma megszakítva. Nincs meg a határozatképesség: #(quorum).";
 ["This issue is already closed."] = "Téma már lezárva.";
 ["This issue is already frozen."] = "Téma már befagyasztva.";
@@ -701,6 +721,7 @@ return {
 ["Your password has been updated successfully"] = "Jelszó módosítva";
 ["Your rating has been deleted"] = "Értékelésed törölve";
 ["Your rating has been updated"] = "Értékelésed frissítve";
+["Your request has been processed."] = false;
 ["Your suggestion has been added"] = "Javaslatod hozzáadva";
 ["Your support has been added to this initiative"] = "Támogatásod hozzáadva a kezdeményezéshez";
 ["Your support has been removed from this initiative"] = "Támogatásod visszavonva a kezdeményezéstõl";
@@ -720,6 +741,7 @@ return {
 ["[not displayed public]"] = "[nem nyilvános]";
 ["a bit unsatisfied"] = "kissé elégedetlen";
 ["abandoned"] = "mellõzve";
+["action"] = false;
 ["activated"] = "aktiválva";
 ["and #{count} more initiatives"] = "és még #{count} további kezdeményezés";
 ["and one more initiative"] = "és még egy további kezdeményezés";
@@ -727,6 +749,7 @@ return {
 ["at least #{count} approvals"] = "legalább #{count} egyetértés";
 ["at least #{count} approvals or abstentions"] = "legalább #{count} egyetértés vagy tartózkodás";
 ["change discussion URL"] = "tárgyalás URL-jének megváltoztatása";
+["confirm"] = false;
 ["day [interval ago]"] = false;
 ["day [interval time left]"] = false;
 ["day [interval]"] = false;
@@ -734,6 +757,7 @@ return {
 ["days [interval time left]"] = false;
 ["days [interval]"] = false;
 ["deactivated"] = "deaktiválva";
+["delegated to"] = false;
 ["delegates to"] = false;
 ["delete<br /><br />"] = "törlés<br /><br />";
 ["disabled"] = "leállítva";
@@ -761,11 +785,14 @@ return {
 ["possibly instable result caused by multistage majority"] = "eredmény instabil lehet a többszintû többség miatt";
 ["prohibit potentially instable results caused by multistage majorities"] = "többszintû többség miatt potenciálisan instabil eredmények tiltása";
 ["reverse beat path to status quo (including ties)"] = "visszaút a status quo-hoz (döntetlenekkel együtt)";
+["revoke"] = false;
 ["satisfied"] = "elégedett";
 ["should"] = "kellene";
 ["should not"] = "nem kellene";
+["the following login is connected to this email address:\n\n"] = false;
 ["to reset your password please click on the following link:\n\n"] = "A jelszavad visszaállításához klikkelj erre a linkre:\n\n";
 ["unit"] = "egység";
+["unit / area"] = false;
 ["until"] = "(a)míg";
 ["variable"] = false;
 ["with winner"] = "gyõztessel";

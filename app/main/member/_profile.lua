@@ -1,6 +1,6 @@
 local member = param.get("member", "table")
 
-local include_private_data = param.get("include_private_data", atom.boolean)
+local for_registration = param.get("for_registration", atom.boolean)
 
 if not member then
   local member_id = param.get("member_id", atom.integer)
@@ -10,34 +10,23 @@ if not member then
 end
 
 ui.form{
-  attr = { class = "member_statement member vertical" },
+  attr = { class = "form" },
   record = member,
   readonly = true,
   content = function()
 
-    slot.put("<br />")
-
-    ui.container{
-      attr = { class = "right" },
-      content = function()
-
-      execute.view{
-        module = "member_image",
-        view = "_show",
-        params = {
-          member = member,
-          image_type = "photo"
+    if not for_registration then
+      ui.container { attr = { class = "member_photo" }, content = function()
+        execute.view{
+          module = "member_image",
+          view = "_show",
+          params = {
+            member = member,
+            image_type = "photo"
+          }
         }
-      }
-
-      ui.container{
-        attr = { class = "contact_data" },
-        content = function()
-        end
-      }
-
-      end
-    }
+      end }
+    end
     
     if member.identification then
       ui.field.text{    label = _"Identification", name = "identification" }
@@ -45,8 +34,11 @@ ui.form{
     if member.name then
       ui.field.text{ label = _"Screen name", name = "name" }
     end
-    if include_private_data and member.login then
+    if for_registration and member.login then
       ui.field.text{    label = _"Login name", name = "login" }
+    end
+    
+    if for_registration and member.notify_email then
       ui.field.text{    label = _"Notification email", name = "notify_email" }
     end
     

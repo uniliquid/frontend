@@ -1,150 +1,185 @@
 local member = Member:by_id(param.get_id())
 
 if not member or not member.activated then
-  error("access denied")
+  execute.view { module = "index", view = "404" }
+  request.set_status("404 Not Found")
+  return
 end
+
+local limit = 25
+
+local initiated_initiatives = Initiative:new_selector()
+  :join("initiator", nil, { "initiator.initiative_id = initiative.id and initiator.member_id = ?", member.id })
+  :join("issue", nil, "issue.id = initiative.issue_id")
+  :add_where("issue.closed ISNULL")
+  :add_order_by("initiative.id DESC")
+  :limit(limit+1)
+  :exec()
+  
+initiated_initiatives:load("issue")
+initiated_initiatives:load_everything_for_member_id(member.id)
+
+local supported_initiatives = Initiative:new_selector()
+  :join("supporter", nil, { "supporter.initiative_id = initiative.id and supporter.member_id = ?", member.id })
+  :join("issue", nil, "issue.id = initiative.issue_id")
+  :add_where("issue.closed ISNULL")
+  :add_order_by("initiative.id DESC")
+  :limit(limit+1)
+  :exec()
+
+supported_initiatives:load("issue")
+supported_initiatives:load_everything_for_member_id(member.id)
+
+local voted_initiatives = Initiative:new_selector()
+  :add_where("initiative.rank = 1")
+  :join("direct_voter", nil, { "direct_voter.issue_id = initiative.issue_id and direct_voter.member_id = ?", member.id })
+  :join("vote", nil, { "vote.initiative_id = initiative.id and vote.member_id = ?", member.id })
+  :join("issue", nil, "issue.id = initiative.issue_id")
+  :add_order_by("issue.closed DESC, initiative.id DESC")
+  :add_field("vote.grade", "vote_grade")
+  :add_field("vote.first_preference", "vote_first_preference")
+  :limit(limit+1)
+  :exec()
+
+voted_initiatives:load("issue")
+voted_initiatives:load_everything_for_member_id(member.id)
+  
+local incoming_delegations_selector = member:get_reference_selector("incoming_delegations")
+  :left_join("issue", "_member_showtab_issue", "_member_showtab_issue.id = delegation.issue_id AND _member_showtab_issue.closed ISNULL")
+  :add_where("_member_showtab_issue.closed ISNULL")
+  :add_order_by("delegation.unit_id, delegation.area_id, delegation.issue_id")
+  :limit(limit+1)
+
+local outgoing_delegations_selector = member:get_reference_selector("outgoing_delegations")
+  :left_join("issue", "_member_showtab_issue", "_member_showtab_issue.id = delegation.issue_id AND _member_showtab_issue.closed ISNULL")
+  :add_where("_member_showtab_issue.closed ISNULL")
+  :add_order_by("delegation.unit_id, delegation.area_id, delegation.issue_id")
+  :limit(limit+1)
+
 
 app.html_title.title = member.name
 app.html_title.subtitle = _("Member")
 
-slot.select("head", function()
-  ui.container{
-    attr = { class = "title" },
-    content = _("Member '#{member}'", { member =  member.name })
+ui.titleMember(member)
+
+execute.view {
+  module = "member", view = "_sidebar_whatcanido", params = {
+    member = member
   }
-
-  ui.container{ attr = { class = "actions" }, content = function()
-
-    if member.id == app.session.member_id then
-      ui.link{
-        content = function()
-          slot.put(encode.html(_"Edit profile"))
-        end,
-        module  = "member",
-        view    = "edit"
-      }
-      slot.put(" &middot; ")
-      ui.link{
-        content = function()
-          slot.put(encode.html(_"Upload avatar/photo"))
-        end,
-        module  = "member",
-        view    = "edit_images"
-      }
-      slot.put(" &middot; ")
-    end
-    ui.link{
-      content = function()
-        slot.put(encode.html(_"Show member history"))
-      end,
-      module  = "member",
-      view    = "history",
-      id      = member.id
-    }
-    if not member.active then
-      slot.put(" &middot; ")
-      ui.tag{
-        attr = { class = "interest deactivated_member_info" },
-        content = _"This member is inactive"
-      }
-    end
-    if member.locked then
-      slot.put(" &middot; ")
-      ui.tag{
-        attr = { class = "interest deactivated_member_info" },
-        content = _"This member is locked"
-      }
-    end
-    if app.session.member_id and not (member.id == app.session.member.id) then
-      slot.put(" &middot; ")
-      --TODO performance
-      local contact = Contact:by_pk(app.session.member.id, member.id)
-      if contact then
-        ui.link{
-          text   = _"Remove from contacts",
-          module = "contact",
-          action = "remove_member",
-          id     = contact.other_member_id,
-          routing = {
-            default = {
-              mode = "redirect",
-              module = request.get_module(),
-              view = request.get_view(),
-              id = param.get_id_cgi(),
-              params = param.get_all_cgi()
-            }
-          }
-        }
-      elseif member.activated then
-        ui.link{
-          text    = _"Add to my contacts",
-          module  = "contact",
-          action  = "add_member",
-          id      = member.id,
-          routing = {
-            default = {
-              mode = "redirect",
-              module = request.get_module(),
-              view = request.get_view(),
-              id = param.get_id_cgi(),
-              params = param.get_all_cgi()
-            }
-          }
-        }
-      end
-    end
-    if app.session.member_id then
-      local ignored_member = IgnoredMember:by_pk(app.session.member.id, member.id)
-      slot.put(" &middot; ")
-      if ignored_member then
-        ui.tag{
-          attr = { class = "interest" },
-          content = _"You have ignored this member"
-        }
-        slot.put(" &middot; ")
-        ui.link{
-          text   = _"Stop ignoring member",
-          module = "member",
-          action = "update_ignore_member",
-          id     = member.id,
-          params = { delete = true },
-          routing = {
-            default = {
-              mode = "redirect",
-              module = request.get_module(),
-              view = request.get_view(),
-              id = param.get_id_cgi(),
-              params = param.get_all_cgi()
-            }
-          }
-        }
-      elseif member.activated then
-        ui.link{
-          attr = { class = "interest" },
-          text    = _"Ignore member",
-          module  = "member",
-          action  = "update_ignore_member",
-          id      = member.id,
-          routing = {
-            default = {
-              mode = "redirect",
-              module = request.get_module(),
-              view = request.get_view(),
-              id = param.get_id_cgi(),
-              params = param.get_all_cgi()
-            }
-          }
-        }
-      end
-    end
-  end }
-end)
-
-util.help("member.show", _"Member page")
-
-execute.view{
-  module = "member",
-  view = "_show",
-  params = { member = member }
 }
 
+execute.view {
+  module = "member", view = "_sidebar_contacts", params = {
+    member = member
+  }
+}
+
+
+ui.section( function() 
+  ui.sectionHead( function()
+    execute.view{
+      module = "member_image",
+      view = "_show",
+      params = {
+        member = member,
+        image_type = "avatar",
+        show_dummy = true,
+        class = "left"
+      }
+    }
+    ui.heading{ level = 1, content = member.name }
+    slot.put("<br />")
+    ui.container {
+      attr = { class = "right" },
+      content = function()
+        ui.link{
+          content = _"Account history",
+          module = "member", view = "history", id = member.id
+        }
+      end
+    }
+    if member.identification then
+      ui.container{ content = member.identification }
+    end
+  end )
+  ui.sectionRow( function()
+    execute.view{
+      module = "member",
+      view = "_profile",
+      params = { member = member }
+    }
+  end )
+end )
+
+
+ui.section( function()
+  ui.sectionHead( function()
+    ui.heading { level = 2, content = _"Initiatives created by this member" }
+  end )
+  ui.sectionRow( function()
+    for i, initiative in ipairs(initiated_initiatives) do
+      execute.view {
+        module = "initiative", view = "_list",
+        params = { initiative = initiative },
+        member = member
+      }
+    end
+  end )
+end )
+
+ui.section( function()
+  ui.sectionHead( function()
+    ui.heading { level = 2, content = _"What this member is currently supporting" }
+  end )
+  ui.sectionRow( function()
+    for i, initiative in ipairs(supported_initiatives) do
+      execute.view {
+        module = "initiative", view = "_list",
+        params = { initiative = initiative },
+        member = member
+      }
+    end
+  end )
+end )
+
+ui.section( function()
+  ui.sectionHead( function()
+    ui.heading { level = 2, content = _"How this member voted" }
+  end )
+  ui.sectionRow( function()
+    for i, initiative in ipairs(voted_initiatives) do
+      execute.view {
+        module = "initiative", view = "_list",
+        params = { initiative = initiative }
+      }
+    end
+  end )
+end )
+
+
+ui.section( function()
+  ui.sectionHead( function()
+    ui.heading { level = 2, content = _"Outgoing delegations" }
+  end )
+  ui.sectionRow( function()
+    execute.view {
+      module = "delegation", view = "_list",
+      params = { delegations_selector = outgoing_delegations_selector, outgoing = true },
+    }
+  end )
+end )
+
+
+ui.section( function()
+   
+  ui.sectionHead( function()
+    ui.heading { level = 2, content = _"Incoming delegations" }
+  end )
+  ui.sectionRow( function()
+    execute.view {
+      module = "delegation", view = "_list",
+      params = { delegations_selector = incoming_delegations_selector, incoming = true },
+    }
+  end )
+  
+end )

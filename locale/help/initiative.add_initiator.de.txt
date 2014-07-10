@@ -1,3 +1,0 @@
-= Initiator einladen =
-
-Hier kannst du eine Person aus deiner Kontaktliste zur gleichberechtigten Mitarbeit am Entwurf einladen. Der eingeladene muss die Einladung erst akzeptieren, bevor er als weiterer Initiator gilt (und angezeigt wird). **Vorsicht:** Alle Initiatoren haben die gleichen Rechte und können andere Initiatoren entfernen.

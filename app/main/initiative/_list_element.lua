@@ -1,152 +1,110 @@
 local initiative = param.get("initiative", "table")
-local selected = param.get("selected", atom.boolean)
-local for_member = param.get("for_member", "table") or app.session.member
+local for_event = param.get("for_event", atom.boolean)
+
+local issue = initiative.issue
 
 local class = "initiative"
 
-if selected then
-  class = class .. " selected"
+if initiative.rank == 1 then
+  class = class .. " rank1"
 end
 
-if initiative.polling then
-  class = class .. " polling"
+if initiative.revoked then
+  class = class .. " revoked"
 end
 
-ui.container{ attr = { class = class }, content = function()
-
-  ui.container{ attr = { class = "rank" }, content = function()
-    if initiative.issue.fully_frozen and initiative.issue.closed
-      or initiative.admitted == false
-    then 
-      ui.field.rank{ attr = { class = "rank" }, value = initiative.rank, eligible = initiative.eligible }
-    elseif not initiative.issue.closed then
-      ui.image{ static = "icons/16/script.png" }
-    else
-      ui.image{ static = "icons/16/cross.png" }
-    end
-  end }
-
-  ui.container{ attr = { class = "bar" }, content = function()
-    if initiative.issue.fully_frozen and initiative.issue.closed then
-      if initiative.negative_votes and initiative.positive_votes then
-        local max_value = initiative.issue.voter_count
-        ui.bargraph{
-          max_value = max_value,
-          width = 100,
-          bars = {
-            { color = "#0a5", value = initiative.positive_votes },
-            { color = "#aaa", value = max_value - initiative.negative_votes - initiative.positive_votes },
-            { color = "#a00", value = initiative.negative_votes },
-          }
-        }
-      else
-         slot.put("&nbsp;")
-      end
-    else
-      local max_value = initiative.issue.population or 0
-      local quorum
-      if initiative.issue.accepted then
-        quorum = initiative.issue.policy.initiative_quorum_num / initiative.issue.policy.initiative_quorum_den
-      else
-        quorum = initiative.issue.policy.issue_quorum_num / initiative.issue.policy.issue_quorum_den
-      end
-      ui.bargraph{
-        max_value = max_value,
-        width = 100,
-        quorum = max_value * quorum,
-        quorum_color = "#00F",
-        bars = {
-          { color = "#0a5", value = (initiative.satisfied_supporter_count or 0) },
-          { color = "#aaa", value = (initiative.supporter_count or 0) - (initiative.satisfied_supporter_count or 0) },
-          { color = "#fff", value = max_value - (initiative.supporter_count or 0) },
+ui.container{
+  attr = { class = class },
+  content = function ()
+    if initiative.rank ~= 1 and not for_event then
+      execute.view {
+        module = "initiative", view = "_bargraph", params = {
+          initiative = initiative,
+          battled_initiative = issue.initiatives[1]
         }
       }
+      slot.put(" ")
     end
-  end }
-
-  if app.session.member_id then
-    ui.container{ attr = { class = "interest" }, content = function()
-      if initiative.member_info.initiated then
-        local label 
-        if for_member and for_member.id ~= app.session.member_id then
-          label = _"This member is initiator of this initiative"
-        else
-          label = _"You are initiator of this initiative"
-        end
-        ui.image{
-          attr = { alt = label, title = label },
-          static = "icons/16/user_edit.png"
+    ui.tag {
+      attr = { class = "initiative_name" },
+      content = function()
+        ui.link {
+          text = initiative.display_name,
+          module = "initiative", view = "show", id = initiative.id
         }
-      elseif initiative.member_info.directly_supported then
-        if initiative.member_info.satisfied then
-          if for_member and for_member.id ~= app.session.member_id then
-            label = _"This member is supporter of this initiative"
-          else
-            local label = _"You are supporter of this initiative"
+        slot.put(" ")
+        if initiative.vote_grade ~= nil then
+          if initiative.vote_grade > 0 then
+            local text = _"voted yes"
+            ui.image { attr = { class = "icon16", title = text, alt = text }, static = "icons/32/support_satisfied.png" }
+          elseif initiative.vote_grade == 0 then
+          elseif initiative.vote_grade < 0 then
+            local text = _"voted no"
+            ui.image { attr = { class = "icon16", title = text, alt = text }, static = "icons/32/voted_no.png" }
           end
-          ui.image{
-            attr = { alt = label, title = label },
-            static = "icons/16/thumb_up_green.png"
-          }
-        else
-          if for_member and for_member.id ~= app.session.member_id then
-            label = _"This member is potential supporter of this initiative"
-          else
-            local label = _"You are potential supporter of this initiative"
+        elseif app.session.member then
+          if initiative.member_info.supported then
+            if initiative.member_info.satisfied then
+              local text = _"supporter"
+              ui.image { attr = { class = "icon16", title = text, alt = text }, static = "icons/32/support_satisfied.png" }
+            else
+              local text = _"supporter with restricting suggestions"
+              ui.image { attr = { class = "icon16", title = text, alt = text }, static = "icons/32/support_unsatisfied.png" }
+            end           
           end
-          ui.image{
-            attr = { alt = label, title = label },
-            static = "icons/16/thumb_up.png"
-          }
-        end
-      elseif initiative.member_info.supported then
-        if initiative.member_info.satisfied then
-          if for_member and for_member.id ~= app.session.member_id then
-            label = _"This member is supporter of this initiative via delegation"
-          else
-            local label = _"You are supporter of this initiative via delegation"
-          end
-          ui.image{
-            attr = { alt = label, title = label },
-            static = "icons/16/thumb_up_green_arrow.png"
-          }
-        else
-          if for_member and for_member.id ~= app.session.member_id then
-            label = _"This member is potential supporter of this initiative via delegation"
-          else
-            local label = _"You are potential supporter of this initiative via delegation"
-          end
-          ui.image{
-            attr = { alt = label, title = label },
-            static = "icons/16/thumb_up_arrow.png"
-          }
         end
       end
-    end }
-  end
-    
-  ui.container{ attr = { class = "name" }, content = function()
-    local link_class = "initiative_link"
-    if initiative.revoked then
-      link_class = "revoked"
-    end
-    ui.link{
-      attr = { class = link_class },
-      content = function()
-        local name
-        if initiative.name_highlighted then
-          name = encode.highlight(initiative.name_highlighted)
-        else
-          name = encode.html(initiative.shortened_name)
-        end
-        ui.tag{ content = "i" .. initiative.id .. ": " }
-        slot.put(name)
-      end,
-      module  = "initiative",
-      view    = "show",
-      id      = initiative.id
     }
-        
-  end }
 
-end }
+  end
+}
+
+if initiative.rank == 1 
+  and issue.voter_count 
+  and initiative.positive_votes ~= nil 
+  and initiative.negative_votes ~= nil 
+  and not for_event
+then
+  function percent(p, q)
+    if q > 0 then
+      return math.floor(p / q * 100) .. "%"
+    else
+      return "0%"
+    end
+  end
+  local result = ""
+  if initiative.eligible then
+    result = _("Reached #{sign}#{num}/#{den}", {
+      sign = issue.policy.direct_majority_strict and ">" or "≥",
+      num = issue.policy.direct_majority_num,
+      den = issue.policy.direct_majority_den
+    })
+  else
+    result = _("Failed  #{sign}#{num}/#{den}", {
+      sign = issue.policy.direct_majority_strict and ">" or "≥",
+      num = issue.policy.direct_majority_num,
+      den = issue.policy.direct_majority_den
+    })
+  end
+  local neutral_count = issue.voter_count - initiative.positive_votes - initiative.negative_votes
+  
+  local result_text 
+  
+  if issue.voter_count > 0 then
+    result_text = _("#{result}: #{yes_count} Yes (#{yes_percent}), #{no_count} No (#{no_percent}), #{neutral_count} Abstention (#{neutral_percent})", {
+      result = result,
+      yes_count = initiative.positive_votes,
+      yes_percent = percent(initiative.positive_votes, issue.voter_count),
+      neutral_count = neutral_count,
+      neutral_percent = percent(neutral_count, issue.voter_count),
+      no_count = initiative.negative_votes,
+      no_percent = percent(initiative.negative_votes, issue.voter_count)
+    })
+  else
+    result_text = _("#{result}: No votes (0)", { result = result })
+  end
+  
+  ui.container { attr = { class = "result" }, content = result_text }
+
+end
+      

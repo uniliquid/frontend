@@ -33,6 +33,7 @@ return {
 ["API keys"] = "API-碼";
 ["Abandon global delegation for this area"] = "停止此領域中的全面委任";
 ["Abandon unit and area delegations for this issue"] = "停止此議題的單位及領域委任";
+["Abandon unit delegation"] = false;
 ["Abandon unit delegation for this area"] = "停止此領域的單位委任";
 ["About site"] = "關於本站";
 ["Abstention"] = "棄權";
@@ -97,8 +98,10 @@ return {
 ["Can't remove last initiator"] = "無法移除最末位發起者";
 ["Can't send confirmation email"] = "無法寄送確認電郵";
 ["Cancel"] = "取消";
-["Cancel [nullify]"] = "取消 [nullify]";
-["Cancel password reset"] = "取消密碼重設";
+["Cancel [nullify]"] = "取消";
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = "取消婉拒邀請";
 ["Cancel registration"] = "取消註冊";
 ["Canceled"] = "已取消";
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = "已取消 (在驗證期撤銷)";
 ["Canceled (issue not accepted)"] = "已取消 (議題不被接受)";
 ["Canceled (no initiative admitted)"] = "已取消 (無提案被遞交)";
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = "更改領域的委任";
 ["Change email"] = "更改電郵地址";
 ["Change email address"] = "更改電郵地址";
@@ -122,6 +126,8 @@ return {
 ["Change your notification email address"] = "更改您的通知用電郵地址";
 ["Change your password"] = "更改您的密碼";
 ["Change your screen name"] = "更改您的使用者代號";
+["Check delegations"] = false;
+["Check your delegations!"] = false;
 ["Choose initiator"] = "選擇發起者";
 ["Choose member"] = "選擇成員";
 ["Closed"] = "結案";
@@ -137,7 +143,6 @@ return {
 ["Confirmed address"] = "已確認電郵地址";
 ["Contacts"] = "通訊錄";
 ["Content"] = "內容";
-["Counting of votes"] = "統計票數";
 ["Counting starts soon"] = "計票即將開始";
 ["Create / edit area"] = "新增 / 編輯領域";
 ["Create / edit policy"] = "新增 / 編輯規則";
@@ -148,8 +153,10 @@ return {
 ["Create new unit"] = "新增新的單位";
 ["Created at"] = "新增於";
 ["Current name"] = "目前代號";
+["Current phase is already closed."] = false;
 ["Current status"] = "目前狀態";
 ["Current trustee"] = "目前受託人";
+["Current unit and area delegations need confirmation"] = false;
 ["Current votings in areas you are member of and issues you are interested in:"] = "目前在您的領域或您所關心的議題中正進行的表決：";
 ["Currently no API key is set."] = "目前並無 API-碼被設置.";
 ["Currently required"] = "目前所需人數";
@@ -221,10 +228,13 @@ return {
 ["Everything"] = "全部";
 ["External memberships"] = "外部成員";
 ["External posts"] = "外部職位";
+["Finish delegation check"] = false;
 ["Finish voting"] = "完成投票";
 ["Finished"] = "已結束";
 ["Finished (with winner)"] = "已結束 (有獲選者)";
 ["Finished (without winner)"] = "已結束 (無獲選者)";
+["Forgot login name?"] = false;
+["Forgot password?"] = false;
 ["Free timing"] = "自定期限";
 ["Friday"] = "週五";
 ["Frozen"] = "底定期";
@@ -235,6 +245,7 @@ return {
 ["Half frozen at"] = "半底定於";
 ["Hello\n\n"] = "您好\n\n";
 ["Hello "] = "您好 ";
+["Hello,\n\n"] = false;
 ["Help #{id}"] = "說明文件 #{id}";
 ["Help for: #{text}"] = "#{text} 的說明文件";
 ["Hide"] = "隱藏";
@@ -295,6 +306,7 @@ return {
 ["Invited"] = "已被邀請";
 ["Issue"] = "議題";
 ["Issue ##{id}"] = "議題 ##{id}";
+["Issue ID"] = false;
 ["Issue accepted"] = "議題被接受";
 ["Issue canceled"] = "議題被取消";
 ["Issue delegation"] = "議題委任";
@@ -302,6 +314,7 @@ return {
 ["Issue finished"] = "議題已結束";
 ["Issue finished without voting"] = "議題未經表決而結束";
 ["Issue frozen"] = "議題已底定";
+["Issue has been canceled"] = false;
 ["Issue pad"] = "議題討論版";
 ["Issue quorum"] = "議題法定門檻";
 ["Issue quorum denumerator"] = "議題法定門檻分母";
@@ -320,6 +333,8 @@ return {
 ["Locked?"] = "被封鎖？";
 ["Login"] = "登入";
 ["Login name"] = "帳號";
+["Login name request"] = false;
+["Login-Name: "] = false;
 ["Logout"] = "登出";
 ["Logout successful"] = "成功登出";
 ["Manage filter"] = "管理篩選條件";
@@ -444,9 +459,11 @@ return {
 ["Please choose two versions of the draft to compare"] = "請選擇兩個版本的草案以比較。";
 ["Please confirm your email address"] = "請確認您的電郵地址";
 ["Please confirm your email address by clicking the following link:\n\n"] = "請點擊下列連結以確認您的電郵地址：\n\n";
+["Please decide for each delegation to confirm or to revoke it!"] = false;
 ["Please enter the email reset code you have received:"] = "請輸入您所收到的電郵重設碼：";
 ["Please enter the invite code you've received."] = "請輸入您所收到的邀請碼";
 ["Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."] = "請輸入您的電郵地址。此地址將為您申請密碼重設時自動通知的收件信箱。此電郵地址將不被公開。在註冊完成後您將收到一封電郵內含認證此信箱的連結。";
+["Please enter your email address. You will receive an email with your login name."] = false;
 ["Please enter your login name. You will receive an email with a link to reset your password."] = "請輸入您的帳號。您將收到一封附有重設密碼連結的電子郵件。";
 ["Please enter your new password twice."] = "請輸入您的新密碼兩次：";
 ["Please select your preferred notification level"] = "請選擇所偏好的通知等級";
@@ -466,6 +483,7 @@ return {
 ["Proceed with registration"] = "繼續註冊";
 ["Profession"] = "職業";
 ["Profile"] = "個人簡介";
+["Public administrative notice:"] = false;
 ["Publish"] = "公開";
 ["Published"] = "已公開";
 ["Quorum"] = "法定門檻";
@@ -484,11 +502,11 @@ return {
 ["Remove initiator from initiative"] = "自提案移除發起者";
 ["Rendered"] = "已格式化";
 ["Repeat new password"] = "重複新密碼";
+["Request email with login name"] = false;
 ["Request password reset link"] = "申請重設密碼的連結";
 ["Resend activation email to '#{email}'"] = "重寄啟用電郵至 '#{email}'";
 ["Reset code"] = "重設碼";
 ["Reset code is invalid!"] = "重設碼無效";
-["Reset link has been send for this member"] = "重設碼已寄給該成員";
 ["Reset password"] = "重設密碼";
 ["Revoke initiative"] = "撤銷提案";
 ["Revoked at"] = "撤銷於";
@@ -577,6 +595,8 @@ return {
 ["This initiative is already revoked"] = "此提案已撤銷";
 ["This initiative is revoked"] = "此提案被撤銷";
 ["This invite key is connected with the following information:"] = "此邀請碼與下列資訊連結：";
+["This issue has been canceled by administrative intervention."] = false;
+["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = "此議題因未達 #{quorum} 的法定門檻而被取消。";
 ["This issue is already closed."] = "此議題已結案。";
 ["This issue is already frozen."] = "此議題已底定。";
@@ -701,6 +721,7 @@ return {
 ["Your password has been updated successfully"] = "密碼更改成功";
 ["Your rating has been deleted"] = "您的評比已刪除";
 ["Your rating has been updated"] = "您的評比已更新";
+["Your request has been processed."] = false;
 ["Your suggestion has been added"] = "您的建議已加入";
 ["Your support has been added to this initiative"] = "您的支持已被加上此提案";
 ["Your support has been removed from this initiative"] = "您的支持已自此提案被移除";
@@ -720,6 +741,7 @@ return {
 ["[not displayed public]"] = "[不公開顯示]";
 ["a bit unsatisfied"] = "略不滿意";
 ["abandoned"] = "被停用";
+["action"] = false;
 ["activated"] = "被啟用";
 ["and #{count} more initiatives"] = "之外 #{count} 個提案";
 ["and one more initiative"] = "之外一個提案";
@@ -727,6 +749,7 @@ return {
 ["at least #{count} approvals"] = "至少 #{count} 票肯定";
 ["at least #{count} approvals or abstentions"] = "至少 #{count} 票肯定或棄權";
 ["change discussion URL"] = "更改討論網址";
+["confirm"] = false;
 ["day [interval ago]"] = false;
 ["day [interval time left]"] = false;
 ["day [interval]"] = false;
@@ -734,6 +757,7 @@ return {
 ["days [interval time left]"] = false;
 ["days [interval]"] = false;
 ["deactivated"] = "停用";
+["delegated to"] = false;
 ["delegates to"] = "委任給";
 ["delete<br /><br />"] = "刪除<br /><br />";
 ["disabled"] = "停用";
@@ -761,11 +785,14 @@ return {
 ["possibly instable result caused by multistage majority"] = "因多階段多數可能導致不穩定結果";
 ["prohibit potentially instable results caused by multistage majorities"] = "防止因多階段多數導致潛在不穩定結果";
 ["reverse beat path to status quo (including ties)"] = "循環性優先順序導至現狀 (包括平手)";
+["revoke"] = false;
 ["satisfied"] = "滿意";
 ["should"] = "應當";
 ["should not"] = "不應";
+["the following login is connected to this email address:\n\n"] = false;
 ["to reset your password please click on the following link:\n\n"] = "欲重設您的密碼請點擊下列連結：\n\n";
 ["unit"] = "單位";
+["unit / area"] = false;
 ["until"] = "直到";
 ["variable"] = "不固定";
 ["with winner"] = "有獲選者";

@@ -1,79 +1,79 @@
-local issue = param.get("issue", "table")
-local initiatives_selector = param.get("initiatives_selector", "table")
+local member = param.get("member", "table") or app.session.member
 
-local initiatives
-if issue then
-  initiatives = issue.initiatives
-else
-  initiatives = initiatives_selector:exec()
-  initiatives:load_everything_for_member_id(app.session.member_id)
+local initiatives = param.get("initiatives", "table")
+local highlight_initiative_id = param.get ( "highlight_initiative_id", "number" )
+
+local for_initiative = param.get("initiative", "table")
+
+local for_event = param.get("for_event", atom.boolean)
+
+if for_initiative then
+  initiatives = { for_initiative }
 end
 
-local highlight_initiative = param.get("highlight_initiative", "table")
+ui.tag { 
+  tag = "ul",
+  attr = { class = "initiatives" },
+  content = function ()
+    local last_group
+    for i, initiative in ipairs(initiatives) do
+      local group
+      if initiative.issue.closed then
+        if initiative.rank == 1 then
+          group = "1st_rank"
+        elseif initiative.admitted then
+          group = "admitted"
+        elseif initiative.revoked_by_member_id then
+          group = "revoked"
+        else
+          group = "not_admitted"
+        end
+      end
+      if not for_initiative and group ~= last_group and not for_event then
 
-local for_member = param.get("for_member", "table") or app.session.member
+        local text
+        if group == "admitted" then
+          if initiative.issue.state == "finished_with_winner" then
+            text = _"Competing initiatives in pairwise comparison to winner:"
+          else
+            text = _"Competing initiatives in pairwise comparison to best initiative:"
+          end
+        end
+        if group == "not_admitted" then
+          text = _("Competing initiatives failed the 2nd quorum (#{num}/#{den}):", {
+            num = initiative.issue.policy.initiative_quorum_num,
+            den = initiative.issue.policy.initiative_quorum_den
+          } )
+        end
+        if text then
+          slot.put("<br />")
+          ui.container { attr = { class = "result" }, content = text }
+        end
+        last_group = group
+      end
 
-local limit = param.get("limit", atom.number)
-local hide_more_initiatives = param.get("hide_more_initiatives", atom.boolean)
-
-local more_initiatives_count
-if limit then
-  if #initiatives > limit then
-    more_initiatives_count = #initiatives - limit
-  end
-  initiatives = {}
-  for i, initiative in ipairs(issue.initiatives) do
-    if i <= limit then
-      initiatives[#initiatives+1] = initiative
+      local class = ""
+      if highlight_initiative_id == initiative.id then
+        class = "highlighted"
+      end
+      if app.session.member then
+        if initiative.member_info.supported then
+          class = class .. " supported"
+        end
+        if initiative.member_info.satisfied then
+          class = class .. " satisfied"
+        end
+      end
+      ui.tag {
+        tag = "li", attr = { class = class },
+        content = function ()
+          execute.view {
+            module = "initiative", view = "_list_element", params = {
+              initiative = initiative, for_event = for_event
+            }
+          }
+        end
+      }
     end
-  end
-end
-
-local name = "initiative_list"
-if issue then
-  name = "issue_" .. tostring(issue.id) ..  "_initiative_list"
-end
-
-ui.add_partial_param_names{ name }
-
-if highlight_initiative then
-  local highlight_initiative_found
-  for i, initiative in ipairs(initiatives) do
-    if initiative.id == highlight_initiative.id then
-      highhighlight_initiative_found = true
-    end
-  end
-  if not highhighlight_initiative_found then
-    initiatives[#initiatives+1] = highlight_initiative
-    if more_initiatives_count then
-      more_initiatives_count = more_initiatives_count - 1
-    end
-  end
-end
-for i, initiative in ipairs(initiatives) do
-  execute.view{
-    module = "initiative",
-    view = "_list_element",
-    params = {
-      initiative = initiative,
-      selected = highlight_initiative and highlight_initiative.id == initiative.id or nil,
-      for_member = for_member
-    }
-  }
-end
-
-if not hide_more_initiatives and more_initiatives_count and more_initiatives_count > 0 then
-  local text
-  if more_initiatives_count == 1 then
-    text = _("and one more initiative")
-  else
-    text = _("and #{count} more initiatives", { count = more_initiatives_count })
-  end
-  ui.link{
-    attr = { class = "more_initiatives_link" },
-    content = text,
-    module = "issue",
-    view = "show",
-    id = issue.id,
-  }
-end
+  end 
+}

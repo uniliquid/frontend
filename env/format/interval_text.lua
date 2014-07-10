@@ -7,7 +7,7 @@ function format.interval_text(value, options)
     :gsub("day", "{DAY}")
     :gsub("mons", "{MONS}")
     :gsub("mon", "{MON}")
-    :gsub("yeas", "{YEARS}")
+    :gsub("years", "{YEARS}")
     :gsub("year", "{YEAR}")
 
   if (options.mode == "time_left") then

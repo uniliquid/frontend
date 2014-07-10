@@ -20,8 +20,12 @@ function ui.filters(args)
         end
         local id     = param.get_id_cgi()
         local params = param.get_all_cgi()
+        local class = "ui_filter_head"
+        if filter.class then
+          class = class .. " " .. filter.class
+        end
         ui.container{
-          attr = { class = "ui_filter_head" },
+          attr = { class = class },
           content = function()
             slot.put(filter.label)
             for idx, option in ipairs(filter) do

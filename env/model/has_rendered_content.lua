@@ -47,7 +47,11 @@ function model.has_rendered_content(class, rendered_class, content_field_name)
       rendered[class.table .. "_id"] = self.id
     end
     rendered.format = "html"
-    rendered.content = format.wiki_text(self[content_field_name], self.formatting_engine)
+    if self.formatting_engine then
+      rendered.content = format.wiki_text(self[content_field_name], self.formatting_engine)
+    else
+      rendered.content = self[content_field_name]
+    end
     rendered:save()
     -- and return it
     return rendered

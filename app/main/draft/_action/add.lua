@@ -25,19 +25,24 @@ if not tmp or tmp.text_entries_left < 1 then
   return false
 end
 
-local formatting_engine = param.get("formatting_engine")
+local formatting_engine
+if config.enforce_formatting_engine then
+  formatting_engine = config.enforce_formatting_engine 
+else
+  formatting_engine = param.get("formatting_engine")
 
-local formatting_engine_valid = false
-for fe, dummy in pairs(config.formatting_engine_executeables) do
-  if formatting_engine == fe then
-    formatting_engine_valid = true
+  local formatting_engine_valid = false
+  for i, fe in pairs(config.formatting_engines) do
+    if formatting_engine == fe.id then
+      formatting_engine_valid = true
+    end
+  end
+  if not formatting_engine_valid then
+    error("invalid formatting engine!")
   end
 end
-if not formatting_engine_valid then
-  error("invalid formatting engine!")
-end
 
-if param.get("preview") then
+if param.get("preview") or param.get("edit") then
   return false
 end
 
@@ -57,5 +62,5 @@ end
 
 draft:render_content()
 
-slot.put_into("notice", _"New draft has been added to initiative")
+slot.put_into("notice", _"The initiative text has been updated")
 

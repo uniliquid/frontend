@@ -33,6 +33,7 @@ return {
 ["API keys"] = false;
 ["Abandon global delegation for this area"] = "Ĉesigi ĝeneralan delegacion pri tiu temaro";
 ["Abandon unit and area delegations for this issue"] = false;
+["Abandon unit delegation"] = false;
 ["Abandon unit delegation for this area"] = false;
 ["About site"] = false;
 ["Abstention"] = "Sindeteno";
@@ -98,7 +99,9 @@ return {
 ["Can't send confirmation email"] = "Ne povas dissendi konfirmoretpoŝton.";
 ["Cancel"] = "Nuligi";
 ["Cancel [nullify]"] = false;
-["Cancel password reset"] = "Nuligi pasvortoremeton";
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = "Nuligi rifuzon de la invito";
 ["Cancel registration"] = "Nuligi registradon";
 ["Canceled"] = "Abolita";
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = false;
 ["Canceled (issue not accepted)"] = false;
 ["Canceled (no initiative admitted)"] = false;
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = "Ŝanĝi delegacion por temaro";
 ["Change email"] = "Ŝanĝi retpoŝton";
 ["Change email address"] = "Ŝanĝi retpoŝtadreson";
@@ -122,6 +126,8 @@ return {
 ["Change your notification email address"] = "Ŝanĝi vian pornotifikan retpoŝtadreson";
 ["Change your password"] = "Ŝanĝi vian pasvorton";
 ["Change your screen name"] = false;
+["Check delegations"] = false;
+["Check your delegations!"] = false;
 ["Choose initiator"] = "Elekti inicianton";
 ["Choose member"] = "Elekti membron";
 ["Closed"] = "Fermita";
@@ -137,7 +143,6 @@ return {
 ["Confirmed address"] = "Konfirmita adreso";
 ["Contacts"] = "Kontaktoj";
 ["Content"] = "Enhavo";
-["Counting of votes"] = "Nombrado de voĉoj";
 ["Counting starts soon"] = false;
 ["Create / edit area"] = "Krei / prilabori temaron";
 ["Create / edit policy"] = "Krei / prilabori regularon";
@@ -148,8 +153,10 @@ return {
 ["Create new unit"] = false;
 ["Created at"] = "Kreita je";
 ["Current name"] = "Aktuala nomo";
+["Current phase is already closed."] = false;
 ["Current status"] = "Aktuala stato";
 ["Current trustee"] = false;
+["Current unit and area delegations need confirmation"] = false;
 ["Current votings in areas you are member of and issues you are interested in:"] = "Aktualaj voĉdonoj pri temoj, en kiuj vi membras kaj kiuj vin interesas:";
 ["Currently no API key is set."] = "Nuntempe ne ekzistas API-ŝlosilo";
 ["Currently required"] = "Nuntempe bezonata";
@@ -221,10 +228,13 @@ return {
 ["Everything"] = false;
 ["External memberships"] = "Eksteraj membrecoj";
 ["External posts"] = "Eksteraj postenoj";
+["Finish delegation check"] = false;
 ["Finish voting"] = "Fini voĉdonadon";
 ["Finished"] = "Finita";
 ["Finished (with winner)"] = false;
 ["Finished (without winner)"] = false;
+["Forgot login name?"] = false;
+["Forgot password?"] = false;
 ["Free timing"] = false;
 ["Friday"] = "Vendredo";
 ["Frozen"] = "Ĝelita";
@@ -235,6 +245,7 @@ return {
 ["Half frozen at"] = "Duone ĝelita je";
 ["Hello\n\n"] = false;
 ["Hello "] = "Saluton ";
+["Hello,\n\n"] = false;
 ["Help #{id}"] = "Helpo #{id}";
 ["Help for: #{text}"] = "Helpo por: #{text}";
 ["Hide"] = "Kaŝi";
@@ -295,6 +306,7 @@ return {
 ["Invited"] = "Invitita";
 ["Issue"] = "Temo";
 ["Issue ##{id}"] = "Temo ##{id}";
+["Issue ID"] = false;
 ["Issue accepted"] = "Temo akceptita";
 ["Issue canceled"] = "Temo nuligita";
 ["Issue delegation"] = "Temodelegacio";
@@ -302,6 +314,7 @@ return {
 ["Issue finished"] = "Temo finita";
 ["Issue finished without voting"] = "Temo finita sen voĉdono";
 ["Issue frozen"] = "Temo ĝelita";
+["Issue has been canceled"] = false;
 ["Issue pad"] = false;
 ["Issue quorum"] = "Kvorumo por temo";
 ["Issue quorum denumerator"] = "Denominatoro de tema kvorumo";
@@ -320,6 +333,8 @@ return {
 ["Locked?"] = "Ĉu blokita?";
 ["Login"] = "Ensaluti";
 ["Login name"] = "Salutnomo";
+["Login name request"] = false;
+["Login-Name: "] = false;
 ["Logout"] = "Adiaŭi";
 ["Logout successful"] = "Adiaŭo sukcesa";
 ["Manage filter"] = "Administri filtrilojn";
@@ -444,9 +459,11 @@ return {
 ["Please choose two versions of the draft to compare"] = "Bonvolu elekti du versiojn de la skizo por kompari ili.";
 ["Please confirm your email address"] = false;
 ["Please confirm your email address by clicking the following link:\n\n"] = false;
+["Please decide for each delegation to confirm or to revoke it!"] = false;
 ["Please enter the email reset code you have received:"] = "Bonvolu enigi retpoŝtoremetokodon, kiun vi ricevis:";
 ["Please enter the invite code you've received."] = "Bonvolu enigi la invitokodon, kiun vi ricevis.";
 ["Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."] = "Bonvolu enigi vian retadreson. Tiu adreso estas uzita por aŭtomataj sciigoj (se vi petas tiajn) kaj por remeti la pasvorton. Tiu adreso ne estos publikigita. Post la fino de la registrado, vi ricevos retpoŝton kun ligilo al la konfirmo de la adreso.";
+["Please enter your email address. You will receive an email with your login name."] = false;
 ["Please enter your login name. You will receive an email with a link to reset your password."] = "Bonvolu enigi vian salutnomon. Vi ricevos retpoŝton kun ligilo al la remeto de la pasvorto.";
 ["Please enter your new password twice."] = "Bonvolu enigi dufoje vian novan pasvorton:";
 ["Please select your preferred notification level"] = false;
@@ -466,6 +483,7 @@ return {
 ["Proceed with registration"] = false;
 ["Profession"] = "Profesio";
 ["Profile"] = "Profilo";
+["Public administrative notice:"] = false;
 ["Publish"] = "Publikigi";
 ["Published"] = "Publikigita";
 ["Quorum"] = "Kvorumo";
@@ -484,11 +502,11 @@ return {
 ["Remove initiator from initiative"] = "Ĉu forigi iniciinton de la iniciato?";
 ["Rendered"] = "Bildigita";
 ["Repeat new password"] = "Ripeti novan pasvorton";
+["Request email with login name"] = false;
 ["Request password reset link"] = "Demandi ligilon por remeti la pasvorton";
 ["Resend activation email to '#{email}'"] = "Resendi aktivigan retpoŝton al '#{email}'";
 ["Reset code"] = "Remetokodo";
 ["Reset code is invalid!"] = "La remetokodo estas malvalida!";
-["Reset link has been send for this member"] = "Remetoligilo estas dissendita";
 ["Reset password"] = "Remeti pasvorton";
 ["Revoke initiative"] = "Nuligi iniciaton";
 ["Revoked at"] = "Nuligita je";
@@ -577,6 +595,8 @@ return {
 ["This initiative is already revoked"] = "Tiu iniciato estas jam nuligita";
 ["This initiative is revoked"] = "Tiu iniciato estas nuligita";
 ["This invite key is connected with the following information:"] = false;
+["This issue has been canceled by administrative intervention."] = false;
+["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = "Tiu temo estas abolita. Ĝi malsukcesis la kvorumon de #{quorum}.";
 ["This issue is already closed."] = "La temo estas jam fermita.";
 ["This issue is already frozen."] = "La temo estas jam ĝelita";
@@ -701,6 +721,7 @@ return {
 ["Your password has been updated successfully"] = "Via pasvorto estas sukcese ĝisdatigita";
 ["Your rating has been deleted"] = "Via takso estas viŝita";
 ["Your rating has been updated"] = "Via takso estas ĝisdatigita";
+["Your request has been processed."] = false;
 ["Your suggestion has been added"] = "Via sugesto estas aldonita";
 ["Your support has been added to this initiative"] = "Via subteno estas aldonita al la iniciato";
 ["Your support has been removed from this initiative"] = "Via subteno estas forigita de la iniciato";
@@ -720,6 +741,7 @@ return {
 ["[not displayed public]"] = false;
 ["a bit unsatisfied"] = "iomete malkontenta";
 ["abandoned"] = "malaplikita";
+["action"] = false;
 ["activated"] = "aktivigita";
 ["and #{count} more initiatives"] = "kaj #{count} pliaj iniciatoj";
 ["and one more initiative"] = false;
@@ -727,6 +749,7 @@ return {
 ["at least #{count} approvals"] = false;
 ["at least #{count} approvals or abstentions"] = false;
 ["change discussion URL"] = false;
+["confirm"] = false;
 ["day [interval ago]"] = false;
 ["day [interval time left]"] = false;
 ["day [interval]"] = false;
@@ -734,6 +757,7 @@ return {
 ["days [interval time left]"] = false;
 ["days [interval]"] = false;
 ["deactivated"] = "malaktivigita";
+["delegated to"] = false;
 ["delegates to"] = false;
 ["delete<br /><br />"] = false;
 ["disabled"] = "malaktiva";
@@ -761,11 +785,14 @@ return {
 ["possibly instable result caused by multistage majority"] = false;
 ["prohibit potentially instable results caused by multistage majorities"] = false;
 ["reverse beat path to status quo (including ties)"] = false;
+["revoke"] = false;
 ["satisfied"] = "kontenta";
 ["should"] = "devus";
 ["should not"] = "ne devus";
+["the following login is connected to this email address:\n\n"] = false;
 ["to reset your password please click on the following link:\n\n"] = "por remeti vian pasvorton bonvolu klaki sekvan ligilon:\n\n";
 ["unit"] = false;
+["unit / area"] = false;
 ["until"] = "ĝis";
 ["variable"] = false;
 ["with winner"] = false;

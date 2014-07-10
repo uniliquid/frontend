@@ -1,21 +1,52 @@
-ui.title(_"Change your login")
+ui.titleMember(_"login name")
 
-util.help("member.settings.login", _"Change login")
+execute.view {
+  module = "member", view = "_sidebar_whatcanido", params = {
+    member = app.session.member
+  }
+}
 
 ui.form{
-  attr = { class = "vertical" },
+  attr = { class = "wide" },
   module = "member",
   action = "update_login",
   routing = {
     ok = {
       mode = "redirect",
-      module = "index",
-      view = "index"
+      module = "member",
+      view = "show",
+      id = app.session.member_id
     }
   },
   content = function()
-    ui.field.text{ label = _"Login", name = "login", value = app.session.member.login }
-    ui.submit{ value = _"Change login" }
+    ui.section( function()
+      ui.sectionHead( function()
+        ui.heading { level = 1, content = _"Login name" }
+      end )
+
+      ui.sectionRow( function()
+        ui.heading { level = 2, content = _"Enter a new login name" }
+        ui.field.text{ name = "login", value = app.session.member.login }
+        
+        slot.put("<br />")
+        
+        ui.tag{
+          tag = "input",
+          attr = {
+            type = "submit",
+            class = "btn btn-default",
+            value = _"Save"
+          },
+          content = ""
+        }
+        slot.put("<br /><br /><br />")
+
+        ui.link {
+          module = "member", view = "show", id = app.session.member_id, 
+          content = _"Cancel"
+        }
+      end )
+    end )
   end
 }
 

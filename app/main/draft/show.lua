@@ -2,39 +2,51 @@ local draft = Draft:new_selector():add_where{ "id = ?", param.get_id() }:single_
 local source = param.get("source", atom.boolean)
 
 execute.view{
-  module = "draft",
+  module = "issue",
   view = "_head",
-  params = { draft = draft}
+  params = { issue = draft.initiative.issue }
 }
 
-slot.put_into("title", " &middot; " .. _"History")
-
-if source then
-  ui.actions(function()
+ui.section( function()
+  
+  ui.sectionHead( function()
     ui.link{
-      content = _"Rendered",
-      module = "draft",
-      view = "show",
-      id = param.get_id(),
-      params = { source = false }
+      module = "initiative", view = "show", id = draft.initiative.id,
+      content = function ()
+        ui.heading { 
+          level = 1,
+          content = draft.initiative.display_name
+        }
+      end
     }
-    end
-  )
-else
-  ui.actions(function()
-    ui.link{
-      content = _"Source",
+    ui.container { attr = { class = "right" }, content = function()
+      if source then
+        ui.link{
+          content = _"Rendered",
+          module = "draft",
+          view = "show",
+          id = param.get_id(),
+          params = { source = false }
+        }
+      else
+        ui.link{
+          content = _"Source",
+          module = "draft",
+          view = "show",
+          id = param.get_id(),
+          params = { source = true }
+        }
+      end
+    end }
+    ui.heading { level = 2, content = _("Draft revision #{id}", { id = draft.id } ) }
+  end)
+  
+  ui.sectionRow( function()
+  
+    execute.view{
       module = "draft",
-      view = "show",
-      id = param.get_id(),
-      params = { source = true }
+      view = "_show",
+      params = { draft = draft, source = source }
     }
-    end
-  )
-end
-
-execute.view{
-  module = "draft",
-  view = "_show",
-  params = { draft = draft, source = source }
-}
+  end)
+end)

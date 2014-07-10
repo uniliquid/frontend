@@ -14,6 +14,28 @@ if app.session.member.notify_level == nil then
   }
 end
 
+if config.check_delegations_interval_soft then
+  local member = Member:new_selector()
+    :add_where({ "id = ?", app.session.member_id })
+    :add_field({ "now() > COALESCE(last_delegation_check, activated) + ?::interval", config.check_delegations_interval_soft }, "needs_delegation_check_soft")
+    :single_object_mode()
+    :exec()
+    
+
+  if member.needs_delegation_check_soft then
+
+    local delegations = Delegation:delegations_to_check_for_member_id(member.id)
+    
+    if #delegations > 0 then
+      notification_links[#notification_links+1] = {
+        module = "index", view = "check_delegations", 
+        text = _"Check your delegations!"
+      }
+    end
+    
+  end
+end
+
 local broken_delegations_count = Delegation:selector_for_broken(app.session.member_id):count()
 
 if broken_delegations_count > 0 then

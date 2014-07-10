@@ -6,9 +6,6 @@ local contacts_selector = Contact:build_selector{
 ui.title(_"Contacts")
 
 
-util.help("contact.list")
-
-
 ui.paginate{
   selector = contacts_selector,
   content = function()

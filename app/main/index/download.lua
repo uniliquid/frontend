@@ -15,12 +15,10 @@ slot.select("actions", function()
   }
 end)
 
-util.help("index.download", _"Download")
-
 ui.container{
   attr = { class = "wiki use_terms" },
   content = function()
-    slot.put(format.wiki_text(config.download_use_terms))
+    slot.put(config.download_use_terms)
   end
 }
 

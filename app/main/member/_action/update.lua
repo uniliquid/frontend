@@ -23,11 +23,11 @@ for i, field in ipairs(fields) do
 end
 
 if not config.locked_profile_fields.statement then
-  local formatting_engine = param.get("formatting_engine")
+  local formatting_engine = param.get("formatting_engine") or config.enforce_formatting_engine
 
   local formatting_engine_valid = false
-  for fe, dummy in pairs(config.formatting_engine_executeables) do
-    if formatting_engine == fe then
+  for i, fe in pairs(config.formatting_engines) do
+    if formatting_engine == fe.id then
       formatting_engine_valid = true
     end
   end

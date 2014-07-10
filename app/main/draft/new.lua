@@ -1,24 +1,27 @@
-slot.put_into("title", _"Edit draft")
-
 local initiative = Initiative:by_id(param.get("initiative_id"))
+initiative:load_everything_for_member_id(app.session.member_id)
+initiative.issue:load_everything_for_member_id(app.session.member_id)
 
-ui.actions(function()
-  ui.link{
-    content = function()
-        ui.image{ static = "icons/16/cancel.png" }
-        slot.put(_"Cancel")
-    end,
-    module = "initiative",
-    view = "show",
-    id = initiative.id
+
+execute.view{
+  module = "issue", view = "_head", params = {
+    issue = initiative.issue,
+    initiative = initiative
   }
-end)
+}
+
+execute.view { 
+  module = "issue", view = "_sidebar_issue", 
+  params = {
+    issue = initiative.issue,
+  }
+}
 
 
 
 ui.form{
   record = initiative.current_draft,
-  attr = { class = "vertical" },
+  attr = { class = "vertical section" },
   module = "draft",
   action = "add",
   params = { initiative_id = initiative.id },
@@ -31,78 +34,103 @@ ui.form{
     }
   },
   content = function()
-
-    ui.field.text{ label = _"Unit", value = initiative.issue.area.unit.name, readonly = true }
-    ui.field.text{ label = _"Area", value = initiative.issue.area.name, readonly = true }
-    ui.field.text{ label = _"Policy", value = initiative.issue.policy.name, readonly = true }
-    ui.field.text{ label = _"Issue", value = _("Issue ##{id}", { id = initiative.issue.id } ), readonly = true }
-    slot.put("<br />")
-    ui.field.text{ label = _"Initiative", value = initiative.name, readonly = true }
-
+  
+    ui.sectionHead( function()
+      ui.heading { level = 1, content = initiative.display_name }
+    end)
+    
     if param.get("preview") then
-      ui.container{
-        attr = { class = "draft_content wiki" },
-        content = function()
-          slot.put(format.wiki_text(param.get("content"), param.get("formatting_engine")))
+      ui.sectionRow( function()
+        ui.field.hidden{ name = "formatting_engine", value = param.get("formatting_engine") }
+        ui.field.hidden{ name = "content", value = param.get("content") }
+        if config.enforce_formatting_engine then
+          formatting_engine = config.enforce_formatting_engine
+        else
+          formatting_engine = param.get("formatting_engine")
         end
-      }
-      slot.put("<br />")
-      ui.submit{ text = _"Save" }
-      slot.put("<br />")
-      slot.put("<br />")
-    end
-    slot.put("<br />")
-
-
-    ui.field.select{
-      label = _"Wiki engine",
-      name = "formatting_engine",
-      foreign_records = {
-        { id = "rocketwiki", name = "RocketWiki" },
-        { id = "compat", name = _"Traditional wiki syntax" }
-      },
-      attr = {id = "formatting_engine"},
-      foreign_id = "id",
-      foreign_name = "name"
-    }
-    ui.tag{
-      tag = "div",
-      content = function()
-        ui.tag{
-          tag = "label",
-          attr = { class = "ui_field_label" },
-          content = function() slot.put("&nbsp;") end,
-        }
-        ui.tag{
+        ui.container{
+          attr = { class = "draft" },
           content = function()
-            ui.link{
-              text = _"Syntax help",
-              module = "help",
-              view = "show",
-              id = "wikisyntax",
-              attr = {onClick="this.href=this.href.replace(/wikisyntax[^.]*/g, 'wikisyntax_'+getElementById('formatting_engine').value)"}
-            }
-            slot.put(" ")
-            ui.link{
-              text = _"(new window)",
-              module = "help",
-              view = "show",
-              id = "wikisyntax",
-              attr = {target = "_blank", onClick="this.href=this.href.replace(/wikisyntax[^.]*/g, 'wikisyntax_'+getElementById('formatting_engine').value)"}
-            }
+            slot.put(format.wiki_text(param.get("content"), formatting_engine))
           end
         }
-      end
-    }
-    ui.field.text{
-      label = _"Content",
-      name = "content",
-      multiline = true,
-      attr = { style = "height: 50ex;" },
-      value = param.get("content")
-   }
 
-    ui.submit{ name = "preview", text = _"Preview" }
-    ui.submit{ text = _"Save" }
+        slot.put("<br />")
+        ui.tag{
+          tag = "input",
+          attr = {
+            type = "submit",
+            class = "btn btn-default",
+            value = _'Publish now'
+          },
+          content = ""
+        }
+        slot.put("<br />")
+        slot.put("<br />")
+
+        ui.tag{
+          tag = "input",
+          attr = {
+            type = "submit",
+            name = "edit",
+            class = "btn-link",
+            value = _'Edit again'
+          },
+          content = ""
+        }
+        slot.put(" | ")
+        ui.link{
+          content = _"Cancel",
+          module = "initiative",
+          view = "show",
+          id = initiative.id
+        }
+      end )
+
+    else
+      ui.sectionRow( function()
+        execute.view{ module = "initiative", view = "_sidebar_wikisyntax" }
+      
+        if not config.enforce_formatting_engine then
+          ui.field.select{
+            label = _"Wiki engine",
+            name = "formatting_engine",
+            foreign_records = config.formatting_engines,
+            attr = {id = "formatting_engine"},
+            foreign_id = "id",
+            foreign_name = "name"
+          }
+        end
+
+        ui.heading{ level = 2, content = _"Enter your proposal and/or reasons" }
+
+        ui.field.text{
+          name = "content",
+          multiline = true,
+          attr = { style = "height: 50ex; width: 100%;" },
+          value = param.get("content")
+        }
+        ui.tag{
+          tag = "input",
+          attr = {
+            type = "submit",
+            name = "preview",
+            class = "btn btn-default",
+            value = _'Preview'
+          },
+          content = ""
+        }
+        slot.put("<br />")
+        slot.put("<br />")
+        
+        ui.link{
+          content = _"Cancel",
+          module = "initiative",
+          view = "show",
+          id = initiative.id
+        }
+        
+      end )
+    end
   end
 }

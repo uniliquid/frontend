@@ -33,6 +33,9 @@ function Contact:build_selector(args)
   if args.member_id then
     selector:add_where{ "member_id = ?", args.member_id }
   end
+  if args.public ~= nil then
+    selector:add_where{ "public = ?", args.public }
+  end
   if args.order then
     if args.order == "name" then
       selector:add_order_by("member.name")

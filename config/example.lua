@@ -12,9 +12,9 @@ config.instance_name = "Instance name"
 config.app_service_provider = "Snake Oil<br/>10000 Berlin<br/>Germany"
 
 
--- A rocketwiki formatted text the user has to accept while registering
+-- A HTML formatted text the user has to accept while registering
 -- ------------------------------------------------------------------------
-config.use_terms = "=== Terms of Use ==="
+config.use_terms = "<h1>Terms of Use</h1><p>Insert terms here</p>"
 
 
 -- Checkbox(es) the user has to accept while registering
@@ -40,14 +40,34 @@ config.absolute_base_url = "http://example.com/"
 
 -- Connection information for the LiquidFeedback database
 -- ------------------------------------------------------------------------
-config.database = { engine='postgresql', dbname='liquid_feedback' }
+config.database = { engine='postgresql', dbname='uniliquid' }
 
 
 -- Location of the rocketwiki binaries
 -- ------------------------------------------------------------------------
-config.formatting_engine_executeables = {
-  rocketwiki= "/opt/rocketwiki-lqfb/rocketwiki-lqfb",
-  compat = "/opt/rocketwiki-lqfb/rocketwiki-lqfb-compat"
+config.enforce_formatting_engine = "markdown2"
+config.formatting_engines = {
+  { id = "markdown2",
+    name = "python-markdown2",
+    executable = "markdown2",
+    args = {'-s', 'escape', '-x', 'cuddled-lists,nofollow,wiki-tables'},
+    remove_images = true
+  },
+  { id = "markdown_py",
+    name = "Python Markdown",
+    executable = "markdown_py",
+    args = {'-s', 'escape', '-x', 'extra', '-x', 'nl2br', '-x', 'sane_lists'},
+    remove_images = true
+  },
+  { id = "rocketwiki",
+    name = "RocketWiki",
+    executable = "/opt/rocketwiki-lqfb/rocketwiki-lqfb"
+  },
+  { id = "compat",
+    name = "Traditional WIKI syntax",
+    executable = "/opt/rocketwiki-lqfb/rocketwiki-lqfb-compat"
+  },
+
 }
 
 
@@ -88,6 +108,17 @@ config.public_access = "none"
 -- notation is according to postgresql intervals, default: no warning at all
 -- ------------------------------------------------------------------------
 -- config.delegation_warning_time = '6 months'
+
+-- after which time a user is advised (_soft) or forced (_hard) to check
+-- unit and area delegations. default: no check at all
+-- ------------------------------------------------------------------------
+-- config.check_delegations_interval_hard = "6 months"
+-- config.check_delegations_interval_soft = "3 months"
+
+-- default option when checking delegations
+-- available options: "confirm", "revoke" and "none", default: "confirm"
+-- ------------------------------------------------------------------------
+-- config.check_delegations_default = "confirm"
 
 -- Prefix of all automatic mails, defaults to "[Liquid Feedback] "
 -- ------------------------------------------------------------------------
@@ -132,9 +163,13 @@ config.public_access = "none"
 --  photo =  function(data) return extos.pfilter(data, "convert", "jpeg:-", "-thumbnail", "240x240", "jpeg:-") end
 --}
 
--- Display a public message of the day
+-- Display a html formatted public message of the day
 -- ------------------------------------------------------------------------
--- config.motd_public = "===Message of the day===\nThe MOTD is formatted with rocket wiki"
+-- config.motd_public = "<h1>Message of the day (public)</h1><p>The MOTD is formatted with HTML</p>"
+
+-- Display a html formatted internal message of the day
+-- ------------------------------------------------------------------------
+-- config.motd_intern = "<h1>Message of the day (intern)</h1><p>The MOTD is formatted with HTML</p>"
 
 -- Automatic issue related discussion URL
 -- ------------------------------------------------------------------------
