@@ -218,7 +218,7 @@ end
 
 filters[#filters+1] = filter
 
-if member then
+if member and not config.disable_policy_selection then
   local filter = {
     name = "filter_policy",
   }
@@ -266,7 +266,7 @@ if member then
   filters[#filters+1] = filter
 end
 
-if member then
+if member and not config.disable_policy_selection then
   local filter_policy = param.get_all_cgi()["filter_policy"]
 
   if filter_policy == "selection" then

@@ -32,20 +32,20 @@ ui.container{ attr = { class = "unit_head", style = style }, content = function(
     end
   end }
 
-  if show_content then
+  if false and show_content then
     ui.container{ attr = { class = "content" }, content = function()
 
       if member and member:has_voting_right_for_unit_id(unit.id) then
         if app.session.member_id == member.id then
-          ui.tag{ content = _"You have voting privileges for this unit" }
-          slot.put(" &middot; ")
+          --ui.tag{ content = _"You have voting privileges for this unit" }
+          --slot.put(" &middot; ")
           if unit.delegation_info.first_trustee_id == nil then
             ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/house_go.png" }, text = _"Delegate unit", module = "delegation", view = "show", params = { unit_id = unit.id, member_id = member.id } }
           else
             ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/house_go.png" }, text = _"Change unit delegation", module = "delegation", view = "show", params = { unit_id = unit.id, member_id = member.id } }
           end
-        else
-          ui.tag{ content = _"Member has voting privileges for this unit" }
+        --else
+        --  ui.tag{ content = _"Member has voting privileges for this unit" }
         end
       end
     end }

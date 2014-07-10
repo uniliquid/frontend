@@ -49,7 +49,7 @@ ui.actions(function()
     params = {
       tab = "open",
       -- filter_policy_sel = "p1",
-      filter_policy = only_direct and "direct" or "any",
+      filter_policy = config.disable_policy_selection and "any" or only_direct and "direct" or "any",
       filter_voting = "not_voted",
       filter = "frozen",
       filter_interest = only_interest and "area" or "unit"

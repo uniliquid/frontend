@@ -73,10 +73,11 @@ ui.form{
   content = function()
     ui.field.text{ label = _"Unit",  value = area.unit.name }
     ui.field.text{ label = _"Area",  value = area.name }
-    slot.put("<br />")
     if issue_id then
+      slot.put("<br />")
       ui.field.text{ label = _"Issue",  value = issue_id }
     elseif policy then
+      slot.put("<br />")
       ui.field.hidden{ name = "policy_id", value = policy.id }
       ui.field.text{ label = _"Policy",  value = policy.name }
       if policy.free_timeable then
@@ -100,7 +101,7 @@ ui.form{
           ui.field.text{ label = _"Free timing", name = "free_timing", value = param.get("free_timing") }
         end
       end
-    else
+    elseif not config.disable_policy_selection then
       tmp = { { id = -1, name = _"Please choose a policy" } }
       for i, allowed_policy in ipairs(area.allowed_policies) do
         if not allowed_policy.polling then

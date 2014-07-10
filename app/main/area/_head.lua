@@ -41,8 +41,9 @@ ui.container{ attr = { class = "area_head", style = style }, content = function(
 
         if membership then
           
+          
           if app.session.member_id == member.id then
-            ui.tag{ content = _"You are participating in this area" }
+            --[[ui.tag{ content = _"You are participating in this area" }
             slot.put(" ")
             ui.tag{ content = function()
               slot.put("(")
@@ -63,7 +64,7 @@ ui.container{ attr = { class = "area_head", style = style }, content = function(
                 }
               }
               slot.put(")")
-            end }
+            end }]]
           else
             ui.tag{ content = _"Member is participating in this area" }
           end
@@ -88,14 +89,14 @@ ui.container{ attr = { class = "area_head", style = style }, content = function(
         end
         
         if app.session.member_id == member.id and app.session.member:has_voting_right_for_unit_id(area.unit_id) then
-
+--[[
           slot.put(" &middot; ")
           if area.delegation_info.own_delegation_scope ~= "area" then
             ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_go.png" }, text = _"Delegate area", module = "delegation", view = "show", params = { area_id = area.id, member_id = member.id } }
           else
             ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_go.png" }, text = _"Change area delegation", module = "delegation", view = "show", params = { area_id = area.id, member_id = member.id } }
           end
-          slot.put(" &middot; ")
+          slot.put(" &middot; ")]]
 
           ui.link{
             content = function()

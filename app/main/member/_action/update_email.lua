@@ -22,7 +22,7 @@ end
 
 email = util.trim(email)
 
-if not email:match('^[^@%s]+@[^@%s]+$') then
+if not email or not email:match('^[^@%s]+@[^@%s]+$') then
   slot.put_into("error", _"This email address is not valid!")
   return false
 end
