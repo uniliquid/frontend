@@ -1,0 +1,1567 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* end reset */
+/* color, fonts, gaps and border radius settings */
+.list-style {
+  list-style: disc;
+  padding-left: 20px;
+}
+/*
+ * basic font settings
+ */
+html {
+  overflow-y: scroll;
+}
+body {
+  font: normal 10pt / 125% sans-serif;
+  background-color: #397ab6;
+  color: #000000;
+  background-attachment: fixed;
+}
+.page {
+  background-image: url("back50.png");
+  max-width: 1240px;
+  border-radius: 0 0 2px 2px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+/*
+ * messages
+ */
+.slot_notice,
+.slot_warning,
+.slot_error {
+  font: bold 12pt / 125% sans-serif;
+  padding: 12pt;
+}
+.slot_motd {
+  background-color: #ccc;
+  padding: 12pt;
+}
+.slot_notice {
+  background-color: #0c0;
+  color: #fff;
+}
+.slot_warning {
+  background-color: #f80;
+  color: #000;
+}
+.slot_error {
+  background-color: #c00;
+  color: #fff;
+}
+/*
+ * global styles
+ */
+/* headlines */
+h1 {
+  font: bold 12pt / 125% sans-serif;
+  margin-bottom: 1ex;
+}
+h1:last-child {
+  margin-bottom: 0;
+}
+h2 {
+  font: normal 12pt / 125% sans-serif;
+}
+h3 {
+  font: bold 10pt / 125% sans-serif;
+}
+h1:first-child,
+h2:first-child,
+h3:first-child {
+  margin-top: 0;
+}
+.right {
+  float: right;
+}
+.left {
+  float: left;
+  margin-right: 9px;
+}
+/* paragraphs */
+p {
+  margin-bottom: 1.5ex;
+}
+p:last-child {
+  margin-bottom: 0;
+}
+/* lists */
+ul.ul {
+  margin-left: 9px;
+  margin-bottom: 1.5ex;
+  list-style: disc;
+  padding-left: 20px;
+}
+ul.ul li {
+  margin: 3px 0;
+}
+ul.ul li:last-child {
+  margin-bottom: 0;
+}
+ul.ul:last-child {
+  margin-bottom: 0;
+}
+/* tables */
+table td {
+  padding: 0.3ex 0.3em;
+}
+/* links */
+a {
+  color: #222277;
+}
+a.disabled {
+  color: #777777;
+  cursor: default;
+}
+/* formulars */
+form.inline {
+  display: inline;
+}
+form.inline div {
+  display: inline;
+}
+img {
+  vertical-align: middle;
+}
+.icon16 {
+  width: 16px;
+  height: 16px;
+}
+.icon24 {
+  width: 24px;
+  height: 24px;
+}
+.icon32 {
+  width: 32px;
+  height: 32px;
+}
+.icon48 {
+  width: 48px;
+  height: 48px;
+}
+img.star {
+  width: 24px;
+  height: 24px;
+}
+/*
+ * Avatars
+ */
+.microAvatar {
+  text-wrap: nowrap;
+}
+.microAvatar img,
+img.micro_avatar {
+  vertical-align: middle;
+  border-radius: 2px;
+  width: 24px;
+  height: 24px;
+}
+img.micro_avatar.highlighted {
+  margin: 0;
+  border: 2px solid #ff8800;
+}
+/*
+ * delegation info
+ */
+.vote_info,
+.delegation_info {
+  white-space: nowrap;
+  float: right;
+  text-decoration: none;
+  margin: -2px;
+}
+.vote_info img,
+.delegation_info img {
+  vertical-align: middle;
+}
+.delegation_info img {
+  border-radius: 2px;
+  margin: 2px;
+}
+.delegation_info.suspended {
+  opacity: 0.3;
+}
+.slot_title .delegation_info.suspended {
+  opacity: 1;
+}
+/*
+ * generic attributes
+ */
+.hide {
+  display: none;
+}
+.head_outer {
+  background-color: #000000;
+  color: #ffffff;
+  overflow: auto;
+  margin: 0 auto;
+  max-width: 1240px;
+}
+.head {
+  padding: 0.3ex 0;
+  margin: 0 12pt;
+  /* 
+  * the logo and instance name
+  */
+  /*
+  * navigation bar
+  */
+}
+.head a {
+  color: #ffffff;
+}
+.head .logo {
+  display: block;
+  padding: 9px 0;
+  text-decoration: none;
+  font: bold 10pt / 100% sans-serif;
+}
+.head .logo .liquid {
+  color: #ffffff;
+}
+.head .logo .feedback {
+  color: #00ee00;
+}
+.head .logo .instanceName {
+  font: normal 10pt / 100% sans-serif;
+  padding-top: 9px;
+}
+.head .logo:hover {
+  text-decoration: underline;
+}
+.head .notifications {
+  margin-left: 0.6em;
+  text-decoration: none;
+}
+.head .notifications .count {
+  background-color: #f00;
+  color: #000;
+  padding: 0.2ex 0.25em;
+  border-radius: 1ex;
+  vertical-align: top;
+}
+.head .notifications .icon {
+  width: 24px;
+  height: 24px;
+}
+.head .nav {
+  float: right;
+  padding-top: 6px;
+}
+.head .nav ul,
+.head .nav > ul > li:first-child {
+  display: inline;
+}
+.head .nav input[name=q] {
+  width: 12em;
+  border-radius: 2px;
+  padding: 2px;
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #397ab6;
+  margin-right: 0.6em;
+}
+.head .nav input[name=q]:focus {
+  outline: 2px solid #397ab6;
+}
+/*
+ * title
+ */
+.slot_title {
+  padding-left: 12pt;
+  padding-right: 12pt;
+  font: bold 12pt / 125% sans-serif;
+  color: #ffffff;
+  padding-top: 12pt;
+}
+.slot_title a {
+  color: #ffffff;
+  display: inline-block;
+}
+.slot_title a.home {
+  margin-right: 4px;
+}
+.slot_title a.delegation_info {
+  margin-right: 0;
+}
+.slot_title .initiative,
+.slot_title a .label {
+  display: none;
+}
+.slot_title .delegation_info {
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 2px;
+  padding-right: 3px;
+  margin-bottom: 12pt;
+}
+.slot_title .delegation_info a {
+  color: #000000;
+}
+.content {
+  clear: both;
+  margin: 0 12pt;
+  margin-top: 12pt;
+}
+/*
+ * the sidebar
+ */
+.sidebar {
+  float: right;
+  width: 30%;
+}
+.sidebarSection {
+  background-color: #ffffff;
+  border-radius: 2px;
+  color: #000000;
+  margin-bottom: 12pt;
+  padding: 0;
+}
+.sidebarSection .sidebarHead {
+  padding: 9px 9px 4.5px 9px;
+  background: #ffffff;
+  color: #000000;
+  min-height: 20px;
+}
+.sidebarSection .sidebarHead a {
+  color: #000000;
+}
+.sidebarSection .sidebarHead .icon24 {
+  margin-top: -3.6px;
+}
+.sidebarSection .sidebarRow {
+  clear: right;
+  display: block;
+  border-top: 1px solid #aaaaaa;
+  padding: 4.5px 9px;
+  min-height: 20px;
+}
+.sidebarSection .sidebarRow.highlighted {
+  background-color: #e7f0ff;
+}
+.sidebarSection .sidebarRow.sidebarRowNarrow {
+  padding: 2.25px 9px;
+}
+.sidebarSection .sidebarRow.moreLink {
+  min-height: 0;
+}
+.sidebarSection h1,
+.sidebarSection h1 a,
+.sidebarSection h2,
+.sidebarSection h2 a,
+.sidebarSection h3,
+.sidebarSection h3 a {
+  color: #000000;
+}
+.sidebarSection a {
+  color: #222277;
+}
+.sidebarSection .areas .whenfolded {
+  display: none;
+}
+.sidebarSection .areas.folded .whenunfolded {
+  display: none;
+}
+.sidebarSection .areas.folded .whenfolded {
+  display: block;
+}
+.sidebarSection .areas.folded .disabled {
+  display: none;
+}
+.sidebarSection a.issue {
+  font: bold 12pt / 125% sans-serif;
+  color: #000000;
+}
+.sidebarSection ul.initiatives li {
+  padding: 4.5px 9px;
+  border-top: 1px solid #aaaaaa;
+}
+.sidebarSection ul.initiatives li .bargraph {
+  display: block;
+}
+.sidebarSection ul.initiatives li .supporterCount {
+  white-space: nowrap;
+}
+.sidebarSection ul.initiatives .revoked .initiative_name {
+  text-decoration: line-through;
+}
+.sidebarSection ul.initiatives li.highlighted {
+  background-color: #e7f0ff;
+}
+.sidebarSection ul.initiatives li.highlighted:last-child {
+  border-radius: 0 0 2px 2px;
+}
+.sidebarSection .supporters {
+  line-height: 28.799999999999997px;
+}
+.sidebarSection .supportCount {
+  color: #00c000;
+  font: bold 12pt / 125% sans-serif;
+  float: right;
+}
+.sidebarSection .member_list .member_thumb {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebarSection .member_list .member_thumb img.member_image {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-right: 0.2em;
+}
+.sidebarSection .member_list .member_thumb.in_delegation_chain {
+  font-weight: bold;
+}
+.sidebarSection > div {
+  position: relative;
+}
+.sidebarSection > div:first-child {
+  margin-top: 0;
+  border-radius: 2px 2px 0 0;
+}
+.sidebarSection > div:last-child {
+  border-radius: 0 0 2px 2px;
+}
+.sidebarSection > div:last-child:first-child {
+  border-radius: 2px;
+}
+.sidebarSection a.unit {
+  font: normal 12pt / 125% sans-serif;
+}
+.sidebarSection a.area {
+  margin-left: 25px;
+  display: block;
+}
+.sidebarSection .star {
+  float: left;
+}
+.sidebarSection .delegation_info {
+  margin-top: -3.6px;
+  margin-bottom: 1px;
+}
+.admitted_info h1 {
+  color: #00aa00;
+}
+.not_admitted_info h1,
+.revoked_info h1 {
+  color: #aa0000;
+}
+.admitted_info .initiative_pie,
+.not_admitted_info .initiative_pie {
+  float: right;
+}
+.admitted_info table tr th,
+.not_admitted_info table tr th {
+  text-align: left;
+}
+.admitted_info table tr td,
+.not_admitted_info table tr td {
+  text-align: right;
+  padding: 0.3ex 0.4em;
+}
+/*
+ * main area
+ */
+.main_outer {
+  width: 70%;
+}
+.main {
+  clear: left;
+  margin-right: 12pt;
+  border-radius: 2px;
+  /*
+   * tabs und filter
+   */
+  /*
+   * initiative
+   */
+  /* the draft */
+}
+.main .section .sectionHead,
+.main .section .sectionRow {
+  background-color: #ffffff;
+  overflow: auto;
+  padding: 9px;
+}
+.main .section .sectionHead {
+  background-color: #ffffff;
+  color: #000000;
+  margin-top: 12pt;
+  border-radius: 2px 2px 0 0;
+}
+.main .section .sectionHead:first-child {
+  margin-top: 0;
+}
+.main .section .sectionHead:last-child {
+  border-radius: 2px;
+}
+.main .section .sectionRow {
+  margin-top: 4px;
+}
+.main .section .sectionRow:last-child {
+  border-radius: 0 0 2px 2px;
+  margin-bottom: 12pt;
+}
+.main > h1 {
+  border-bottom: 1px solid #aaaaaa;
+  padding: 9px;
+}
+.main .ui_filter .ui_filter_head {
+  background: #ffffff;
+  color: #000000;
+  padding: 0 9px 9px 9px;
+  vertical-align: middle;
+}
+.main .ui_filter .ui_filter_head a {
+  white-space: nowrap;
+  font: normal 10pt / 150% sans-serif;
+  margin-right: 0.5em;
+}
+.main .ui_filter .ui_filter_head a.active {
+  font: bold 10pt / 150% sans-serif;
+  text-decoration: none;
+  color: #000000;
+}
+.main .ui_filter .ui_filter_head select {
+  background: #ffffff;
+  color: #444444;
+  font: normal 10pt / 150% sans-serif;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.main .ui_filter .ui_filter_head select option {
+  color: #000000;
+}
+.main .ui_filter .ui_filter_head select option:first-child,
+.main .ui_filter .ui_filter_head select option[value="interest_direct"],
+.main .ui_filter .ui_filter_head select option[value="interest_delegated"],
+.main .ui_filter .ui_filter_head select option[value="support_direct"],
+.main .ui_filter .ui_filter_head select option[value="support_delegated"],
+.main .ui_filter .ui_filter_head select option[value="potential_support_direct"],
+.main .ui_filter .ui_filter_head select option[value="potential_support_delegated"] {
+  color: #444444;
+}
+.main .ui_filter .ui_filter_head select.active {
+  color: #000000;
+}
+.main .ui_filter .ui_filter_head:first-child {
+  border-radius: 2px 2px 0 0;
+  padding-top: 9px;
+}
+.main .ui_filter .ui_filter_head.filter_filter {
+  padding-top: 9px;
+}
+.main .ui_filter .ui_filter_head.filter_mode {
+  padding-top: 9px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.main .ui_filter .ui_filter_head.subfilter a {
+  font: normal 10pt / 150% sans-serif;
+}
+.main .ui_filter .ui_filter_head.subfilter a.active {
+  font: bold 10pt / 150% sans-serif;
+}
+.main .filter {
+  float: right;
+}
+.main .delegation_info.suspended {
+  margin: 1ex -2px -2px -2px;
+}
+.main .issues .state_info {
+  font: bold 10pt / 125% sans-serif;
+  color: #007700;
+}
+.main .issues .state_info.negative {
+  color: #aa0000;
+}
+.main ul.initiatives li {
+  margin-top: 1ex;
+}
+.main ul.initiatives li .bargraph {
+  float: left;
+  margin-top: 5px;
+  margin-right: 0.5em;
+}
+.main ul.initiatives li .initiative_name {
+  display: block;
+  margin-left: 110px;
+}
+.main ul.initiatives li .rank1 .initiative_name {
+  margin-left: 0;
+}
+.main ul.initiatives li .revoked .initiative_name {
+  text-decoration: line-through;
+}
+.main ul.initiatives li:first-child {
+  margin-top: 0;
+  clear: none;
+}
+.main .events .event ul.initiatives li .initiative_name {
+  margin-left: 0;
+}
+.main .member_photo {
+  float: right;
+}
+.main .member_thumb.in_delegation_chain {
+  font-weight: bold;
+}
+.main .support {
+  color: #aaa;
+  line-height: 80%;
+  float: right;
+  width: 102px;
+}
+.main .initiativeInfo {
+  font-family: normal 10pt / 125% sans-serif;
+  line-height: 24px;
+  overflow: auto;
+}
+.main .initiativeInfo .support {
+  margin-top: 1ex;
+  float: left;
+  width: auto;
+}
+.main .initiativeInfo .mySupport {
+  line-height: 125%;
+  min-width: 12em;
+  text-align: right;
+}
+.main .initiativeInfo .initiators {
+  margin-top: 1.5ex;
+  margin-bottom: -1ex;
+  float: left;
+}
+.main .initiativeInfo .links {
+  margin-top: 1.5ex;
+  margin-bottom: -1ex;
+  float: right;
+  clear: right;
+}
+.main .initiativeInfo .initiator_links {
+  clear: right;
+}
+.main .issueInfo .links {
+  margin-top: 1.5ex;
+  margin-bottom: -1ex;
+  float: right;
+  clear: both;
+}
+.main .draft_updated_info {
+  color: #007700;
+}
+.main .draft_updated_info .info {
+  font: bold 10pt / 125% sans-serif;
+}
+.main .draft {
+  font: normal 10pt / 125% sans-serif;
+}
+.main .draft ul {
+  margin-left: 1em;
+  margin-bottom: 1.5ex;
+  list-style: square;
+  padding-left: 1em;
+}
+.main .draft h1 {
+  font: italic 10pt / 125% sans-serif;
+  font-size: 125%;
+  border-bottom: 1px solid #444444;
+  margin-bottom: 1ex;
+}
+.main .draft h2 {
+  font: normal 10pt / 125% sans-serif;
+  font-size: 125%;
+}
+.main .draft h3 {
+  font: normal 10pt / 125% sans-serif;
+  font-size: 125%;
+}
+.main .draft h4 {
+  font: normal 10pt / 125% sans-serif;
+}
+.main .draft hr {
+  border: none;
+  border-top: 1px solid #000000;
+}
+.main .draft b,
+.main .draft strong {
+  font: italic 10pt / 125% sans-serif;
+}
+.main .draft i,
+.main .draft em {
+  font: normal 10pt / 125% sans-serif;
+}
+.main form,
+.main .form {
+  margin: 0;
+  padding: 0;
+}
+.main form .ui_field_label,
+.main .form .ui_field_label {
+  display: inline-block;
+  width: 25%;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  margin-bottom: 9px;
+  padding-right: 0.5%;
+  vertical-align: top;
+  color: #444444;
+}
+.main form input[type=text],
+.main .form input[type=text],
+.main form input[type=password],
+.main .form input[type=password],
+.main form select,
+.main .form select,
+.main form textarea,
+.main .form textarea {
+  vertical-align: top;
+  width: 73%;
+  margin: 0;
+  padding: 3px;
+  border: 1px solid #444444;
+  font: bold 10pt / 125% sans-serif;
+  margin-bottom: 9px;
+}
+.main form input:focus,
+.main .form input:focus {
+  outline: 2px solid #397ab6;
+}
+.main form .actions,
+.main .form .actions {
+  margin-left: 26%;
+}
+.main form.wide input[type=text],
+.main form.wide input[type=password],
+.main form.wide select,
+.main form.wide textarea {
+  width: 100%;
+}
+.issues .event .initiative_pie,
+.events .event .initiative_pie {
+  clear: right;
+  float: right;
+}
+.issues .event ul.initiatives .initiative_info_left,
+.events .event ul.initiatives .initiative_info_left {
+  display: inline;
+  margin-right: 0.5em;
+}
+.issues .event ul.initiatives .initiative_info_right,
+.events .event ul.initiatives .initiative_info_right {
+  float: right;
+}
+.issues .event ul.initiatives .initiative_info_right .bargraph,
+.events .event ul.initiatives .initiative_info_right .bargraph {
+  float: right;
+  margin-left: 0.5em;
+}
+.issues .event ul.initiatives .result,
+.events .event ul.initiatives .result {
+  color: #444444;
+  margin-top: 0.5ex;
+}
+.issues .event ul.initiatives h3,
+.events .event ul.initiatives h3 {
+  margin-top: 1ex;
+  margin-bottom: 0;
+}
+.issues .event ul.initiatives a.initiative,
+.events .event ul.initiatives a.initiative {
+  font: bold 10pt / 125% sans-serif;
+}
+.issues .event .event_info,
+.events .event .event_info {
+  font: bold 10pt / 125% sans-serif;
+  color: #007700;
+  margin-top: 0.66ex;
+  margin-bottom: 1ex;
+}
+.issues .event .event_info:last-child,
+.events .event .event_info:last-child {
+  margin-bottom: 0;
+}
+.issues .event .event_info.negative,
+.events .event .event_info.negative {
+  color: #aa0000;
+}
+.issues .event .event_time,
+.events .event .event_time {
+  font: normal 10pt / 125% sans-serif;
+  color: #444444;
+}
+.issues .event:hover .event_time,
+.events .event:hover .event_time {
+  visibility: visible;
+}
+.issues .event:hover ul.initiatives div,
+.events .event:hover ul.initiatives div {
+  visibility: visible;
+}
+.issues .issue_context,
+.events .issue_context {
+  line-height: 24px;
+  margin-bottom: 0.66ex;
+}
+.issues .issue_context .unit,
+.events .issue_context .unit {
+  background-color: #777;
+  color: #fff;
+  padding: 1px 3px;
+  border-radius: 2px;
+  text-decoration: none;
+}
+.issues .issue_context .area,
+.events .issue_context .area {
+  background-color: #ddd;
+  color: #000;
+  padding: 1px 3px;
+  border-radius: 2px;
+  text-decoration: none;
+}
+.issues .issue_info .issue,
+.events .issue_info .issue {
+  font: bold 10pt / 125% sans-serif;
+  color: #000000;
+}
+.issues img.star,
+.events img.star {
+  vertical-align: middle;
+  float: right;
+  margin-left: 0.5em;
+}
+.issues .event.suggestion ul.initiatives li,
+.events .event.suggestion ul.initiatives li {
+  margin-top: 0;
+  margin-bottom: 1ex;
+}
+.issues .event.suggestion ul.initiatives li a,
+.events .event.suggestion ul.initiatives li a {
+  font: normal 10pt / 125% sans-serif;
+}
+.issues .event.suggestion .suggestion,
+.events .event.suggestion .suggestion {
+  font: bold 10pt / 125% sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.suggestions .suggestion .opinion {
+  float: right;
+}
+.suggestions .suggestion .opinion .must {
+  background-color: #00cc00;
+  color: #ffffff;
+}
+.suggestions .suggestion .opinion .should {
+  background-color: #44aa44;
+  color: #ffffff;
+}
+.suggestions .suggestion .opinion .shouldnot {
+  background-color: #aa4444;
+  color: #ffffff;
+}
+.suggestions .suggestion .opinion .mustnot {
+  background-color: #cc0000;
+  color: #ffffff;
+}
+.suggestions .suggestion .opinion .implemented {
+  background-color: #00cc00;
+  color: #ffffff;
+}
+.suggestions .suggestion .opinion .notimplemented {
+  background-color: #cc0000;
+  color: #ffffff;
+}
+.suggestions .suggestion .suggestion-rating {
+  float: right;
+}
+.suggestions .suggestion .suggestion-text {
+  margin-top: 9px;
+  font: normal 10pt / 125% sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  z-index: 10;
+}
+.suggestions .suggestion .suggestion-more {
+  display: none;
+}
+.suggestions .suggestion .suggestion-less {
+  display: none;
+}
+.suggestions .suggestion .suggestionHead {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.suggestions .suggestion .rating {
+  display: none;
+  padding: 4.5px 0;
+}
+.suggestions .suggestion .rating .active-plus2 {
+  background-color: #00cc00;
+  color: #ffffff;
+}
+.suggestions .suggestion .rating .active-plus1 {
+  background-color: #44aa44;
+  color: #ffffff;
+}
+.suggestions .suggestion .rating .active-minus1 {
+  background-color: #aa4444;
+  color: #ffffff;
+}
+.suggestions .suggestion .rating .active-minus2 {
+  background-color: #cc0000;
+  color: #ffffff;
+}
+.suggestions .suggestion .rating .active-notfulfilled {
+  background-color: #faa;
+}
+.suggestions .suggestion .rating .active-fulfilled {
+  background-color: #afa;
+}
+.suggestions .suggestion.rateable .suggestion-more {
+  display: block;
+}
+.suggestions .suggestion.rateable.unfolded .rating {
+  border-top: 3px solid #397ab6;
+}
+.suggestions .suggestion.folded .suggestion-more {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: inset 0 -12ex 10ex -5ex #ffffff;
+  padding-top: 5ex;
+}
+.suggestions .suggestion.unfolded .suggestion-more {
+  display: none;
+}
+.suggestions .suggestion.unfolded .rating {
+  display: block;
+}
+.suggestions .suggestion.unfolded .suggestion-less {
+  margin-top: 1ex;
+  display: block;
+}
+.suggestions .suggestion.highlighted {
+  background-color: #e7f0ff;
+}
+.suggestions .suggestion.highlighted .suggestion-more {
+  box-shadow: inset 0 -12ex 10ex -5ex #e7f0ff;
+}
+li.raw {
+  list-style: none;
+  padding: 0;
+  margin: 0 !important;
+}
+.satisfiedSupporterCount {
+  color: #070;
+}
+.potentialSupporterCount {
+  color: #960;
+}
+.bargraph {
+  display: inline-block;
+  vertical-align: top;
+  height: 9px;
+}
+.bargraph div {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  height: 9px;
+}
+.diff .diff_added {
+  background-color: #cfc;
+}
+.diff .diff_removed {
+  text-decoration: line-through;
+  background-color: #fcc;
+}
+.btn,
+.ui_paginate_foot a {
+  text-decoration: none;
+  min-width: 2em;
+  text-align: center;
+  display: inline-block;
+  border-radius: 5px;
+  border: none;
+  font: bold 10pt / 125% sans-serif;
+  background-color: #999;
+  color: #fff !important;
+  margin-bottom: 5px;
+}
+.btn {
+  padding: 1ex 1em;
+}
+.ui_paginate_foot a {
+  padding: 0.5ex 0.5em;
+  background-color: #eee;
+  color: 000 !important;
+}
+.ui_paginate_foot a.active {
+  background-color: #666;
+  color: #fff !important;
+}
+.btn-default {
+  background-color: #47a;
+  color: #fff !important;
+}
+.btn:hover,
+.btn:focus,
+.ui_paginate_foot a:hover,
+.ui_paginate_foot a:focus {
+  background-color: #0a0;
+  color: #fff !important;
+  cursor: pointer;
+}
+.btn-dangerous:hover {
+  background-color: #c00;
+  color: #fff !important;
+}
+.btn-link {
+  font: normal 10pt / 125% sans-serif;
+  background-color: #ffffff;
+  color: #222277;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+/*************************************************************************
+ * Voting
+ */
+.main .section #voting_form .sectionRow:last-child {
+  border-radius: 0;
+  margin-bottom: 0;
+}
+#voting {
+  background: #ddd;
+  padding: 9px;
+  margin-top: 4px;
+  position: relative;
+  margin-bottom: 2ex;
+}
+#voting .approval,
+#voting .abstention,
+#voting .disapproval {
+  border: 2px black solid;
+  margin-bottom: 2ex;
+  padding: 1ex;
+  padding-bottom: 2ex;
+  border-radius: 2px;
+}
+#voting .disapproval {
+  margin-bottom: 2ex;
+}
+#voting .approval {
+  background-color: #9f9;
+}
+#voting .approval .movable {
+  background-color: #dfd;
+}
+#voting .abstention {
+  background-color: #ccc;
+}
+#voting .abstention .movable {
+  background-color: #f2f2f2;
+}
+#voting .disapproval {
+  background-color: #f88;
+}
+#voting .disapproval .movable {
+  background-color: #fbb;
+}
+#voting .movable {
+  position: relative;
+  border: 1px black solid;
+  margin-top: 1ex;
+  padding: 0.5ex;
+  border-radius: 2px;
+}
+#voting .voting_form_active .movable {
+  cursor: pointer;
+  vertical-align: middle;
+  cursor: move;
+}
+#voting .voting_form_active .clickable {
+  cursor: auto;
+}
+#voting .voting_form_active a.clickable {
+  cursor: pointer;
+}
+/*
+ * footer
+ */
+.footer {
+  text-align: center;
+  color: #ffffff;
+  background-color: #000000;
+  padding: 9px 0;
+  border: 1px solid #000;
+  border-top: none;
+}
+.footer a {
+  color: #ffffff;
+}
+.ui_paginate_head {
+  display: none;
+}
+.ui_paginate_foot {
+  line-height: 180%;
+}
+.swiper_tabs {
+  display: none;
+}
+#swiper_info {
+  display: none;
+}
+.nav .searchLink {
+  display: none;
+}
+@media (max-width: 767px) {
+  html body {
+    margin: 0;
+    background: #255078;
+  }
+  html body .head {
+    margin: 6pt;
+    padding: 0;
+  }
+  html body .head .logo {
+    display: block;
+    padding: 0;
+  }
+  html body .head .logo .liquid,
+  html body .head .logo .feedback {
+    font: bold 12pt / 125% sans-serif;
+  }
+  html body .head .logo .instanceName {
+    font: normal 10pt / 100% sans-serif;
+    display: block;
+    margin-left: 0;
+  }
+  html body .head .nav {
+    padding: 0;
+  }
+  html body .initiativeInfo h1 {
+    display: none;
+  }
+  html body .slot_title {
+    font: normal 12pt / 125% sans-serif;
+    padding: 0;
+    margin: 0 6pt;
+  }
+  html body .slot_title .spacer {
+    display: none;
+  }
+  html body .slot_title .unit,
+  html body .slot_title .area,
+  html body .slot_title .issue,
+  html body .slot_title .initiative,
+  html body .slot_title .member {
+    display: block;
+    margin-right: 0;
+    padding: 4px 0;
+    border-radius: 2px;
+    overflow: auto;
+  }
+  html body .slot_title .unit:before,
+  html body .slot_title .area:before,
+  html body .slot_title .issue:before,
+  html body .slot_title .initiative:before,
+  html body .slot_title .member:before {
+    content: "↳";
+    position: relative;
+    top: -2px;
+  }
+  html body .slot_title .area {
+    margin-left: 10px;
+  }
+  html body .slot_title .issue {
+    margin-left: 20px;
+  }
+  html body .slot_title .initiative {
+    margin-left: 30px;
+  }
+  html body .slot_title a:last-child,
+  html body .slot_title .issue:last-child,
+  html body .slot_title .area:last-child,
+  html body .slot_title .unit:last-child,
+  html body .slot_title .initiative:last-child {
+    margin-bottom: 6pt;
+  }
+  html body .slot_title .unit a,
+  html body .slot_title .initiative a,
+  html body .slot_title .issue a,
+  html body .slot_title .area a {
+    margin-bottom: 0;
+    display: inline;
+  }
+  html body .slot_title a.home {
+    display: none;
+  }
+  html body .slot_title .weight {
+    float: right;
+    margin: 0;
+  }
+  html body .slot_title .delegation_info {
+    float: right;
+    display: block;
+    margin-top: -10px;
+  }
+  html body .slot_title a .label {
+    display: inline;
+  }
+  html body .slot_title .star {
+    float: right;
+    margin-left: 0.5em;
+    margin-top: -4.5px;
+    margin-bottom: -4.5px;
+  }
+  html body .slot_title > span > *:last-child {
+    font: bold 12pt / 125% sans-serif;
+  }
+  html body .page {
+    background: none;
+    margin: 0;
+    box-shadow: none;
+  }
+  html body .nav #member_menu .text {
+    display: none;
+  }
+  html body .nav form.search {
+    display: none;
+  }
+  html body .nav .notifications,
+  html body .nav .searchLink,
+  html body .nav #member_menu a {
+    vertical-align: middle;
+    display: inline-block;
+    height: 48px;
+    min-width: 35px;
+    text-align: center;
+    background-color: #000;
+    border: 1px solid #777;
+    border-radius: 2px;
+    margin: 0;
+  }
+  html body .nav .notifications img,
+  html body .nav .searchLink img,
+  html body .nav #member_menu a img {
+    margin: 0;
+    width: 48px;
+    height: 48px;
+  }
+  html body .nav .notifications {
+    padding: 12px 2px;
+    height: 24px;
+  }
+  html body .nav #member_menu a :last-child {
+    display: none;
+  }
+  html body .notifications span {
+    margin-left: -5px;
+  }
+  html body .swiper_tabs {
+    clear: both;
+    display: block;
+    overflow: auto;
+    margin: 6pt;
+  }
+  html body .swiper_tabs div {
+    display: block;
+    float: left;
+    width: 33.333%;
+  }
+  html body .swiper_tabs div a {
+    padding: 8px 0;
+    display: block;
+    text-align: center;
+    background-color: #eee;
+  }
+  html body .swiper_tabs div a.active {
+    background-color: #abe;
+  }
+  html body .swiper_tabs div:first-child a {
+    border-radius: 2px 0 0 2px;
+  }
+  html body .swiper_tabs div:last-child a {
+    border-radius: 0 2px 2px 0;
+  }
+  html body #swiper_info.active {
+    display: block;
+    font: bold 10pt / 125% sans-serif;
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+    background-color: #255078;
+    color: #ffffff;
+  }
+  html body .sidebarSection {
+    margin: 0 6pt 6pt 6pt;
+  }
+  html body .main,
+  html body .extra > .section {
+    clear: none;
+    float: none;
+    width: auto;
+    margin: 0 6pt 6pt 6pt;
+  }
+  html body .main .section .sectionRow:last-child,
+  html body .extra > .section .section .sectionRow:last-child {
+    margin-bottom: 6pt;
+  }
+  html body .ui_filter_head.filter_mode {
+    float: none !important;
+    background: #ffffff !important;
+    text-align: left !important;
+    border-radius: 2px;
+    margin-bottom: 6pt !important;
+  }
+  html body .member_photo {
+    text-align: center;
+    margin-bottom: 2ex;
+  }
+  html body .member_photo .member_image_photo {
+    max-width: 600px;
+  }
+  html body #trace_content {
+    margin: 6pt 0;
+    border-radius: 0;
+  }
+  html body #trace_content ul li .trace_head {
+    padding: 6px 5px;
+  }
+  html body #trace_content ul ul {
+    padding: 5px 2px;
+  }
+}
+.textCenter {
+  text-align: center;
+}
+a.initiative {
+  text-decoration: none;
+  border-bottom: 1px solid #66c;
+}
+a.initiative:hover {
+  border-bottom: 1px solid #007;
+}
+#trace_content {
+  margin: 12pt;
+  padding: 9px;
+  border-radius: 2px;
+  background-color: #ffffff;
+}
+#trace_content #system_error {
+  font-family: monospace;
+}
+#trace_content ul li {
+  margin-top: 10px;
+}
+#trace_content ul li .trace_head {
+  padding: 3px 5px;
+  border-radius: 2px 2px 0 0;
+}
+#trace_content ul li .trace_head:last-child {
+  border-radius: 2px;
+}
+#trace_content ul li ul {
+  border-radius: 0 0 2px 2px;
+}
+#trace_content ul li:first-child {
+  margin-top: 0;
+}
+#trace_content ul ul {
+  padding: 10px;
+}
+#trace_content .trace_config > ul {
+  background-color: #eee;
+  border: 1px solid #ccc;
+}
+#trace_content .trace_config > .trace_head {
+  background-color: #ccc;
+  color: #000;
+}
+#trace_content .trace_request > ul {
+  background-color: #afa;
+}
+#trace_content .trace_request > .trace_head {
+  background-color: #0c0;
+}
+#trace_content .trace_filter > ul {
+  background-color: #ccf;
+  border: 1px solid #00c;
+  border-top: none;
+}
+#trace_content .trace_filter > .trace_head {
+  background-color: #00c;
+  color: #fff;
+}
+#trace_content .trace_view > ul {
+  background-color: #cfc;
+  border: 1px solid #0c0;
+  border-top: none;
+}
+#trace_content .trace_view > .trace_head {
+  background-color: #0c0;
+  color: #000;
+}
+#trace_content .trace_action_neutral > ul {
+  background-color: #ffa;
+  border: 1px solid #fe0;
+}
+#trace_content .trace_action_neutral > .trace_head {
+  background-color: #fe0;
+  color: #000;
+}
+#trace_content .trace_sql {
+  background-color: #fff;
+  padding: 2px 4px;
+  margin-top: 8px;
+}
+#trace_content .trace_error {
+  background-color: #faa;
+  color: #000;
+  font-weight: bold;
+  border: 1px solid #c00;
+}
+#trace_content .trace_exectime {
+  background-color: #ccc;
+  font-weight: bold;
+  border-radius: 2px;
+}
+#trace_content .time {
+  float: right;
+}
+#trace_content .total_duration {
+  font-weight: bold;
+}

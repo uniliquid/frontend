@@ -1,0 +1,255 @@
+<html>
+<head>
+<title>LiquidFeedback Installation Instructions</title>
+</head>
+<body>
+<h1>LiquidFeedback Installation Instructions</h1>
+
+<p>This document gives a short outline about the necessary steps to setup a
+LiquidFeedback system.</p>
+
+<h2>1. Install necessary dependencies</h2>
+
+<p>If you're using a Debian system, make sure that the following packages are
+installed:</p>
+
+<ul>
+<li>lua5.1</li>
+<li>postgresql</li>
+<li>build-essential</li>
+<li>libpq-dev</li>
+<li>liblua5.1-0-dev</li>
+<li>lighttpd</li>
+<li>ghc</li>
+<li>libghc6-parsec3-dev</li>
+<li>imagemagick</li>
+<li>exim4</li>
+<li>markdown2 (install with Python's pip)</li>
+</ul>
+
+<p>If you're using any other Linux distribution or BSD system, install the
+necessary software components accordingly.</p>
+
+<h2>2. Ensure that the user account of your webserver has access to the database</h2>
+
+<p>Whichever useraccount is used by the webserver (usually <code>www-data</code>) needs to
+have access to your PostgreSQL installation. This is done by executing
+PostgreSQL's shell command <code>createuser</code> as database superuser (usually <code>pgsql</code>,
+or <code>postgres</code> for Debian installations):</p>
+
+<pre><code>su - postgres
+createuser
+
+Enter name of role to add: www-data
+Shall the new role be a superuser? (y/n) n
+Shall the new role be allowed to create databases? (y/n) y
+Shall the new role be allowed to create more new roles? (y/n) n
+
+exit
+</code></pre>
+
+<h2>3. Install and configure LiquidFeedback-Core</h2>
+
+<p>We recommend to create the database with the same user as your webserver
+(usually <code>www-data</code>) to avoid having to setup database privileges.</p>
+
+<p>The example below installs the database as <code>www-data</code> and stores the two
+executables <code>lf_update</code> and <code>lf_update_issue_order</code> in the directory
+<code>/opt/liquid_feedback_core/</code>:</p>
+
+<pre><code># Download and unpack LiquidFeedback-Core
+# from http://www.public-software-group.org/pub/projects/liquid_feedback/backend/
+make
+mkdir /opt/liquid_feedback_core
+cp core.sql lf_update lf_update_issue_order /opt/liquid_feedback_core
+su - www-data
+cd /opt/liquid_feedback_core
+createdb liquid_feedback
+createlang plpgsql liquid_feedback  # command may be omitted, depending on PostgreSQL version
+psql -v ON_ERROR_STOP=1 -f core.sql liquid_feedback
+</code></pre>
+
+<p>A simple configuration may look as follows:</p>
+
+<pre><code>psql liquid_feedback
+
+INSERT INTO system_setting (member_ttl) VALUES ('1 year');
+INSERT INTO contingent (polling, time_frame, text_entry_limit, initiative_limit) VALUES (false, '1 hour', 20, 6);
+INSERT INTO contingent (polling, time_frame, text_entry_limit, initiative_limit) VALUES (false, '1 day', 80, 12);
+INSERT INTO contingent (polling, time_frame, text_entry_limit, initiative_limit) VALUES (true, '1 hour', 200, 60);
+INSERT INTO contingent (polling, time_frame, text_entry_limit, initiative_limit) VALUES (true, '1 day', 800, 120);
+INSERT INTO policy (index, name, admission_time, discussion_time, verification_time, voting_time, issue_quorum_num, issue_quorum_den, initiative_quorum_num, initiative_quorum_den) VALUES (1, 'Default policy', '8 days', '15 days', '8 days', '15 days', 10, 100, 10, 100);
+INSERT INTO unit (name) VALUES ('Our organization');
+INSERT INTO area (unit_id, name) VALUES (1, 'Default area');
+INSERT INTO allowed_policy (area_id, policy_id, default_policy) VALUES (1, 1, TRUE);
+</code></pre>
+
+<p>If you want to create an admin user with an empty password (CAUTION!), then execute the following SQL statement:</p>
+
+<pre><code>INSERT INTO member (login, name, admin, password) VALUES ('admin', 'Administrator', TRUE, '$1$/EMPTY/$NEWt7XJg2efKwPm4vectc1');
+</code></pre>
+
+<p>Exit the <code>psql</code> interface by typing:</p>
+
+<pre><code>\q
+</code></pre>
+
+<p>And don't forget to quit the <code>www-data</code> shell:</p>
+
+<pre><code>exit
+</code></pre>
+
+<h2>4. Install WebMCP</h2>
+
+<p>Note: Using Debian, it may be necessary to append <code>-I /usr/include/lua5.1</code> at
+the end of the CFLAGS line in <code>Makefile.options</code> of the WebMCP source
+distibution:</p>
+
+<pre><code># Download and unpack WebMCP
+# from http://www.public-software-group.org/pub/projects/webmcp/
+vi Makefile.options  # Debian requires  -I /usr/include/lua5.1  at end of CFLAGS line
+make
+mkdir /opt/webmcp
+cp -RL framework/* /opt/webmcp/
+</code></pre>
+
+<h2>5. Install the LiquidFeedback-Frontend</h2>
+
+<p>Unpack source tree into appropriate directory, e.g. <code>/opt/liquid_feedback_frontend</code>:</p>
+
+<pre><code># Download LiquidFeedback-Frontend
+# from http://www.public-software-group.org/pub/projects/liquid_feedback/frontend/
+mv liquid_feedback_frontend-vX.X.X /opt/liquid_feedback_frontend
+</code></pre>
+
+<p>Create HTML code for help texts:</p>
+
+<pre><code>cd /opt/liquid_feedback_frontend/locale
+PATH=/opt/rocketwiki-lqfb:$PATH make
+</code></pre>
+
+<p>Make <code>tmp/</code> directory of LiquidFeedback-Frontend writable for webserver:</p>
+
+<pre><code>chown www-data /opt/liquid_feedback_frontend/tmp
+</code></pre>
+
+<p>Compile binary for fast delivery of member images:</p>
+
+<pre><code>cd /opt/liquid_feedback_frontend/fastpath
+vi getpic.c  # check and modify #define commands as necessary
+make
+</code></pre>
+
+<h2>6. Configure mail system</h2>
+
+<p>It may be necessary to configure your server's mail system, e.g. running
+<code>dpkg-reconfigure exim4-config</code> on a Debian system.</p>
+
+<h2>7. Configure the Webserver for LiquidFeedback:</h2>
+
+<p>A sample configuration for <code>lighttpd</code> is given below (assuming <code>mod_alias</code> has
+been included elsewhere):</p>
+
+<pre><code>server.modules += ("mod_cgi", "mod_rewrite", "mod_redirect", "mod_setenv")
+
+# Enable CGI-Execution of *.lua files through lua binary
+cgi.assign += ( ".lua" =&gt; "/usr/bin/lua5.1" )
+
+alias.url += ( "/lf/fastpath/" =&gt; "/opt/liquid_feedback_frontend/fastpath/",
+               "/lf/static"    =&gt; "/opt/liquid_feedback_frontend/static",
+               "/lf"           =&gt; "/opt/webmcp/cgi-bin" )
+
+# Configure environment for demo application
+$HTTP["url"] =~ "^/lf" {
+  setenv.add-environment += (
+    "LANG" =&gt; "en_US.UTF-8",
+    "WEBMCP_APP_BASEPATH" =&gt; "/opt/liquid_feedback_frontend/",
+    "WEBMCP_CONFIG_NAME"  =&gt; "myconfig")
+}
+
+# URL beautification
+url.rewrite-once += (
+  # do not rewrite static URLs
+      "^/lf/fastpath/(.*)$" =&gt; "/lf/fastpath/$1",
+      "^/lf/static/(.*)$"   =&gt; "/lf/static/$1",
+
+  # dynamic URLs
+      "^/lf/([^\?]*)(\?(.*))?$" =&gt; "/lf/webmcp-wrapper.lua?_webmcp_path=$1&amp;$3",
+
+)
+
+$HTTP["url"] =~ "^/lf/fastpath/" {
+  cgi.assign = ( "" =&gt; "" )
+  setenv.add-response-header = ( "Cache-Control" =&gt; "private; max-age=86400" )
+}
+</code></pre>
+
+<p>If you're using Debian, you may want to create a file with the name
+<code>/etc/lighttpd/conf-available/60-liquidfeedback.conf</code> and create a softlink in
+<code>/etc/lighttpd/conf-enabled/</code>.</p>
+
+<h2>8. Configure the LiquidFeedback-Frontend:</h2>
+
+<pre><code>cd /opt/liquid_feedback_frontend/config
+cp example.lua myconfig.lua
+# edit myconfig.lua according to your needs
+</code></pre>
+
+<p>Use the following option in your configuration file to enable fast image
+loading:</p>
+
+<pre><code>config.fastpath_url_func = function(member_id, image_type)
+  return request.get_absolute_baseurl() .. "fastpath/getpic?" .. tostring(member_id) .. "+" .. tostring(image_type)
+end
+</code></pre>
+
+<h2>9. Setup regular execution of <code>lf_update</code> and <code>lf_update_suggestion_order</code></h2>
+
+<p>The executables <code>lf_update</code> and <code>lf_update_suggestion_order</code> must be executed
+regularly. This may be achieved by creating a file named
+<code>/opt/liquid_feedback_core/lf_updated</code> with the following contents:</p>
+
+<pre><code>#!/bin/sh
+
+PIDFILE="/var/run/lf_updated.pid"
+PID=$$
+
+if [ -f "${PIDFILE}" ] &amp;&amp; kill -CONT $( cat "${PIDFILE}" ); then
+  echo "lf_updated is already running."
+  exit 1
+fi
+
+echo "${PID}" &gt; "${PIDFILE}"
+
+while true; do
+  su - www-data -c 'nice /opt/liquid_feedback_core/lf_update dbname=liquid_feedback 2&gt;&amp;1 | logger -t "lf_updated"'
+  su - www-data -c 'nice /opt/liquid_feedback_core/lf_update_suggestion_order dbname=liquid_feedback 2&gt;&amp;1 | logger -t "lf_updated"'
+  sleep 5
+done
+</code></pre>
+
+<p>This file must be marked as executable:</p>
+
+<pre><code>chmod +x /opt/liquid_feedback_core/lf_updated
+</code></pre>
+
+<p>And this file should be started automatically at system boot.</p>
+
+<h2>10. Setup notification loop in background</h2>
+
+<p>In addition to regular execution of <code>lf_update</code> and
+<code>lf_update_suggestion_order</code>, the following commands should be executed in
+background:</p>
+
+<pre><code>su - www-data
+cd /opt/liquid_feedback_frontend/
+echo "Event:send_notifications_loop()" | ../webmcp/bin/webmcp_shell myconfig
+</code></pre>
+
+<h2>11. Start the sytem</h2>
+
+<p>After <code>lf_update</code> has been executed at least once, and the webserver has been
+restarted (using the configuration above), you should be able to access your
+LiquidFeedback system.</p>
+</body>
+</html>
