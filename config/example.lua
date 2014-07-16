@@ -50,7 +50,7 @@ config.formatting_engines = {
   { id = "markdown2",
     name = "python-markdown2",
     executable = "markdown2",
-    args = {'-s', 'escape', '-x', 'cuddled-lists,nofollow,wiki-tables'},
+    args = {'-s', 'escape', '-x', 'nofollow,wiki-tables'},
     remove_images = true
   },
   { id = "markdown_py",
@@ -87,7 +87,7 @@ config.formatting_engines = {
 -- "everything"
 --     -> Show everything a member can see, including profile pages
 -- ------------------------------------------------------------------------
-config.public_access = "none"
+config.public_access = "anonymous"
 
 
 

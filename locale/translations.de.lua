@@ -772,6 +772,7 @@ return {
 ["[event mail]     Phase: #{phase}"] = "       Phase: #{phase}";
 ["[event mail]    Policy: #{policy}"] = "   Regelwerk: #{policy}";
 ["[not displayed public]"] = "[nicht öffentlich]";
+["[not public]"] = "[nicht öffentlich]";
 ["a bit unsatisfied"] = "etwas unzufrieden";
 ["abandoned"] = "ausgesetzt";
 ["accept invitation"] = "Einladung annehmen";

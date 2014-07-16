@@ -89,10 +89,14 @@ if initiative.revoked then
         revoked = format.timestamp(initiative.revoked)
       }))
       slot.put(" ")
-      ui.link{
-        module = "member", view = "show", id = initiative.revoked_by_member_id,
-        content = initiative.revoked_by_member.name
-      }
+      if app.session:has_access("authors_pseudonymous") then
+        ui.link{
+          module = "member", view = "show", id = initiative.revoked_by_member_id,
+          content = initiative.revoked_by_member.name
+        }
+      else
+        ui.tag{ content = _"[Not public]" }
+      end
       local suggested_initiative = initiative.suggested_initiative
       if suggested_initiative then
         slot.put("<br /><br />")

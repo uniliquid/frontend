@@ -200,12 +200,13 @@ loading:
     end
 
 
-9. Setup regular execution of `lf_update` and `lf_update_suggestion_order`
----------------------------------------------------------------------------
+9. Setup regular execution of `lf_update` and related commands 
+--------------------------------------------------------------
 
-The executables `lf_update` and `lf_update_suggestion_order` must be executed
-regularly. This may be achieved by creating a file named
-`/opt/liquid_feedback_core/lf_updated` with the following contents:
+The executables `lf_update`, `lf_update_issue_order`, and
+`lf_update_suggestion_order` must be executed regularly. This may be achieved
+by creating a file named `/opt/liquid_feedback_core/lf_updated` with the
+following contents:
 
     #!/bin/sh
 
@@ -221,6 +222,7 @@ regularly. This may be achieved by creating a file named
 
     while true; do
       su - www-data -c 'nice /opt/liquid_feedback_core/lf_update dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
+      su - www-data -c 'nice /opt/liquid_feedback_core/lf_update_issue_order dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
       su - www-data -c 'nice /opt/liquid_feedback_core/lf_update_suggestion_order dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
       sleep 5
     done

@@ -80,7 +80,7 @@ config.formatting_engines = {
   { id = "markdown2",
     name = "markdown2",
     executable = "markdown2",
-    args = {'-s', 'escape', '-x', 'cuddled-lists,nofollow,wiki-tables'},
+    args = {'-s', 'escape', '-x', 'nofollow,wiki-tables'},
     remove_images = true
   },
   { id = "multimarkdown",
