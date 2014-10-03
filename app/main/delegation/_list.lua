@@ -1,7 +1,16 @@
 local delegations_selector = param.get("delegations_selector", "table")
 local outgoing = param.get("outgoing", atom.boolean)
 local incoming = param.get("incoming", atom.boolean)
-
+local member = app.session.member
+local level = param.get("level")
+local level_id = param.get("level_id",atom.integer)
+if member and level == "area" then
+  ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_go.png" }, text = _"Change my delegation", module = "delegation", view = "show", params = { area_id = level_id, member_id = member.id } }
+elseif member and level == "unit" then
+  ui.link{ image = ui.image{ attr = { class = "spaceicon" }, static = "icons/16/folder_go.png" }, text = _"Change my delegation", module = "delegation", view = "show", params = { unit_id = level_id, member_id = member.id } }
+end
+slot.put("<br style='clear: left;' />")
+slot.put("<br style='clear: left;' />")
 local function delegation_scope(delegation)
   ui.container{
     attr = { class = "delegation_scope" },

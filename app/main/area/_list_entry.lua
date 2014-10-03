@@ -29,12 +29,14 @@ ui.container{ attr = { class = "area" }, content = function()
       text = _("#{count} in discussion", { count = area.issues_discussion_count }) 
     }
     slot.put(" &middot; ")
+if not config.no_verification then
     ui.link{ 
       image = { attr = { class = "spaceicon" }, static = "icons/16/lock.png" },
       module = "area", view = "show", id = area.id, params = { tab = "open", filter = "half_frozen" },
       text = _("#{count} in verification", { count = area.issues_frozen_count }) 
     }
     slot.put(" &middot; ")
+end
     ui.link{ 
       image = { attr = { class = "spaceicon" }, static = "icons/16/email_open_image.png" },
       module = "area", view = "show", id = area.id, params = { tab = "open", filter = "frozen" },

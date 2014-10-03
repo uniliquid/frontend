@@ -108,6 +108,7 @@ ui.form{
           tmp[#tmp+1] = allowed_policy
         end
       end
+    if area.default_policy == nil or #area.allowed_policies > 1 then
       ui.field.select{
         label = _"Policy",
         name = "policy_id",
@@ -116,6 +117,16 @@ ui.form{
         foreign_name = "name",
         value = param.get("policy_id", atom.integer) or area.default_policy and area.default_policy.id
       }
+    else
+      ui.field.text{ label = _"Policy",  value = area.default_policy.name }
+      ui.field.hidden{
+--        label = _"Policy",
+        name = "policy_id",
+        foreign_id = "id",
+        foreign_name = "name",
+        value = area.default_policy.id
+      }
+    end
       ui.tag{
         tag = "div",
         content = function()
@@ -127,14 +138,8 @@ ui.form{
           ui.tag{
             content = function()
               ui.link{
-                text = _"Information about the available policies",
-                module = "policy",
-                view = "list"
-              }
-              slot.put(" ")
-              ui.link{
                 attr = { target = "_blank" },
-                text = _"(new window)",
+                text = _"Information about the available policies",
                 module = "policy",
                 view = "list"
               }
@@ -150,6 +155,7 @@ ui.form{
     
     if preview then
       ui.heading{ level = 1, content = encode.html(param.get("name")) }
+if not config.no_discussion_url then
       local discussion_url = param.get("discussion_url")
       ui.container{
         attr = { class = "ui_field_label" },
@@ -175,6 +181,7 @@ ui.form{
           end
         end
       }
+end
       ui.container{
         attr = { class = "draft_content wiki" },
         content = function()
@@ -194,12 +201,13 @@ ui.form{
       attr = { maxlength = 256 },
       value = param.get("name")
     }
+if not config.no_discussion_url then
     ui.field.text{
       label = _"Discussion URL",
       name = "discussion_url",
       value = param.get("discussion_url")
     }
-
+end
     ui.wikitextarea("draft", _"Content")
 
     ui.submit{ name = "preview", text = _"Preview" }

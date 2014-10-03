@@ -24,7 +24,7 @@ ui.container{
   attr = { class = "initiative_head " .. (side == "pro" and "details_issue" or "details_initiative") },
   content = function()
     if app.session.member_id
-      and (initiative.issue.half_frozen or initiative.issue.fully_frozen)
+      and (initiative.issue.accepted or initiative.issue.half_frozen or initiative.issue.fully_frozen)
       and not (initiative.issue.fully_frozen and not initiative.admitted)
       and not initiative.issue.closed
       and not initiative.revoked

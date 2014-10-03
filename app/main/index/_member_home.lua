@@ -2,12 +2,15 @@ local member = param.get("member", "table")
 local for_member = param.get("for_member", atom.boolean)
 local filter_unit = param.get_all_cgi()["filter_unit"] or "my_areas"
 
+local units = Unit:new_selector():add_where("active"):add_order_by("name"):exec()
 
 if not for_member then
 
+if ((units ~= nil and #units > 1) or (not config.disable_memberships))  then
   ui.container{ attr = { class = "ui_filter" }, content = function()
     ui.container{ attr = { class = "ui_filter_head" }, content = function()
 
+if units ~= nil and #units > 1 then
       ui.link{
         attr = { class = filter_unit == "global" and "active" or nil },
         text = function()
@@ -18,7 +21,8 @@ if not for_member then
       }
 
       slot.put(" ")
-
+end
+if not config.disable_memberships then
       ui.link{
         attr = { class = filter_unit == "my_units" and "ui_tabs_link active" or nil },
         text = function()
@@ -38,9 +42,10 @@ if not for_member then
         end,
         module = "index", view = "index", params = { filter_unit = "my_areas" }
       }
-      
+end
     end }
   end }
+end
 end
 
 if not for_member then
@@ -50,8 +55,6 @@ if not for_member then
   end
 
 end
-
-local units = Unit:new_selector():add_where("active"):add_order_by("name"):exec()
 
 if member then
   units:load_delegation_info_once_for_member_id(member.id)

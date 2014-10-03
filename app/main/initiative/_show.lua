@@ -159,6 +159,7 @@ ui.container{ attr = { class = class }, content = function()
                 }
               }
           end
+if not config.no_discussion_url then
           if (initiative.discussion_url and #initiative.discussion_url > 0) then
             slot.put(" &middot; ")
             if initiative.discussion_url:find("^https?://") then
@@ -177,7 +178,7 @@ ui.container{ attr = { class = class }, content = function()
               slot.put(encode.html(initiative.discussion_url))
             end
           end
-          if initiator and initiator.accepted and not initiative.issue.half_frozen and not initiative.issue.closed and not initiative.revoked then
+          if not config.no_discussion_url and initiator and initiator.accepted and not initiative.issue.half_frozen and not initiative.issue.closed and not initiative.revoked then
             slot.put(" &middot; ")
             ui.link{
               image = { attr = { class = "spaceicon" }, static = "icons/16/comment_edit.png" },
@@ -189,6 +190,7 @@ ui.container{ attr = { class = class }, content = function()
             slot.put(" ")
           end
         end
+end
       }
     end }
 
@@ -471,7 +473,7 @@ if not show_as_head then
   }
 
   -- open arguments in discussion phase
-  if issue.half_frozen or issue.fully_frozen or issue.closed then
+  if issue.accepted or issue.half_frozen or issue.fully_frozen or issue.closed then
 
     execute.view{
       module = "argument",

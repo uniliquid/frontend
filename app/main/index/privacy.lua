@@ -5,6 +5,6 @@ slot.put("<br />")
 ui.container{
   attr = { class = "wiki use_terms" },
   content = function()
-    slot.put(config.privacy_terms)
+    slot.put(format.wiki_text(config.privacy_terms))
   end
 }

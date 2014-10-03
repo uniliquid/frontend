@@ -18,31 +18,33 @@ function Notify:by_member_interest(member_id, interest)
 end
 
 function Notify:records()
-  return {
-    { level = "all", phase = _"New", name = "initiative_created_in_new_issue", title = _"New issue and initiative" },
-    { level = "all", phase = _"New", name = "admission__initiative_created_in_existing_issue", title = _"New initiative in issue" },
-    { level = "all", phase = _"New", name = "admission__new_draft_created", title = _"New draft for initiative" },
-    { level = "all", phase = _"New", name = "admission__suggestion_created", title = _"New suggestion for initiative" },
-    { level = "all", phase = _"New", name = "admission__initiative_revoked", title = _"Initiative revoked" },
-    { level = "all", phase = _"New", name = "canceled_revoked_before_accepted", title = _"Issue was cancelled due to revocation" },
-    { level = "all", phase = _"New", name = "canceled_issue_not_accepted", title = _"Issue was not accepted" },
-    { level = "discussion", phase = _"Discussion", name = "discussion", title = _"Issue reached discussion" },
-    { level = "discussion", phase = _"Discussion", name = "discussion__initiative_created_in_existing_issue", title = _"New initiative in issue" },
-    { level = "discussion", phase = _"Discussion", name = "discussion__new_draft_created", title = _"New draft for initiative" },
-    { level = "discussion", phase = _"Discussion", name = "discussion__suggestion_created", title = _"New suggestion for initiative" },
-    { level = "discussion", phase = _"Discussion", name = "discussion__argument_created", title = _"New argument for initiative" },
-    { level = "discussion", phase = _"Discussion", name = "discussion__initiative_revoked", title = _"Initiative revoked" },
-    { level = "discussion", phase = _"Discussion", name = "canceled_after_revocation_during_discussion", title = _"Issue was cancelled due to revocation (during discussion)" },
-    { level = "verification", phase = _"Frozen", name = "verification", title = _"Issue was frozen" },
-    { level = "verification", phase = _"Frozen", name = "verification__initiative_created_in_existing_issue", title = _"New initiative in issue" },
-    { level = "verification", phase = _"Frozen", name = "verification__argument_created", title = _"New argument for initiative" },
-    { level = "verification", phase = _"Frozen", name = "verification__initiative_revoked", title = _"Initiative revoked" },
-    { level = "verification", phase = _"Frozen", name = "canceled_after_revocation_during_verification", title = _"Issue was cancelled due to revocation (during verification)" },
-    { level = "verification", phase = _"Frozen", name = "canceled_no_initiative_admitted", title = _"Issue was cancelled because no initiative was admitted" },
-    { level = "voting", phase = _"Voting", name = "voting", title = _"Voting for issue started" },
-    { level = "voting", phase = _"Voting", name = "finished_with_winner", title = _"Issue was finished (with winner)" },
-    { level = "voting", phase = _"Voting", name = "finished_without_winner", title = _"Issue was finished (without winner)" }
-  }
+  local records = {}
+  table.insert(records,{ level = "all", phase = _"New", name = "initiative_created_in_new_issue", title = _"New issue and initiative" })
+  table.insert(records,{ level = "all", phase = _"New", name = "admission__initiative_created_in_existing_issue", title = _"New initiative in issue" })
+  table.insert(records,{ level = "all", phase = _"New", name = "admission__new_draft_created", title = _"New draft for initiative" })
+  table.insert(records,{ level = "all", phase = _"New", name = "admission__suggestion_created", title = _"New suggestion for initiative" })
+  table.insert(records,{ level = "all", phase = _"New", name = "admission__initiative_revoked", title = _"Initiative revoked" })
+  table.insert(records,{ level = "all", phase = _"New", name = "canceled_revoked_before_accepted", title = _"Issue was cancelled due to revocation" })
+  table.insert(records,{ level = "all", phase = _"New", name = "canceled_issue_not_accepted", title = _"Issue was not accepted" })
+  table.insert(records,{ level = "discussion", phase = _"Discussion", name = "discussion", title = _"Issue reached discussion" })
+  table.insert(records,{ level = "discussion", phase = _"Discussion", name = "discussion__initiative_created_in_existing_issue", title = _"New initiative in issue" })
+  table.insert(records,{ level = "discussion", phase = _"Discussion", name = "discussion__new_draft_created", title = _"New draft for initiative" })
+  table.insert(records,{ level = "discussion", phase = _"Discussion", name = "discussion__suggestion_created", title = _"New suggestion for initiative" })
+  table.insert(records,{ level = "discussion", phase = _"Discussion", name = "discussion__argument_created", title = _"New argument for initiative" })
+  table.insert(records,{ level = "discussion", phase = _"Discussion", name = "discussion__initiative_revoked", title = _"Initiative revoked" })
+  table.insert(records,{ level = "discussion", phase = _"Discussion", name = "canceled_after_revocation_during_discussion", title = _"Issue was cancelled due to revocation (during discussion)" })
+if not config.no_verification then
+  table.insert(records,{ level = "verification", phase = _"Frozen", name = "verification", title = _"Issue was frozen" })
+  table.insert(records,{ level = "verification", phase = _"Frozen", name = "verification__initiative_created_in_existing_issue", title = _"New initiative in issue" })
+  table.insert(records,{ level = "verification", phase = _"Frozen", name = "verification__argument_created", title = _"New argument for initiative" })
+  table.insert(records,{ level = "verification", phase = _"Frozen", name = "verification__initiative_revoked", title = _"Initiative revoked" })
+  table.insert(records,{ level = "verification", phase = _"Frozen", name = "canceled_after_revocation_during_verification", title = _"Issue was cancelled due to revocation (during verification)" })
+  table.insert(records,{ level = "verification", phase = _"Frozen", name = "canceled_no_initiative_admitted", title = _"Issue was cancelled because no initiative was admitted" })
+end
+  table.insert(records,{ level = "voting", phase = _"Voting", name = "voting", title = _"Voting for issue started" })
+  table.insert(records,{ level = "voting", phase = _"Voting", name = "finished_with_winner", title = _"Issue was finished (with winner)" })
+  table.insert(records,{ level = "voting", phase = _"Voting", name = "finished_without_winner", title = _"Issue was finished (without winner)" })
+return records
 end
 
 function Notify:enum_interest()

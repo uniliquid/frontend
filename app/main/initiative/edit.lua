@@ -28,8 +28,10 @@ ui.form{
       id = initiative.id
     }
   },
+if not config.no_discussion_url then
   content = function()
     ui.field.text{ label = _"Discussion URL",  name = "discussion_url" }
     ui.submit{ text = _"Save" }
   end
+end
 }

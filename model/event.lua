@@ -82,6 +82,12 @@ function Event.object:send_notification()
   
   for k,v in ipairs(members_to_notify_now) do table.insert(members_to_notify,v) end
 
+  if config.no_verification then
+    if self.state == "verification" then
+      return
+    end
+  end
+
   print ( "Event " .. self.id .. " -> " .. #members_to_notify .. " members" )
 
   -- generate mail content only once for each language

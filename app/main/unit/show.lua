@@ -115,7 +115,7 @@ if app.session:has_access("all_pseudonymous") then
     label = _"Delegations",
     module = "delegation",
     view = "_list",
-    params = { delegations_selector = delegations_selector }
+    params = { delegations_selector = delegations_selector, level = "unit", level_id = unit.id }
   }
 end
 

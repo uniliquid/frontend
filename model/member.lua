@@ -382,6 +382,13 @@ function Member:by_login_and_password(login, password)
   end
 end
 
+function Member:by_email(email)
+  local selector = self:new_selector()
+  selector:add_where{'lower("notify_email") = ?', string.lower(email) }
+  selector:optional_object_mode()
+  return selector:exec()
+end
+
 function Member:by_login(login)
   local selector = self:new_selector()
   selector:add_where{'lower("login") = ?', string.lower(login) }

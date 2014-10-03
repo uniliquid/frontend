@@ -22,7 +22,7 @@ end
 
 email = util.trim(email)
 
-if not email or not email:match('^[^@%s]+@[^@%s]+$') then
+if not email or not email:match('^[^@+%s]+@[^@%s]+$') then
   slot.put_into("error", _"This email address is not valid!")
   return false
 end
@@ -34,6 +34,12 @@ end
 
 if config.email_require_host ~= nil and email:sub(-string.len(config.email_require_host)) ~= config.email_require_host then
   slot.put_into("error", _"Email address is invalid! " .. config.email_requirement_text)
+  return false
+end
+
+local check_member = Member:by_email(notify_email)
+if check_member and check_member.id ~= member.id then
+  slot.put_into("error", _"This email address is already taken, please choose another one!")
   return false
 end
 

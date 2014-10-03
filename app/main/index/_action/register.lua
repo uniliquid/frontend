@@ -56,11 +56,20 @@ local notify_email = param.get("notify_email")
 
 if not config.locked_profile_fields.notify_email and notify_email then
   local success = true
+  if not notify_email or not notify_email:match('^[^@+%s]+@[^@%s]+$') then
+    slot.put_into("error", _"This email address is not valid!")
+    success = false
+  end
   if #notify_email < 5 then
     slot.put_into("error", _"Email address too short!")
     success = false
   elseif config.email_require_host ~= nil and notify_email:sub(-string.len(config.email_require_host)) ~= config.email_require_host then
     slot.put_into("error", _"Email address is invalid! " .. config.email_requirement_text)
+    success = false
+  end
+  local check_member = Member:by_email(notify_email)
+  if check_member and check_member.id ~= member.id then
+    slot.put_into("error", _"This email address is already taken, please choose another one!")
     success = false
   end
   if not success then

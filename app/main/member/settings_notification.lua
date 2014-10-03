@@ -67,6 +67,7 @@ ui.form{
       }
     end }
 
+if not config.no_verification then
     slot.put("<br />")
 
     ui.container{ content = function()
@@ -83,7 +84,7 @@ ui.form{
         content = _"Only for issues reaching the frozen phase"
       }
     end }
-    
+end
     slot.put("<br />")
 
     ui.container{ content = function()

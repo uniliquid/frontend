@@ -50,7 +50,7 @@ if issue.closed then
 --elseif issue.fully_frozen then
 --  slot.put_into("error", _"Voting for this issue has already begun!")
 --  return false
-elseif not (initiative.issue.half_frozen or initiative.issue.fully_frozen) then
+elseif not (initiative.issue.accepted or initiative.issue.half_frozen or initiative.issue.fully_frozen) then
   slot.put_into("error", _"This issue is still in discussion!")
   return false
 elseif (initiative.issue.fully_frozen and not initiative.admitted) then

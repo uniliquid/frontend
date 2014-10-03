@@ -150,7 +150,11 @@ slot.put([[
 </script>
 ]])
 
-slot.put(config.landing_page_content_html)
+page_content = config.landing_page_content_html
+if not app.session.member then
+  page_content = page_content:gsub("index/index.html","index/register.html")
+end
+slot.put(page_content)
 
 local issues = db:query("SELECT COUNT(*) AS count FROM issue", "object").count
 local initiatives = db:query("SELECT COUNT(*) AS count FROM initiative", "object").count

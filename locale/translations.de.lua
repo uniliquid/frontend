@@ -1,5 +1,6 @@
 #!/usr/bin/env lua
 return {
+["Change my delegation"] = "Meine Delegation ändern";
 ["Reddit-Discussion (#{number} posts)"] = "Reddit-Diskussion (#{number} Beiträge)";
 ["Reddit-Discussion (1 post)"] = "Reddit-Diskussion (1 Beitrag)";
 ["Email address is invalid! "] = "E-Mail-Adresse ist ungültig! ";
@@ -286,7 +287,7 @@ return {
 ["Create a new account?"] = "Neuen Account anlegen?";
 ["Create alternative initiative"] = "Alternative Initiative hinzufügen";
 ["Create new area"] = "Neuen Themenbereich anlegen";
-["Create new issue"] = "Neues Thema anlegen";
+["Create new issue"] = "Neue Initiative anlegen";
 ["Create new policy"] = "Neues Regelwerk anlegen";
 ["Create new unit"] = "Neue Gliederung anlegen";
 ["Created at"] = "Erzeugt am/um";
@@ -758,7 +759,7 @@ return {
 ["Phases"] = "Phasen";
 ["Phone"] = "Telefon";
 ["Photo"] = "Foto";
-["Please choose a login name. This name will not be shown to others and is used only by you to login into the system. Anyway - we recommend using a pseudonym, so that you do not tell us your real name - we prefer not knowing your real name. The login name is case sensitive."] = "Bitte wähle einen Login. Dieser wird anderen nicht gezeigt und nur von dir zum Login verwendet. Wir empfehlen dennoch die Nutzung eines Pseudonyms, damit du uns deinen Realnamen nicht nennst - uns ist lieber wir kennen ihn nicht. Groß- und Kleinschreibung wird berücksichtigt.";
+["Please choose a login name. This name will not be shown to others and is used only by you to login into the system. Anyway - we recommend using a pseudonym, so that you do not tell us your real name - we prefer not knowing your real name. The login name is case sensitive."] = "Bitte wähle einen Login. Dieser wird anderen nicht gezeigt und nur von dir zum Login verwendet. Wir empfehlen dennoch die Nutzung eines Pseudonyms, damit du der Öffentlichkeit nicht deinen Realnamen nicht nennst. Groß- und Kleinschreibung wird berücksichtigt.";
 ["Please choose a member!"] = "Bitte wähle ein Mitglied!";
 ["Please choose a member"] = "Bitte wähle ein Mitglied";
 ["Please choose a name. This name will be PUBLICLY shown to others to identify you. We recommend using a pseudonym."] = "Bitte wähle einen Namen. Dieser wird anderen ÖFFENTLICH angezeigt um Dich zu identifizieren. Wir empfehlen die Nutzung eines Pseudonyms.";

@@ -94,7 +94,7 @@ if app.session:has_access("all_pseudonymous") then
       label = _"Delegations" .. " (" .. tostring(delegations_selector:count()) .. ")",
       module = "delegation",
       view = "_list",
-      params = { delegations_selector = delegations_selector }
+      params = { delegations_selector = delegations_selector, level = "area", level_id = area.id }
     }
 end
 
