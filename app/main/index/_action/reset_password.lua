@@ -9,7 +9,7 @@ if not secret then
     :optional_object_mode()
     :exec()
 
-  if not member then
+  if not member or not member.login or not member.name then
     slot.put_into("error", _"Sorry, aber ein Account mit diesem Anmeldenamen oder mit dieser Email-Adresse existiert nicht. Bitte wende Dich an den Administrator oder den Support.")
     return false
   end
