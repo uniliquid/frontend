@@ -2,7 +2,7 @@ local id = param.get_id()
 
 local member = Member:by_id(id) or Member:new()
 
-param.update(member, "identification", "notify_email", "admin")
+param.update(member, "notify_email", "admin")
 
 local locked = param.get("locked", atom.boolean)
 if locked ~= nil then
@@ -23,15 +23,7 @@ local name = param.get("name")
 if name then
   member.name = name
 end
-local identification = param.get("identification")
-if identification then
-  identification = util.trim(identification)
-  if identification == "" then
-    identification = nil
-  end
-end
 if id then
-  member.identification = identification
   if config.use_matn then
     local matn_p = param.get("matn")
     if string.len(matn_p) == 7 then

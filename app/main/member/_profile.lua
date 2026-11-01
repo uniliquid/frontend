@@ -41,9 +41,6 @@ ui.form{
 
       end
     }
-    if not member.locked and member.identification then
-      ui.field.text{ label = _"Identification", name = "identification", value = md5.sumhexa(member.identification) }
-    end
     if member.name then
       ui.field.text{ label = _"Screen name", name = "name" }
     end
