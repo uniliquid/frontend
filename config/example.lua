@@ -195,10 +195,6 @@ config.footer_html = ""
 config.forbid_similar_names = false
 config.max_nick_length = 60
 
-config.mv_connection = false
---config.mv_decryption_url = "https://admidio_url/adm_api/usr.php?user_id="
---config.mv_name = "Admidio"
-
 config.invite_text_file = "/opt/uniliquid_frontend/config/invite_mail.txt"
 config.invite_subject = "[Liquid] Einladung ins Liquid"
 
