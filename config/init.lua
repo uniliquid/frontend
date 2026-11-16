@@ -17,6 +17,19 @@ if not config.password_hash_max_rounds then
   config.password_hash_max_rounds = 20000
 end
 
+-- Login sessions (README, "Login sessions"); PostgreSQL intervals.
+if config.session_idle_lifetime == nil then
+  config.session_idle_lifetime = "30 days"
+end
+
+if config.session_max_lifetime == nil then
+  config.session_max_lifetime = "90 days"
+end
+
+if config.session_renew_interval == nil then
+  config.session_renew_interval = "1 hour"
+end
+
 if config.enabled_languages == nil then
   config.enabled_languages = { 'en', 'de', 'eo', 'el', 'hu', 'it', 'nl', 'zh-Hans', 'zh-TW' }
 end

@@ -78,6 +78,12 @@ if err then
   return false
 end
 
+-- A deactivated member (password removed) is logged out on all devices.
+-- (A lock does the same in the database: core's session.sql.)
+if deactivate and member.id then
+  Session:delete_for_member(member.id)
+end
+
 if not id and config.single_unit_id then
   local privilege = Privilege:new()
   privilege.member_id = member.id

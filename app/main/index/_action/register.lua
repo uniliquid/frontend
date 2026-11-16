@@ -285,8 +285,8 @@ if step > 2 then
   end
   member:save()
 
-  app.session.member = member
-  app.session:save()
+  -- A new session (new ident and CSRF secret) for the logged in member.
+  Session:login(member)
 if not config.default_privilege_after_verification then
   if config.default_privilege_for_unit > 0 then
     local privilege = Privilege:by_pk(config.default_privilege_for_unit, member.id)

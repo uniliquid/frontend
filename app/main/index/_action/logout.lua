@@ -1,7 +1,7 @@
 if app.session and app.session.member then
 
-  app.session.member = nil
-  app.session:save()
+  -- The session is deleted; a new anonymous one replaces it.
+  Session:logout()
   slot.put_into("notice", _"Logout successful")
   if config.etherpad then
     request.set_cookie{

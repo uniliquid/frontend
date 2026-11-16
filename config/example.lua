@@ -126,6 +126,15 @@ config.member_image_convert_func = {
 --   return config.absolute_base_url .. "r?" .. tostring(issue.id)
 --end
 
+-- Login sessions (README, "Login sessions"); PostgreSQL intervals, the
+-- defaults are shown. A logged in session expires after the idle lifetime
+-- without a request, at the latest the maximum lifetime after the login;
+-- its expiry is renewed at most once per renew interval.
+-- ------------------------------------------------------------------------
+--config.session_idle_lifetime = "30 days"
+--config.session_max_lifetime = "90 days"
+--config.session_renew_interval = "1 hour"
+
 -- Integration of Etherpad, disabled by default
 -- ------------------------------------------------------------------------
 --config.etherpad = {

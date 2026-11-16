@@ -71,8 +71,8 @@ if member then
   end
   
   member:save()
-  app.session.member = member
-  app.session:save()
+  -- A new session (new ident and CSRF secret) for the logged in member.
+  Session:login(member)
   slot.put_into("notice", _"Login successful")
   trace.debug('User authenticated')
   if config.etherpad then
