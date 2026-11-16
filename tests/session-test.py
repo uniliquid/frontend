@@ -381,6 +381,22 @@ check("locked during the login: no session for the member, error shown",
       and (race is None or row(race) is None or row(race)["member_id"] is None), response.headers)
 sql("DROP TRIGGER test_lock_on_login ON member; DROP FUNCTION test_lock_on_login()")
 
+# Simulated: the password changed between the password check and
+# Session:login (a test-only trigger changes the hash when the login action
+# saves the member).
+m7 = member("test-member-7", "test-password-7")
+sql(f"""CREATE FUNCTION test_change_password_on_login() RETURNS trigger LANGUAGE plpgsql AS $$
+    BEGIN NEW.password := crypt('test-password-7b', gen_salt('md5')); RETURN NEW; END; $$;
+    CREATE TRIGGER test_change_password_on_login BEFORE UPDATE ON member FOR EACH ROW
+    WHEN (OLD.id = {m7}) EXECUTE PROCEDURE test_change_password_on_login()""")
+response, race = login("test-member-7", "test-password-7")
+check("password changed during the login: no session for the member",
+      value(f"SELECT count(*) FROM session WHERE member_id = {m7}") == "0", response.headers)
+sql("DROP TRIGGER test_change_password_on_login ON member; DROP FUNCTION test_change_password_on_login()")
+response, ok7 = login("test-member-7", "test-password-7b")
+check("password check in Session:login: a normal login (with rehash) still works",
+      ok7 and row(ok7) and row(ok7)["member_id"] == m7)
+
 # --- Configuration errors --------------------------------------------------------
 
 test_config = open("/app/config/test.lua").read()

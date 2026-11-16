@@ -76,21 +76,25 @@ end
 -- Max-Age. Returns nil (nothing changed) if the member is locked: the
 -- member row is read FOR SHARE, so a lock running at the same time either
 -- came first (no session) or waits for this transaction and then deletes
--- the new session (core's trigger).
-function Session:login(member)
+-- the new session (core's trigger). With password_hash (login), also nil
+-- if the member's password hash is no longer that one (the password was
+-- changed or reset after it was checked).
+function Session:login(member, password_hash)
   local old = app.session
   local ident = random_string()
+  local password_check = password_hash and { ' AND "password" = ?', password_hash } or ""
   local result = db:query({
     'INSERT INTO "session" ("ident", "additional_secret", "member_id", "lang", "logged_in_at", "expiry")'
     .. ' SELECT ?, ?, "id", ?, now(), LEAST(now() + ?::interval, now() + ?::interval)'
-    .. ' FROM "member" WHERE "id" = ? AND NOT "locked" FOR SHARE'
+    .. ' FROM "member" WHERE "id" = ? AND NOT "locked"$ FOR SHARE'
     .. ' RETURNING floor(extract(epoch FROM "expiry" - now()))::int8 AS "max_age"',
     ident,
     random_string(),
     old and old.lang or nil,
     config.session_idle_lifetime,
     config.session_max_lifetime,
-    member.id
+    member.id,
+    { password_check }
   }, "opt_object")
   if not result then
     return nil

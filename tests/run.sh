@@ -6,8 +6,8 @@
 set -eu
 cd "$(dirname "$0")/.."
 # uniliquid/webmcp and uniliquid/core with the session additions.
-WEBMCP_COMMIT=${WEBMCP_COMMIT:-59b9ca5a5a2c2d7aaad22a597948835ecb226cae}
-CORE_COMMIT=${CORE_COMMIT:-3d55170f41a6c0a23729331ef63db0d876fcef5b}
+WEBMCP_COMMIT=${WEBMCP_COMMIT:-04da3e4dc751be14730061477f977b08af386584}
+CORE_COMMIT=${CORE_COMMIT:-f0f5e1763a8e89b0585adcafed25ce72f9b7d06a}
 image="frontend-tests:$WEBMCP_COMMIT-$CORE_COMMIT"
 docker build -q -t "$image" --build-arg WEBMCP_COMMIT="$WEBMCP_COMMIT" \
     --build-arg CORE_COMMIT="$CORE_COMMIT" tests >/dev/null

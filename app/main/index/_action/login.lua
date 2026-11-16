@@ -73,7 +73,8 @@ if member then
   member:save()
   -- A new session (new ident and CSRF secret) for the logged in member
   -- (none if the member was locked meanwhile).
-  if not Session:login(member) then
+  -- (member.password: the hash checked above, or its rehash just saved)
+  if not Session:login(member, member.password) then
     slot.put_into("error", _'Invalid login name or password!')
     return false
   end
