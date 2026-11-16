@@ -73,21 +73,28 @@ end
 -- transaction, then redirect, so that the next request uses the new CSRF
 -- secret): the current session (app.session) is deleted, its language is
 -- kept, and the new one becomes app.session; its cookie is sent with
--- Max-Age.
+-- Max-Age. Returns nil (nothing changed) if the member is locked: the
+-- member row is read FOR SHARE, so a lock running at the same time either
+-- came first (no session) or waits for this transaction and then deletes
+-- the new session (core's trigger).
 function Session:login(member)
   local old = app.session
   local ident = random_string()
   local result = db:query({
     'INSERT INTO "session" ("ident", "additional_secret", "member_id", "lang", "logged_in_at", "expiry")'
-    .. ' VALUES (?, ?, ?, ?, now(), LEAST(now() + ?::interval, now() + ?::interval))'
+    .. ' SELECT ?, ?, "id", ?, now(), LEAST(now() + ?::interval, now() + ?::interval)'
+    .. ' FROM "member" WHERE "id" = ? AND NOT "locked" FOR SHARE'
     .. ' RETURNING floor(extract(epoch FROM "expiry" - now()))::int8 AS "max_age"',
     ident,
     random_string(),
-    member.id,
     old and old.lang or nil,
     config.session_idle_lifetime,
-    config.session_max_lifetime
-  }, "object")
+    config.session_max_lifetime,
+    member.id
+  }, "opt_object")
+  if not result then
+    return nil
+  end
   if old then
     db:query{ 'DELETE FROM "session" WHERE "ident" = ?', old.ident }
   end
@@ -108,7 +115,8 @@ function Session.object:renew()
     config.session_max_lifetime,
     self.ident
   }, "opt_object")
-  self.renew_due = false
+  -- (self.renew_due is not changed: a field set on the object would be
+  -- saved as a column by a later save() in this request.)
   if result then
     self:send_cookie(result.max_age)
   end

@@ -11,6 +11,9 @@ SQL
 PGOPTIONS='-c client_min_messages=warning' psql -X -q -v ON_ERROR_STOP=1 -d liquid_feedback -f /opt/core/core.sql
 PGOPTIONS='-c client_min_messages=warning' psql -X -q -v ON_ERROR_STOP=1 -d liquid_feedback -f /opt/core/session.sql
 runuser -u postgres -- psql -X -q -v ON_ERROR_STOP=1 -d liquid_feedback -c 'CREATE EXTENSION pgcrypto'
+# Without session.sql: the error a frontend deployed too early shows.
+runuser -u postgres -- psql -X -q -v ON_ERROR_STOP=1 -c 'CREATE DATABASE lf_without_session OWNER root'
+PGOPTIONS='-c client_min_messages=warning' psql -X -q -v ON_ERROR_STOP=1 -d lf_without_session -f /opt/core/core.sql
 cp -a /src /app
 rm -rf /app/.git
 cp /src/tests/config.lua /app/config/test.lua

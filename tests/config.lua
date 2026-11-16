@@ -19,6 +19,7 @@ config.register_without_invite_code = false
 config.enable_forum_scripts = false
 config.use_lfbot_reddit_buffer = false
 config.linkmenu = {}
+config.default_privilege_for_unit = 0
 config.database = { engine = 'postgresql', dbname = 'liquid_feedback' }
 -- As deployed without site settings: the C implementations of WebMCP.
 require 'webmcp_accelerator'

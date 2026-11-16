@@ -285,8 +285,12 @@ if step > 2 then
   end
   member:save()
 
-  -- A new session (new ident and CSRF secret) for the logged in member.
-  Session:login(member)
+  -- A new session (new ident and CSRF secret) for the logged in member
+  -- (none if the member was locked meanwhile).
+  if not Session:login(member) then
+    slot.put_into("error", _"The code you've entered is invalid")
+    return false
+  end
 if not config.default_privilege_after_verification then
   if config.default_privilege_for_unit > 0 then
     local privilege = Privilege:by_pk(config.default_privilege_for_unit, member.id)

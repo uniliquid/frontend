@@ -71,8 +71,12 @@ if member then
   end
   
   member:save()
-  -- A new session (new ident and CSRF secret) for the logged in member.
-  Session:login(member)
+  -- A new session (new ident and CSRF secret) for the logged in member
+  -- (none if the member was locked meanwhile).
+  if not Session:login(member) then
+    slot.put_into("error", _'Invalid login name or password!')
+    return false
+  end
   slot.put_into("notice", _"Login successful")
   trace.debug('User authenticated')
   if config.etherpad then

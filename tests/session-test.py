@@ -59,7 +59,7 @@ class Response:
         return None
 
 
-def request(path, ident=None, data=None):
+def request(path, ident=None, data=None, config_name="test"):
     """A request as the web server's rewrite rules pass it to the CGI
     script; path like "/", "/module/view.html" or "/module/action"."""
     path, _, query = path.partition("?")
@@ -79,7 +79,7 @@ def request(path, ident=None, data=None):
     body = urllib.parse.urlencode(data or {}).encode()
     env = {"PATH": os.environ["PATH"], "LANG": "C.UTF-8", "HTTPS": "on",
            "REQUEST_METHOD": "POST" if data is not None else "GET", "QUERY_STRING": query_string,
-           "WEBMCP_APP_BASEPATH": "/app/", "WEBMCP_CONFIG_NAME": "test"}
+           "WEBMCP_APP_BASEPATH": "/app/", "WEBMCP_CONFIG_NAME": config_name}
     if ident:
         env["HTTP_COOKIE"] = COOKIE + "=" + ident
     if data is not None:
@@ -128,10 +128,10 @@ def anonymous():
     return response.cookie()[0]
 
 
-def action(path, ident, fields, secret=None):
+def action(path, ident, fields, secret=None, mode="redirect"):
     """POSTs an action from the session ident (with its CSRF secret) with
-    redirect routing to the start page."""
-    data = {"_webmcp_csrf_secret": secret or row(ident)["secret"], "_webmcp_routing.default.mode": "redirect",
+    routing (redirect or forward) to the start page."""
+    data = {"_webmcp_csrf_secret": secret or row(ident)["secret"], "_webmcp_routing.default.mode": mode,
             "_webmcp_routing.default.module": "index", "_webmcp_routing.default.view": "index"}
     data.update(fields)
     return request(path, ident, data)
@@ -152,13 +152,17 @@ def submit(page_path, action_path, ident, fields):
     return request(action_path, ident, data)
 
 
-def login(login_name, password, ident=None):
-    """Logs in with the login form; the response and the new ident."""
+def login(login_name, password, ident=None, mode=None):
+    """Logs in with the login form (its routing, or the given mode); the
+    response and the new ident."""
     ident = ident or anonymous()
     page = request("/index/login.html", ident)
     forms = [f for f in Forms(page.body).forms if f[0].endswith("/index/login")]
     assert forms, "login form found"
     data = dict(forms[0][1], login=login_name, password=password)
+    if mode:
+        data.update({"_webmcp_routing.default.mode": mode, "_webmcp_routing.default.module": "index",
+                     "_webmcp_routing.default.view": "index"})
     response = request("/index/login", ident, data)
     cookie = response.cookie()
     return response, cookie[0] if cookie else None
@@ -323,6 +327,78 @@ response, i3 = login("test-member-1", "test-password-1")
 response = submit(f"/admin/member_edit/{m1}.html", "/admin/member_update", adm, {"deactivate": "1"})
 check("I: deactivate in the admin UI deletes the sessions", response.status == "303" and row(i3) is None
       and value(f"SELECT password IS NULL FROM member WHERE id = {m1}") == "t", response.status)
+
+# --- Renewal and a save of the session in the same request -------------------
+
+response, s = login("test-member-2", "test-password-2d")
+sql(f"UPDATE session SET expiry = now() + '14 days' WHERE ident = '{s}'")
+response = action("/index/set_lang", s, {"lang": "de"})
+check("renewal, then the action saves the session (set_lang) in the same request",
+      response.status == "303" and row(s)["lang"] == "de" and row(s)["expiry"] > 30 * DAY - 120, (response.status, row(s)))
+
+# --- Registration (invite code) ------------------------------------------------
+
+m5 = int(value("""INSERT INTO member (invite_code, notify_email) VALUES ('test-invite-code-1', 'test-member-5@example.org')
+    RETURNING id"""))
+j = anonymous()
+response = action("/index/register", j, {"step": "3", "code": "test-invite-code-1",
+                  "notify_email": "test-member-5@example.org", "name": "test-member-5", "login": "test-member-5",
+                  "password1": "test-password-5", "password2": "test-password-5"})
+cookie = response.cookie()
+check("J: registration logs in on a new session with Max-Age",
+      response.status == "303" and cookie and cookie[0] != j and response.max_age() > 29 * DAY, response.headers)
+check("J: the anonymous session is gone, the new one belongs to the new member",
+      row(j) is None and cookie and row(cookie[0])["member_id"] == m5 and row(cookie[0])["logged_in_at"])
+
+# --- Forwarded view after login and logout -------------------------------------
+
+response, fw = login("test-member-2", "test-password-2d", mode="forward")
+check("forward: login answers with the start page, logged in, new cookie",
+      response.status == "200" and fw and row(fw) and row(fw)["member_id"] == m2
+      and "/index/logout" in response.body and "system error" not in response.body, response.headers)
+response = request("/", fw)
+check("forward: the next request uses the new session", response.status == "200" and response.cookie() is None
+      and "/index/logout" in response.body)
+response = action("/index/logout", fw, {}, mode="forward")
+cookie = response.cookie()
+check("forward: logout answers with the start page and a new anonymous cookie",
+      response.status == "200" and cookie and cookie[0] != fw and row(fw) is None
+      and "Max-Age" not in " ".join(cookie[1]) and "system error" not in response.body, response.headers)
+
+# --- Login of a member locked at the same time ---------------------------------
+
+# Simulated: a lock committed between the password check and
+# Session:login (a test-only trigger locks the member when the login
+# action saves it).
+m6 = member("test-member-6", "test-password-6")
+sql(f"""CREATE FUNCTION test_lock_on_login() RETURNS trigger LANGUAGE plpgsql AS $$
+    BEGIN NEW.locked := TRUE; RETURN NEW; END; $$;
+    CREATE TRIGGER test_lock_on_login BEFORE UPDATE ON member FOR EACH ROW
+    WHEN (OLD.id = {m6} AND NOT OLD.locked) EXECUTE PROCEDURE test_lock_on_login()""")
+response, race = login("test-member-6", "test-password-6")
+check("locked during the login: no session for the member, error shown",
+      value(f"SELECT count(*) FROM session WHERE member_id = {m6}") == "0"
+      and (race is None or row(race) is None or row(race)["member_id"] is None), response.headers)
+sql("DROP TRIGGER test_lock_on_login ON member; DROP FUNCTION test_lock_on_login()")
+
+# --- Configuration errors --------------------------------------------------------
+
+test_config = open("/app/config/test.lua").read()
+for name, setting in [("bad_format", 'config.session_idle_lifetime = "2 weeks"'),
+                      ("bad_order", 'config.session_renew_interval = "30 days"'),
+                      ("bad_max", 'config.session_max_lifetime = "29 days"')]:
+    with open(f"/app/config/{name}.lua", "w") as f:
+        f.write(setting + "\n" + test_config)
+    response = request("/", config_name=name)
+    check(f"config: {name} -> clear error message",
+          "Invalid configuration: " in response.body and "config.session_" in response.body, response.body[:300])
+with open("/app/config/without_session.lua", "w") as f:
+    f.write(test_config.replace("dbname = 'liquid_feedback'", "dbname = 'lf_without_session'"))
+subprocess.run(["psql", "-X", "-q", "-d", "lf_without_session", "-c",
+                "INSERT INTO session (ident, additional_secret) VALUES ('test-ident-1', 'x')"], check=True)
+response = request("/", "test-ident-1", config_name="without_session")
+check("database without session.sql: a visitor with a cookie gets the error page naming the missing column",
+      "logged_in_at" in response.body and "does not exist" in response.body, response.body[:300])
 
 print("all passed" if failures == 0 else f"{failures} failed")
 sys.exit(0 if failures == 0 else 1)
