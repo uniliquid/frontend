@@ -1,12 +1,15 @@
-if cgi.cookies.liquid_feedback_session then
-  app.session = Session:by_ident(cgi.cookies.liquid_feedback_session)
-end
+-- Runs again for a view that an action forwards to: the session of this
+-- request (possibly a new one from a login) is kept.
 if not app.session then
-  app.session = Session:new()
-  request.set_cookie{
-    name = "liquid_feedback_session",
-    value = app.session.ident
-  }
+  if cgi.cookies.liquid_feedback_session then
+    app.session = Session:by_ident(cgi.cookies.liquid_feedback_session)
+  end
+  if not app.session then
+    app.session = Session:new()
+    app.session:send_cookie()
+  elseif app.session.renew_due then
+    app.session:renew()
+  end
 end
 
 request.set_csrf_secret(app.session.additional_secret)

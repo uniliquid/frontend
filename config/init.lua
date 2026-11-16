@@ -17,6 +17,46 @@ if not config.password_hash_max_rounds then
   config.password_hash_max_rounds = 20000
 end
 
+-- Login sessions (README, "Login sessions"); PostgreSQL intervals.
+if config.session_idle_lifetime == nil then
+  config.session_idle_lifetime = "30 days"
+end
+
+if config.session_max_lifetime == nil then
+  config.session_max_lifetime = "90 days"
+end
+
+if config.session_renew_interval == nil then
+  config.session_renew_interval = "1 hour"
+end
+
+-- Checked here, so that a wrong value gives this message instead of a
+-- database error: "<number> minute(s)|hour(s)|day(s)", renew interval <
+-- idle lifetime <= maximum lifetime.
+do
+  local unit_minutes = { minute = 1, hour = 60, day = 1440 }
+  local function minutes(key)
+    local value = config[key]
+    local number, unit
+    if type(value) == "string" then
+      number, unit = string.match(value, "^([1-9]%d?%d?%d?%d?) (%a+)$")
+    end
+    if unit then
+      unit = string.gsub(unit, "s$", "")
+    end
+    if not (number and unit_minutes[unit]) then
+      error("Invalid configuration: config." .. key .. " must be a string like \"30 days\", \"12 hours\" or \"90 minutes\", not " .. tostring(value), 0)
+    end
+    return tonumber(number) * unit_minutes[unit]
+  end
+  local idle = minutes("session_idle_lifetime")
+  local max = minutes("session_max_lifetime")
+  local renew = minutes("session_renew_interval")
+  if not (renew < idle and idle <= max) then
+    error("Invalid configuration: needs config.session_renew_interval < config.session_idle_lifetime <= config.session_max_lifetime", 0)
+  end
+end
+
 if config.enabled_languages == nil then
   config.enabled_languages = { 'en', 'de', 'eo', 'el', 'hu', 'it', 'nl', 'zh-Hans', 'zh-TW' }
 end

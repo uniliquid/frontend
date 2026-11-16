@@ -7,3 +7,47 @@ https://wiki.piratenpartei.at/wiki/Liquid
 Original Installation instructions (for Debian squeeze)
 http://dev.liquidfeedback.org/trac/lf/wiki/installation
 
+
+Login sessions
+==============
+
+Needs core's session.sql (uniliquid/core, README "Session additions")
+applied to the database BEFORE this frontend is deployed: without the
+column session.logged_in_at every visitor with a session cookie gets the
+error page ('column "logged_in_at" does not exist').
+
+Needs uniliquid/webmcp with the set_cookie arguments max_age, http_only
+and same_site. An older WebMCP silently ignores them: sessions work, but
+the cookie has no Max-Age (a login ends with the browser), HttpOnly or
+SameSite. The deployment's check of the cookie headers catches this.
+
+- Anonymous session: created on the first request without a valid cookie,
+  24 hours from then (core's column default); browser-session cookie.
+- Login and registration: a new session (new ident and CSRF secret), the
+  anonymous one is deleted (no session fixation); the language is kept.
+  It expires config.session_idle_lifetime (default 30 days) after the last
+  renewal, never later than config.session_max_lifetime (default 90 days)
+  after the login. The expiry is renewed at most once per
+  config.session_renew_interval (default 1 hour). The cookie has Max-Age,
+  so a login survives closing the browser; use "Logout" on shared
+  computers.
+- Cookie liquid_feedback_session: HttpOnly, SameSite=Lax, secure with an
+  https base URL.
+- Logout: the session is deleted and replaced by a new anonymous one.
+- Password change: logged out on all other devices, a new session on the
+  current one. Password reset and admin "deactivate": logged out on all
+  devices. Lock (any way): core's trigger deletes the sessions.
+- An expired session is not used, even before lf_update deletes it.
+- Sessions without logged_in_at (logged in before this code) are not
+  extended; they end at their stored expiry.
+
+The settings are "<number> minute(s)|hour(s)|day(s)" (PostgreSQL
+intervals, config/example.lua), with renew interval < idle lifetime <=
+maximum lifetime; config/init.lua stops with "Invalid configuration: ..."
+otherwise. A change takes effect on new logins and renewals; stored
+expiries are not shortened.
+
+A member locked while logging in gets no session (Session:login reads the
+member row FOR SHARE and only for an unlocked member).
+
+Tests (Docker): tests/run.sh

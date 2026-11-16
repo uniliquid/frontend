@@ -17,7 +17,17 @@ if #new_password1 < 8 then
   return false
 end
 
-app.session.member:set_password(new_password1)
-app.session.member:save()
+local member = app.session.member
+member:set_password(new_password1)
+member:save()
+
+-- Re-keyed (a new session after the re-authentication with the old
+-- password), and logged out on all other devices.
+if Session:login(member) then
+  Session:delete_for_member(member.id, app.session.ident)
+else
+  -- locked meanwhile: no session at all
+  Session:delete_for_member(member.id)
+end
 
 slot.put_into("notice", _"Your password has been updated successfully")

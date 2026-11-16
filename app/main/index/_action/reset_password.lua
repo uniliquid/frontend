@@ -80,6 +80,9 @@ else
   member.password_reset_secret_expiry = nil
   member:save()
 
+  -- Logged out on all devices.
+  Session:delete_for_member(member.id)
+
   slot.put_into("notice", _"Password has been reset successfully")
 
 end
